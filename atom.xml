@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>FoodieWang</title>
+  
+  <subtitle>慎而思之,勤而行之</subtitle>
+  <link href="https://foodie-wang.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://foodie-wang.github.io/"/>
+  <updated>2023-06-12T19:26:38.760Z</updated>
+  <id>https://foodie-wang.github.io/</id>
+  
+  <author>
+    <name>ydwang</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java语言</title>
+    <link href="https://foodie-wang.github.io/2023/06/13/Java%E8%AF%AD%E8%A8%80/"/>
+    <id>https://foodie-wang.github.io/2023/06/13/Java%E8%AF%AD%E8%A8%80/</id>
+    <published>2023-06-12T19:21:55.000Z</published>
+    <updated>2023-06-12T19:26:38.760Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Java基础（面试常考）&quot;&gt;&lt;a href=&quot;#Java基础（面试常考）&quot; class=&quot;headerlink&quot; title=&quot;Java基础（面试常考）&quot;&gt;&lt;/a&gt;Java基础（面试常考）&lt;/h1&gt;&lt;h2 id=&quot;1-Java语言有哪些特点？&quot;&gt;&lt;a href=&quot;</summary>
+      
+    
+    
+    
+    <category term="面试" scheme="https://foodie-wang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Java" scheme="https://foodie-wang.github.io/tags/Java/"/>
+    
+  </entry>
+  
+</feed>

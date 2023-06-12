@@ -1,3 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>Java语言</title>
+    <url>/2023/06/13/Java%E8%AF%AD%E8%A8%80/</url>
+    <content><![CDATA[<h1 id="Java基础（面试常考）"><a href="#Java基础（面试常考）" class="headerlink" title="Java基础（面试常考）"></a>Java基础（面试常考）</h1><h2 id="1-Java语言有哪些特点？"><a href="#1-Java语言有哪些特点？" class="headerlink" title="1. Java语言有哪些特点？"></a>1. Java语言有哪些特点？</h2><ul>
+<li><p>简单易学</p>
+</li>
+<li><p>面向对象（封装、继承、多态）</p>
+</li>
+<li><p>平台无关性（Java虚拟机实现平台无关性）</p>
+<p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
+<p>也就是说，用Java创建的可执行二进制程序，能够不加改变的运行于多个平台。</p>
+</li>
+<li><p>可靠性</p>
+</li>
+<li><p>安全性</p>
+</li>
+<li><p>支持多线程</p>
+</li>
+<li><p>支持网络编程</p>
+</li>
+<li><p>编译与解释共存</p>
+<p>Java中会将源代码通过javac编译成字节码（class文件），然后运行时JVM会将字节码解释为对应的机器码，最后执行。</p>
+<p>在常见的HotSpot虚拟机中，为了避免解释型语言带来的执行效率低问题，采用了JIT compile(just in time compilation)即时编译技术，将运行频率很高的字节码直接编译为机器指令执行来提高性能。</p>
+<p>这就是我们为什么经常会说 Java 是编译与解释共存的语言的原因。</p>
+</li>
+<li><p>会自动进行垃圾回收（GC）</p>
+</li>
+</ul>
+<h2 id="2-JDK、JRE、JVM有什么区别？"><a href="#2-JDK、JRE、JVM有什么区别？" class="headerlink" title="2. JDK、JRE、JVM有什么区别？"></a>2. JDK、JRE、JVM有什么区别？</h2><p>JDK：JDK是Java Development Kit的缩写，它的功能是最全的Java SDK。它拥有JRE所拥有的的一切，还有编译器（Javac）和工具（Javadoc和jdb）。它能够创建和编译程序。</p>
+<p>JRE：JRE是Java Runtime Environment的缩写，是Java运行时环境。它是运行已编译Java程序所需的所以内容的集合，包括JVM，Java类库，Java命令和其他一些基础构件。但是它不能用于创建新程序。</p>
+<p>JVM：Java虚拟机是运行Java运行字节码的虚拟机。JVM有针对不同系统的特定实现，目的是使用相同的字节码，都会给出相同的结果。</p>
+<h2 id="3-Java和C-的区别？"><a href="#3-Java和C-的区别？" class="headerlink" title="3. Java和C++的区别？"></a>3. Java和C++的区别？</h2><ul>
+<li>都是面向对象语言，都支持封装、继承、多态</li>
+<li>Java不提供指针来直接访问内存，程序内存更加安全</li>
+<li>Java的类是单继承的，接口是多继承的。C++支持类的多继承</li>
+<li>Java有垃圾回收机制，不需要手动释放无用内存</li>
+<li>Java语言中没有结束符这一概念。C语言中，字符串或字符数组最后都会有一个额外的字符 ‘ \0 ‘ 来表示结束</li>
+</ul>
+<h2 id="4-字符型常量和字符串常量有什么区别？"><a href="#4-字符型常量和字符串常量有什么区别？" class="headerlink" title="4. 字符型常量和字符串常量有什么区别？"></a>4. 字符型常量和字符串常量有什么区别？</h2><ul>
+<li>字符型常量是用单引号引起来的一个字符，字符串常量是用双引号引起来的零个或多个字符</li>
+<li>字符型常量是可以用来进行数学运算的，因为一个字符对应一个ASCII码值。而字符串常量不行，因为字符串常量代表的是地址值</li>
+<li>字符型常量占两个字节，字符串常量占多个字节</li>
+</ul>
+<h2 id="5-抽象类与接口的区别？"><a href="#5-抽象类与接口的区别？" class="headerlink" title="5. 抽象类与接口的区别？"></a>5. 抽象类与接口的区别？</h2><ul>
+<li>抽象类与接口都不能直接进行实例化，如果要实例化，抽象类变量必须指向实现所有抽象方法的子类对象，接口变量也必须指向实现所有接口的类对象</li>
+<li>抽象类必须保证有一个类要去继承它，且这个类只能继承一个抽象类，否则会报错。而接口也要被类去实现。</li>
+<li>接口里定义的变量都是被static、final修饰的，抽象类中的变量就是普通变量</li>
+<li>抽象类可以没有抽象方法，但是有抽象方法的一定是抽象类</li>
+<li>一个类可以实现多个接口，接口与接口是多继承的</li>
+<li>接口中没有this指针，没有构造函数，不能拥有实例变量或实例方法</li>
+<li>抽象类不能再Java8中的lambda表达式中使用</li>
+</ul>
+<h2 id="6-字节流与字符流的区别？（StringBuilder和StringBuffer的区别）"><a href="#6-字节流与字符流的区别？（StringBuilder和StringBuffer的区别）" class="headerlink" title="6. 字节流与字符流的区别？（StringBuilder和StringBuffer的区别）"></a>6. 字节流与字符流的区别？（StringBuilder和StringBuffer的区别）</h2><ul>
+<li>StringBuffer和StringBuilder都继承自AbstractStringBuilder类，都用来存储字符串，但是不像String那样有final修饰，所以是可变的。</li>
+<li>StringBuffer类中方法都加了synchronized同步锁，所以线程安全。而StringBuilder没有加synchronized同步锁，所以线程不安全。</li>
+<li>StringBuilder适用于单线程下对字符串缓冲区大量字符串的操作。而StringBuffer适用于多线程下对字符串缓冲区大量字符串的操作。</li>
+<li>StringBuilder每次都需要复制一次字符数组，再构造一个字符串。而StringBuffer每次获取toString都会直接使用缓冲区的。toStringCache的值来构造一个字符串。</li>
+<li>性能上来说，StringBuilder和StringBuffer都是对变量的操作，对变量的操作是直接对该对象本身进行更改就行，不会进行重复的创建和回收。所以在运行速度上比较快。</li>
+</ul>
+<h2 id="7-Java中IO流分为几种"><a href="#7-Java中IO流分为几种" class="headerlink" title="7. Java中IO流分为几种"></a>7. Java中IO流分为几种</h2><p>按流向分：输入流、输出流</p>
+<p>按操作单元分：字节流、字符流</p>
+<p>按流的角色分：节点流、处理流</p>
+<p>InputStream &#x2F; Reader：所有的输入流的基类。InputStream是字节输入流，Reader是字符输入流。</p>
+<p>OutputStream &#x2F; Writer：所有的输出流的基类。OutputStream是字节输出流，Writer是字符输出流。</p>
+<h2 id="8-为什么有了字节流还要有字符流？"><a href="#8-为什么有了字节流还要有字符流？" class="headerlink" title="8. 为什么有了字节流还要有字符流？"></a>8. 为什么有了字节流还要有字符流？</h2><p>字符流是由Java虚拟机将字节转换得到的，这个过程非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所有I&#x2F;O流提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。</p>
+<ul>
+<li>音频，视频等媒体文件用字节流比较好</li>
+<li>涉及到字符的话使用字符流比较好</li>
+</ul>
+<h2 id="9-static与final关键字，final修饰的数组可以改变吗？"><a href="#9-static与final关键字，final修饰的数组可以改变吗？" class="headerlink" title="9. static与final关键字，final修饰的数组可以改变吗？"></a>9. static与final关键字，final修饰的数组可以改变吗？</h2><h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>static可以修饰变量、方法、代码块</p>
+<ol>
+<li><p><strong>static修饰变量和方法</strong></p>
+<ul>
+<li><p>被static修饰的变量属于类变量，可以通过<strong>类名.变量名</strong>直接引用，而不需要new出一个类来</p>
+</li>
+<li><p>被static修饰的方法属于类方法，可以通过<strong>类名.方法名</strong>直接引用，而不需要new出一个类来</p>
+</li>
+</ul>
+<p>静态资源属于类，但是是独立于类存在的。从JVM的类加载机制的角度讲，<strong>静态资源是类初始化的时候加载的，而非静态资源是类new的时候加载的</strong>。类的初始化早于类的new。所以对于静态资源来说，它是不可能知道一个类中有哪些非静态资源的。但是对于非静态资源来说就不一样了，由于它是new出来之后产生的，因此属于类的这些东西它都能认识。综上所述：</p>
+<ul>
+<li><p>&#x3D;&#x3D;静态方法能不能引用非静态资源？不能，new的时候才会产生的东西，对于初始化后就存在的静态资源来说，根本不认识它。&#x3D;&#x3D;</p>
+</li>
+<li><p>&#x3D;&#x3D;静态方法里面能不能引用静态资源？可以，因为都是类初始化的时候加载的，大家相互都认识。&#x3D;&#x3D;</p>
+</li>
+<li><p>&#x3D;&#x3D;非静态方法里面能不能引用静态资源？可以，非静态方法就是实例方法，那是new之后才产生的，那么属于类的内容它都认识。&#x3D;&#x3D;</p>
+</li>
+</ul>
+</li>
+<li><p><strong>static修饰代码块</strong></p>
+<ul>
+<li>静态块里面的代码只执行一次，且只在初始化类的时候执行</li>
+<li>静态资源的加载顺序是严格按照静态资源的定义顺序来加载的</li>
+<li>静态代码块对于定义在它之后的静态变量，可以赋值，但是不能访问</li>
+<li>静态代码块是严格按照父类静态代码块-&gt;子类静态代码块的顺序加载的，且只加载一次</li>
+</ul>
+</li>
+<li><p><strong>static修饰类</strong></p>
+<p>如果static修饰一个类，那这个类一定是一个匿名内部类。像线程池ThreadPoolExecutor中的四种拒绝策略AbortPolicy、DiscardPolicy、DiscardOldestPolicy、CallerRunsPolicy就是静态内部类。</p>
+</li>
+<li><p><strong>import static</strong></p>
+<p>import static是JDK1.5之后的新特性，这两个关键字连用可以指定导入某个类中的指定静态资源，并且不需要使用类名.资源名，可以直接使用资源名。注意一下，<strong>import static</strong>必须这么写，而不能写成static import。举个例子来看一下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.*;</span><br><span class="line"><span class="number">2</span> </span><br><span class="line"><span class="number">3</span> <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line"><span class="number">4</span> &#123;</span><br><span class="line"><span class="number">5</span>     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line"><span class="number">6</span>     &#123;</span><br><span class="line"><span class="number">7</span>         System.out.println(sin(<span class="number">2.2</span>));</span><br><span class="line"><span class="number">8</span>     &#125;</span><br><span class="line"><span class="number">9</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这么写意味着我导入了Math下的所有静态资源，main函数里面我就可以直接用sin(2.2)而不需要使用Math.sin(2.2)了。注意一下，要写**import static java.lang.Math.***，最后的“.*”不可少，有了这两个字符才意味着导入的是Math下的所有静态资源，写成import static java.lang.Math是有问题的。当然，我们也可以指定只导入某个静态资源，比如只导入Math下sin这个方法而不导入Math下的所有静态资源：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.sin;</span><br><span class="line"><span class="number">2</span> </span><br><span class="line"><span class="number">3</span> <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line"><span class="number">4</span> &#123;</span><br><span class="line"><span class="number">5</span>     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line"><span class="number">6</span>     &#123;</span><br><span class="line"><span class="number">7</span>         System.out.println(sin(<span class="number">2.2</span>));</span><br><span class="line"><span class="number">8</span>     &#125;</span><br><span class="line"><span class="number">9</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这么写也是没问题的。导入静态变量也是一样，有兴趣的可以自己试一下。对于import static，个人的态度是：</p>
+<p>1、简化了一些操作，比如静态导入Math下的所有静态资源，在频繁使用Math类下静态资源的地方，可以少些很多“Math.”</p>
+<p>2、降低了代码的可读性</p>
+<p>建议在某些场景下导入特定的静态资源，不建议使用“.*”的导入方式。</p>
+</li>
+</ol>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><ul>
+<li>使用final修饰的类不能被继承</li>
+<li>使用final修饰的方法不能被重写</li>
+<li>使用final修饰的变量不可变，如果该变量是基本数据类型，初始化之后成员变量的值不能被改变。如果是引用数据类型，那么它只能指向初始化时的那个对象，不能再指向别的对象，但是对象当中的内容是允许改变的。</li>
+</ul>
+<p>使用final关键字的好处：</p>
+<ol>
+<li>final方法比非final快一些</li>
+<li>final关键字提高了性能。JVM和Java应用都会缓存final变量。</li>
+<li>final变量可以安全的在多线程环境下进行共享，而不需要额外的同步开销。</li>
+<li>使用final关键字，JVM会对方法、变量及类进行优化。</li>
+</ol>
+<h2 id="10-Java泛型了解吗？什么是类型擦除？介绍一下常用通配符？"><a href="#10-Java泛型了解吗？什么是类型擦除？介绍一下常用通配符？" class="headerlink" title="10. Java泛型了解吗？什么是类型擦除？介绍一下常用通配符？"></a>10. Java泛型了解吗？什么是类型擦除？介绍一下常用通配符？</h2><p>Java泛型是JDK5引入的一个新特性，泛型提供了编译时类型安全检测机制。泛型是的本质是参数化类型。</p>
+<p>泛型一般有三种使用方式：泛型类、泛型方法、泛型接口</p>
+<p>常用通配符：T、E、K、V、?</p>
+<ul>
+<li>T（type）：具体的Java类型</li>
+<li>E（element）：代表element</li>
+<li>K、V（Key、Value）：分别代表Java键值中的key、value</li>
+<li>？：表示不确定的Java类型</li>
+</ul>
+<p>Java的泛型是伪泛型，因为在编译期间，所有的泛型信息都会被擦除，这就是类型擦除。</p>
+<h2 id="11-x3D-x3D-和equals的区别？"><a href="#11-x3D-x3D-和equals的区别？" class="headerlink" title="11. &#x3D;&#x3D;和equals的区别？"></a>11. &#x3D;&#x3D;和equals的区别？</h2><p>（1）基本类型比较</p>
+<ol>
+<li>使用“&#x3D;&#x3D;”比较的是值是否相等</li>
+<li>基本数据类型无equals方法</li>
+</ol>
+<p>（2）引用数据类型</p>
+<ol>
+<li><p>重写了equals方法，比如String：</p>
+<p>第一种情况：使用“&#x3D;&#x3D;”比较的是String的引用是否指向了同一块内存</p>
+<p>第二种情况：使用equals方法比较的是String的引用的对象的内容是否相等。</p>
+</li>
+<li><p>没有重写equals方法：比如User类等自定义类</p>
+<p>“&#x3D;&#x3D;”和equals没有区别，比较的都是引用是否指向了同一块内存。</p>
+</li>
+</ol>
+<h2 id="12-hashcode-与equals，为什么重写equals时必须重写hashcode-？"><a href="#12-hashcode-与equals，为什么重写equals时必须重写hashcode-？" class="headerlink" title="12. hashcode()与equals，为什么重写equals时必须重写hashcode()？"></a>12. hashcode()与equals，为什么重写equals时必须重写hashcode()？</h2><p>hashcode()的作用就是获取哈希码，也叫散列码，作用是为了确定该对象在哈希表中的索引位置</p>
+<p>如果两个对象相等，那么hashcode一定也相同，调用equals时也都会返回true。但是两个对象有相同的hashcode值，他们也不一定是相等的。因此equals方法被覆盖过，则hashcode方法也必须被覆盖。</p>
+<ol>
+<li>使用hashcode方法提前校验，可以避免每一次比对都调用equals方法，提高效率。</li>
+<li>保证是同一个对象，因为如果重写了equals没有重写hashcode，会出现equals相同，hashcode不相同的对象。如果重写了hashcode而没有重写equals，那么会出现hashcode相同，equals不相同的对象。</li>
+</ol>
+<h2 id="13-方法重载和方法重写？"><a href="#13-方法重载和方法重写？" class="headerlink" title="13. 方法重载和方法重写？"></a>13. 方法重载和方法重写？</h2><p>方法重载：重载就是同样的一个方法能够根据输入数据的不同，做出不同的结果处理。即：发生在同一个类中，方法名相同，参数类型不同，个数不同，顺序不同，方法返回值与权限修饰符可以不同。</p>
+<p>方法重写：重写就是当子类继承了父类相同的方法，输入数据一样，但要做出有别于父类的响应时，就要覆盖父类的方法。</p>
+<p>方法重写时需要遵循“两同两小一大”</p>
+<ul>
+<li>两同：方法名相同，参数列表相同</li>
+<li>两小：子类方法返回值类型应该小于父类方法返回值类型。子类方法声明抛出的异常类应该比父类方法抛出的异常类更小或相等</li>
+<li>一大：子类方法的访问权限应该比父类方法的访问权限更大或相等</li>
+</ul>
+<h2 id="14-深拷贝、浅拷贝"><a href="#14-深拷贝、浅拷贝" class="headerlink" title="14. 深拷贝、浅拷贝"></a>14. 深拷贝、浅拷贝</h2><p>深拷贝：对基本数据类型进行值传递，对引用数据类型，创建一个新的对象，并复制其内容。新对象跟原对象不共享内存，修改新对象不会改到原对象</p>
+<p>浅拷贝：对基本数据类型进行值传递，对引用数据类型进行引用传递般的拷贝。浅拷贝只复制某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存</p>
+<h2 id="15-面向对象的三大特征"><a href="#15-面向对象的三大特征" class="headerlink" title="15. 面向对象的三大特征"></a>15. 面向对象的三大特征</h2><p>封装、继承、多态</p>
+<ul>
+<li><p>封装：</p>
+<p>封装就是把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象内部信息</p>
+</li>
+<li><p>继承：</p>
+<p>继承是使用已存在的类的定义作为基础建立新类的技术</p>
+<ol>
+<li>子类拥有父类对象所有的属性和方法（包括私有属性和私有方法），但是无法访问，只能拥有。</li>
+<li>子类可以拥有自己的属性和方法（对父类进行扩展）</li>
+<li>子类可以用自己的方式实现父类的方法（方法重写）</li>
+</ol>
+</li>
+<li><p>多态：</p>
+<p>多态，表示一个对象具有多种状态。父类引用指向子类对象。方法重载也是多态的一种体现。</p>
+</li>
+</ul>
+<h2 id="16-import-java和javax的区别"><a href="#16-import-java和javax的区别" class="headerlink" title="16. import java和javax的区别"></a>16. import java和javax的区别</h2><p>刚开始的时候 JavaAPI 所必需的包是 java 开头的包，&#x3D;&#x3D;javax 当时只是扩展 API 包来使用&#x3D;&#x3D;。然而随着时间的推移，javax 逐渐的扩展成为 Java API 的组成部分。但是，将扩展从 javax 包移动到 java 包太麻烦了，最终可能会破坏一堆现有的代码。因此，&#x3D;&#x3D;最终决定 javax 包将成为标准API的一部分。&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;所以，实际上java和javax没有区别。这都是一个名字。&#x3D;&#x3D;</p>
+<h2 id="17-创建一个对象用什么运算符？对象实例与对象引用有何不同？"><a href="#17-创建一个对象用什么运算符？对象实例与对象引用有何不同？" class="headerlink" title="17. 创建一个对象用什么运算符？对象实例与对象引用有何不同？"></a>17. 创建一个对象用什么运算符？对象实例与对象引用有何不同？</h2><p>使用new关键字创建对象。</p>
+<p>new创建的对象实例是在堆内存中的，而对象引用指向对象实例，存放在栈内存中。一个对象引用可以指向一个或零个对象；一个对象可以有n个引用指向它。</p>
+<h2 id="18-什么是方法的返回值？返回值在类的方法里的作用是什么？"><a href="#18-什么是方法的返回值？返回值在类的方法里的作用是什么？" class="headerlink" title="18. 什么是方法的返回值？返回值在类的方法里的作用是什么？"></a>18. 什么是方法的返回值？返回值在类的方法里的作用是什么？</h2><p>方法的返回值就是我们获取到的某个方法体中的代码执行之后产生的结果。</p>
+<p>返回值的作用：接收方法体执行结束之后产生的结果，使得其可以用于后续其他的操作</p>
+<h2 id="19-什么是哈夫曼树"><a href="#19-什么是哈夫曼树" class="headerlink" title="19. 什么是哈夫曼树"></a>19. 什么是哈夫曼树</h2><p>给定N个权值作为N个<a href="https://baike.baidu.com/item/%E5%8F%B6%E5%AD%90%E7%BB%93%E7%82%B9/3620239">叶子结点</a>，构造一棵二叉树，若该树的带权路径长度达到最小，称这样的二叉树为最优二叉树，也称为哈夫曼树(Huffman Tree)。</p>
+<h2 id="20-什么是满二叉树、什么是完全二叉树、什么是平衡二叉树？"><a href="#20-什么是满二叉树、什么是完全二叉树、什么是平衡二叉树？" class="headerlink" title="20. 什么是满二叉树、什么是完全二叉树、什么是平衡二叉树？"></a>20. 什么是满二叉树、什么是完全二叉树、什么是平衡二叉树？</h2><p>满二叉树：除了最后一层没有子节点外，其余每一层上所有节点都有两个子节点的二叉树叫满二叉树。也就是深度为k，且有2的k次方-1个节点的二叉树称为满二叉树。</p>
+<p>完全二叉树：如果对满二叉树的结点进行编号, 约定编号从根结点起, 自上而下, 自左而右。则深度为k的, 有n个结点的二叉树, 当且仅当其每一个结点都与深度为k的满二叉树中编号从1至n的结点一一对应时, 称之为完全二叉树。</p>
+<p>平衡二叉树：任意节点的子树的高度差都小于等于1。</p>
+<h2 id="21-反射机制"><a href="#21-反射机制" class="headerlink" title="21. 反射机制"></a>21. 反射机制</h2><p>Java反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取信息以及动态调用对象属性及方法的功能称之为Java语言的反射机制。</p>
+<h2 id="22-静态编译和动态编译"><a href="#22-静态编译和动态编译" class="headerlink" title="22. 静态编译和动态编译"></a>22. 静态编译和动态编译</h2><ul>
+<li>静态编译：在编译时确定类型，绑定对象</li>
+<li>动态编译：在运行时，确定类型，绑定对象</li>
+</ul>
+<h2 id="23-反射机制的优缺点？"><a href="#23-反射机制的优缺点？" class="headerlink" title="23. 反射机制的优缺点？"></a>23. 反射机制的优缺点？</h2><p>优点：运行期类型的判断，动态加载类，提高代码灵活度。</p>
+<p>缺点：性能比直接的Java代码要慢的多，不够安全。</p>
+<h2 id="23-反射的应用场景？"><a href="#23-反射的应用场景？" class="headerlink" title="23. 反射的应用场景？"></a>23. 反射的应用场景？</h2><p>JDBC连接数据库使用<code>Class.forName(driver);</code>，通过反射加载数据库驱动</p>
+<p>Spring的IOC、AOP中使用了反射</p>
+<p>动态配置实例的属性</p>
+<p>Web服务器中利用反射调用了Servlet的服务方法</p>
+<h2 id="24-什么叫对象的序列化？什么叫反序列化？实现对象的序列化需要做哪些工作？"><a href="#24-什么叫对象的序列化？什么叫反序列化？实现对象的序列化需要做哪些工作？" class="headerlink" title="24. 什么叫对象的序列化？什么叫反序列化？实现对象的序列化需要做哪些工作？"></a>24. 什么叫对象的序列化？什么叫反序列化？实现对象的序列化需要做哪些工作？</h2><p>将对象中数据编码为字节序列的过程叫对象的序列化</p>
+<p>将字节序列重新反向解码为对象数据的过程称之为反序列化</p>
+<p>Java提供了API来实现序列化，但要遵守如下规定：</p>
+<ul>
+<li>要实现序列化接口（Serializable）</li>
+<li>为了保持序列化过程稳定，建议在类中添加序列化版本号</li>
+<li>如果不想被序列化，加<strong>transient</strong>关键字</li>
+</ul>
+<h2 id="25-泛型中存在类型擦除，在编译期间，所有的泛型信息都会被擦除，那为什么反射能够获取到泛型信息？"><a href="#25-泛型中存在类型擦除，在编译期间，所有的泛型信息都会被擦除，那为什么反射能够获取到泛型信息？" class="headerlink" title="25. 泛型中存在类型擦除，在编译期间，所有的泛型信息都会被擦除，那为什么反射能够获取到泛型信息？"></a>25. 泛型中存在类型擦除，在编译期间，所有的泛型信息都会被擦除，那为什么反射能够获取到泛型信息？</h2><p>泛型的类型擦除是有范围的，定义在类上的泛型信息是不会被擦除的。Java编译器仍在class文件以Signature属性的方式保留了泛型信息。</p>
+<p>Type作为顶级接口，Type下还有几种类型，比如TypeVariable，ParameterizedType，WildCardType，GenericArrayType以及Class。通过这些接口，我们就可以在运行时获取泛型相关的信息。</p>
+<h2 id="26-Java异常"><a href="#26-Java异常" class="headerlink" title="26. Java异常"></a>26. Java异常</h2><p>所有异常都有一个共同的祖先，Throwable类。Throwable类有两个重要的子类，Exception和Error。</p>
+<p>Exception是能被程序本身处理的（try-catch）</p>
+<p>Error不能被程序本身处理，只能尽量避免</p>
+<p>Exception又可以分为 &#x3D;&#x3D;受检查异常&#x3D;&#x3D; 和 &#x3D;&#x3D;不受检查异常&#x3D;&#x3D; ，除了RuntimeException及其子类外，都是受检查异常，常见的受检查异常有：SQLException、IOException、ClassNotFoundException</p>
+<p>常见的不受检查异常有：NullPointException、ArrayIndexOfBoundsException、ClassCastException….</p>
+<h2 id="27-finally在哪些情况下不会执行？"><a href="#27-finally在哪些情况下不会执行？" class="headerlink" title="27. finally在哪些情况下不会执行？"></a>27. finally在哪些情况下不会执行？</h2><ul>
+<li>在try或finally中用了System.exit()退出程序，则finally不会执行。但是如果System.exit()在异常语句之后，finally还会执行。</li>
+<li>程序所在的线程死亡，finally不会执行</li>
+<li>关闭CPU，finally不会执行</li>
+<li>在进入try之前，就已经返回了，那就不会执行finally</li>
+</ul>
+<h2 id="28-javac命令和java命令做了什么事情？"><a href="#28-javac命令和java命令做了什么事情？" class="headerlink" title="28. javac命令和java命令做了什么事情？"></a>28. javac命令和java命令做了什么事情？</h2><p>javac：负责的是编译的部分，当执行javac时，会启动java的编译器程序。对指定扩展名的.java文件进行编译。</p>
+<p>java：负责运行的部分，会启动jvm加载运行时所需要的类库，并对class文件进行执行。一个文件要被执行，必须要有一个执行的起始点，这个起始点就是main()函数。</p>
+<h2 id="29-java数据类型"><a href="#29-java数据类型" class="headerlink" title="29. java数据类型"></a>29. java数据类型</h2><p>基本数据类型：byte、short、int、long、float、double、char、boolean</p>
+<p>引用数据类型：类、接口、数组</p>
+<p>int：4个字节</p>
+<p>short：2个字节</p>
+<p>long：8个字节</p>
+<p>byte：1个字节</p>
+<p>float：4个字节</p>
+<p>double：8个字节</p>
+<p>char：2个字节</p>
+<p>两个数相加，如果一个是double，另一个转换为double。</p>
+<p>否则，有一个是float，则另一个转换为float。</p>
+<p>否则，有一个是long，则另一个转换为long。</p>
+<p>级别从低到高：byte、char、int（这三个平级） - &gt; int - &gt; long - &gt; float - &gt; double</p>
+<p>类型转换时可能会出现精度丢失或者数据无法表示</p>
+<ul>
+<li>精度丢失：float只能有24位来确定精度，而int是32位。int转float可能丢失末尾的有效数字</li>
+<li>无法表示：比如float存放一个1e30，转换为int是无法表示的，因为超过了int的最大值</li>
+</ul>
+<h2 id="30-throw和throws的区别？"><a href="#30-throw和throws的区别？" class="headerlink" title="30. throw和throws的区别？"></a>30. throw和throws的区别？</h2><p>throw用于抛出异常对象，后面跟的是异常对象，throw用于函数内</p>
+<p>throws用于抛出异常类，后面跟的是异常类，可以跟多个，用逗号隔开。throws用于方法上（函数上）</p>
+<h2 id="31-自动装箱、自动拆箱？"><a href="#31-自动装箱、自动拆箱？" class="headerlink" title="31. 自动装箱、自动拆箱？"></a>31. 自动装箱、自动拆箱？</h2><p>装箱就是自动将基本数据类型转换为包装器类型</p>
+<p>拆箱就是自动将包装器类型转换为基本数据类型</p>
+<p>int &lt;-&gt; Integer</p>
+<p>byte &lt;-&gt; Byte</p>
+<p>long &lt;-&gt; Long</p>
+<p>float &lt;-&gt; Float</p>
+<p>double &lt;-&gt; Double</p>
+<p>char &lt;-&gt; Character</p>
+<p>boolean &lt;-&gt; Boolean</p>
+<p>自动装箱：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">b</span> <span class="operator">=</span> a; 	<span class="comment">//这一步相当于执行了Integer b = Integer.valueOf(a);</span></span><br></pre></td></tr></table></figure>
+
+<p>自动拆箱：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">3</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> b;		<span class="comment">//这一步相当于执行了int a = b.intValue();</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="32-JDBC操作数据库的基本步骤"><a href="#32-JDBC操作数据库的基本步骤" class="headerlink" title="32. JDBC操作数据库的基本步骤"></a>32. JDBC操作数据库的基本步骤</h2><ol>
+<li>加载（注册）数据库驱动（到JVM）</li>
+<li>建立（获取）数据库连接</li>
+<li>创建（获取）数据库操作对象</li>
+<li>定义操作的SQL语句</li>
+<li>执行数据库操作</li>
+<li>获取并操作结果集</li>
+<li>关闭对象，回收数据库资源（关闭结果集 -&gt; 关闭数据库操作对象 -&gt; 关闭连接）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JDBCTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">driver</span> <span class="operator">=</span> <span class="string">&quot;com.mysql.jdbc.driver&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;jdbc:mysql://localhost:8080/test?characterEncoding=utf-8&amp;serverTimeZone=Asia/Shanghai&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> <span class="string">&quot;root&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> <span class="string">&quot;root&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">Statement</span> <span class="variable">stmt</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">ResultSet</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">//1.加载数据库驱动（成功加载后，会将Driver类的实例注册到DriverManager类中）</span></span><br><span class="line">            Class.forName(driver);</span><br><span class="line">            <span class="comment">//2.获取数据库连接</span></span><br><span class="line">            conn = DriverManager.getConnection(url, username, password);</span><br><span class="line">            <span class="comment">//3.获取数据库操作对象</span></span><br><span class="line">            stmt = conn.createStatement();</span><br><span class="line">            <span class="comment">//4.定义SQL语句</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select * from user where id = 100&quot;</span>;</span><br><span class="line">            <span class="comment">//5.执行数据库操作</span></span><br><span class="line">            rs = stmt.excuteQuery(sql);</span><br><span class="line">            <span class="comment">//6.获取并操作结果集</span></span><br><span class="line">            <span class="keyword">while</span>(rs.next()) &#123;</span><br><span class="line">                System.out.println(rs.getInt(<span class="string">&quot;id&quot;</span>));</span><br><span class="line">                System.out.println(rs.getString(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            <span class="comment">//7.关闭对象，回收数据库资源</span></span><br><span class="line">            <span class="keyword">if</span>(rs != <span class="literal">null</span>) &#123;	<span class="comment">//关闭结果集对象</span></span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    rs.close();</span><br><span class="line">                &#125;<span class="keyword">catch</span>(SQLException e)&#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(stmt != <span class="literal">null</span>) &#123;	<span class="comment">//关闭数据库操作对象</span></span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    stmt.close();</span><br><span class="line">                &#125;<span class="keyword">catch</span>(SQLException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(conn != <span class="literal">null</span>) &#123;	<span class="comment">//关闭数据库连接对象</span></span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    conn.close();</span><br><span class="line">                &#125;<span class="keyword">catch</span>(SQLException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="33-Statement和PreparedStatement有什么区别？"><a href="#33-Statement和PreparedStatement有什么区别？" class="headerlink" title="33. Statement和PreparedStatement有什么区别？"></a>33. Statement和PreparedStatement有什么区别？</h2><ul>
+<li>PreparedStatement接口代表预编译的语句，它主要的优势在于可以减少SQL的编译错误并增加安全性（减少SQL注入攻击的可能性）</li>
+<li>PreparedStatement中SQL语句是可以带参数的，避免了用字符串拼接SQL语句的麻烦和不安全</li>
+<li>当批量处理SQL或频繁执行相同的查询时，PreparedStatement有明显的性能上的优势，由于数据库可以将编译优化后的SQL语句缓存起来，下次执行相同结构的语句时就会很快</li>
+</ul>
+<h2 id="34-Class-forName和ClassLoader的区别？"><a href="#34-Class-forName和ClassLoader的区别？" class="headerlink" title="34. Class.forName和ClassLoader的区别？"></a>34. Class.forName和ClassLoader的区别？</h2><p>Class.forName的源码中，有一个forName0方法，这个forName0方法的第二个参数设置为了true，这个参数代表是否对加载的类进行初始化。设置为true时会对类进行初始化，会执行类中的静态代码块，以及对静态变量的赋值等操作。</p>
+<p>而ClassLoader并不会对类进行初始化</p>
+<h2 id="35-float和double的区别？"><a href="#35-float和double的区别？" class="headerlink" title="35. float和double的区别？"></a>35. float和double的区别？</h2><ul>
+<li>float是单精度类型，精度是&#x3D;&#x3D;8&#x3D;&#x3D;位有效数字，占用4个字节，取值范围10^-38^ ~10^38^。</li>
+<li>double是双精度类型，精度是&#x3D;&#x3D;17&#x3D;&#x3D;位有效数字，占用8个字节，取值范围是10^-308^~10^308^。</li>
+<li>如果不声明，则默认为double类型，如果要使用float的话，需要在后面加 f 。例如：float a &#x3D; 1.0f</li>
+<li>float是8位有效数字，第七位会产生四舍五入（5及5一下都舍去）</li>
+</ul>
+<h2 id="36-既然反射可以拿到private里的值，那private的意义在哪？"><a href="#36-既然反射可以拿到private里的值，那private的意义在哪？" class="headerlink" title="36. 既然反射可以拿到private里的值，那private的意义在哪？"></a>36. 既然反射可以拿到private里的值，那private的意义在哪？</h2><ol>
+<li>Java里的private修饰符不是为了绝对的安全设计的，而是对用户常规使用java的一种约束。就好比在饭店厨房门口挂一个闲人免进的牌子，但你还是能够通过其他方法进去。</li>
+<li>private的意义是OOP（面向对象编程）的封装概念。</li>
+<li>setAccessable(true)，这行代码取消了java权限控制检查，会产生安全隐患，但是提高了反射的速度。</li>
+</ol>
+<h2 id="37-一个java文件写多个类，会生成多少个class文件？"><a href="#37-一个java文件写多个类，会生成多少个class文件？" class="headerlink" title="37. 一个java文件写多个类，会生成多少个class文件？"></a>37. 一个java文件写多个类，会生成多少个class文件？</h2><p>一个java文件写多个类，除去内部类，剩下的每个普通类都会生成一个class文件。</p>
+<h2 id="38-Java语言的6个设计原则。"><a href="#38-Java语言的6个设计原则。" class="headerlink" title="38. Java语言的6个设计原则。"></a>38. Java语言的6个设计原则。</h2><ul>
+<li><p>遵循单一职责原则</p>
+<p>一个类只专注于做一件事<br>高内聚，低耦合</p>
+</li>
+<li><p>开放-封闭原则</p>
+<p>对拓展开放，对修改关闭（尽可能不动原有代码进行拓展）<br>高内聚，低耦合<br>为达到目的，需对系统进行抽象化设计（关键）</p>
+<p><img src="C:\Users\FoodieWang\AppData\Roaming\Typora\typora-user-images\image-20210708012552846.png" alt="image-20210708012552846"></p>
+</li>
+<li><p>里氏代换原则（LSP）</p>
+<p>子类必须能够替换它们的基类型，基类与子类可互换，客户端没有察觉情况下<br>低耦合<br>很容易实现同一父类下的各个子类的互换，而客户端可以毫不察觉</p>
+<p><img src="C:\Users\FoodieWang\AppData\Roaming\Typora\typora-user-images\image-20210708012701645.png" alt="image-20210708012701645"></p>
+<p>士兵只能使用WeaponGun，而无法使用ToyGun杀敌，如果使用ToyGun将会出错。这就是里氏替换原则。</p>
+</li>
+<li><p>依赖倒置原则</p>
+<p>这个是开闭原则的基础。</p>
+<p>具体内容：面向接口编程，依赖于抽象而不依赖于细节。写代码时用到具体类时，不与具体类交互，而与具体类的上层接口交互。</p>
+</li>
+<li><p>接口隔离原则（Interface Segregation Principle）</p>
+<p>使用多个专一功能的接口比使用一个总接口总要好，但不能过度<br>一个接口不能过于臃肿<br>高内聚<br>会使一个软件系统功能拓展时，修改的压力不会影响到别的对象那去</p>
+<p><img src="C:\Users\FoodieWang\AppData\Roaming\Typora\typora-user-images\image-20210708012807116.png" alt="image-20210708012807116"></p>
+<p>Model只要满足好身材这个条件，就有可能成为模特，漂亮女孩满足好身材和好。AngelaBaby即有好身材又好。</p>
+</li>
+<li><p>迪米特法则（Law of Demeter）</p>
+<p>又叫最少知识原则<br>对象与对象之间应该使用尽可能少的方法来关联，避免千丝万缕的关系<br>低耦合<br>类知道其他类应尽量少<br>类可以访问其他类的方法或者属性也应尽量少</p>
+<p><img src="C:\Users\FoodieWang\AppData\Roaming\Typora\typora-user-images\image-20210708012836504.png" alt="image-20210708012836504"></p>
+<p>如果Lily和Jack自己做hamburg那么就会与Vegetable、Meat、Bread产生千丝万缕关系。上图，则由KFC来做，这样Lily和Jack就只与Hamburg有关关联，与材料就没有关联了。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>

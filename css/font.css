@@ -57,6 +57,8 @@
 
   .icon-photo:before {
     content: "\e60a";
+    /* 修改大小 */
+    font-size: 15px;
   }
 
   
