@@ -1,5 +1,5 @@
 :root {
-    --trans-light: rgba(255, 255, 255, 1);
+    --trans-light: rgba(255, 255, 255, 0.70);
     --trans-dark: rgba(25, 25, 25, 0.75);
     --border-style: 1.2px solid rbg(169, 169, 169);
     --backdrop-filter: blur(15px) saturate(150%);
@@ -15,20 +15,20 @@
 } */
 
 /* 白天模式遮罩透明 */
-/* #footer::before {
+#footer::before {
     background: transparent !important;
-} */
-/* #page-header::before {
+}
+#page-header::before {
     background: transparent !important;
-} */
+}
 
 /* 夜间模式遮罩透明 */
-/* [data-theme="dark"] #footer::before {
+[data-theme="dark"] #footer::before {
     background: transparent !important;
-} */
-/* [data-theme="dark"] #page-header::before {
+}
+[data-theme="dark"] #page-header::before {
     background: transparent !important;
-} */
+}
 
 
 
@@ -281,5 +281,46 @@ figure.highlight pre .addition {
     color: #e3a9a9;
 }
 
+.jz {
+    text-align: center;
+}
+
+/* 固定导航栏 */
+.nav-fixed #nav{
+    transform: translateY(58px)!important;
+    -webkit-transform: translateY(58px)!important;
+    -moz-transform: translateY(58px)!important;
+    -ms-transform: translateY(58px)!important;
+    -o-transform: translateY(58px)!important;
+}
+#nav{
+    transition: none!important;
+    -webkit-transition: none!important;
+    -moz-transition: none!important;
+    -ms-transition: none!important;
+    -o-transition: none!important;
+}
 
 
+/* 个人信息卡片背景设置 */
+/*白天主题下的配置*/
+/* #aside-content>.card-widget.card-info {
+    background-image: url('../img/light_personInfo_background.png');
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    background-size: 100%
+} */
+
+/*黑暗主题下的配置*/
+[data-theme=dark] #aside-content>.card-widget.card-info {
+    /*换成自己图片的地址*/
+    background-image: url('../img/black.png') !important
+}
+
+
+#page-header #page-site-info {
+    position: absolute;
+    top: 310px;
+    padding: 0 10px;
+    width: 98%;
+}
