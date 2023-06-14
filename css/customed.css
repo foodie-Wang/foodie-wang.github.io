@@ -1,33 +1,37 @@
 :root {
-    --trans-light: rgba(255, 255, 255, 0.75);
-    --trans-dark: rgba(25, 25, 25, 0.6);
-    --border-style: 1px solid rbg(169, 169, 169);
-    --backdrop-filter: blur(5px) saturate(150%);
+    --trans-light: rgba(255, 255, 255, 1);
+    --trans-dark: rgba(25, 25, 25, 0.75);
+    --border-style: 1.2px solid rbg(169, 169, 169);
+    --backdrop-filter: blur(15px) saturate(150%);
 }
 
+/* 一图流设置 */
 /* 页脚与页头透明 */
-#footer {
+/* #footer {
     background: transparent !important
-}
-#page-header {
+} */
+/* #page-header {
     background: transparent !important;
-}
+} */
 
 /* 白天模式遮罩透明 */
-#footer::before {
+/* #footer::before {
     background: transparent !important;
-}
-#page-header::before {
+} */
+/* #page-header::before {
     background: transparent !important;
-}
+} */
 
 /* 夜间模式遮罩透明 */
-[data-theme="dark"] #footer::before {
+/* [data-theme="dark"] #footer::before {
     background: transparent !important;
-}
-[data-theme="dark"] #page-header::before {
+} */
+/* [data-theme="dark"] #page-header::before {
     background: transparent !important;
-}
+} */
+
+
+
 
 /* 翻页按钮居中 */
 #pagination {
@@ -86,7 +90,7 @@ img {
 #recent-posts > .recent-post-item {
     background: var(--trans-light);
     backdrop-filter: var(--backdrop-filter);
-    border-radius: 25px;
+    border-radius: 30px;
     border: var(--border-style);
 }
 
@@ -95,7 +99,7 @@ img {
     background: var(--trans-light);
     backdrop-filter: var(--backdrop-filter);
     border: var(--border-style);
-    border-radius: 18px;
+    border-radius: 30px;
 }
 
 /* 文章页、归档页、普通页面*/
@@ -105,13 +109,14 @@ div#archive {
     background: var(--trans-light);
     backdrop-filter: var(--backdrop-filter);
     border: var(--border-style);
-    border-radius: 20px;
+    border-radius: 30px;
 }
 
 /* 导航栏 */
 #page-header.nav-fixed #nav {
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: var(--backdrop-filter);
+    
 }
 
 [data-theme="dark"] #page-header.nav-fixed #nav {
@@ -226,15 +231,55 @@ figure.highlight pre .addition {
     color: #00bf03 !important;
 }
 
+
+
+
+#body-wrap #footer {
+    --tw-bg-opacity: 1;
+    background-color: rgb(229 229 229/var(--tw-bg-opacity));
+}
+
+#body-wrap #footer #footer-wrap {
+    font-weight: 700;
+    color: black;
+}
+
+/* #content-inner {
+    background-color: #eaedf2;
+} */
+
+/* .bg-hexo-light-gray {
+    --tw-bg-opacity: 1;
+    background-color: rgb(229 229 229/var(--tw-bg-opacity));
+} */
+
 /* 左上角网站标题：字体、大小、颜色设置 */
 #body-wrap #page-header #nav #blog-info a span {
-    font-family: sans-serif;
+    font-family: sans-serif; 
     font-size: 30px;
     color: #e3a9a9;
 }
 
+/* 导航栏字体、大小、颜色设置 */
 #body-wrap #page-header #nav #menus .site-page {
     font-family: sans-serif;
     font-size: 23px;
     color: #e3a9a9;
 }
+
+/* 中间网站标题：字体、大小、颜色设置 */
+#body-wrap #page-header #site-info #site-title {
+    font-family: sans-serif; 
+    font-size: 50px;
+    color: #e3a9a9;
+}
+
+/* 子标题：字体、大小、颜色设置 */
+#body-wrap #page-header #site-info #site-subtitle {
+    font-family: sans-serif; 
+    font-size: 30px;
+    color: #e3a9a9;
+}
+
+
+
