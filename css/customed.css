@@ -361,3 +361,13 @@ figure.highlight pre .addition {
     content: '\f1f9';
     font-size: 1.3em;
 }
+
+#swiper_container .blog-slider__pagination .swiper-pagination-bullet-active {
+    background: #000000;
+    /* height: 30px; */
+}
+
+[data-theme=dark] #swiper_container .blog-slider__pagination .swiper-pagination-bullet-active {
+    background: #ffffff;
+    /* height: 30px; */
+}
