@@ -324,3 +324,40 @@ figure.highlight pre .addition {
     padding: 0 10px;
     width: 98%;
 }
+
+
+#post .post-copyright .post-copyright-meta {
+    color: #000000;
+    font-weight: bold;
+}
+
+[data-theme=dark] #post .post-copyright .post-copyright-meta {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#post .post-copyright .post-copyright-info a {
+    color: #000000;
+}
+
+[data-theme=dark] #post .post-copyright .post-copyright-info a {
+    color: #ffffff;
+}
+
+#post .post-copyright:before {
+    position: absolute;
+    top: 2px;
+    right: 12px;
+    color: #000000;
+    content: '\f1f9';
+    font-size: 1.3em;
+}
+
+[data-theme=dark] #post .post-copyright:before {
+    position: absolute;
+    top: 2px;
+    right: 12px;
+    color: #ffffff;
+    content: '\f1f9';
+    font-size: 1.3em;
+}
