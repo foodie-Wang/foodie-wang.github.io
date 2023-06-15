@@ -351,4 +351,146 @@
         <tag>css</tag>
       </tags>
   </entry>
+  <entry>
+    <title>计算机网络面试题汇总（一）</title>
+    <url>/2023/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="一、OSI七层模型、TCP-x2F-IP四层模型与五层模型介绍"><a href="#一、OSI七层模型、TCP-x2F-IP四层模型与五层模型介绍" class="headerlink" title="一、OSI七层模型、TCP&#x2F;IP四层模型与五层模型介绍"></a>一、OSI七层模型、TCP&#x2F;IP四层模型与五层模型介绍</h1><p>OSI七层模型（从顶到下）分别是：应用层、表示层、会话层、传输层、网络层、数据链路层和物理层。</p>
+<p>TCP&#x2F;IP四层模型（从顶到下）分别是：应用层、传输层、网际层、网络接口层。</p>
+<p>五层模型（从顶到下）分别是：应用层、传输层、网络层、数据链路层、物理层。</p>
+<p>OSI七层模型中每一层的功能与常见协议如下：</p>
+<ul>
+<li><p>应用层：通过应用进程间的交互来完成特定的网络应用。</p>
+<p><strong>常见协议：</strong>SMTP（简单邮件传输协议）、FTP（文件传输协议）、DNS（域名系统）、HTTP（超文本传输协议）、POP3（邮局协议）、Telnet（远程登录协议）…</p>
+</li>
+<li><p>表示层：主要用于处理两个通信系统间信息交换的表示方式，包括：数据的加密和解密、数据的压缩和解压缩、数据的编码和解码等。</p>
+</li>
+<li><p>会话层：建立、维护和重连应用程序之间的会话。</p>
+</li>
+<li><p>传输层：为两台主机进程之间的通信提供通用的数据传输服务。</p>
+<p><strong>常见协议：</strong>TCP（传输控制协议）、UDP（用户数据报协议）。</p>
+</li>
+<li><p>网络层：把传输层产生的报文段或用户数据报封装成分组和包进行传送。此外，还会寻找合适的网间路由和交换节点，保证数据的及时传输。</p>
+<p><strong>常见协议：</strong>IP（网际互联协议）、IPv6（网际互联协议第6版），ICMP（互联网控制信息协议）、IGMP（互联网组管理协议）、OSPF（开放最短路径优先协议）…</p>
+</li>
+<li><p>数据链路层：将网络层传下来的IP数据报组装成帧，在两个相邻节点之间的链路上进行帧的传输。每一帧包括必要的控制信息（同步信息、差错控制、地址信息等）。</p>
+</li>
+<li><p>物理层：利用物理传输介质为数据链路层提供物理连接，实现相邻计算机之间比特流的透明传输。</p>
+</li>
+</ul>
+<p><img src="/img/article_content_img/osi-model.png" alt="OSI七层模型图"></p>
+<h1 id="二、常见协议简介"><a href="#二、常见协议简介" class="headerlink" title="二、常见协议简介"></a>二、常见协议简介</h1><ul>
+<li>HTTP（<strong>Hypertext Transfer Protocol，超文本传输协议</strong>）：基于TCP协议，使用“客户端&#x2F;服务器”工作模式，是一种用于传输超文本和多媒体内容的协议，主要是为Web浏览器与Web服务器之间的通信而设计的。当我们使用浏览器浏览网页时，网页就是通过HTTP请求进行加载的。HTTP是一种<strong>无状态</strong>协议，即无法记录客户端用户的状态。因此，一般采用会采用Session来记录客户端用户的状态。</li>
+<li>SMTP（<strong>Simple Mail Transfer Protocol，简单邮件传输协议</strong>）：基于TCP协议，是一种用于发送电子邮件的协议。（注：SMTP只负责发送邮件，不负责接收邮件）</li>
+<li>FTP（<strong>File Transfer Protocol，文件传输协议</strong>）：基于TCP协议，是一种用于在计算机之间传输文件的协议，可以屏蔽操作系统和文件存储方式。但FTP是一种不安全的协议，因为它在传输过程中不会对数据进行加密。因此，若要传输敏感数据，建议使用SFTP（<strong>SSH File Transfer Protocol，安全文件传输协议</strong>）。</li>
+<li>Telnet（<strong>远程登录协议</strong>）：基于TCP协议，用于通过一个终端登录到其他服务器。但Telnet也是一种不安全的协议，因为所有数据都会以明文的形式传送。</li>
+<li>DNS（<strong>Domain Name System，域名系统</strong>）：基于UDP协议，用于IP地址与域名映射。</li>
+<li>POP3（<strong>Post Office Protocol - Version 3，邮局协议版本3</strong>）：基于TCP协议，负责邮件的接收。</li>
+<li>IMAP（<strong>Internet Mail Access Protocol，邮件访问协议</strong>）：基于TCP协议，负责邮件的接收。相比于POP3协议，IMAP协议支持邮件搜索、标记、分类、归档等功能，并且支持在多个设备之间同步邮件状态。</li>
+<li>TCP（<strong>Transmission Control Protocol，传输控制协议</strong>）：提供面向连接的、可靠的、有状态的数据传输服务。</li>
+<li>UDP（<strong>User Datagram Protocol，用户数据报协议</strong>）：提供无连接的，不可靠的，无状态的数据传输服务。</li>
+<li>IP（<strong>Internet Protocol，网际互联协议</strong>）：主要用来定义数据包格式、对数据包进行路由和寻址，以便它们可以跨网络传播并到达正确的目的地。目前IP协议主要有两种，分别为IPv4和IPv6。</li>
+<li>ICMP（<strong>Internet Control Message Protocol，互联网控制信息协议</strong>）：一种用于传输网络状态和错误信息的协议，常用于网络诊断和故障排除。例如：<code>ping</code>命令就是使用ICMP协议来测试网络连通性。</li>
+<li>ARP（<strong>Address Resolution Protocol，地址解析协议</strong>）：用于解决IP地址与物理地址（MAC地址）相互转化的问题。</li>
+<li>RIP（<strong>Routing Information Protocol，路由信息协议</strong>）：一种内部网关协议，也是一种动态路由协议。该协议基于距离向量算法，使用固定的跳数作为度量标准，选择跳数最少的路径作为最佳路径。</li>
+</ul>
+<h1 id="三、常见协议端口号"><a href="#三、常见协议端口号" class="headerlink" title="三、常见协议端口号"></a>三、常见协议端口号</h1><ul>
+<li>Telnet（远程登录协议）：23</li>
+<li>FTP（文件传输协议）：20、21</li>
+<li>SMTP（简单邮件传输协议）：25</li>
+<li>POP3（邮局协议版本3）：110</li>
+<li>DNS（域名系统）：53</li>
+<li>SSH（安全外壳协议）：22</li>
+<li>HTTP（超文本传输协议）：80</li>
+<li>HTTPS（安全的超文本传输协议）：443</li>
+</ul>
+<h1 id="四、从输入URL到页面展示的全过程"><a href="#四、从输入URL到页面展示的全过程" class="headerlink" title="四、从输入URL到页面展示的全过程"></a>四、从输入URL到页面展示的全过程</h1><ol>
+<li><strong>DNS解析：</strong>浏览器查找所输入域名的IP地址。<a href="http://love2peace.top/">DNS解析全过程</a></li>
+<li><strong>TCP连接：</strong>浏览器与目标服务器通过“三次握手”建立TCP连接。</li>
+<li><strong>发送请求：</strong>浏览器通过HTTP协议发送请求。</li>
+<li><strong>返回报文：</strong>服务器处理请求并将处理结果及相应的视图返回给浏览器。</li>
+<li><strong>解析、渲染页面：</strong>浏览器解析并渲染页面。若遇到对js、css、图片等静态资源的引用，则重复上述步骤，向服务器请求这些资源。</li>
+<li><strong>TCP断开连接：</strong>浏览器与目标服务器通过“四次挥手”断开连接。</li>
+</ol>
+<h1 id="五、HTTP状态码"><a href="#五、HTTP状态码" class="headerlink" title="五、HTTP状态码"></a>五、HTTP状态码</h1><table>
+<thead>
+<tr>
+<th align="center">状态码</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">100（Continue）</td>
+<td align="center">请求者应当继续发起请求。表示服务器已经收到请求的第一部分，正在等到其余部分。例如：浏览器使用POST方式向服务器发起请求时，要先进行“三次握手”，然后服务器返回100状态码，浏览器才会再次发送数据。</td>
+</tr>
+<tr>
+<td align="center">200（OK）</td>
+<td align="center">服务器已经成功处理请求</td>
+</tr>
+<tr>
+<td align="center">201（Created）</td>
+<td align="center">请求被成功处理并且在服务端创建了一个新的资源。例如：通过POST请求创建一个新的用户。</td>
+</tr>
+<tr>
+<td align="center">202（Accepted）</td>
+<td align="center">服务端已经接收到了请求，但是还没有进行处理。</td>
+</tr>
+<tr>
+<td align="center">204（No Content）</td>
+<td align="center">服务端已经成功处理了请求，但是没有返回任何内容。一般用于只关注处理结果是否成功的场景。</td>
+</tr>
+<tr>
+<td align="center">301（Moved Permanently）</td>
+<td align="center">永久重定向。例如：网站网址进行了变更。</td>
+</tr>
+<tr>
+<td align="center">302（Moved Temporarily）</td>
+<td align="center">暂时重定向。例如：网站的某些资源原本确实存在，但是被暂时移动到其他的URI下。</td>
+</tr>
+<tr>
+<td align="center">400（Bad Request）</td>
+<td align="center">发送的HTTP请求存在问题。例如：请求参数不合法、请求方法错误等。</td>
+</tr>
+<tr>
+<td align="center">401（Unauthorized）</td>
+<td align="center">未进行认证，但却访问了需要认证之后才能访问的资源。</td>
+</tr>
+<tr>
+<td align="center">403（Forbidden）</td>
+<td align="center">拒绝访问。一般用于针对非法请求。</td>
+</tr>
+<tr>
+<td align="center">404（Not Found）</td>
+<td align="center">请求的资源在服务端未找到。</td>
+</tr>
+<tr>
+<td align="center">409（Conflict）</td>
+<td align="center">请求的资源与服务端当前的状态存在冲突，请求无法被处理。</td>
+</tr>
+<tr>
+<td align="center">410（Gone）</td>
+<td align="center">服务器上某个资源被永久性的删除。</td>
+</tr>
+<tr>
+<td align="center">500（Internal Server Error）</td>
+<td align="center">服务端内部出错。例如：服务端抛异常，且这个异常没有被处理（异常捕获）。</td>
+</tr>
+<tr>
+<td align="center">502（Bad Gateway）</td>
+<td align="center">网关将请求转发到服务端，但服务端返回的是一个错误的响应。</td>
+</tr>
+</tbody></table>
+<h1 id="六、HTTP和HTTPS的区别"><a href="#六、HTTP和HTTPS的区别" class="headerlink" title="六、HTTP和HTTPS的区别"></a>六、HTTP和HTTPS的区别</h1><ul>
+<li>端口号不同。HTTP端口号为80，HTTPS端口号为443。</li>
+<li>URL前缀不同。HTTP的URL前缀是<code>http://</code>，HTTPS的URL前缀是<code>https://</code>。</li>
+<li>安全性不同。HTTP是明文传输，客户端和服务器都无法验证对方的身份，所以安全性很低。而HTTPS是运行在SSL&#x2F;TLS之上的，所有内容都经过加密，加密采用对称加密，而对称加密的秘钥又是采用服务端证书进行了非对称加密，所以安全性很高。不过HTTPS比HTTP更耗费服务器资源。</li>
+</ul>
+<h1 id="七、HTTP1-0和HTTP1-1的区别"><a href="#七、HTTP1-0和HTTP1-1的区别" class="headerlink" title="七、HTTP1.0和HTTP1.1的区别"></a>七、HTTP1.0和HTTP1.1的区别</h1>]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
 </search>
