@@ -501,6 +501,75 @@
 <p>这样，服务器就知道客户端想请求的真正网址了。</p>
 </li>
 </ul>
+<h1 id="八、HTTP-x2F-1-1和HTTP-x2F-2-0的区别"><a href="#八、HTTP-x2F-1-1和HTTP-x2F-2-0的区别" class="headerlink" title="八、HTTP&#x2F;1.1和HTTP&#x2F;2.0的区别"></a>八、HTTP&#x2F;1.1和HTTP&#x2F;2.0的区别</h1><ul>
+<li><strong>IO多路复用：</strong>HTTP&#x2F;1.1使用的是串行方式，每个请求和响应都需要独立的连接。HTTP&#x2F;2.0引入IO多路复用技术，支持在同一个连接上并发处理多个请求，并且并发请求的数量比HTTP&#x2F;1.1大了好几个量级。因此，在处理多个请求时HTTP&#x2F;2.0更加高效，减少了网络延迟，提高了性能。</li>
+<li><strong>二进制帧：</strong>HTTP&#x2F;1.1使用文本格式的报文进行数据传输，而HTTP&#x2F;2.0使用二进制帧进行数据传输，二进制帧更加紧凑和高效，减少了传输的数据量和宽带消耗。</li>
+<li><strong>头部压缩：</strong>HTTP&#x2F;1.1中，请求和响应都是由自由状态行、请求&#x2F;响应头部、消息主体三部分组成。一般而言，消息主体都会经过gzip压缩，或者本身传输的就是压缩后的二进制文件，但状态行和头部没有经过任何压缩，直接以纯文本的形式传输。随着Web功能越来越复杂，每个页面产生的请求越来越多，导致消耗在头部的流量越来越多，尤其每次都要传输UserAgent、Cookie这类不会频繁变动的内容，完全是一种浪费。所以在HTTP&#x2F;2.0中采用HPACK算法对头部数据进行压缩，体积小了，传输速度就更快了。</li>
+<li><strong>服务器推送：</strong>对于HTTP&#x2F;1.1来说，想要获取任何资源，客户端都必须自己向服务端发送请求，这样就会导致客户端请求次数过多。而HTTP&#x2F;2.0引入了服务器推送技术（Sever Push），它允许服务器推送资源给浏览器，即当客户端请求一个资源时，服务器会将其他相关的资源一并推送给客户端，从而减少了客户端的请求次数和延迟。</li>
+</ul>
+<h1 id="九、HTTP-x2F-2-0和HTTP-x2F-3-0的区别"><a href="#九、HTTP-x2F-2-0和HTTP-x2F-3-0的区别" class="headerlink" title="九、HTTP&#x2F;2.0和HTTP&#x2F;3.0的区别"></a>九、HTTP&#x2F;2.0和HTTP&#x2F;3.0的区别</h1><ul>
+<li><strong>传输协议：</strong>HTTP&#x2F;2.0是基于TCP的协议，HTTP&#x2F;3.0新增了QUIC（Quic UDP Internet Connections）协议来实现可靠的传输，提供与SSL&#x2F;TLS相当的安全性，具有较低的连接和传输延迟。</li>
+<li><strong>连接建立：</strong>由于HTTP&#x2F;2.0是基于TCP的协议，因此建立连接需要进行“三次握手”过程（一般是3个RTT）。而HTTP&#x2F;3.0是基于UDP的协议，因此避免了“三次握手”过程，它允许在第一次连接时发送数据（0个RTT）。</li>
+<li><strong>队头阻塞：</strong>HTTP&#x2F;2.0采用了IO多路复用，即多个请求复用一个TCP连接，因此一旦发生丢包，就会阻塞所有HTTP请求。而HTTP&#x2F;3.0基于QUIC协议的特性，在一定程度上解决了队头阻塞问题。一个连接建立多个不同的数据流，这些数据流之间互不影响，当某个数据流发生了丢包，其他数据流不会受到影响（本质上是多路复用+轮询）。</li>
+<li><strong>错误恢复：</strong>HTTP&#x2F;3.0相比于HTTP&#x2F;2.0来说，具有更好的错误恢复机制，当出现丢包、延迟等网络问题时，可以更快地进行恢复和重传。而HTTP&#x2F;2.0需要依赖于TCP的错误恢复机制。</li>
+<li><strong>安全性：</strong>HTTP&#x2F;2.0使用TLS协议进行加密，而HTTP&#x2F;3.0基于QUIC协议，包含了内置的加密和身份验证机制，可以提供更强的安全性。</li>
+</ul>
+<h1 id="十、HTTPS（SSL-x2F-TLS）的连接过程是怎么样的"><a href="#十、HTTPS（SSL-x2F-TLS）的连接过程是怎么样的" class="headerlink" title="十、HTTPS（SSL&#x2F;TLS）的连接过程是怎么样的"></a>十、HTTPS（SSL&#x2F;TLS）的连接过程是怎么样的</h1><ol>
+<li><p>TLS层是在TCP层之上的，因此在建立TLS之前，需要先建立TCP连接。</p>
+</li>
+<li><p>客户端向服务器发送建立TLS请求，请求内容包括：客户端支持的SSL&#x2F;TLS协议版本号、客户端产生的随机数client-random、客户端支持的加密规则等。</p>
+</li>
+<li><p>服务端收到客户端的请求后，向客户端发出响应，响应内容包括：确认SSL&#x2F;TLS协议版本号、服务器产生的随机数server-random、确认的加密规则、服务器的数字证书。</p>
+</li>
+<li><p>校验数字证书，如果校验失败，连接断开。如果校验成功，则继续步骤5。</p>
+</li>
+<li><p>如果校验通过，客户端会从数字证书中取出服务器的公钥，然后使用这个公钥去加密要传输的报文，之后向服务器发送以下信息：</p>
+<ul>
+<li>Client Key Exchange：基于前面提到的两个随机数，再生成第三个随机数pre-master，然后通过CA证书中的公钥对pre-master加密，得到pre-master key，发送给服务器。</li>
+<li>Change Cipher Spec：加密通信算法改变通知，表示客户端随后的信息都将用<strong>会话秘钥</strong>加密通信。</li>
+<li>Encrypted handshake message：这一步对应的是客户端的Finish消息，客户端将前面握手的消息生成摘要，再用协商好的会话秘钥进行加密，这是客户端发出的第一条加密消息，服务端收到后，会用会话秘钥解密，如果能解出来说明前面协商的秘钥是一致的，至此，客户端的握手完成。</li>
+</ul>
+<blockquote>
+<p>会话秘钥是用双方协商的加密算法和三个随机数生成的</p>
+</blockquote>
+</li>
+<li><p>服务器使用自己的CA证书的私钥对pre-master key解密，得到pre-master，再计算出会话秘钥，随后向客户端发送以下信息：</p>
+<ul>
+<li>Change Cipher Spec：加密通信算法改变通知，表示服务端随后的信息都将用会话秘钥加密通信。</li>
+<li>Encrypted handshake message：这一步对应的是服务端的Finish消息，服务端会将握手过程消息生成摘要，然后再用会话秘钥加密，这是服务器发出的第一条加密消息，客户端接收后会用会话秘钥解密，能解出来说明协商成功。</li>
+</ul>
+</li>
+<li><p>至此，整个SSL&#x2F;TLS的握手阶段全部结束，TCP四次挥手断开连接。</p>
+</li>
+</ol>
+<h1 id="十一、HTTP协议如何保持状态"><a href="#十一、HTTP协议如何保持状态" class="headerlink" title="十一、HTTP协议如何保持状态"></a>十一、HTTP协议如何保持状态</h1><p>HTTP是一种无状态协议，即不会对请求和响应之间的通信状态进行保存。因此，当我们需要保存用户状态时，需要采用Session机制。Session的主要作用就是通过服务端记录用户的状态，典型场景是购物车，当添加商品到购物车时，系统本来是不知道是哪个用户操作的（HTTP无状态），但由于服务端会给每个用户创建特定的Session，以此来标识并跟踪用户，这样系统便知道是哪个用户进行添加购物车的操作了。</p>
+<p>Session在服务端一般会保存在数据库和内存（例如：Redis）。然后通过在Cookie中附加SessionID的方式来实现Session跟踪。如果Cookie被禁用了，则可以利用URL重写，把SessionID直接附加到URL路径的后面。</p>
+<h1 id="十二、Cookie和Session是如何配合的"><a href="#十二、Cookie和Session是如何配合的" class="headerlink" title="十二、Cookie和Session是如何配合的"></a>十二、Cookie和Session是如何配合的</h1><p>用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的Session，请求返回时将此Session的唯一标识信息SessionID返回给浏览器，浏览器收到服务器返回的SessionID后，会将此信息存入到Cookie中，同时Cookie记录此SessionID属于哪个域名。</p>
+<p>用户第二次访问服务器的时候，请求会自动判断此域名下是否存在Cookie信息，如果存在，则自动将Cookie信息也发送给服务器，服务器会从Cookie中获取SessionID，再根据SessionID查找对应的Session信息，如果没有找到，说明用户没有登录或者登录失效，如果找到了，说明用户已经登录，可执行后续操作。</p>
+<h1 id="十三、Cookie和Session的区别"><a href="#十三、Cookie和Session的区别" class="headerlink" title="十三、Cookie和Session的区别"></a>十三、Cookie和Session的区别</h1><ul>
+<li><strong>存储位置：</strong>Cookie的数据信息保存在客户端浏览器中。Session的数据信息保存在服务器上。</li>
+<li><strong>存储容量：</strong>单个Cookie保存的数据小于等于4KB，一个站点最多保存20个Cookie。对于Session来说，没有上限，但是出于对服务器的性能考虑，Session内不要存放过多的东西，并且设置Session删除机制。</li>
+<li><strong>存储方式：</strong>Cookie中只能保存ASCII字符串，如果要存储非ASCII字符串还要对其编码。Session中能够存储任何类型的数据。</li>
+<li><strong>隐私策略：</strong>Cookie存储在浏览器中，对客户端是可见的。Session存储在服务器上，对客户端是透明的（不可见）。</li>
+<li><strong>跨域支持：</strong>Cookie支持跨域名访问，Session不支持跨域名访问。</li>
+<li><strong>生命周期：</strong>Cookie保存在硬盘中，通过设置<code>maxAge</code>属性来设置生命周期，如果是比较大的正整数，那么关闭浏览器，Cookie还是存在的。Session保存在服务器中，设置<code>maxInactiveInterval</code>属性值来确定Session的有效期，并且Session虽然没有从服务器中消亡，但也失效了。</li>
+<li><strong>浏览器支持：</strong>如果浏览器禁用了Cookie，那么Cookie是无用的。而Session可以通过url重写来进行会话跟踪。</li>
+</ul>
+<h1 id="十四、HTTP的GET和POST请求方式的区别"><a href="#十四、HTTP的GET和POST请求方式的区别" class="headerlink" title="十四、HTTP的GET和POST请求方式的区别"></a>十四、HTTP的GET和POST请求方式的区别</h1><ul>
+<li>GET是获取数据，POST是提交数据。</li>
+<li>我们平时在浏览器上输入网址直接访问的方式就是GET方式。而form表单提交，method里面设置的post，则是POST方式。</li>
+<li>GET的访问时候的参数是在URL里面的，比如<code>?username=111&amp;password=123</code>，POST提交的参数是在请求体里面的。而且在请求体里面的会进行urlencode编码，所以这两者相比较来说，POST更安全。但其实从数据传输角度来说这两种都不安全，如果想要安全的，需要使用HTTPS协议。</li>
+<li>GET有浏览器缓存记录，而POST没有。</li>
+<li>GET方式访问的URL是可以保存为浏览器书签的，POST不可以。</li>
+<li>GET在浏览器回退时是无害的，而POST会再次提交请求。</li>
+<li>GET请求的URL的编码格式采用的是ASCII编码，而不是unicode，所以所有的非ASCII字符都要编码之后再传输。</li>
+<li>GET传送的数据量较小，不能大于2KB。POST传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。</li>
+<li>GET只能传输ASCLL字符，不能进行编码。POST传输的时候是放在HTTP的请求体之中的，并且是经过urlencode编码的所以是相对安全的。POST对数据类型没有限制限制，二进制数据也是可以的。</li>
+<li>HTTP协议并没有对GET和POST的长度做限制，其实是浏览器限制了他们传输大小。URL地址是有长度限制的，浏览器不同，长度限制的具体数值也是不一样的。比如IE浏览器是2083字节。需要注意的是这些仅仅是URL地址栏的长度限制。理论上来说POST的长度是没有限制的，但是受服务器的配置限制或者内存大小的限制，造成了实际开发中POST也是有数据长度的限制的。</li>
+<li>因为GET是获取数据，所以GET请求是安全且幂等的，是无害的。这个安全指得是对数据不会造成影响。幂等就是无论获取多少次数据得到的资源都是一样的。POST是向服务器传输数据，数据会被重新提交，所以就会有对原有的数据造成伤害。</li>
+</ul>
+<h1 id="十五、URL和URI的区别"><a href="#十五、URL和URI的区别" class="headerlink" title="十五、URL和URI的区别"></a>十五、URL和URI的区别</h1><p>URI是统一资源标识符，可以唯一标识一个资源。</p>
+<p>URL是统一资源定位符，它是具体的URI，即它既可以唯一标识一个资源，还提供了定位该资源的信息。</p>
 ]]></content>
       <categories>
         <category>面试</category>
