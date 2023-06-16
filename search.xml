@@ -642,7 +642,7 @@
 
 <h2 id="5、删除链表中的重复元素Ⅱ"><a href="#5、删除链表中的重复元素Ⅱ" class="headerlink" title="5、删除链表中的重复元素Ⅱ"></a>5、删除链表中的重复元素Ⅱ</h2><p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii">https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii</a></p>
 <p>给定一个已排序的链表的头 <code>head</code> ， 删除原始链表中所有重复数字的节点，只留下不同的数字。返回 已排序的链表。</p>
-<p><img src="/img/image-20230425215955324.png" alt="image-20230425215955324"></p>
+<p><img src="/img/article_content_img/image-20230425215955324.png" alt="image-20230425215955324"></p>
 <p>思路：</p>
 <ul>
 <li>由于链表是有序的，所以相同的节点肯定是紧挨着的。</li>
@@ -699,7 +699,7 @@
 
 <h2 id="9、将二叉树展开为链表"><a href="#9、将二叉树展开为链表" class="headerlink" title="9、将二叉树展开为链表"></a>9、将二叉树展开为链表</h2><p><a href="https://leetcode.cn/problems/flatten-binary-tree-to-linked-list">https://leetcode.cn/problems/flatten-binary-tree-to-linked-list</a></p>
 <p>思路：</p>
-<p><img src="/img/image-20230425181116678.png" alt="image-20230425181116678"></p>
+<p><img src="/img/article_content_img/image-20230425181116678.png" alt="image-20230425181116678"></p>
 <p>其实是分为三步：</p>
 <ul>
 <li>首先将根节点的左子树变成链表</li>
@@ -717,12 +717,12 @@
 
 <h2 id="10、复制带随机指针的链表"><a href="#10、复制带随机指针的链表" class="headerlink" title="10、复制带随机指针的链表"></a>10、复制带随机指针的链表</h2><p><a href="https://leetcode.cn/problems/copy-list-with-random-pointer/">https://leetcode.cn/problems/copy-list-with-random-pointer/</a></p>
 <p>思路：</p>
-<p><img src="/img/image-20230425191755847.png" alt="image-20230425191755847"></p>
+<p><img src="/img/article_content_img/image-20230425191755847.png" alt="image-20230425191755847"></p>
 <ul>
 <li>使用HashMap，key为原节点，value是复制的新节点（创建的新节点）</li>
 <li>共有两次对原链表的遍历。第一次遍历，创建新节点，并将原节点与新节点存入HashMap中。第二次遍历，添加新节点之间的指针指向关系。</li>
 </ul>
-<p><img src="/img/image-20230425191931161.png" alt="image-20230425191931161"></p>
+<p><img src="/img/article_content_img/image-20230425191931161.png" alt="image-20230425191931161"></p>
 <ul>
 <li>从图中可以看出原节点和新节点是一一对应的关系，<code>newNode</code>为新结点，<code>cur</code>为原结点，则：<ul>
 <li><code>newNode = map.get(cur)</code></li>

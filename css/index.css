@@ -1376,12 +1376,12 @@ canvas:not(#ribbon-canvas),
 :root {
   --global-font-size: 15px;
   --global-bg: #fff;
-  --font-color: #4c4948;
+  --font-color: #000000;
   --hr-border: #d2ebfd;
   --hr-before-color: #bfe4fb;
   --search-bg: #f6f8fa;
-  --search-input-color: #4c4948;
-  --search-a-color: #4c4948;
+  --search-input-color: #000000;
+  --search-a-color: #000000;
   --preloader-bg: #37474f;
   --preloader-color: #fff;
   --tab-border-color: #f0f0f0;
@@ -5004,7 +5004,7 @@ mjx-assistive-mml {
   bottom: 0;
 }
 .aplayer {
-  color: #4c4948;
+  color: #000000;
 }
 #article-container .aplayer {
   margin: 0 0 20px;
@@ -5528,13 +5528,13 @@ blockquote.pullquote.right {
 .note.modern {
   border: 1px solid transparent !important;
   background-color: #f5f5f5;
-  color: #4c4948;
+  color: #000000;
 }
 .note.flat {
   border: initial;
   border-left: 5px solid #eee;
   background-color: #f9f9f9;
-  color: #4c4948;
+  color: #000000;
 }
 .note h2,
 .note h3,
@@ -6132,10 +6132,10 @@ blockquote.pullquote.right {
   }
 }
 .read-mode {
-  --font-color: #4c4948;
+  --font-color: #000000;
   --readmode-light-color: #fff;
-  --white: #4c4948;
-  --light-grey: #4c4948;
+  --white: #000000;
+  --light-grey: #000000;
   --gray: #d6dbdf;
   --hr-border: #d6dbdf;
   --hr-before-color: #b9c2c9;
