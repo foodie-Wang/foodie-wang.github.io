@@ -376,3 +376,7 @@ figure.highlight pre .addition {
 #article-container a {
     color: #000000;
 }
+
+[data-theme=dark] #article-container a {
+    color: #ffffff;
+}
