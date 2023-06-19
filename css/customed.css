@@ -380,3 +380,21 @@ figure.highlight pre .addition {
 [data-theme=dark] #article-container a {
     color: #ffffff;
 }
+
+/* 序号、分类 */
+#article-container li::marker {
+    color: #000000;
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+
+[data-theme=dark] #article-container li::marker {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+#article-container ul > li {
+    list-style-type: disclosure-closed;
+}
