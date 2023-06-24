@@ -981,13 +981,68 @@
 </blockquote>
 </li>
 </ul>
-<h1 id="三、HTTP是基于TCP还是UDP的？"><a href="#三、HTTP是基于TCP还是UDP的？" class="headerlink" title="三、HTTP是基于TCP还是UDP的？"></a>三、HTTP是基于TCP还是UDP的？</h1><p>HTTP&#x2F;3.0之前是基于TCP协议的，而HTTP&#x2F;3.0弃用TCP，改用基于UDP的QUIC协议。主要目的是解决HTTP&#x2F;2.0中存在的队头阻塞问题。由于HTTP&#x2F;2.0在单个TCP连接上使用了多路复用技术，受到TCP拥塞控制的影响，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。此外，HTTP&#x2F;2.0需要经过“三次握手”的过程建立连接，一般是3个RTT（往返时延），而借助QUIC协议的特性，HTTP&#x2F;3.0可以避免TCP的三次握手的延迟，允许在第一次连接时发送数据（0个RTT）。</p>
+<h1 id="三、HTTP是基于TCP还是UDP的？"><a href="#三、HTTP是基于TCP还是UDP的？" class="headerlink" title="三、HTTP是基于TCP还是UDP的？"></a>三、HTTP是基于TCP还是UDP的？</h1><p>HTTP&#x2F;3.0之前是基于TCP协议的，而HTTP&#x2F;3.0弃用TCP，改用基于UDP的QUIC协议。主要目的是解决HTTP&#x2F;2.0中存在的队头阻塞问题。由于HTTP&#x2F;2.0在单个TCP连接上使用了多路复用技术，受到TCP拥塞控制的影响，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。此外，HTTP&#x2F;2.0需要经过“三次握手”的过程建立连接，一般是3个RTT（往返时延），而借助QUIC协议的特性，HTTP&#x2F;3.0可以避免TCP的“三次握手”的延迟，允许在第一次连接时发送数据（0个RTT）。</p>
 <h1 id="四、TCP的三次握手"><a href="#四、TCP的三次握手" class="headerlink" title="四、TCP的三次握手"></a>四、TCP的三次握手</h1><p><img src="/img/article_content_img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="TCP三次握手"></p>
 <p><strong>第一次握手：</strong>客户端将自己的SYN设置为1，并随机生成一个客户端的初始序列号（Sequence Number）发送给服务端，然后客户端进入<em>SYN_SENT</em>状态。</p>
 <p><strong>第二次握手：</strong>服务端收到客户端发来的SYN&#x3D;1之后，就知道客户端此时想要建立连接了。此时服务端将自己的SYN与ACK都设置为1，并随机生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number &#x3D; Sequence Number + 1。之后随机生成一个服务端的初始序列号（Sequence Number），将SYN、ACK、Acknowledgement Number、Sequence Number一并发送给客户端，然后服务端进入<em>SYN_RECV</em>状态。</p>
 <p><strong>第三次握手：</strong>客户端收到服务端发回的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，验证通过后，客户端将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），该值等于服务端传过来的初始序列号的值加一，然后将ACK与Acknowledgement Number发送给服务端，此时客户端进入<em>Establish</em>状态。服务端收到客户端传过来的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，若验证通过，则服务端也进入<em>Establish</em>状态。</p>
-<p>自此，连接建立完成，三次握手结束。</p>
-<h1 id="五、为什么TCP连接时三次握手，而不是两次或者四次？"><a href="#五、为什么TCP连接时三次握手，而不是两次或者四次？" class="headerlink" title="五、为什么TCP连接时三次握手，而不是两次或者四次？"></a>五、为什么TCP连接时三次握手，而不是两次或者四次？</h1>]]></content>
+<p>自此，连接建立完成，“三次握手”结束。</p>
+<h1 id="五、为什么TCP连接是三次握手，而不是两次或者四次？"><a href="#五、为什么TCP连接是三次握手，而不是两次或者四次？" class="headerlink" title="五、为什么TCP连接是三次握手，而不是两次或者四次？"></a>五、为什么TCP连接是三次握手，而不是两次或者四次？</h1><p><strong>结论：TCP连接允许“四次握手”，不允许“两次握手”。</strong></p>
+<p>“三次握手”的目的是建立可靠的通信信道，要确认自己与对方的发送与接收都是正常的。</p>
+<ol>
+<li><strong>第一次握手：</strong>Client什么都没有确认。Server确认了自己的接收和Client的发送正常。</li>
+<li><strong>第二次握手：</strong>Client确认了自己的发送和接收、Server的发送和接收正常。Server确认了自己的发送正常。</li>
+<li><strong>第三次握手：</strong>Server确认了Client的接收正常。</li>
+</ol>
+<p><strong>而两次握手会导致的问题主要有以下两个：</strong></p>
+<ul>
+<li><p>如果是两次握手，那么当服务端发送SYN、ACK、Acknowledge Number、Sequence Number之后，连接就建立完成。但由于客户端没有给服务端返回ACK和Acknowledge Number，服务端就不知道客户端是否收到了发送过去的东西，即服务端无法确认自己的发送和对方的接收是正常的。</p>
+</li>
+<li><p>客户端发出的第一个连接请求没有丢失，只是在某个网络节点长时间滞留了，而客户端没有收到任何反馈，则再次发起连接请求，此时，连接正常建立。当此次连接断开时，之前滞留的请求发送到了服务端，那么服务端会给客户端发送SYN、ACK、Acknowledge Number、Sequence Number。</p>
+<p>如果采用的是“两次握手”，到此连接就已经建立完成，但此时客户端并没有想要建立连接，所以客户端就不会理会服务端，但服务端却一直在等待客户端发送数据，因此服务端的资源就被白白浪费了。</p>
+<p>如果采用的是“三次握手”，当服务端给客户端发送SYN、ACK、Acknowledge Number、Sequence Number后，客户端依旧不会给服务端任何回应，此时服务端会重发上述信息，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态，避免了服务端资源的浪费。</p>
+</li>
+</ul>
+<p><strong>四次握手：</strong>将第二次握手分成两步。</p>
+<ul>
+<li><p><strong>第一步：</strong>服务端发送ACK和Acknowledge Number到客户端。</p>
+</li>
+<li><p><strong>第二步：</strong>服务端发送SYN和Sequence Number到客户端。</p>
+<p>出于优化的目的，提高效率，将这两步合并。</p>
+</li>
+</ul>
+<h1 id="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"><a href="#六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。" class="headerlink" title="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"></a>六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。</h1><p><strong>服务端：</strong></p>
+<ul>
+<li>如果客户端发出的ACK未及时送达服务端，那么服务端会重发SYN、ACK、Acknowledge Number、Sequence Number，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态。</li>
+</ul>
+<blockquote>
+<p>重传次数：由内核参数<code>top_syn_retries</code>配置，默认值为5，可以手动修改。</p>
+<p>重传周期：按照“指数退避”算法计算重传周期，即第一次是1秒后进行超时重传，第二次是2秒后进行超时重传，第三次是4秒后进行超时重传，第四次是8秒后进行超时重传，第五次是16秒后进行超时重传，以类类推，直到达到最大重传次数。</p>
+</blockquote>
+<p><strong>客户端：</strong></p>
+<ul>
+<li><p>服务端还未进入CLOSED状态：</p>
+<p>在服务端超时重发的过程中，客户端及时向服务端发送ACK并且该ACK抵达服务端，那么服务端收到之后进行ACK和Acknowledge Number的验证，验证通过则进入ESTABLISH状态，连接建立。</p>
+</li>
+<li><p>服务端已进入CLOSED状态：</p>
+<p>客户端依旧向服务端发送数据，但由于服务端已经进入CLOSED状态，此时服务端会给客户端回应一个RST包。</p>
+</li>
+</ul>
+<h1 id="七、如果连接已经建立，但客户端出现了故障怎么办？"><a href="#七、如果连接已经建立，但客户端出现了故障怎么办？" class="headerlink" title="七、如果连接已经建立，但客户端出现了故障怎么办？"></a>七、如果连接已经建立，但客户端出现了故障怎么办？</h1><p>服务端每收到一个客户端的发来的请求，会对该请求建立一个计时器，这个计时器通常设置为2小时。如果2小时后，仍未收到客户端的任何数据，此时服务端会发送一个探测报文段到客户端，一共会发送10次，每隔75秒发送一次，如果发送10次都没有反应的话，服务端会认为客户端出现了故障，连接就会关闭。</p>
+<h1 id="八、TCP三次握手中，哪一次握手最容易受到攻击？"><a href="#八、TCP三次握手中，哪一次握手最容易受到攻击？" class="headerlink" title="八、TCP三次握手中，哪一次握手最容易受到攻击？"></a>八、TCP三次握手中，哪一次握手最容易受到攻击？</h1><p>在TCP三次握手中，<strong>第二次握手</strong>最容易受到攻击，即SYN洪水攻击。具体原因如下：</p>
+<p>如果客户端伪造出大量第一次的SYN同步报文，服务端就会依次消耗掉很多资源来保存客户端的信息，并进行确认，实际上确认是会失败的，但失败需要一定的时间，因为服务端会连续多次进行第二次握手确认后才认定失败。那么短时间有大量的SYN同步报文涌向服务端，服务端资源可能被耗尽，就可能导致正常的客户端得不到响应而失败。</p>
+<p>解决措施：</p>
+<ul>
+<li><p><strong>缩短SYN超时时间，限制同时打开的SYN半连接数目。</strong></p>
+<p>SYN Flood攻击效果取决于服务端保持的SYN半连接数目，该值等于SYN攻击的频度乘上SYN超时时间。设置SYN超时时间在20秒以下可以成倍降低服务器的负荷。</p>
+</li>
+<li><p><strong>设置SYN Cookie</strong></p>
+<p>当服务端接收到SYN包并返回SYN + ACK包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值，并将这个cookie值作为将要返回的SYN + ACK包的初始序列号。当客户端返回一个ACK包时，根据包头信息计算cookie，与返回的确认序列号(初始序列号 + 1)进行对比，如果相同，则认为是一个正常连接，之后分配资源并建立连接；如果短时间内连续受到某个IP的重复SYN报文，就认定是受到了攻击，以后从这个IP地址来的包都会被丢弃。</p>
+</li>
+<li><p><strong>防火墙</strong></p>
+</li>
+</ul>
+<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1>]]></content>
       <categories>
         <category>面试</category>
       </categories>
