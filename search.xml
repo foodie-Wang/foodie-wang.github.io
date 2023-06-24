@@ -984,7 +984,7 @@
 <h1 id="三、HTTP是基于TCP还是UDP的？"><a href="#三、HTTP是基于TCP还是UDP的？" class="headerlink" title="三、HTTP是基于TCP还是UDP的？"></a>三、HTTP是基于TCP还是UDP的？</h1><p>HTTP&#x2F;3.0之前是基于TCP协议的，而HTTP&#x2F;3.0弃用TCP，改用基于UDP的QUIC协议。主要目的是解决HTTP&#x2F;2.0中存在的队头阻塞问题。由于HTTP&#x2F;2.0在单个TCP连接上使用了多路复用技术，受到TCP拥塞控制的影响，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。此外，HTTP&#x2F;2.0需要经过“三次握手”的过程建立连接，一般是3个RTT（往返时延），而借助QUIC协议的特性，HTTP&#x2F;3.0可以避免TCP的“三次握手”的延迟，允许在第一次连接时发送数据（0个RTT）。</p>
 <h1 id="四、TCP的三次握手"><a href="#四、TCP的三次握手" class="headerlink" title="四、TCP的三次握手"></a>四、TCP的三次握手</h1><p><img src="/img/article_content_img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="TCP三次握手"></p>
 <p><strong>第一次握手：</strong>客户端将自己的SYN设置为1，并随机生成一个客户端的初始序列号（Sequence Number）发送给服务端，然后客户端进入<em>SYN_SENT</em>状态。</p>
-<p><strong>第二次握手：</strong>服务端收到客户端发来的SYN&#x3D;1之后，就知道客户端此时想要建立连接了。此时服务端将自己的SYN与ACK都设置为1，并随机生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number &#x3D; Sequence Number + 1。之后随机生成一个服务端的初始序列号（Sequence Number），将SYN、ACK、Acknowledgement Number、Sequence Number一并发送给客户端，然后服务端进入<em>SYN_RECV</em>状态。</p>
+<p><strong>第二次握手：</strong>服务端收到客户端发来的SYN&#x3D;1之后，就知道客户端此时想要建立连接了。此时，服务端将自己的SYN与ACK都设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number &#x3D; Sequence Number + 1。之后随机生成一个服务端的初始序列号（Sequence Number），将SYN、ACK、Acknowledgement Number、Sequence Number一并发送给客户端，然后服务端进入<em>SYN_RECV</em>状态。</p>
 <p><strong>第三次握手：</strong>客户端收到服务端发回的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，验证通过后，客户端将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），该值等于服务端传过来的初始序列号的值加一，然后将ACK与Acknowledgement Number发送给服务端，此时客户端进入<em>Establish</em>状态。服务端收到客户端传过来的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，若验证通过，则服务端也进入<em>Establish</em>状态。</p>
 <p>自此，连接建立完成，“三次握手”结束。</p>
 <h1 id="五、为什么TCP连接是三次握手，而不是两次或者四次？"><a href="#五、为什么TCP连接是三次握手，而不是两次或者四次？" class="headerlink" title="五、为什么TCP连接是三次握手，而不是两次或者四次？"></a>五、为什么TCP连接是三次握手，而不是两次或者四次？</h1><p><strong>结论：TCP连接允许“四次握手”，不允许“两次握手”。</strong></p>
@@ -1042,7 +1042,34 @@
 <li><p><strong>防火墙</strong></p>
 </li>
 </ul>
-<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1>]]></content>
+<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1><p><strong>第一次挥手：</strong>客户端将自己的FIN设置为1，并随机生成一个客户端的初始序列号（Sequence Number），发送给服务端，请求断开客户端到服务端之间的通信。此时，客户端进入<em>FIN_WAIT_1</em>状态。</p>
+<p><strong>第二次挥手：</strong>服务端收到客户端的FIN后，将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number &#x3D; Sequence Number + 1。之后将ACK与确认应答号发送到客户端，服务端进入<em>CLOSE_WAIT</em>状态。客户端收到并验证ACK与确认应答号，验证通过后，进入<em>FIN_WAIT_2</em>状态。</p>
+<p><strong>第三次挥手：</strong>服务端将自己的FIN设置为1，并随机生成一个服务端的初始序列号（Sequence Number），发送给客户端，请求断开服务端到客户端之间的通信。此时，服务端进入<em>LAST_ACK</em>状态。</p>
+<p><strong>第四次挥手：</strong>客户端收到服务端的FIN后，将自己的ACK设置为1，并生成一个确认应答号，该值为服务端传过来的初始序列号的值加一。之后将ACK与确认应答号发送到服务端，客户端进入<em>TIME_WAIT</em>状态。服务端收到并验证ACK与确认应答号，验证通过，进入<em>CLOSED</em>状态。客户端在等待2MSL的时间后，也进入<em>CLOSED</em>状态。</p>
+<p>自此，连接断开完成，“四次挥手”结束。</p>
+<p>&#x3D;&#x3D;注意：只要四次挥手没有结束，客户端和服务端就可以继续传输数据！&#x3D;&#x3D;</p>
+<blockquote>
+<p><strong>MSL（Maximum Segment Lifetime）</strong>：一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所需的最大时间。如果直到2MSL，客户端都没有再次收到FIN，那么客户端推断ACK已经被成功接收，则结束TCP连接。</p>
+</blockquote>
+<h1 id="十、为什么要四次挥手？"><a href="#十、为什么要四次挥手？" class="headerlink" title="十、为什么要四次挥手？"></a>十、为什么要四次挥手？</h1><p>TCP是全双工通信，可以双向传输数据。任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放的通知，对方确认后再完全断开TCP连接。</p>
+<h1 id="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）"><a href="#十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）" class="headerlink" title="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）"></a>十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）</h1><p>因为服务端收到客户端断开连接的请求时，可能还有一些数据没有发送完，因此先给客户端传回 ACK，表示已经接收到了断开连接的请求。等到数据发完之后再向客户端发送 FIN，申请断开服务端到客户端的数据传送。</p>
+<h1 id="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"><a href="#十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？" class="headerlink" title="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"></a>十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？</h1><p>第四次挥手时，客户端发送到服务端的ACK和确认应答号有可能丢失，如果服务端因为某些原因而没有收到ACK和确认应答号的话，服务端会重发FIN和初始序列号。</p>
+<p>如果客户端在2MSL的时间内收到了FIN和初始序列号，就会重新发送ACK和确认应答号，并再次等待2MSL。</p>
+<p>如果客户端没有等待2MSL的时间，而是直接进入CLOSED状态，那么客户端将永远无法收到服务端重发的FIN，而服务端因为一直未收到客户端的ACK和确认应答号，会不停的重发FIN，连接始终无法断开。</p>
+<h1 id="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"><a href="#十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？" class="headerlink" title="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"></a>十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？</h1><p>如果第二次挥手时，服务端ACK和确认应答号没有送达客户端，那么客户端会认为可能是第一次挥手时发送的FIN未送达服务端，因此客户端会重新发送FIN和初始序列号。</p>
+<h1 id="十四、TIME-WAIT状态的意义"><a href="#十四、TIME-WAIT状态的意义" class="headerlink" title="十四、TIME_WAIT状态的意义"></a>十四、TIME_WAIT状态的意义</h1><p>首先，&#x3D;&#x3D;TIME_WAIT并不属于客户端或服务端专属的状态，而是属于主动发起断开连接请求的一端的状态&#x3D;&#x3D;，在发送最后一次ACK和确认应答号后会进入TIME_WAIT状态。</p>
+<p>这里假设是客户端发起的断开连接的请求，客户端在第四次挥手发送ACK和确认应答号之后，可能由于网络比较阻塞，该数据帧在传输过程中丢失了，服务端由于没有收到ACK则会重发FIN，但此时如果客户端没有TIME_WAIT状态，而是直接进入CLOSED状态，则客户端不会理会服务端，服务端就会一直重发FIN。</p>
+<p>因此，采用TIME_WAIT状态用来保障当网络比较阻塞时，TCP连接依旧可以正常关闭。</p>
+<h1 id="十五、TIME-WAIT状态过多会产生什么后果？怎么处理？"><a href="#十五、TIME-WAIT状态过多会产生什么后果？怎么处理？" class="headerlink" title="十五、TIME_WAIT状态过多会产生什么后果？怎么处理？"></a>十五、TIME_WAIT状态过多会产生什么后果？怎么处理？</h1><p>从服务端来讲，短时间内主动关闭了大量的客户端连接，就会造成服务端上出现大量的TIME_WAIT状态，严重消耗服务端的资源，此时部分客户端就会显示连接不上。</p>
+<p>从客户端来讲，客户端TIME_WAIT过多会导致端口资源被占用，而端口就65535个，一旦被占满就无法创建新的连接。</p>
+<p><strong>解决方法：</strong></p>
+<ul>
+<li><p>服务端可以设置<code>SO_REUSEADDR</code>套接字选项来避免TIME_WAIT状态，此套接字选项告诉内核：即时此端口正忙（处于TIME_WAIT），也请继续并重用它。</p>
+</li>
+<li><p>调整系统内核参数，修改<code>/etc/sysctl.conf</code>文件中<code>net.ipv4.tcp_tw_reuse</code>和<code>tcp_timestamps</code>参数。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = 1 # 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭； </span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 # 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
       <categories>
         <category>面试</category>
       </categories>
