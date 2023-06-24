@@ -1042,7 +1042,8 @@
 <li><p><strong>防火墙</strong></p>
 </li>
 </ul>
-<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1><p><strong>第一次挥手：</strong>客户端将自己的FIN设置为1，并随机生成一个客户端的初始序列号（Sequence Number），发送给服务端，请求断开客户端到服务端之间的通信。此时，客户端进入<em>FIN_WAIT_1</em>状态。</p>
+<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1><p><img src="/img/article_content_img/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" alt="TCP四次挥手"></p>
+<p><strong>第一次挥手：</strong>客户端将自己的FIN设置为1，并随机生成一个客户端的初始序列号（Sequence Number），发送给服务端，请求断开客户端到服务端之间的通信。此时，客户端进入<em>FIN_WAIT_1</em>状态。</p>
 <p><strong>第二次挥手：</strong>服务端收到客户端的FIN后，将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number &#x3D; Sequence Number + 1。之后将ACK与确认应答号发送到客户端，服务端进入<em>CLOSE_WAIT</em>状态。客户端收到并验证ACK与确认应答号，验证通过后，进入<em>FIN_WAIT_2</em>状态。</p>
 <p><strong>第三次挥手：</strong>服务端将自己的FIN设置为1，并随机生成一个服务端的初始序列号（Sequence Number），发送给客户端，请求断开服务端到客户端之间的通信。此时，服务端进入<em>LAST_ACK</em>状态。</p>
 <p><strong>第四次挥手：</strong>客户端收到服务端的FIN后，将自己的ACK设置为1，并生成一个确认应答号，该值为服务端传过来的初始序列号的值加一。之后将ACK与确认应答号发送到服务端，客户端进入<em>TIME_WAIT</em>状态。服务端收到并验证ACK与确认应答号，验证通过，进入<em>CLOSED</em>状态。客户端在等待2MSL的时间后，也进入<em>CLOSED</em>状态。</p>
@@ -1069,7 +1070,7 @@
 <li><p>调整系统内核参数，修改<code>/etc/sysctl.conf</code>文件中<code>net.ipv4.tcp_tw_reuse</code>和<code>tcp_timestamps</code>参数。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = 1 # 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭； </span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 # 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</span><br></pre></td></tr></table></figure></li>
 </ul>
-]]></content>
+<h1 id="十六、TCP如何保证可靠传输？"><a href="#十六、TCP如何保证可靠传输？" class="headerlink" title="十六、TCP如何保证可靠传输？"></a>十六、TCP如何保证可靠传输？</h1>]]></content>
       <categories>
         <category>面试</category>
       </categories>
