@@ -1257,4 +1257,134 @@
         <tag>计算机网络</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL面试题汇总（一）</title>
+    <url>/2023/06/26/MySQL%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="介绍一下MySQL的特点"><a href="#介绍一下MySQL的特点" class="headerlink" title="介绍一下MySQL的特点"></a>介绍一下MySQL的特点</h1><ol>
+<li>MySQL功能完善、性能卓越、服务稳定，很少出现异常宕机。</li>
+<li>MySQL开源免费且没有版权制约，自主性及使用成本低。</li>
+<li>MySQL历史悠久，用户活跃度高，遇到问题可以去社区寻求帮助。</li>
+<li>MySQL体积小，安装方便，易于维护。</li>
+<li>MySQL支持多种操作系统，提供多种API接口，支持多种开发语言。</li>
+<li>MySQL事务支持优秀，支持分库分表、读写分离和高可用。</li>
+</ol>
+<h1 id="什么是关系型数据库？"><a href="#什么是关系型数据库？" class="headerlink" title="什么是关系型数据库？"></a>什么是关系型数据库？</h1><p>关系型数据库（RDBMS，Relational Database Management System）就是一种建立在关系模型基础上的数据库。关系模型表明了数据库中所存储的数据之间的联系，包括：一对一、一对多、多对多。</p>
+<p>关系型数据库中，数据都被存放在了各种表中，表中的每一行就存放着一条数据。</p>
+<p><img src="/img/article_content_img/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93.jpg" alt="关系型数据库"></p>
+<p><strong>常见的关系型数据库：</strong>MySQL、Oracle、SQL Server、SQLite、PostgreSQL…</p>
+<h1 id="MySQL存储引擎有哪些？架构了解吗？"><a href="#MySQL存储引擎有哪些？架构了解吗？" class="headerlink" title="MySQL存储引擎有哪些？架构了解吗？"></a>MySQL存储引擎有哪些？架构了解吗？</h1><p>MySQL支持多种存储引擎，我们可以通过<code>SHOW ENGINES;</code>命令来查看，具体如下图：</p>
+<p><img src="/img/article_content_img/MySQL%E7%9A%84%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.jpg"></p>
+<p>从上图可以看出，MySQL支持9种存储引擎，默认使用InnoDB存储引擎，也只有InnoDB存储引擎支持事务。</p>
+<blockquote>
+<p>MySQL5.5 之前的版本，默认存储疫情是MyISAM，从MySQL5.5之后才默认采用InnoDB存储引擎。</p>
+<p>你可以通过<code>SELECT VERSION();</code>命令查看MySQL的版本。</p>
+</blockquote>
+<p>MySQL存储引擎采用的是<strong>插件式架构</strong>，支持多种存储引擎，甚至可以针对不同的业务场景，给每张表设置不同的存储引擎。<strong>存储引擎是基于表的，而不是基于数据库的！</strong></p>
+<h1 id="MyISAM存储引擎和InnoDB存储引擎有哪些区别？"><a href="#MyISAM存储引擎和InnoDB存储引擎有哪些区别？" class="headerlink" title="MyISAM存储引擎和InnoDB存储引擎有哪些区别？"></a>MyISAM存储引擎和InnoDB存储引擎有哪些区别？</h1><ol>
+<li>InnoDB是事务性存储引擎，因此支持事务操作，而MyISAM不支持事务。</li>
+<li>InnoDB支持外键，而MyISAM不支持。</li>
+<li>InnoDB既支持行级锁，也支持表级锁，默认采用行级锁。而MyISAM仅支持表级锁。</li>
+<li>基于InnoDB的表必须有主键，如果未主动设置主键列，则InnoDB会检索表中是否具有唯一索引，如果有唯一索引，那么会把加了唯一索引的列指定为主键列，否则，InnoDB会自动生成一个6Byte的自增主键。而MyISM允许没有主键。</li>
+<li>MySQL5.7版本之前，InnoDB是不支持全文索引的，5.7版本之后才支持。而MyISAM引擎一直支持全文索引。</li>
+<li>InnoDB支持MVCC（多版本并发控制），而MyISAM不支持。</li>
+<li>InnoDB不保存表的具体行数，因此在执行 <code>select count(*) from table</code> 时需要进行全表扫描，相当于扫描整个磁盘。而MyISAM使用一个变量保存了整个表的行数，执行上述命令时，直接读出该变量的值即可，速度相对较快。</li>
+<li>MyISAM和InnoDB底层数据结构都是B+树，但是具体实现方式有所不同。基于InnoDB引擎的表只有一个.ibd文件，这个.ibd文件既存放索引，也存放数据，即每一个非叶子节点存放索引，叶子节点存放索引以及索引对应的数据。而基于MyISAM引擎的表具有.myi和.myd两个文件，.myi文件存储表中索引以及索引对应数据的指针，即每一个非叶子节点存放索引，叶子节点存放索引以及索引对应数据的指针，该指针就指向.myd文件中存放的数据。</li>
+</ol>
+<h1 id="InnoDB为什么推荐使用自增ID作为主键"><a href="#InnoDB为什么推荐使用自增ID作为主键" class="headerlink" title="InnoDB为什么推荐使用自增ID作为主键"></a>InnoDB为什么推荐使用自增ID作为主键</h1><p>在InnoDB中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。InnoDB使用B+树索引模型，所以数据都是存放在B+树的叶子节点中的。</p>
+<p><strong>每一个索引在InnoDB里面都对应一颗B+树。</strong>因此，一张表其实就是由多个B+树构成的，即一个主键索引树和多个非主键索引树。</p>
+<p>现在假设我们有一个主键列为ID的表，表中有一个字段k，并且字段k上加了索引。建表SQL语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">primary</span> key, </span><br><span class="line">k <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>, </span><br><span class="line">name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">index (k)) engine<span class="operator">=</span>InnoDB;</span><br></pre></td></tr></table></figure>
+
+<p>表中R1-R5的（ID,k）值分别为（100,1）、（200,2）、（300,3）、（500,5）和（600,6），具体如下图所示：</p>
+<p><img src="/img/article_content_img/mysql1.jpg" alt="InnoDB索引组织结构"></p>
+<p>从图中可以看出，根据叶子节点的内容，索引类型分为主键索引和非主键索引。</p>
+<blockquote>
+<p>主键索引的叶子节点保存的整行数据，而非主键索引的叶子节点保存的是主键的值。例如：查询k&#x3D;3的数据，则先在非主索引树中找到对应主键的值为300，再进行回表，去主键索引树中查找ID为300的数据。</p>
+</blockquote>
+<p><strong>索引维护：</strong></p>
+<p>B+树为了维护<strong>索引有序性</strong>，在插入新值的时候需要做必要的维护。以上图为例，如果插入新的行ID值为700，则只需要在R5的记录后面插入一个新记录。但如果新插入的ID值为400，则需要逻辑上挪动后面的数据，以腾出位置。</p>
+<p>而更糟的情况是，如果R5所在的数据页已经满了，根据B+树的算法，这时需要申请一个新的数据页，然后挪动部分数据过去，这个过程称之为页分裂，而页分裂会影响性能。此外，原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。</p>
+<p>当相邻两个页由于删除了数据，利用率很低之后，会将数据页做合并。合并的过程，可以认为是分裂过程的逆过程。</p>
+<p><strong>自增ID作为主键，功能上来说，我们在插入数据时无需指定ID值，系统会根据当前ID最大值加1作为下一条记录的ID值。因此，这种插入数据的模式，非常符合递增插入的场景，每次插入一条新记录都是追加操作，不会涉及挪动其他记录，也不会触发叶子节点的分裂。而有业务逻辑的字段做主键，则往往不能保证有序插入，这样就有可能导致频繁的页分裂和合并，写数据成本相对较高，影响性能。</strong></p>
+<p><strong>此外，从存储的角度来说，由于每个非主键索引的叶子节点上都是主键的值，那么如果主键长度太长，非主键索引的叶子节点就越大，占用的空间也就越大。</strong>例如：使用<code>VARCHAR</code>类型的唯一字段身份证号作为主键，则每个非主键索引的叶子节点占用约20个字节，如果使用整型（<code>INT</code>）数据做主键，则只需要4个字节，如果是长整型（<code>BIGINT</code>）则需要8个字节。</p>
+<blockquote>
+<p><code>VARCHAR</code>需要使用1个或2个额外字节记录字符串的长度：如果列的最大长度小于或等于255个字节，则只使用1个字节表示，否则使用2个字节。假设采用<code>latin-1</code>字符集，一个<code>VARCHAR(10)</code>的列需要11个字节的存储空间。<code>VARCHAR(1000)</code>的列则需要1002个字节。</p>
+</blockquote>
+<p>因此，综合考虑性能和存储两方面，自增ID作为主键都会是更合理的选择！</p>
+<h1 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h1><p>事务就是逻辑上的一组操作，要么全部执行成功，要么全部执行失败。事务以<code>BEGIN/START TRANSACTION</code>开始，以<code>ROLLBACK/COMMIT</code>结束。</p>
+<p>事务具有四大特性：A（原子性）、C（一致性）、I（隔离性）、D（持久性）。</p>
+<ul>
+<li><p><strong>原子性（Atomicity）：</strong>指事务是最小的执行单位，不允许分割。事务中的操作要么全部执行成功，要么全部执行失败。</p>
+</li>
+<li><p><strong>一致性（Consistency）：</strong>指事务执行前后，数据处于一种合法的状态，这种状态是语义上的而不是语法上的。合法的数据状态就是要满足预定的约束，这个约束可以自己来定义。满足这个约束，数据就是一致的，否则就是不一致的。</p>
+<p>例子：</p>
+<ul>
+<li>规定如下约束：账户余额必须大于等于0。A账户有200元，转账300元出去，那么A账户余额变为-100元。此时，数据就是不一致的，因为不满足账户余额必须大于等于0这一约束。</li>
+<li>规定如下约束：A账户与B账户余额之和必须相同。A账户有200元，B账户有100元，A+B&#x3D;300元。A转账50元给B账户，A账户的钱已经扣了，但是B账户因为各种意外原因，余额并未增加，那么A+B&#x3D;250元。此时，数据就是不一致的，因为不满足A账户与B账户余额之和必须相同的约束。</li>
+</ul>
+</li>
+<li><p><strong>隔离性（Isolation）：</strong>指事务与事务之间不能互相干扰，即并发访问数据库的时候，一个用户的事务不能被其他事务所干扰，各并发事务之间数据库是独立的。</p>
+</li>
+<li><p><strong>持久性（Durability）：</strong>指事务一旦提交，它对数据库的改变就是永久性的，即使数据库发生故障也不应该对其有任何影响。</p>
+</li>
+</ul>
+<p><strong>注：原子性、隔离性和持久性是数据库保证一致性的手段，一致性是最终要达到的目的！也就是说，只有保证了原子性、隔离性和持久性，才能保证一致性！</strong></p>
+<h1 id="数据库如何保证原子性？"><a href="#数据库如何保证原子性？" class="headerlink" title="数据库如何保证原子性？"></a>数据库如何保证原子性？</h1><p>利用<strong>回滚日志（undo log）</strong>来实现原子性。所有事务执行期间所做的操作的<strong>逆操作</strong>都会被记录到undo log中，如果事务执行过程中遇到异常，出现了回滚，则可以直接利用undo log进行数据恢复，恢复到事务执行之前的状态。此外，undo log会先于数据持久化到磁盘上，这样就保证了即使遇到数据库突然宕机等情况，当用户再次启动数据库的时候，数据库还能够通过查询undo log来回滚之前未完成的事务。</p>
+<blockquote>
+<p><strong>逆操作：</strong></p>
+<ul>
+<li>当插入（INSERT）一条数据的时候，undo log中会记录这条数据对应的删除（DELETE）记录。</li>
+<li>当删除（DELETE）一条数据的时候，undo log中会记录这条数据对应的插入（INSERT）记录。</li>
+<li>当更新（UPDATE）一条数据（新值）的时候，undo log中会记录这条数据（旧值）对应的（UPDATE）记录。</li>
+</ul>
+</blockquote>
+<h1 id="数据库如何保证持久性？"><a href="#数据库如何保证持久性？" class="headerlink" title="数据库如何保证持久性？"></a>数据库如何保证持久性？</h1><p>利用重做日志（redo log）来实现持久性。</p>
+<p>MySQL是先把磁盘上的数据加载到内存，在内存中对数据进行修改，再写回到磁盘上。如果此时出现宕机，内存中的数据就会丢失。而redo log解决了这个问题，当做数据修改的时候，不仅在内存中操作，还会在redo log中记录这次操作。当事务提交的时候，会将redo log日志进行刷盘（redo log一部分在内存中，一部分在磁盘上）。当数据库宕机重启的时候，会将redo log中的内容恢复到数据库中，再根据undo log和binlog内容决定是回滚数据还是提交数据。</p>
+<p>此外，采用redo log具有以下好处：</p>
+<ul>
+<li>redo log体积小，毕竟只记录了哪一页修改了什么，所以刷盘快。</li>
+<li>redo log是一直往末尾追加，属于顺序IO，效率显然比随机IO高。</li>
+</ul>
+<h1 id="数据库如何保证隔离性？"><a href="#数据库如何保证隔离性？" class="headerlink" title="数据库如何保证隔离性？"></a>数据库如何保证隔离性？</h1><p>我们首先需要知道，如果无法保证隔离性会出现哪些问题呢？</p>
+<p>在典型的应用程序中，多个事务并发运行，经常会操作相同的数据来完成各自的任务，所以可能会导致以下问题的出现：</p>
+<h2 id="脏读（Dirty-Read）"><a href="#脏读（Dirty-Read）" class="headerlink" title="脏读（Dirty Read）"></a>脏读（Dirty Read）</h2><p>简单来说，脏读是指一个事务读取了被另一个事务修改但未提交的数据。</p>
+<p>一个事务读取数据并对数据进行了修改，这个修改对其他事务来说是可见的，即使当前事务没有提交。这时，另外一个事务读取了这个还未提交的数据，但第一个事务由于一些原因进行了回滚，导致数据并没有提交到数据库，那么第二个事务读取到的就是脏数据，即产生了脏读。</p>
+<p>下面将举一个例子来更为直观地说明脏读。</p>
+<p>例：事务1读取某表中的数据A&#x3D;20，之后事务1修改数据A&#x3D;A-1&#x3D;19，但还未提交。这时，事务2读取表中数据A&#x3D;19，然后事务1进行回滚导致对数据A的修改并未提交到数据库，A的值还是20。所以事务2读取到的就是脏数据。</p>
+<p><img src="/img/article_content_img/%E8%84%8F%E8%AF%BB.png" alt="脏读"></p>
+<h2 id="丢失修改（Lost-to-modify）"><a href="#丢失修改（Lost-to-modify）" class="headerlink" title="丢失修改（Lost to modify）"></a>丢失修改（Lost to modify）</h2><p>简单来说，就是一个事务修改了的数据，被另外一个事务再次修改，导致第一个事务修改的数据被覆盖（丢失）了。</p>
+<p>一个事务读取一个数据时，另外一个事务也读取了该数据，那么在第一个事务中修改了这个数据后，第二个事务也修改了这个数据。此时，第一个事务内的修改结果就被丢失了，因此称为丢失修改。</p>
+<p>下面将举一个例子来更为直观地说明丢失修改。</p>
+<p>例：事务1读取某表中的数据A&#x3D;20，事务2也读取了该表中的数据A&#x3D;20，然后事务1先修改了数据A&#x3D;A-1&#x3D;19，然后提交到数据库，后来事务2也修改了这个数据A&#x3D;A-1&#x3D;19，并提交到数据库。最终A的值为19。但是A进行了两次减1操作，A的值应该是18才对。这就是丢失修改，即事务1修改的数据A的值被事务2修改的数据A的值覆盖（丢失）了。</p>
+<p><img src="/img/article_content_img/%E4%B8%A2%E5%A4%B1%E4%BF%AE%E6%94%B9.png" alt="丢失修改"></p>
+<h2 id="不可重复读（Unrepeatable-Read）"><a href="#不可重复读（Unrepeatable-Read）" class="headerlink" title="不可重复读（Unrepeatable Read）"></a>不可重复读（Unrepeatable Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同一个数据，得到的值不一致。</p>
+<p>一个事务读取一个数据时，另外一个事务也读取了该数据，并对该数据进行了修改。此时，第一个事务再次读取该数据时，发现与之前读取的值不一样了，这就是不可重复读。</p>
+<p>下面将举一个例子来更为直观地说明不可重复读。</p>
+<p>例：事务1读取某表中的数据A&#x3D;20，事务2也读取了该表中的数据A&#x3D;20并将A的值进行了修改A&#x3D;A-1&#x3D;19，此时事务1再次读取数据A的值&#x3D;19，这与第一次读取A的值&#x3D;20不同。</p>
+<p><img src="/img/article_content_img/%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB.png" alt="不可重复读"></p>
+<h2 id="幻读（Phantom-Read）"><a href="#幻读（Phantom-Read）" class="headerlink" title="幻读（Phantom Read）"></a>幻读（Phantom Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同样的几行数据，但相比于第一次读取，会新增或减少一些数据，就像出现了幻觉一样。</p>
+<p>一个事务读取了几行数据，接着另外一个并发事务往表中插入了一些新数据或者删除了一些数据，之后第一个事务再次读取这几行数据时，发现数据变多或变少了（不该出现的数据），这就是幻读。</p>
+<p>下面将举一个例子来更为直观地说明不可重复读。</p>
+<p>事务1根据条件（where name like “%王”）查询了某表中的一批数据（假设有5条数据），接着并发事务2往表中插入了一行数据，该数据同样满足上述条件，此时事务1再次根据该条件查询数据时，发现有6条数据，相比于之前多了一条。</p>
+<p><img src="/img/article_content_img/%E5%B9%BB%E8%AF%BB.png" alt="幻读"></p>
+<h2 id="不可重复读和幻读有什么区别？"><a href="#不可重复读和幻读有什么区别？" class="headerlink" title="不可重复读和幻读有什么区别？"></a>不可重复读和幻读有什么区别？</h2><ul>
+<li>不可重复读主要针对的是<strong>某一行</strong>数据，并且针对的是<strong>UPDATE</strong>操作。</li>
+<li>幻读主要针对的是一个<strong>数据整体&#x2F;范围</strong>，并且针对的是<strong>INSERT</strong>和<strong>DELETE</strong>操作。</li>
+</ul>
+<p>因此，我们只要防止上述问题出现，即可保证事务的隔离性。</p>
+<h2 id="数据库的四种隔离级别"><a href="#数据库的四种隔离级别" class="headerlink" title="数据库的四种隔离级别"></a>数据库的四种隔离级别</h2><ul>
+<li>读未提交</li>
+<li>读已提交</li>
+<li>可重复读</li>
+<li>串行化</li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
 </search>
