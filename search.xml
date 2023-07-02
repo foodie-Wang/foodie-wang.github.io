@@ -328,18 +328,6 @@
       </tags>
   </entry>
   <entry>
-    <title>面经</title>
-    <url>/2023/06/13/%E9%9D%A2%E7%BB%8F/</url>
-    <content><![CDATA[<h1 id="面经"><a href="#面经" class="headerlink" title="面经"></a>面经</h1><p>1、测试测试</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>Java面试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>前端</title>
     <url>/2023/06/13/%E5%89%8D%E7%AB%AF/</url>
     <content><![CDATA[<h1 id="CSS学习"><a href="#CSS学习" class="headerlink" title="CSS学习"></a>CSS学习</h1><p>测试测试</p>
@@ -1284,7 +1272,7 @@
 <li>InnoDB是事务性存储引擎，因此支持事务操作，而MyISAM不支持事务。</li>
 <li>InnoDB支持外键，而MyISAM不支持。</li>
 <li>InnoDB既支持行级锁，也支持表级锁，默认采用行级锁。而MyISAM仅支持表级锁。</li>
-<li>基于InnoDB的表必须有主键，如果未主动设置主键列，则InnoDB会检索表中是否具有唯一索引，如果有唯一索引，那么会把加了唯一索引的列指定为主键列，否则，InnoDB会自动生成一个6Byte的自增主键。而MyISM允许没有主键。</li>
+<li>基于InnoDB的表必须有主键，如果未主动设置主键列，则InnoDB会检索表中是否具有唯一索引，如果有唯一索引，那么会把加了唯一索引的列指定为主键列，否则，InnoDB会自动生成一个6Byte的自增主键。而MyISAM允许没有主键。</li>
 <li>MySQL5.7版本之前，InnoDB是不支持全文索引的，5.7版本之后才支持。而MyISAM引擎一直支持全文索引。</li>
 <li>InnoDB支持MVCC（多版本并发控制），而MyISAM不支持。</li>
 <li>InnoDB不保存表的具体行数，因此在执行 <code>select count(*) from table</code> 时需要进行全表扫描，相当于扫描整个磁盘。而MyISAM使用一个变量保存了整个表的行数，执行上述命令时，直接读出该变量的值即可，速度相对较快。</li>
@@ -1362,21 +1350,37 @@
 <p>下面将举一个例子来更为直观地说明不可重复读。</p>
 <p>例：事务1读取某表中的数据A&#x3D;20，事务2也读取了该表中的数据A&#x3D;20并将A的值进行了修改A&#x3D;A-1&#x3D;19，此时事务1再次读取数据A的值&#x3D;19，这与第一次读取A的值&#x3D;20不同。</p>
 <p><img src="/img/article_content_img/%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB.png" alt="不可重复读"></p>
-<h2 id="幻读（Phantom-Read）"><a href="#幻读（Phantom-Read）" class="headerlink" title="幻读（Phantom Read）"></a>幻读（Phantom Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同样的几行数据，但相比于第一次读取，会新增或减少一些数据，就像出现了幻觉一样。</p>
-<p>一个事务读取了几行数据，接着另外一个并发事务往表中插入了一些新数据或者删除了一些数据，之后第一个事务再次读取这几行数据时，发现数据变多或变少了（不该出现的数据），这就是幻读。</p>
+<h2 id="幻读（Phantom-Read）"><a href="#幻读（Phantom-Read）" class="headerlink" title="幻读（Phantom Read）"></a>幻读（Phantom Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同样的几行数据，但相比于第一次读取，会新增一些数据，就像出现了幻觉一样。</p>
+<p>一个事务读取了几行数据，接着另外一个并发事务往表中插入了一些新数据，之后第一个事务再次读取这几行数据时，发现数据变多了（不该出现的数据），这就是幻读。</p>
 <p>下面将举一个例子来更为直观地说明不可重复读。</p>
 <p>事务1根据条件（where name like “%王”）查询了某表中的一批数据（假设有5条数据），接着并发事务2往表中插入了一行数据，该数据同样满足上述条件，此时事务1再次根据该条件查询数据时，发现有6条数据，相比于之前多了一条。</p>
 <p><img src="/img/article_content_img/%E5%B9%BB%E8%AF%BB.png" alt="幻读"></p>
 <h2 id="不可重复读和幻读有什么区别？"><a href="#不可重复读和幻读有什么区别？" class="headerlink" title="不可重复读和幻读有什么区别？"></a>不可重复读和幻读有什么区别？</h2><ul>
 <li>不可重复读主要针对的是<strong>某一行</strong>数据，并且针对的是<strong>UPDATE</strong>操作。</li>
-<li>幻读主要针对的是一个<strong>数据整体&#x2F;范围</strong>，并且针对的是<strong>INSERT</strong>和<strong>DELETE</strong>操作。</li>
+<li>幻读主要针对的是一个<strong>数据整体&#x2F;范围</strong>，并且针对的是<strong>INSERT</strong>操作。</li>
 </ul>
-<p>因此，我们只要防止上述问题出现，即可保证事务的隔离性。</p>
-<h2 id="数据库的四种隔离级别"><a href="#数据库的四种隔离级别" class="headerlink" title="数据库的四种隔离级别"></a>数据库的四种隔离级别</h2><ul>
-<li>读未提交</li>
-<li>读已提交</li>
-<li>可重复读</li>
-<li>串行化</li>
+<p>因此，我们只要防止上述问题出现，即可保证事务的隔离性。那么如何防止上述问题出现呢？这里就需要隔离级别的概念。</p>
+<h2 id="数据库的四种隔离级别"><a href="#数据库的四种隔离级别" class="headerlink" title="数据库的四种隔离级别"></a>数据库的四种隔离级别</h2><p>SQL标准定义了四个隔离级别，其级别从低到高依次是：读未提交、读已提交、不可重复读、串行化。</p>
+<ul>
+<li><strong>读未提交（READ UNCOMMITTED）：</strong>允许读取尚<strong>未提交</strong>的数据变更，即一个事务提交之前，其执行结果对其他事务是可见的。该隔离级别最低，会导致脏读、不可重复读和幻读。</li>
+<li><strong>读已提交（READ COMMITTED）：</strong>允许读取并发事务<strong>已经提交</strong>的数据，即一个事务只能读取已经提交了的事务对数据做出的变更。该隔离级别是<strong>Oracle的默认隔离级别</strong>，可以解决脏读，但无法解决不可重复读和幻读。</li>
+<li><strong>可重复读（REPEATABLE READ）：</strong>确保同一个事务在执行期间，多次读取相同数据时，得到的结果相同。该隔离级别是<strong>MySQL的默认隔离级别</strong>，可以解决脏读和不可重复读，但无法解决幻读。</li>
+<li><strong>串行化（SERIALIZABLE）：</strong>所有事务串行执行，保证事务之间完全不可能产生干扰。该隔离级别最高，可以解决脏读、不可重复读和幻读问题，但是性能非常低，可能会导致大量的超时和锁竞争现象。一般不会使用。</li>
+</ul>
+<h1 id="MySQL中的锁"><a href="#MySQL中的锁" class="headerlink" title="MySQL中的锁"></a>MySQL中的锁</h1><p>锁是一种常见的并发事务的控制方式。根据加锁的范围，MySQL中的锁大致可以分为：全局锁、表锁和行锁。</p>
+<h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><p>全局锁就是对整个数据库实例加锁，可以通过<code>FLUSH TABLES WITH READ LOCK</code>（FTWRL）命令实现。加锁后，整个库处于只读状态，之后其他线程的数据更新语句（增、删、改）、数据定义语句（建表、修改表结构等）和更新类事务的提交语句，均会被阻塞。</p>
+<p><strong>全局锁的典型使用场景：全库逻辑备份</strong></p>
+<p>但备份过程中，整个库完全处于<strong>只读</strong>状态，也会造成以下问题：</p>
+<ul>
+<li>如果在主库上备份，那么在备份期间，主库不能执行更新，业务基本停摆。</li>
+<li>如果在从库备份，那么备份期间从库无法执行主库同步过来的binlog，导致主从数据不一致。</li>
+</ul>
+<p>当然，官方自带的逻辑备份工具是<strong>mysqldump</strong>，当mysqldump使用参数<code>-single-transaction</code>的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于MVCC的支持，这个过程中数据是可以正常更新的。但此方法只适用于所有的表使用事物引擎的库。如果有的表使用了不支持事务的引擎，那么备份就只能通过全局锁这种方式来实现了。</p>
+<p><strong>那么既然要做全库只读，为什么不使用<code>set global readonly = true</code>的方式呢？</strong></p>
+<p>主要有以下两个原因：</p>
+<ul>
+<li>某些系统中，<code>readonly</code>的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改global变量的方式影响面更大，不建议使用。</li>
+<li>在异常处理机制上存在差异。如果执行FTWRL命令之后由于客户端发生异常断开，那么MySQL会自动释放这个全局锁，整个库可以回到正常更新的状态。而将整个库设置为readonly后，如果客户端发生异常，则数据库就会一直保持readonly状态，这样会导致整个库长时间处于不可写的状态，风险较高。</li>
 </ul>
 ]]></content>
       <categories>
