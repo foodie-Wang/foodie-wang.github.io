@@ -1382,7 +1382,24 @@
 <li>某些系统中，<code>readonly</code>的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改global变量的方式影响面更大，不建议使用。</li>
 <li>在异常处理机制上存在差异。如果执行FTWRL命令之后由于客户端发生异常断开，那么MySQL会自动释放这个全局锁，整个库可以回到正常更新的状态。而将整个库设置为readonly后，如果客户端发生异常，则数据库就会一直保持readonly状态，这样会导致整个库长时间处于不可写的状态，风险较高。</li>
 </ul>
-]]></content>
+<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><p><strong>MySQL中表级锁有两种：表锁、元数据锁（MDL，Meta Data Lock ）</strong></p>
+<h3 id="表锁："><a href="#表锁：" class="headerlink" title="表锁："></a>表锁：</h3><p>表锁的加锁语法为<code>lock tables xxx read/write</code>，<code>xxx</code>为表名，<code>read/write</code>为读锁或写锁。解锁可以使用<code>unlock tables</code>命令主动释放锁，也可以在客户端断开的时候自动释放。</p>
+<p>在表级锁中，如果加的是读锁，则当前线程读、写操作和其他线程的读操作均可以进行，但其他线程的写操作会被阻塞。如果加的是写锁，则当前线程的读、写操作均可进行，但其他线程的读、写操作均被阻塞。</p>
+<h3 id="元数据锁（MDL，Meta-Data-Lock）"><a href="#元数据锁（MDL，Meta-Data-Lock）" class="headerlink" title="元数据锁（MDL，Meta Data Lock）"></a>元数据锁（MDL，Meta Data Lock）</h3><p>MDL在MySQL5.5之后引入，该锁不需要显式使用，当访问一个表的时候会被自动加上。<strong>MDL的作用是保证读写的正确性，即用于隔离DML和DDL操作之间的干扰。</strong>例如：如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，删了一列，那么查询线程拿到的结果跟表结构就对不上了，肯定是有问题的。</p>
+<p>当对一个表做增、删、改、查操作时，需要加MDL读锁，当对一个表做结构变更时，需要加MDL写锁。</p>
+<ul>
+<li>读锁之间不互斥，允许多个线程对同一张表进行增、删、改、查操作。</li>
+<li>读锁与写锁之间，写锁与写锁之间互斥，所以如果有两个线程同时给一个表加字段，其中一个要等另一个执行完才能开始执行。</li>
+</ul>
+<p><strong>使用MDL锁中遇到的问题：</strong>给小表加字段导致数据库挂掉。（事务中的MDL锁，在语句执行开始时申请，但是语句结束后并不会马上释放，而会等到整个事务提交之后再释放）</p>
+<p><img src="/img/article_content_img/MDL%E9%94%81%E9%97%AE%E9%A2%98.jpg" alt="MDL锁问题"></p>
+<p>从上图可以看出，sessionA先启动，这时候对表<code>t</code>加一个MDL读锁。由于sessionB需要的也是MDL读锁，因此可以正常执行。之后由于sessionA的MDL读锁还没有释放，而sessionC需要MDL写锁，因此sessionC会被阻塞。之后所有要在表<code>t</code>上新申请MDL读锁的请求也会被sessionC阻塞。因此，现在这个表<code>t</code>变成了一个完全不可读写的表。而如果这张表上查询语句频繁，且客户端有重试机制的话，那么每超时一个请求，就会再发起一个session去请求，整个数据库的线程很快就会爆满。</p>
+<p><strong>如何解决上述问题？</strong></p>
+<p>在<code>ALTER TABLE</code>语句里面设定等待时间，如果在指定的等待时间内没有拿到MDL写锁，也不要阻塞后面的业务语句，而是先放弃，之后开发人员或者DBA再通过重试命令重复这个过程。</p>
+<p>MariaDB已经合并了AliSQL的这个功能，所以这两个开元分支目前都支持DDL的<code>NOWAIT/WAIT N</code>语法。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name NOWAIT <span class="keyword">ADD</span> column...</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name WAIT N <span class="keyword">ADD</span> column...</span><br></pre></td></tr></table></figure>
+
+<h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2>]]></content>
       <categories>
         <category>面试</category>
       </categories>
