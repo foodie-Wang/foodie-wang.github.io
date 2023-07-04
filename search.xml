@@ -1382,7 +1382,8 @@
 <li>某些系统中，<code>readonly</code>的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改global变量的方式影响面更大，不建议使用。</li>
 <li>在异常处理机制上存在差异。如果执行FTWRL命令之后由于客户端发生异常断开，那么MySQL会自动释放这个全局锁，整个库可以回到正常更新的状态。而将整个库设置为readonly后，如果客户端发生异常，则数据库就会一直保持readonly状态，这样会导致整个库长时间处于不可写的状态，风险较高。</li>
 </ul>
-<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><p><strong>MySQL中表级锁有两种：表锁、元数据锁（MDL，Meta Data Lock ）</strong></p>
+<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><p>表级锁是MySQL中锁定粒度仅次于全局锁的一种锁，是<strong>针对非索引字段</strong>加的锁，对当前操作的整张表加锁，<strong>实现简单，资源消耗少，加锁快，不会出现死锁，但触发锁冲突的概率最高，高并发下效率低</strong>。表级锁与存储引擎无关，MyISAM和InnoDB引擎都支持表级锁。</p>
+<p><strong>MySQL中表级锁有两种：表锁、元数据锁（MDL，Meta Data Lock ）</strong></p>
 <h3 id="表锁："><a href="#表锁：" class="headerlink" title="表锁："></a>表锁：</h3><p>表锁的加锁语法为<code>lock tables xxx read/write</code>，<code>xxx</code>为表名，<code>read/write</code>为读锁或写锁。解锁可以使用<code>unlock tables</code>命令主动释放锁，也可以在客户端断开的时候自动释放。</p>
 <p>在表级锁中，如果加的是读锁，则当前线程读、写操作和其他线程的读操作均可以进行，但其他线程的写操作会被阻塞。如果加的是写锁，则当前线程的读、写操作均可进行，但其他线程的读、写操作均被阻塞。</p>
 <h3 id="元数据锁（MDL，Meta-Data-Lock）"><a href="#元数据锁（MDL，Meta-Data-Lock）" class="headerlink" title="元数据锁（MDL，Meta Data Lock）"></a>元数据锁（MDL，Meta Data Lock）</h3><p>MDL在MySQL5.5之后引入，该锁不需要显式使用，当访问一个表的时候会被自动加上。<strong>MDL的作用是保证读写的正确性，即用于隔离DML和DDL操作之间的干扰。</strong>例如：如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，删了一列，那么查询线程拿到的结果跟表结构就对不上了，肯定是有问题的。</p>
@@ -1399,7 +1400,104 @@
 <p>MariaDB已经合并了AliSQL的这个功能，所以这两个开元分支目前都支持DDL的<code>NOWAIT/WAIT N</code>语法。</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name NOWAIT <span class="keyword">ADD</span> column...</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name WAIT N <span class="keyword">ADD</span> column...</span><br></pre></td></tr></table></figure>
 
-<h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2>]]></content>
+<h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2><p>MySQL的<strong>行锁是在引擎层由引擎自己实现的</strong>，行锁是针对数据表中行记录的锁。行锁也是MySQL中<strong>锁定粒度最小</strong>的一种锁，是<strong>针对索引字段加的锁</strong>。<strong>行级锁能大大减少数据库操作的冲突，并发度最高，但加锁开销也最大，加锁慢，可能会出现死锁</strong>。</p>
+<p>例如：事务A在执行期间对需要更改的那一行加行锁并进行更新操作，事务A还并未提交。此时事务B开启，也想要更改该行数据，但由于行锁还未释放，则事务B获得行锁失败，陷入阻塞等待，只有当事务A提交或回滚，事务A的行锁释放后，事务B才能对该行数据加行锁，执行更新操作。</p>
+<h3 id="两阶段协议"><a href="#两阶段协议" class="headerlink" title="两阶段协议"></a>两阶段协议</h3><p>两阶段协议指锁的添加和释放分别在两个阶段进行。也就是说，<strong>在InnoDB事务中，行锁是在需要的时候添加，不需要的时候不会立刻释放，而是要等到事务结束之后才释放</strong>。</p>
+<p><strong>如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量放在后面。</strong></p>
+<h3 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><p><img src="/img/article_content_img/MySQL%E6%AD%BB%E9%94%81.jpg" alt="MySQL死锁"></p>
+<p>从上图可以看出，事务A在等待事务B释放id&#x3D;2的行锁，事务B在等待事务A释放id&#x3D;1的行锁，此时事务A和事务B就是在互相等待对方释放资源，陷入了死锁状态。</p>
+<p>对于死锁，有两种解决方案：</p>
+<ol>
+<li>直接进入等待，直到超时。超时时间通过参数<code>innodb_lock_wait_timeout</code>进行设置，默认为50s。</li>
+<li>发起死锁检测，发现死锁后，主动回滚死锁链中的某一个事务，让其他事务得以继续执行。可以将<code>innodb_deadlock_detect</code>参数设置为<code>on</code>来开启死锁检测，默认就是<code>on</code>。</li>
+</ol>
+<p>对于第一种方案，默认的超时时间为50s，即第一个被锁住的线程要等待50s才会超时退出，其他线程才能继续执行，这对于在线服务来说，是无法接受的。而如果将超时时间设置的很短，虽然可以很快解开死锁，但如果不是死锁，而是简单的锁等待的话，就会出现“误伤”。</p>
+<p>对于第二种方案，<code>innodb_deadlock_detect</code>默认值是<code>on</code>，主动进行死锁检测会在发生死锁的时候快速发现并进行处理，但也存在额外负担。<strong>死锁检测的时间复杂度是O(n^2^)<strong>。假设有1000个并发线程同时更新同一行，那么死锁检测操作就是100万（1000*1000）的量级，这期间需要</strong>消耗大量的CPU资源</strong>。因此，就可能会出现<strong>CPU利用率很高，但每秒执行的事务量却很少</strong>的情况。</p>
+<p><strong>那么如何解决由热点数据行更新导致的性能问题？</strong></p>
+<ul>
+<li><p>如果可以确保这个业务一定不会出现死锁，可以临时把死锁检测关掉。</p>
+</li>
+<li><p>控制并发度。</p>
+<ol>
+<li><p>MySQL中间件做并发限制。</p>
+</li>
+<li><p>修改数据库源码：对于相同行的更新，在进入引擎之前排队。这样在InnoDB内部就不会有大量的死锁检测工作。</p>
+</li>
+<li><p>将一行改成逻辑上的多行来减少锁冲突。例如：将影院账户总额这一条记录拆成逻辑上的10条记录，影院郑虎总额等于这10条记录的值的总和。这样每次要给影院账户加金额的时候，随机选其中一条记录来增加。这样每次冲突的概率就变成原来的1&#x2F;10，可以减少锁等待的个数，也就减少了死锁检测的CPU消耗。</p>
+<p>但这种方案要根据实际业务逻辑做详细设计。假如是退票逻辑，那么账户余额可能会减少，因此就需要考虑一部分行记录变成0的情况，代码层面就需要对其做特殊处理。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="InnoDB中有哪几类行锁？"><a href="#InnoDB中有哪几类行锁？" class="headerlink" title="InnoDB中有哪几类行锁？"></a>InnoDB中有哪几类行锁？</h3><p>InnoDB行锁是通过对索引数据页上的记录加锁实现的，MySQL InnoDB支持三种数据行锁定方式：</p>
+<ul>
+<li><p><strong>记录锁（Record Lock）：</strong>也被称为记录锁，属于单个行记录上的锁。</p>
+</li>
+<li><p><strong>间隙锁（Gap Lock）：</strong>锁定一个范围，即锁的就是两个值之间的空隙，不包括记录本身。间隙锁只有在可重复读隔离级别下才有效。（左开右开）</p>
+<p><img src="/img/article_content_img/%E9%97%B4%E9%9A%99%E9%94%81.jpg" alt="MySQL死锁"></p>
+</li>
+<li><p><strong>临键锁（Next-Key Lock）：</strong>记录锁与间隙锁的结合，既锁定一个范围，也锁定记录行本身。主要为了解决幻读问题。（左开右闭）</p>
+</li>
+</ul>
+<p>在可重复读隔离级别下，行锁默认使用Next-Key Lock，但是如果操作的索引是唯一索引或者主键索引，InnoDB会对Next-Key Lock进行优化，将其降级为Record Lock。</p>
+<h3 id="共享锁和排它锁"><a href="#共享锁和排它锁" class="headerlink" title="共享锁和排它锁"></a>共享锁和排它锁</h3><p>不论是表级锁还是行级锁，都存在共享锁（Share Lock，S锁）和排它锁（Exclusive Lock，X锁）</p>
+<ul>
+<li><p>共享锁（S锁）：又称为读锁，事务在读取记录的时候获取共享锁，允许多个事务同时获取。（锁兼容）</p>
+<p>若事务R对数据对象A加上S锁，则事务R可以读A但不能修改A，其他事务只能再对A加S锁，直到事务R释放S锁后，才不能加X锁。</p>
+</li>
+<li><p>排它锁（X锁）：又称为写锁&#x2F;独占锁，事务在修改记录的时候获取排它锁，不允许多个事务同时获取。（锁不兼容）</p>
+<p>若事务R对数据对象A加上X锁，则事务R可以读、写A，其他事务在事务R没有释放X锁之前，无法对A加任何锁。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">S锁</th>
+<th align="center">X锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">S锁</td>
+<td align="center">不冲突</td>
+<td align="center">冲突</td>
+</tr>
+<tr>
+<td align="center">X锁</td>
+<td align="center">冲突</td>
+<td align="center">冲突</td>
+</tr>
+</tbody></table>
+<p><strong>意向锁：</strong>用来快速判断是否可以对某表使用表锁。意向锁属于表级锁，主要有以下两种：</p>
+<ul>
+<li><strong>意向共享锁（Intention Shared Lock，IS锁）：</strong>事务有意向对表中某些记录加S锁，则在加这个S锁之前，需要先对该表加IS锁。</li>
+<li><strong>意向排它锁（Intention Exclusive Lock，IX锁）：</strong>事务有意向对表中某些记录加X锁，则在加这个X锁之前，需要先对该表加IX锁。</li>
+</ul>
+<p>意向锁之间都是相互兼容的，不存在任何冲突。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">IS锁</th>
+<th align="center">IX锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">IS锁</td>
+<td align="center">兼容</td>
+<td align="center">兼容</td>
+</tr>
+<tr>
+<td align="center">IX锁</td>
+<td align="center">兼容</td>
+<td align="center">兼容</td>
+</tr>
+</tbody></table>
+<p><strong>意向锁是由数据引擎自己维护的，用户无法手动操作意向锁，在为数据行加S&#x2F;X锁之前，InnoDB会先获取该行数据所在表的对应的意向锁。</strong></p>
+<p><strong>MySQL加行锁的方式：</strong></p>
+<p><code>select ... for update</code>：对读取的记录加X锁</p>
+<p><code>select ... lock in share mode</code>：对读取的记录加S锁</p>
+]]></content>
       <categories>
         <category>面试</category>
       </categories>
