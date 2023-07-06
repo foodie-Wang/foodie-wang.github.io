@@ -1506,4 +1506,128 @@
         <tag>数据库</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Redis面试题汇总（一）</title>
+    <url>/2023/07/04/Redis%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="Redis是什么？"><a href="#Redis是什么？" class="headerlink" title="Redis是什么？"></a>Redis是什么？</h1><p>Redis是基于C语言开发的一个非关系型数据库（NoSQL），并且由于其数据都存储在内存中，所以Redis也是一个内存型数据库，读写速度非常快，常用作缓存。</p>
+<p>Redis支持多种数据类型，可以满足不同的业务场景，包括：String、Hash、List、Set、Zset、Bitmap、Hyperloglog、GEO等。Redis支持事务、持久化、Lua脚本以及多种开箱即用的集群方案（Sentinel、Redis Cluster）。</p>
+<h1 id="Redis有哪些优点和缺点？"><a href="#Redis有哪些优点和缺点？" class="headerlink" title="Redis有哪些优点和缺点？"></a>Redis有哪些优点和缺点？</h1><p><strong>优点：</strong></p>
+<ul>
+<li>基于内存操作，读写速度非常快</li>
+<li>支持的数据类型丰富，可以满足多种不同的业务场景</li>
+<li>支持数据持久化，有效避免数据丢失</li>
+<li>Redis采用IO多路复用技术，多路指多个socket连接，复用指复用一个线程。Redis使用单线程来轮询描述符，将数据库的开、关、读、写都转换成了事件。多路复用主要有三种技术：select、poll、epoll。</li>
+<li>Redis是单线程的，避免线程切换开销以及多线程的竞争问题。这里的单线程是指在处理网络请求（一个或多个redis客户端连接）的时候只用一个线程来处理。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>Redis的数据都是存储在内存中的，所以数据量过大时会对内存不友好。因此，需要设置键的过期时间、过期策略、内存淘汰策略。</li>
+<li>对join或其他结构化查询的支持较差</li>
+</ul>
+<h1 id="Redis为什么快？"><a href="#Redis为什么快？" class="headerlink" title="Redis为什么快？"></a>Redis为什么快？</h1><p>Redis内部做了非常多的性能优化，比较重要的有以下三点：</p>
+<ol>
+<li>Redis基于内存操作，内存的访问速度是磁盘的上千倍。</li>
+<li>Redis基于Reactor模式开发了一套高效的事件处理模型，主要是单线程事件循环和IO多路复用。</li>
+<li>Redis内置了多种优化过后的数据结构实现，性能非常高。</li>
+</ol>
+<p><img src="/img/article_content_img/why-redis-so-fast.png" alt="为什么Redis这么快"></p>
+<h1 id="Memcached和Redis有什么区别？"><a href="#Memcached和Redis有什么区别？" class="headerlink" title="Memcached和Redis有什么区别？"></a>Memcached和Redis有什么区别？</h1><p>Memcached和Redis都是常用的分布式缓存，但Memcached的使用率现在远不及Redis，因为Redis的功能相比Memcached更加强大。</p>
+<p><strong>共同点：</strong></p>
+<ul>
+<li>都是基于内存操作的数据库，一般都用来当做缓存。</li>
+<li>都具有过期策略。</li>
+<li>性能都非常高</li>
+</ul>
+<p><strong>不同点：</strong></p>
+<ul>
+<li>Memcached仅支持最简单的k&#x2F;v数据类型，即String类型，而Redis支持的数据类型更多，包括：String、List、Hash、Set、Zset、Bitmap、Hyperloglog、GEO等。</li>
+<li>Memcached数据全部存储在内存中，没有持久化机制。而Redis具有RDB、AOF两种持久化方式，可以将数据持久化到磁盘中，重启的时候可以再次加载进行使用。</li>
+<li>Memcached没有灾难恢复机制，而Redis具有。因为Memcached的数据全部存储在内存且没有持久化机制，所以一旦发生断电、宕机等情况，数据将全部丢失，而Redis可以通过AOF和RDB文件进行数据的恢复。</li>
+<li>Memcached没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据，而Redis是原生支持cluster模式的。</li>
+<li>Memcached在服务器内存使用完之后，会报异常，而Redis则是可以将不用的数据放到磁盘上。</li>
+<li>Memcached是多线程的、非阻塞IO复用的网络模型，而Redis是单线程的IO多路复用网络模型。</li>
+<li>Memcached不支持发布订阅模型、Lua脚本、事务等功能，而Redis支持，并且Redis支持的编程语言也比Memcached多。</li>
+<li>Memcached采用惰性删除，Redis采用定期删除与惰性删除结合的方式。</li>
+</ul>
+<h1 id="为什么要使用Redis-x2F-为什么要使用缓存？"><a href="#为什么要使用Redis-x2F-为什么要使用缓存？" class="headerlink" title="为什么要使用Redis&#x2F;为什么要使用缓存？"></a>为什么要使用Redis&#x2F;为什么要使用缓存？</h1><p>主要从高性能与高并发两个方面考虑：</p>
+<p><strong>高性能：</strong></p>
+<p>Redis是内存型数据库，读写速度非常快，因此效率就高。我们一般会将一些高频访问的数据放在缓存中，保证用户下一次访问这些数据的时候，直接从缓存中获取。</p>
+<p><strong>高并发：</strong></p>
+<p>一般像MySQL这类的数据库的QPS大概在1w左右（4核8G），但是Redis可以在单机模式下的QPS达到10w+，最高可达30w+。而如果是Redis集群，则QPS会更高。</p>
+<p>因此，综合考虑以上两点，决定使用Redis，可以提高系统整体的并发。</p>
+<blockquote>
+<p>QPS（Query Per Second）：服务器每秒可以执行的查询次数</p>
+</blockquote>
+<h1 id="Redis具有哪些使用场景？"><a href="#Redis具有哪些使用场景？" class="headerlink" title="Redis具有哪些使用场景？"></a>Redis具有哪些使用场景？</h1><p>虽然在日常使用过程中，我们都是将Redis用作缓存，但其实Redis支持的使用场景远不止有缓存，具体如下：</p>
+<ol>
+<li><strong>消息队列：</strong><ul>
+<li>方式一：通过Redis自带的List数据结构来实现，List是一个双向列表，可以作为一个简单的消息队列使用。命令如下：<code>lpush/rpush ---&gt; rpop/lpop</code>。</li>
+<li>方式二：通过发布&#x2F;订阅功能（Redis2.0引入）来实现，其解决了List实现消息队列没有哦广播机制的问题。</li>
+<li>方式三：通过Redis自带的Stream数据结构来实现。Stream支持发布&#x2F;订阅模式，支持按照消费者组进行消费以及支持消息的持久化。</li>
+</ul>
+</li>
+<li><strong>延时队列：</strong>Redisson内置了延时队列（基于Sorted set实现）。</li>
+<li><strong>限流：</strong>一般通过Redis+Lua脚本来实现限流。具体可参考：<a href="https://mp.weixin.qq.com/s/kyFAWH3mVNJvurQDt4vchA">Redis分布式限流器</a></li>
+<li><strong>分布式锁：</strong>基于Redisson实现分布式锁。具体可参考：<a href="https://javaguide.cn/distributed-system/distributed-lock.html">Redis分布式锁</a></li>
+<li><strong>分布式Session：</strong>利用String或者Hash保存Session数据，所有的服务器都可以访问。</li>
+<li><strong>复杂业务场景：</strong>通过Redis以及Redis扩展（Redisson）提供的数据结构，可以很方便地完成多种复杂的业务场景，例如：通过Bitmap实现统计日活、月活的功能、通过Zset实现排行榜功能等。</li>
+<li>……</li>
+</ol>
+<h1 id="缓存数据的处理流程"><a href="#缓存数据的处理流程" class="headerlink" title="缓存数据的处理流程"></a>缓存数据的处理流程</h1><p><img src="/img/article_content_img/Redis%E7%BC%93%E5%AD%98%E6%B5%81%E7%A8%8B.jpg" alt="Redis缓存流程"></p>
+<p>从图中可以看出，用户发送请求获取数据后，首先需要判断缓存中是否有对应数据，如果缓存中有对应数据，那么直接返回即可。如果缓存中没有，则会去数据库（例如：MySQL）中查找。如果数据库中有对应数据，则先把该数据同步到缓存中，之后再返回数据。如果数据库中也没有对应数据，那么就返回一个空数据。</p>
+<h1 id="Redis中常见的数据结构"><a href="#Redis中常见的数据结构" class="headerlink" title="Redis中常见的数据结构"></a>Redis中常见的数据结构</h1><p>Redis支持的数据结构非常多，例如：String、List、Hash、Set、Zset、Hyperloglog、GEO、Bitmap等。</p>
+<h2 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h2><p>String是Redis中最简单也是最常用的一种数据结构，可以用来存储任何类型的数据，例如：字符串、整数、浮点数、图片、序列化之后的对象等。</p>
+<h3 id="String类型常用命令"><a href="#String类型常用命令" class="headerlink" title="String类型常用命令"></a>String类型常用命令</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">append key value	# 给这个key对应的值后面追加字符串。如果key不存在，相当于set key value</span><br><span class="line"></span><br><span class="line">strlen key	# 查看当前key对应的value的长度，即字符串长度</span><br><span class="line"></span><br><span class="line">incr key	# 自增1</span><br><span class="line"></span><br><span class="line">decr key	# 自减1</span><br><span class="line"></span><br><span class="line">incrby key increment	# 指定步长自增</span><br><span class="line"></span><br><span class="line">decrby key increment	# 指定步长自减</span><br><span class="line"></span><br><span class="line">getrange key start end	# 获取指定范围的字符串（类似于java中的substring）</span><br><span class="line"></span><br><span class="line">setrange key offset value	# 从offset处开始替换字符串，value是替换的新值</span><br><span class="line"></span><br><span class="line">setex key seconds value	# set值的时候，加过期时间</span><br><span class="line"></span><br><span class="line">setnx key value	# set if not exist：如果key不存在就set成功，如果key已经存在就set失败。</span><br><span class="line"></span><br><span class="line">mset key value [key value...]	# 批量设置值</span><br><span class="line"></span><br><span class="line">mget key [key...]	# 批量获取值</span><br><span class="line"></span><br><span class="line">msetnx key value [key value...]	# 批量设置值，如果key不存在就设置成功，如果key存在就失败。（这是一个原子性的操作）</span><br><span class="line"></span><br><span class="line">getset key value	# 先get再set。如果存在值，就获取原来的值，并设置新的值</span><br></pre></td></tr></table></figure>
+
+<h3 id="String类型的应用场景"><a href="#String类型的应用场景" class="headerlink" title="String类型的应用场景"></a>String类型的应用场景</h3><ul>
+<li><strong>常规数据的缓存：</strong>例如：Session、Token、序列化之后的对象、图片的路径等。</li>
+<li><strong>计数场景：</strong>例如：文章点赞量、转发量，页面单位时间内的访问量等。</li>
+<li><strong>分布式锁：</strong>利用<code>SETNX KEY VALUE</code>命令可以实现一个简易的分布式锁。</li>
+<li>……</li>
+</ul>
+<h3 id="String类型底层实现"><a href="#String类型底层实现" class="headerlink" title="String类型底层实现"></a>String类型底层实现</h3><p>Redis是C语言编写的，但Redis并没有直接使用C语言传统的字符串（以空字符<code>\0</code>结尾的字符数组）表示，而是自己构建了一种名为<strong>简单动态字符串（Simple Dynamic String，SDS）</strong>的抽象类型来作为底层实现，其结构定义如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span> &#123;</span></span><br><span class="line">    <span class="comment">// 记录buf数组中已使用字节的数量</span></span><br><span class="line">    <span class="comment">// 等于SDS所保存的字符串的长度</span></span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 记录buf数组中未使用字节的数量</span></span><br><span class="line">    <span class="type">int</span> <span class="built_in">free</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 字节数组，用于保存字符串</span></span><br><span class="line">    <span class="type">char</span> buf[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实SDS不仅是再String类型中有使用，SDS存在于任何使用到字符串对象的地方，即Redis数据库中，<strong>任何包含字符串值的键值对在底层都是由SDS实现的</strong>。</p>
+<p>举个例子：</p>
+<p>当客户端执行命令：<code>SET msg &quot;hello world&quot;</code>时，Redis将在数据库中创建一个新的键值对，其中：键值对的键是一个字符串对象，对象的底层实现是一个保存着字符串”msg”的SDS，键值对的值是一个字符串对象，对象的底层实现是一个保存着字符串”hello world”的SDS。</p>
+<p>当客户端执行命令：<code>RPUSH fruits &quot;apple&quot; &quot;banana&quot; &quot;orange&quot;</code>时，Redis将在数据库中创建一个新的键值对，其中：键值对的键是一个字符串对象，对象的底层实现是一个保存了字符串”fruits”的SDS，键值对的值是一个列表对象，列表对象包含了三个字符串对象，这三个字符串对象分别由三个SDS实现，第一个SDS保存着字符串”apple”，第二个SDS保存着字符串”banana”，第三个SDS保存着字符串”orange”。</p>
+<h4 id="SDS相比于C字符串的区别"><a href="#SDS相比于C字符串的区别" class="headerlink" title="SDS相比于C字符串的区别"></a>SDS相比于C字符串的区别</h4><ul>
+<li><p><strong>获取字符串长度的时间复杂度不同：</strong>SDS获取字符串长度的时间复杂度为O(1)，C字符串获取字符串长度的时间复杂度为O(n)。</p>
+<p>这是因为C字符串不记录字符串长度，所以想要获取其长度必须遍历整个字符串，对遇到的每个字符计数，直到遇到末尾的<code>\0</code>为止。</p>
+<p>而SDS的<code>len</code>属性中记录了字符串长度，因此，直接读取<code>len</code>属性的值即可，不存在遍历字符串的过程。</p>
+</li>
+<li><p><strong>SDS可以杜绝缓冲区溢出：</strong>由于C字符串不记录自身长度，所以对字符串做修改的时候，就可能会造成溢出。举个例子，下图展示了在内存中紧邻的两个C字符串s1和s2，其中s1保存了字符串”Redis”，s2保存了字符串”MongoDB”。</p>
+<p><img src="/img/article_content_img/C-String1.jpg" alt="在内存中紧邻的两个C字符串"></p>
+<p>此时，当执行<code>strcat(s1, &quot;Cluster&quot;);</code>命令时，s1的数据将溢出到s2所在空间中，导致s2保存的内容被修改，如下图所示。</p>
+<p><img src="/img/article_content_img/C-String2.jpg" alt="s1的内容溢出到s2所在的位置上"></p>
+<p>而SDS在进行字符串修改时，会先判断当前空间是否满足修改所需的要求，如果空间不足，则SDS会将空间扩展到执行修改所需的大小，然后再执行修改操作，所以SDS既不需要手动修改SDS空间大小，也不会出现缓冲区溢出。</p>
+</li>
+<li><p><strong>空间预分配和惰性空间释放策略：</strong></p>
+<p><strong>空间预分配：</strong></p>
+<p><strong>用于优化SDS字符串增长操作：当SDS的API对一个SDS进行修改，并且需要对SDS进行空间扩展的时候，程序不仅会为SDS分配修改所需的空间，还会为SDS分配额外的未使用空间。</strong></p>
+<p>其中，额外分配的未使用空间数量由以下公式决定：</p>
+<ul>
+<li>如果对SDS进行修改之后，SDS的长度（<code>len</code>属性的值）小于1MB，那么程序分配和<code>len</code>属性同样大小的未使用空间，这时SDS的<code>len</code>属性的值将和<code>free</code>属性的值相同。例如：如果进行修改之后，SDS的<code>len</code>变成13字节，那么程序也会分配13字节的未使用空间，SDS的<code>buf</code>数组的实际长度将变成<code>13B + 13B + 1B = 27B</code>（额外的一个字节用于保存空字符）。</li>
+<li>如果对SDS进行修改之后，SDS的长度大于等于1MB，那么程序会分配1MB的未使用空间。例如：如果进行修改之后，SDS的<code>len</code>变成30MB，那么程序会分配1MB的未使用空间，SDS的<code>buf</code>数组的实际长度将变成<code>30MB + 1MB + 1B</code>（额外的一个字节用于保存空字符）。</li>
+</ul>
+<p>通过空间预分配策略，Redis可以减少连续执行字符串增长操作所需的内存重分配次数，即SDS将连续增长N次字符串所需的内存重分配次数从必定N次降低为最多N次，提高了性能。</p>
+<p><strong>惰性空间释放：</strong></p>
+<p><strong>用于优化SDS字符串缩短操作：当SDS的API需要缩短SDS保存的字符串时，程序并不立即使用内存重分配来回收缩短后多出来的字节，而是使用<code>free</code>属性将这些字节的数量记录起来，并等待将来使用。</strong></p>
+<p>需要注意的是，SDS提供了相应的API，让我们可以在有需要时真正释放SDS的未使用空间，说不完全不必担心惰性空间释放策略会造成内存泄漏。</p>
+</li>
+<li><p><strong>二进制安全：</strong>C字符串中的字符必须符合某种编码（例如：ASCII），并且除了字符串末尾之外，字符串中不能包含任何空字符，否则最先被读入的空字符将被认为是字符串的末尾，从而停止对字符串的读取。因此，C字符串无法保存像图片、音频、视频、压缩文件等二进制数据。<strong>而SDS是可以存储二进制数据的，SDS API都会以处理二进制的方式来处理SDS存放在<code>buf</code>数组中的数据，程序不会对其中的数据做任何限制、过滤，数据在写入的时候是什么样子，读出的时候就还是什么样子。并且SDS使用的是<code>len</code>属性来判断是否字符串是否结束，而不是使用空字符来判断。</strong></p>
+</li>
+<li><p><strong>兼容部分C字符串函数：</strong>SDS可以重用<code>&lt;string.h&gt;</code>函数库，从而避免了不必要的代码重复。</p>
+</li>
+</ul>
+<h2 id="List类型"><a href="#List类型" class="headerlink" title="List类型"></a>List类型</h2>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
 </search>
