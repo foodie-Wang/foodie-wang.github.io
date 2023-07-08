@@ -1592,7 +1592,8 @@
 <p>举个例子：</p>
 <p>当客户端执行命令：<code>SET msg &quot;hello world&quot;</code>时，Redis将在数据库中创建一个新的键值对，其中：键值对的键是一个字符串对象，对象的底层实现是一个保存着字符串”msg”的SDS，键值对的值是一个字符串对象，对象的底层实现是一个保存着字符串”hello world”的SDS。</p>
 <p>当客户端执行命令：<code>RPUSH fruits &quot;apple&quot; &quot;banana&quot; &quot;orange&quot;</code>时，Redis将在数据库中创建一个新的键值对，其中：键值对的键是一个字符串对象，对象的底层实现是一个保存了字符串”fruits”的SDS，键值对的值是一个列表对象，列表对象包含了三个字符串对象，这三个字符串对象分别由三个SDS实现，第一个SDS保存着字符串”apple”，第二个SDS保存着字符串”banana”，第三个SDS保存着字符串”orange”。</p>
-<h4 id="SDS相比于C字符串的区别"><a href="#SDS相比于C字符串的区别" class="headerlink" title="SDS相比于C字符串的区别"></a>SDS相比于C字符串的区别</h4><ul>
+<p><strong>SDS相比于C字符串的区别</strong></p>
+<ul>
 <li><p><strong>获取字符串长度的时间复杂度不同：</strong>SDS获取字符串长度的时间复杂度为O(1)，C字符串获取字符串长度的时间复杂度为O(n)。</p>
 <p>这是因为C字符串不记录字符串长度，所以想要获取其长度必须遍历整个字符串，对遇到的每个字符计数，直到遇到末尾的<code>\0</code>为止。</p>
 <p>而SDS的<code>len</code>属性中记录了字符串长度，因此，直接读取<code>len</code>属性的值即可，不存在遍历字符串的过程。</p>
