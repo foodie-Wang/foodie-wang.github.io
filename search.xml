@@ -565,6 +565,254 @@
       </tags>
   </entry>
   <entry>
+    <title>计算机网络面试题汇总（二）</title>
+    <url>/posts/21576.html</url>
+    <content><![CDATA[<h1 id="一、TCP与UDP的区别"><a href="#一、TCP与UDP的区别" class="headerlink" title="一、TCP与UDP的区别"></a>一、TCP与UDP的区别</h1><ul>
+<li><strong>是否面向连接：</strong>TCP是面向连接的，即传输数据之前，需要先与服务端通过“三次握手”建立连接，数据传输完成后，通过“四次挥手”释放连接。而UDP则是无连接的，可以直接进行数据的传输。</li>
+<li><strong>传输是否可靠：</strong>TCP由于具有“三次握手”、“四次挥手”、流量控制、拥塞控制、超时重传、确认等机制，保证了TCP的传输是可靠的，即无差错、不丢失、不重复、按序到达。而UDP不具有上述机制，因此传输是不可靠的。</li>
+<li><strong>是否具有状态：</strong>TCP传输是有状态的，即TCP会去记录自己发送消息的状态。比如：消息是否发送了、消息是否被接收了等。因此，TCP会维持一个复杂的连接状态表。而UDP传输是无状态的。</li>
+<li><strong>首部开销：</strong>TCP的首部开销为20个字节，UDP的首部开销8个字节。</li>
+<li><strong>传输形式：</strong>TCP是基于字节流进行传输，而UDP是基于报文进行传输。</li>
+<li><strong>传输效率：</strong>由于TCP具有各种各样的机制来保证其传输的可靠性，因此传输效率比UDP低很多。</li>
+<li><strong>是否支持广播或多播服务：</strong>TCP只支持一对一（点对点）通信，而UDP既支持一对一通信，也支持一对多、多对一、多对多通信。</li>
+<li><strong>应用场景：</strong>TCP主要用于严格保证数据可靠传输的场景，例如：文件、邮件传输。而UDP主要用于追求实时性，即便丢失一些数据也无关紧要的场景，例如：直播、语音、视频、游戏等。</li>
+</ul>
+<h1 id="二、TCP和UDP首部的格式"><a href="#二、TCP和UDP首部的格式" class="headerlink" title="二、TCP和UDP首部的格式"></a>二、TCP和UDP首部的格式</h1><p>UDP首部由源端口号、目标端口号、包长度、校验和组成。</p>
+<ul>
+<li><strong>源端口号（Source Port）：</strong>表示发送端端口号，字段长16位（2字节）。该字段是可选项，有时可能不会设置源端口号。没有源端口号的时候，该字段的值设置为0。</li>
+<li><strong>目标端口号（Destination Port）：</strong>表示接收端端口号，字段长16位（2字节）。</li>
+<li><strong>包长度（Length）：</strong>该字段保存了UDP首部的长度与数据的长度之和，单位为字节。</li>
+<li><strong>校验和（Checksum）：</strong>校验和是为了提供可靠的UDP首部和数据而设计的。包括校验和字段在内的所有数据之和结果为“16位全部为1”时，才会被认为所收到的数据是正确的。</li>
+</ul>
+<blockquote>
+<p>关于UDP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》220页。</p>
+</blockquote>
+<p>TCP首部由源端口号、目标端口号、序列号、确认应答号、数据偏移、保留、控制位、窗口大小、校验和、紧急指针、选项、填充构成。</p>
+<ul>
+<li><p><strong>源端口号（Source Port）：</strong>表示发送端端口号，字段长16位（2字节）。</p>
+</li>
+<li><p><strong>目标端口号（Destination Port）：</strong>表示接收端端口号，字段长度16位（2字节）。</p>
+</li>
+<li><p><strong>序列号（Sequence Number）：</strong>指发送数据的位置，序列号不会从0或1开始，而是在建立连接时由计算机生成的随机数作为其初始值，通过SYN包传给接收端主机。每发送一次数据，就累加一次该数据字节数的大小。字段长32位（4字节）。</p>
+</li>
+<li><p><strong>确认应答号（Acknowledgement Number）：</strong>指下一次应该收到的数据的序列号，字段长度32位（4字节）。实际上，可以将其理解为发送端收到这个确认应答以后，可以认为在这个序号以前的数据都已经被正确接收。</p>
+</li>
+<li><p><strong>数据偏移（Data Offset）：</strong>该字段表示TCP所传输的数据部分应该从TCP包的哪个位开始计算，当然也可以把它看作TCP首部的长度。字段长4位，单位为4字节。</p>
+</li>
+<li><p><strong>保留（Reserved）：</strong>该字段主要是为了以后扩展时使用，其长度为4位。一般设置为0，但即时收到的包中该字段不为0，此包也不会被丢弃。</p>
+</li>
+<li><p><strong>控制位（Control Flag）：</strong>字段长为8位，每一位从左至右分别为CWR、ECE、URG、ACK、PSH、RST、SYN、FIN。这些控制标志也叫作控制位。当他们对应位上的值为1时，具有不同的含义。例如：CWR标志和ECE标志都用于IP首部的ECN字段，ECE标志为1时，则通知对方已将拥塞窗口缩小。</p>
+<blockquote>
+<p>关于控制位值为1时具体的含义，可以参考《图解TCP/IP（第5版）》223页。</p>
+</blockquote>
+</li>
+<li><p><strong>窗口大小（Window Size）：</strong>用于通知从相同TCP首部的确认应答号所指位置开始能够接收的数据大小，该字段长16位（2字节）。TCP不允许发送超过此处所示大小的数据。不过，如果窗口为0，则表示可以发送窗口探测，以了解最新的窗口大小，但这个探测数据必须是1字节。</p>
+</li>
+<li><p><strong>校验和（Checksum）：</strong>与UDP类似，区别在于TCP的校验和无法关闭。</p>
+<blockquote>
+<p>关于TCP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》224页。</p>
+</blockquote>
+</li>
+<li><p><strong>紧急指针（Urgent Pointer）：</strong>该字段长16位（2字节）。只有在URG控制位为1时有效。该字段表示本报文段中紧急数据的指针，即从数据部分的首位到紧急指针所指示的位置为紧急数据。</p>
+</li>
+<li><p><strong>选项（Options）：</strong>该字段用于提高TCP的传输性能。长度最大为40字节。</p>
+<blockquote>
+<p>关于每个选项字段具体的含义，可以参考《图解TCP/IP（第5版）》225页。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="三、HTTP是基于TCP还是UDP的？"><a href="#三、HTTP是基于TCP还是UDP的？" class="headerlink" title="三、HTTP是基于TCP还是UDP的？"></a>三、HTTP是基于TCP还是UDP的？</h1><p>HTTP/3.0之前是基于TCP协议的，而HTTP/3.0弃用TCP，改用基于UDP的QUIC协议。主要目的是解决HTTP/2.0中存在的队头阻塞问题。由于HTTP/2.0在单个TCP连接上使用了多路复用技术，受到TCP拥塞控制的影响，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。此外，HTTP/2.0需要经过“三次握手”的过程建立连接，一般是3个RTT（往返时延），而借助QUIC协议的特性，HTTP/3.0可以避免TCP的“三次握手”的延迟，允许在第一次连接时发送数据（0个RTT）。</p>
+<h1 id="四、TCP的三次握手"><a href="#四、TCP的三次握手" class="headerlink" title="四、TCP的三次握手"></a>四、TCP的三次握手</h1><p><img src="/img/article_content_img/TCP三次握手.png" alt="TCP三次握手"></p>
+<p><strong>第一次握手：</strong>客户端将自己的SYN设置为1，并随机生成一个客户端的初始序列号（Sequence Number）发送给服务端，然后客户端进入<em>SYN_SENT</em>状态。</p>
+<p><strong>第二次握手：</strong>服务端收到客户端发来的SYN=1之后，就知道客户端此时想要建立连接了。此时，服务端将自己的SYN与ACK都设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后随机生成一个服务端的初始序列号（Sequence Number），将SYN、ACK、Acknowledgement Number、Sequence Number一并发送给客户端，然后服务端进入<em>SYN_RECV</em>状态。</p>
+<p><strong>第三次握手：</strong>客户端收到服务端发回的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，验证通过后，客户端将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），该值等于服务端传过来的初始序列号的值加一，然后将ACK与Acknowledgement Number发送给服务端，此时客户端进入<em>Establish</em>状态。服务端收到客户端传过来的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，若验证通过，则服务端也进入<em>Establish</em>状态。</p>
+<p>自此，连接建立完成，“三次握手”结束。</p>
+<h1 id="五、为什么TCP连接是三次握手，而不是两次或者四次？"><a href="#五、为什么TCP连接是三次握手，而不是两次或者四次？" class="headerlink" title="五、为什么TCP连接是三次握手，而不是两次或者四次？"></a>五、为什么TCP连接是三次握手，而不是两次或者四次？</h1><p><strong>结论：TCP连接允许“四次握手”，不允许“两次握手”。</strong></p>
+<p>“三次握手”的目的是建立可靠的通信信道，要确认自己与对方的发送与接收都是正常的。</p>
+<ol>
+<li><strong>第一次握手：</strong>Client什么都没有确认。Server确认了自己的接收和Client的发送正常。</li>
+<li><strong>第二次握手：</strong>Client确认了自己的发送和接收、Server的发送和接收正常。Server确认了自己的发送正常。</li>
+<li><strong>第三次握手：</strong>Server确认了Client的接收正常。</li>
+</ol>
+<p><strong>而两次握手会导致的问题主要有以下两个：</strong></p>
+<ul>
+<li><p>如果是两次握手，那么当服务端发送SYN、ACK、Acknowledge Number、Sequence Number之后，连接就建立完成。但由于客户端没有给服务端返回ACK和Acknowledge Number，服务端就不知道客户端是否收到了发送过去的东西，即服务端无法确认自己的发送和对方的接收是正常的。</p>
+</li>
+<li><p>客户端发出的第一个连接请求没有丢失，只是在某个网络节点长时间滞留了，而客户端没有收到任何反馈，则再次发起连接请求，此时，连接正常建立。当此次连接断开时，之前滞留的请求发送到了服务端，那么服务端会给客户端发送SYN、ACK、Acknowledge Number、Sequence Number。</p>
+<p>如果采用的是“两次握手”，到此连接就已经建立完成，但此时客户端并没有想要建立连接，所以客户端就不会理会服务端，但服务端却一直在等待客户端发送数据，因此服务端的资源就被白白浪费了。</p>
+<p>如果采用的是“三次握手”，当服务端给客户端发送SYN、ACK、Acknowledge Number、Sequence Number后，客户端依旧不会给服务端任何回应，此时服务端会重发上述信息，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态，避免了服务端资源的浪费。</p>
+</li>
+</ul>
+<p><strong>四次握手：</strong>将第二次握手分成两步。</p>
+<ul>
+<li><p><strong>第一步：</strong>服务端发送ACK和Acknowledge Number到客户端。</p>
+</li>
+<li><p><strong>第二步：</strong>服务端发送SYN和Sequence Number到客户端。</p>
+<p>出于优化的目的，提高效率，将这两步合并。</p>
+</li>
+</ul>
+<h1 id="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"><a href="#六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。" class="headerlink" title="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"></a>六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。</h1><p><strong>服务端：</strong></p>
+<ul>
+<li>如果客户端发出的ACK未及时送达服务端，那么服务端会重发SYN、ACK、Acknowledge Number、Sequence Number，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态。</li>
+</ul>
+<blockquote>
+<p>重传次数：由内核参数<code>top_syn_retries</code>配置，默认值为5，可以手动修改。</p>
+<p>重传周期：按照“指数退避”算法计算重传周期，即第一次是1秒后进行超时重传，第二次是2秒后进行超时重传，第三次是4秒后进行超时重传，第四次是8秒后进行超时重传，第五次是16秒后进行超时重传，以类类推，直到达到最大重传次数。</p>
+</blockquote>
+<p><strong>客户端：</strong></p>
+<ul>
+<li><p>服务端还未进入CLOSED状态：</p>
+<p>在服务端超时重发的过程中，客户端及时向服务端发送ACK并且该ACK抵达服务端，那么服务端收到之后进行ACK和Acknowledge Number的验证，验证通过则进入ESTABLISH状态，连接建立。</p>
+</li>
+<li><p>服务端已进入CLOSED状态：</p>
+<p>客户端依旧向服务端发送数据，但由于服务端已经进入CLOSED状态，此时服务端会给客户端回应一个RST包。</p>
+</li>
+</ul>
+<h1 id="七、如果连接已经建立，但客户端出现了故障怎么办？"><a href="#七、如果连接已经建立，但客户端出现了故障怎么办？" class="headerlink" title="七、如果连接已经建立，但客户端出现了故障怎么办？"></a>七、如果连接已经建立，但客户端出现了故障怎么办？</h1><p>服务端每收到一个客户端的发来的请求，会对该请求建立一个计时器，这个计时器通常设置为2小时。如果2小时后，仍未收到客户端的任何数据，此时服务端会发送一个探测报文段到客户端，一共会发送10次，每隔75秒发送一次，如果发送10次都没有反应的话，服务端会认为客户端出现了故障，连接就会关闭。</p>
+<h1 id="八、TCP三次握手中，哪一次握手最容易受到攻击？"><a href="#八、TCP三次握手中，哪一次握手最容易受到攻击？" class="headerlink" title="八、TCP三次握手中，哪一次握手最容易受到攻击？"></a>八、TCP三次握手中，哪一次握手最容易受到攻击？</h1><p>在TCP三次握手中，<strong>第二次握手</strong>最容易受到攻击，即SYN洪水攻击。具体原因如下：</p>
+<p>如果客户端伪造出大量第一次的SYN同步报文，服务端就会依次消耗掉很多资源来保存客户端的信息，并进行确认，实际上确认是会失败的，但失败需要一定的时间，因为服务端会连续多次进行第二次握手确认后才认定失败。那么短时间有大量的SYN同步报文涌向服务端，服务端资源可能被耗尽，就可能导致正常的客户端得不到响应而失败。</p>
+<p>解决措施：</p>
+<ul>
+<li><p><strong>缩短SYN超时时间，限制同时打开的SYN半连接数目。</strong></p>
+<p>SYN Flood攻击效果取决于服务端保持的SYN半连接数目，该值等于SYN攻击的频度乘上SYN超时时间。设置SYN超时时间在20秒以下可以成倍降低服务器的负荷。</p>
+</li>
+<li><p><strong>设置SYN Cookie</strong></p>
+<p>当服务端接收到SYN包并返回SYN + ACK包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值，并将这个cookie值作为将要返回的SYN + ACK包的初始序列号。当客户端返回一个ACK包时，根据包头信息计算cookie，与返回的确认序列号(初始序列号 + 1)进行对比，如果相同，则认为是一个正常连接，之后分配资源并建立连接；如果短时间内连续受到某个IP的重复SYN报文，就认定是受到了攻击，以后从这个IP地址来的包都会被丢弃。</p>
+</li>
+<li><p><strong>防火墙</strong></p>
+</li>
+</ul>
+<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1><p><img src="/img/article_content_img/TCP四次挥手.png" alt="TCP四次挥手"></p>
+<p><strong>第一次挥手：</strong>客户端将自己的FIN设置为1，并随机生成一个客户端的初始序列号（Sequence Number），发送给服务端，请求断开客户端到服务端之间的通信。此时，客户端进入<em>FIN_WAIT_1</em>状态。</p>
+<p><strong>第二次挥手：</strong>服务端收到客户端的FIN后，将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后将ACK与确认应答号发送到客户端，服务端进入<em>CLOSE_WAIT</em>状态。客户端收到并验证ACK与确认应答号，验证通过后，进入<em>FIN_WAIT_2</em>状态。</p>
+<p><strong>第三次挥手：</strong>服务端将自己的FIN设置为1，并随机生成一个服务端的初始序列号（Sequence Number），发送给客户端，请求断开服务端到客户端之间的通信。此时，服务端进入<em>LAST_ACK</em>状态。</p>
+<p><strong>第四次挥手：</strong>客户端收到服务端的FIN后，将自己的ACK设置为1，并生成一个确认应答号，该值为服务端传过来的初始序列号的值加一。之后将ACK与确认应答号发送到服务端，客户端进入<em>TIME_WAIT</em>状态。服务端收到并验证ACK与确认应答号，验证通过，进入<em>CLOSED</em>状态。客户端在等待2MSL的时间后，也进入<em>CLOSED</em>状态。</p>
+<p>自此，连接断开完成，“四次挥手”结束。</p>
+<p>==注意：只要四次挥手没有结束，客户端和服务端就可以继续传输数据！==</p>
+<blockquote>
+<p><strong>MSL（Maximum Segment Lifetime）</strong>：一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所需的最大时间。如果直到2MSL，客户端都没有再次收到FIN，那么客户端推断ACK已经被成功接收，则结束TCP连接。</p>
+</blockquote>
+<h1 id="十、为什么要四次挥手？"><a href="#十、为什么要四次挥手？" class="headerlink" title="十、为什么要四次挥手？"></a>十、为什么要四次挥手？</h1><p>TCP是全双工通信，可以双向传输数据。任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放的通知，对方确认后再完全断开TCP连接。</p>
+<h1 id="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）"><a href="#十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）" class="headerlink" title="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）"></a>十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）</h1><p>因为服务端收到客户端断开连接的请求时，可能还有一些数据没有发送完，因此先给客户端传回 ACK，表示已经接收到了断开连接的请求。等到数据发完之后再向客户端发送 FIN，申请断开服务端到客户端的数据传送。</p>
+<h1 id="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"><a href="#十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？" class="headerlink" title="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"></a>十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？</h1><p>第四次挥手时，客户端发送到服务端的ACK和确认应答号有可能丢失，如果服务端因为某些原因而没有收到ACK和确认应答号的话，服务端会重发FIN和初始序列号。</p>
+<p>如果客户端在2MSL的时间内收到了FIN和初始序列号，就会重新发送ACK和确认应答号，并再次等待2MSL。</p>
+<p>如果客户端没有等待2MSL的时间，而是直接进入CLOSED状态，那么客户端将永远无法收到服务端重发的FIN，而服务端因为一直未收到客户端的ACK和确认应答号，会不停的重发FIN，连接始终无法断开。</p>
+<h1 id="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"><a href="#十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？" class="headerlink" title="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"></a>十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？</h1><p>如果第二次挥手时，服务端ACK和确认应答号没有送达客户端，那么客户端会认为可能是第一次挥手时发送的FIN未送达服务端，因此客户端会重新发送FIN和初始序列号。</p>
+<h1 id="十四、TIME-WAIT状态的意义"><a href="#十四、TIME-WAIT状态的意义" class="headerlink" title="十四、TIME_WAIT状态的意义"></a>十四、TIME_WAIT状态的意义</h1><p>首先，==TIME_WAIT并不属于客户端或服务端专属的状态，而是属于主动发起断开连接请求的一端的状态==，在发送最后一次ACK和确认应答号后会进入TIME_WAIT状态。</p>
+<p>这里假设是客户端发起的断开连接的请求，客户端在第四次挥手发送ACK和确认应答号之后，可能由于网络比较阻塞，该数据帧在传输过程中丢失了，服务端由于没有收到ACK则会重发FIN，但此时如果客户端没有TIME_WAIT状态，而是直接进入CLOSED状态，则客户端不会理会服务端，服务端就会一直重发FIN。</p>
+<p>因此，采用TIME_WAIT状态用来保障当网络比较阻塞时，TCP连接依旧可以正常关闭。</p>
+<h1 id="十五、TIME-WAIT状态过多会产生什么后果？怎么处理？"><a href="#十五、TIME-WAIT状态过多会产生什么后果？怎么处理？" class="headerlink" title="十五、TIME_WAIT状态过多会产生什么后果？怎么处理？"></a>十五、TIME_WAIT状态过多会产生什么后果？怎么处理？</h1><p>从服务端来讲，短时间内主动关闭了大量的客户端连接，就会造成服务端上出现大量的TIME_WAIT状态，严重消耗服务端的资源，此时部分客户端就会显示连接不上。</p>
+<p>从客户端来讲，客户端TIME_WAIT过多会导致端口资源被占用，而端口就65535个，一旦被占满就无法创建新的连接。</p>
+<p><strong>解决方法：</strong></p>
+<ul>
+<li><p>服务端可以设置<code>SO_REUSEADDR</code>套接字选项来避免TIME_WAIT状态，此套接字选项告诉内核：即时此端口正忙（处于TIME_WAIT），也请继续并重用它。</p>
+</li>
+<li><p>调整系统内核参数，修改<code>/etc/sysctl.conf</code>文件中<code>net.ipv4.tcp_tw_reuse</code>和<code>tcp_timestamps</code>参数。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = 1 # 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭； </span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 # 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="十六、TCP如何保证可靠传输？"><a href="#十六、TCP如何保证可靠传输？" class="headerlink" title="十六、TCP如何保证可靠传输？"></a>十六、TCP如何保证可靠传输？</h1><ol>
+<li><strong>基于数据块传输：</strong>应用数据被分割成TCP认为最适合发送的数据块，再传输给网络层。数据块被称为报文段或段。</li>
+<li><strong>对失序数据包重新排序以及去重：</strong>TCP为了保证不发生丢包，发送端会对数据包进行编号，接收端会对收到的包进行排序，并对编号重复的包进行去重。</li>
+<li><strong>校验和：</strong>TCP将保持它首部和数据的校验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果检验和有差错，那么TCP将丢弃这个报文段并且不会对此报文段进行确认。</li>
+<li><strong>超时重传：</strong>当发送方发送数据后，它启动一个定时器，等待接收端确认收到这个报文段。若在规定时间内仍为收到确认，则重传该报文段。</li>
+<li><strong>流量控制：</strong>TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据时，能提示发送方降低发送速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
+<li><strong>拥塞控制：</strong>当网络出现拥塞时，减少数据的发送。（慢启动、拥塞避免、快重传、快恢复）</li>
+<li><strong>ARQ协议（自动重传请求）</strong>：连续ARQ协议与停止等待ARQ协议。</li>
+</ol>
+<h1 id="十七、TCP流量控制是如何实现的？"><a href="#十七、TCP流量控制是如何实现的？" class="headerlink" title="十七、TCP流量控制是如何实现的？"></a>十七、TCP流量控制是如何实现的？</h1><p><strong>首先考虑一个问题，为什么要引入流量控制？</strong></p>
+<p>双方在通信的时候，发送方的速率跟接收方的速率不一定相等，那如果发送方的发送速率过快，接收方速率慢导致来不及接收，这个时候接收方就会把来不及接收的数据包放到缓存区中。那如果接收方缓存区满了，此时发送方还在不停的发送数据，就会导致丢包的情况。大量丢包会浪费服务器资源。因此，需要控制发送方的发送速率，让发送方跟接收方形成动态平衡的状态。</p>
+<p><img src="/img/article_content_img/流量控制（一）.png" alt="流量控制（一）"></p>
+<p><strong>怎么去进行流量控制？</strong></p>
+<p>使用滑动窗口协议来进行流量控制。</p>
+<p><img src="/img/article_content_img/流量控制（二）.png" alt="流量控制（二）"></p>
+<p>从图中可以看出，窗口大小目前设定为7，灰色的部分是已经发送并且收到了返回的ACK的数据包。黄色的部分是已经发送但还没有收到ACK的数据包。绿色的部分是准备发送的数据包。后面11-16是还没有被读进内存的数据，所以他们也不在滑动窗口内。</p>
+<p><strong>接下来分两种情况来讨论：</strong></p>
+<ul>
+<li><strong>正常情况：</strong></li>
+</ul>
+<p><img src="/img/article_content_img/流量控制（三）.png" alt="流量控制（三）"></p>
+<p>从图中我们可以看出，4号数据包已经发送并收到返回的ACK，此时窗口可以右移，但是一定要保证窗口大小还是7。因此，现在11号数据包被读进了窗口中（缓存区），成为了待发送的状态。8号和9号数据包变成黄色，说明已经发送出去了，但是还没有收到返回的ACK。重复上述操作，直到所有的数据都发送成功。</p>
+<ul>
+<li><strong>丢包情况：</strong></li>
+</ul>
+<p><img src="/img/article_content_img/流量控制（四）.png" alt="流量控制（四）"></p>
+<p>如果数据已经发送出去了，但是接收方返回的ACK没有及时送达，可能丢失了，又或者数据看似发出去了，但是接收方根本没收到，那此时发送方会一直等待接收ACK，而接收方也一直在等待发送方继续发送数据，但是因为发送方在没收到返回的ACK之前是不能将窗口右移的，所以就会陷入一种僵局，即死锁状态。</p>
+<p><strong>那应该怎么去解决这种问题呢？</strong></p>
+<p>采用<strong>超时重传机制</strong>。因为接收方在返回的ACK中是包含着接收窗口的大小的。如果发送方在发送出数据之后始终收不到返回的ACK，会启用一个持续计时器，当计时器到时后，会主动的向接收方去发送1个字节的探测数据包，查看接收窗口的状态。如果这时候检测到接收窗口的大小是大于0的，那发送方会重发刚才的数据包，如果接收窗口大小等于0，那就刷新这个计时器，重复上述操作，这样就不会产生僵局的情况了。</p>
+<p><img src="/img/article_content_img/流量控制（五）.png" alt="流量控制（五）"></p>
+<h1 id="十八、接收窗口大小是固定的吗？接收窗口是否越大越好？"><a href="#十八、接收窗口大小是固定的吗？接收窗口是否越大越好？" class="headerlink" title="十八、接收窗口大小是固定的吗？接收窗口是否越大越好？"></a>十八、接收窗口大小是固定的吗？接收窗口是否越大越好？</h1><p><strong>TCP发送窗口可以划分为四个部分：</strong></p>
+<ol>
+<li><p>已经发送并且确认的TCP段（已经发送并确认）</p>
+</li>
+<li><p>已经发送但还没有确认的TCP段（已经发送未确认）</p>
+</li>
+<li><p>未发送但接收方准备接收的TCP段（可以发送）</p>
+</li>
+<li><p>未发送并且接收方也不准备接收的TCP段（不可发送）</p>
+</li>
+</ol>
+<p><strong>TCP发送窗口结构示意图：</strong></p>
+<p><img src="/img/article_content_img/滑动窗口（一）.jpg" alt="滑动窗口（一）"></p>
+<ul>
+<li>SND.WND：发送窗口</li>
+<li>SND.UNA：Send Unacknowledged指针，指向发送窗口的第一个字节。</li>
+<li>SND.NXT：Send Next指针，指向可用窗口的第一个字节。</li>
+</ul>
+<p><strong>可用窗口大小：</strong><code>SND.UNA + SND.WND - SND.NXT</code></p>
+<p><strong>TCP接收窗口可以划分成三个部分：</strong></p>
+<ol>
+<li>已经接收并且确认的TCP段（已经接收并确认）</li>
+<li>等待接收并且允许发送方发送的TCP段（可以接收未确认）</li>
+<li>不可接收并且不允许发送方发送的TCP段（不可接收）</li>
+</ol>
+<p><strong>TCP接收窗口结构示意图：</strong></p>
+<p><img src="/img/article_content_img/滑动窗口（二）.jpg" alt="滑动窗口（二）"></p>
+<p>接收窗口的大小是根据网络环境以及发送方的拥塞窗口大小动态调整的。</p>
+<p>接收窗口如果太小，会严重浪费链路利用率，增加丢包率。如果接收窗口太大，不仅不会减少丢包率，反而会增加内存消耗。</p>
+<h1 id="十九、零窗口"><a href="#十九、零窗口" class="headerlink" title="十九、零窗口"></a>十九、零窗口</h1><p>接收方没有能力接收数据的时候，会把接收窗口大小设置为0，此时发送方需要暂停发送数据，但是会启动一个持续计时器，计时器到时后，发送方会发送一个字节的探测数据包，查看接收窗口的状态。如果接收方能够接收数据，就会在返回的报文中更新接收窗口大小，恢复数据的发送。</p>
+<h1 id="二十、拥塞控制"><a href="#二十、拥塞控制" class="headerlink" title="二十、拥塞控制"></a>二十、拥塞控制</h1><p>关于拥塞控制的详细介绍，可以点击下面的链接进行查看。</p>
+<p><a href="http://love2peace.top/2023/06/24/TCP的拥塞控制是如何实现的？/">TCP的拥塞控制是如何实现的？</a></p>
+<h1 id="二十一、ARQ协议是什么？"><a href="#二十一、ARQ协议是什么？" class="headerlink" title="二十一、ARQ协议是什么？"></a>二十一、ARQ协议是什么？</h1><p><strong>自动重传请求（Automic Repeat-reQuest， ARQ）</strong>：是OSI模型中数据链路层和传输层的错误纠正协议之一。它通过使用确认和超时两个机制，在不可靠服务的基础上实现可靠的信息传输。如果发送方在发送后一段时间内没有收到确认信息，即ACK，它通常会重新发送，直到收到确认或者达到重试次数。</p>
+<p>ARQ协议包括<strong>停止等待ARQ协议</strong>和<strong>连续ARQ协议</strong>。</p>
+<h2 id="停止等待ARQ协议"><a href="#停止等待ARQ协议" class="headerlink" title="停止等待ARQ协议"></a>停止等待ARQ协议</h2><p>停止等待ARQ协议是为了实现可靠传输的，它的基本原理就是每发送完一个分组后就停止发送，等待对方确认（回复ACK）。如果达到设置的超时时间后，还是没有收到ACK，说明没有发送成功，需要重新发送，直到收到确认后再发送下一个分组。</p>
+<p>在停止等待协议中，若接收方收到重复分组，就丢弃该分组，但仍需要对发送方返回确认ACK。</p>
+<ol>
+<li><p><strong>无差错情况：</strong></p>
+<p>发送方发送分组，接收方在规定时间内收到，并回复ACK，发送方再次发送。</p>
+</li>
+<li><p><strong>有差错情况：（超时重传）</strong></p>
+<p>停止等待协议中超时重传是指：只要超过一段时间仍然没有收到确认，就重传前面发送过的分组（认为刚才发送过的分组丢失了）。因此，每发送完一个分组需要设置一个超时计时器，其重传时间应比数据在分组传输的平均往返时间更长一些。这种自动重传方式常称为 <strong>自动重传请求 ARQ</strong> 。此外，在停止等待协议中，若收到重复分组，就丢弃该分组，但同时还要发送确认ACK。</p>
+</li>
+<li><p><strong>确认丢失和确认迟到：</strong></p>
+<ul>
+<li><strong>确认丢失：</strong>确认消息在传输过程丢失。当A发送M1消息，B收到后，B向A发送了一个M1的确认消息，但却在传输过程中丢失。而A并不知道，在超时计时器超时后，A重传M1消息，B再次收到该消息后采取以下两点措施：<ul>
+<li>丢弃这个重复的M1消息，不向上层交付。 </li>
+<li>向A发送确认消息。（不会认为已经发送过了，就不再发送。A能重传，就证明B的确认消息丢失）。</li>
+</ul>
+</li>
+<li><strong>确认迟到：</strong>确认消息在传输过程中迟到。当A发送M1消息，B收到并发送确认。在超时时间内A没有收到确认消息，因此A重传M1消息，B仍然收到并继续发送确认消息（B收到了2份M1）。此时A收到了B第二次发送的确认消息，A接着发送其他数据了。过了一会，A收到了B第一次发送的对M1的确认消息（A也收到了2份确认消息）。处理如下：<ul>
+<li>A收到重复的确认后，直接丢弃。</li>
+<li>B收到重复的M1后，也直接丢。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>优点：</strong>简单。</p>
+<p><strong>缺点：</strong>信道利用率低、等待时间长。</p>
+<h2 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h2><p>连续ARQ协议可以提高信道利用率。发送方维持一个发送窗口，凡位于发送窗口内的分组可以连续发送出去，而不需要等待对方确认。接收方一般采用累计确认，对按序到达的最后一个分组发送确认，表明到这个分组为止的所有分组都已经正确收到了。</p>
+<p><strong>优点：</strong> 信道利用率高，容易实现，即使确认丢失，也不必重传。</p>
+<p><strong>缺点：</strong> 不能向发送方反映出接收方已经正确收到的所有分组的信息。 比如：发送方发送了5条消息，中间第三条丢失（3号），这时接收方只能对前两个发送确认。发送方无法知道后三个分组的下落，而只好把后三个全部重传一次。这也叫Go-Back-N（回退N），表示需要退回来重传已经发送过的 N 个消息。</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode刷题记录（链表）</title>
     <url>/posts/51149.html</url>
     <content><![CDATA[<h1 id="easy"><a href="#easy" class="headerlink" title="easy"></a>easy</h1><h2 id="1、合并两个有序链表"><a href="#1、合并两个有序链表" class="headerlink" title="1、合并两个有序链表"></a>1、合并两个有序链表</h2><p><a href="https://leetcode.cn/problems/merge-two-sorted-lists/">https://leetcode.cn/problems/merge-two-sorted-lists/</a></p>
@@ -882,254 +1130,6 @@
       </tags>
   </entry>
   <entry>
-    <title>计算机网络面试题汇总（二）</title>
-    <url>/posts/21576.html</url>
-    <content><![CDATA[<h1 id="一、TCP与UDP的区别"><a href="#一、TCP与UDP的区别" class="headerlink" title="一、TCP与UDP的区别"></a>一、TCP与UDP的区别</h1><ul>
-<li><strong>是否面向连接：</strong>TCP是面向连接的，即传输数据之前，需要先与服务端通过“三次握手”建立连接，数据传输完成后，通过“四次挥手”释放连接。而UDP则是无连接的，可以直接进行数据的传输。</li>
-<li><strong>传输是否可靠：</strong>TCP由于具有“三次握手”、“四次挥手”、流量控制、拥塞控制、超时重传、确认等机制，保证了TCP的传输是可靠的，即无差错、不丢失、不重复、按序到达。而UDP不具有上述机制，因此传输是不可靠的。</li>
-<li><strong>是否具有状态：</strong>TCP传输是有状态的，即TCP会去记录自己发送消息的状态。比如：消息是否发送了、消息是否被接收了等。因此，TCP会维持一个复杂的连接状态表。而UDP传输是无状态的。</li>
-<li><strong>首部开销：</strong>TCP的首部开销为20个字节，UDP的首部开销8个字节。</li>
-<li><strong>传输形式：</strong>TCP是基于字节流进行传输，而UDP是基于报文进行传输。</li>
-<li><strong>传输效率：</strong>由于TCP具有各种各样的机制来保证其传输的可靠性，因此传输效率比UDP低很多。</li>
-<li><strong>是否支持广播或多播服务：</strong>TCP只支持一对一（点对点）通信，而UDP既支持一对一通信，也支持一对多、多对一、多对多通信。</li>
-<li><strong>应用场景：</strong>TCP主要用于严格保证数据可靠传输的场景，例如：文件、邮件传输。而UDP主要用于追求实时性，即便丢失一些数据也无关紧要的场景，例如：直播、语音、视频、游戏等。</li>
-</ul>
-<h1 id="二、TCP和UDP首部的格式"><a href="#二、TCP和UDP首部的格式" class="headerlink" title="二、TCP和UDP首部的格式"></a>二、TCP和UDP首部的格式</h1><p>UDP首部由源端口号、目标端口号、包长度、校验和组成。</p>
-<ul>
-<li><strong>源端口号（Source Port）：</strong>表示发送端端口号，字段长16位（2字节）。该字段是可选项，有时可能不会设置源端口号。没有源端口号的时候，该字段的值设置为0。</li>
-<li><strong>目标端口号（Destination Port）：</strong>表示接收端端口号，字段长16位（2字节）。</li>
-<li><strong>包长度（Length）：</strong>该字段保存了UDP首部的长度与数据的长度之和，单位为字节。</li>
-<li><strong>校验和（Checksum）：</strong>校验和是为了提供可靠的UDP首部和数据而设计的。包括校验和字段在内的所有数据之和结果为“16位全部为1”时，才会被认为所收到的数据是正确的。</li>
-</ul>
-<blockquote>
-<p>关于UDP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》220页。</p>
-</blockquote>
-<p>TCP首部由源端口号、目标端口号、序列号、确认应答号、数据偏移、保留、控制位、窗口大小、校验和、紧急指针、选项、填充构成。</p>
-<ul>
-<li><p><strong>源端口号（Source Port）：</strong>表示发送端端口号，字段长16位（2字节）。</p>
-</li>
-<li><p><strong>目标端口号（Destination Port）：</strong>表示接收端端口号，字段长度16位（2字节）。</p>
-</li>
-<li><p><strong>序列号（Sequence Number）：</strong>指发送数据的位置，序列号不会从0或1开始，而是在建立连接时由计算机生成的随机数作为其初始值，通过SYN包传给接收端主机。每发送一次数据，就累加一次该数据字节数的大小。字段长32位（4字节）。</p>
-</li>
-<li><p><strong>确认应答号（Acknowledgement Number）：</strong>指下一次应该收到的数据的序列号，字段长度32位（4字节）。实际上，可以将其理解为发送端收到这个确认应答以后，可以认为在这个序号以前的数据都已经被正确接收。</p>
-</li>
-<li><p><strong>数据偏移（Data Offset）：</strong>该字段表示TCP所传输的数据部分应该从TCP包的哪个位开始计算，当然也可以把它看作TCP首部的长度。字段长4位，单位为4字节。</p>
-</li>
-<li><p><strong>保留（Reserved）：</strong>该字段主要是为了以后扩展时使用，其长度为4位。一般设置为0，但即时收到的包中该字段不为0，此包也不会被丢弃。</p>
-</li>
-<li><p><strong>控制位（Control Flag）：</strong>字段长为8位，每一位从左至右分别为CWR、ECE、URG、ACK、PSH、RST、SYN、FIN。这些控制标志也叫作控制位。当他们对应位上的值为1时，具有不同的含义。例如：CWR标志和ECE标志都用于IP首部的ECN字段，ECE标志为1时，则通知对方已将拥塞窗口缩小。</p>
-<blockquote>
-<p>关于控制位值为1时具体的含义，可以参考《图解TCP/IP（第5版）》223页。</p>
-</blockquote>
-</li>
-<li><p><strong>窗口大小（Window Size）：</strong>用于通知从相同TCP首部的确认应答号所指位置开始能够接收的数据大小，该字段长16位（2字节）。TCP不允许发送超过此处所示大小的数据。不过，如果窗口为0，则表示可以发送窗口探测，以了解最新的窗口大小，但这个探测数据必须是1字节。</p>
-</li>
-<li><p><strong>校验和（Checksum）：</strong>与UDP类似，区别在于TCP的校验和无法关闭。</p>
-<blockquote>
-<p>关于TCP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》224页。</p>
-</blockquote>
-</li>
-<li><p><strong>紧急指针（Urgent Pointer）：</strong>该字段长16位（2字节）。只有在URG控制位为1时有效。该字段表示本报文段中紧急数据的指针，即从数据部分的首位到紧急指针所指示的位置为紧急数据。</p>
-</li>
-<li><p><strong>选项（Options）：</strong>该字段用于提高TCP的传输性能。长度最大为40字节。</p>
-<blockquote>
-<p>关于每个选项字段具体的含义，可以参考《图解TCP/IP（第5版）》225页。</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="三、HTTP是基于TCP还是UDP的？"><a href="#三、HTTP是基于TCP还是UDP的？" class="headerlink" title="三、HTTP是基于TCP还是UDP的？"></a>三、HTTP是基于TCP还是UDP的？</h1><p>HTTP/3.0之前是基于TCP协议的，而HTTP/3.0弃用TCP，改用基于UDP的QUIC协议。主要目的是解决HTTP/2.0中存在的队头阻塞问题。由于HTTP/2.0在单个TCP连接上使用了多路复用技术，受到TCP拥塞控制的影响，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。此外，HTTP/2.0需要经过“三次握手”的过程建立连接，一般是3个RTT（往返时延），而借助QUIC协议的特性，HTTP/3.0可以避免TCP的“三次握手”的延迟，允许在第一次连接时发送数据（0个RTT）。</p>
-<h1 id="四、TCP的三次握手"><a href="#四、TCP的三次握手" class="headerlink" title="四、TCP的三次握手"></a>四、TCP的三次握手</h1><p><img src="/img/article_content_img/TCP三次握手.png" alt="TCP三次握手"></p>
-<p><strong>第一次握手：</strong>客户端将自己的SYN设置为1，并随机生成一个客户端的初始序列号（Sequence Number）发送给服务端，然后客户端进入<em>SYN_SENT</em>状态。</p>
-<p><strong>第二次握手：</strong>服务端收到客户端发来的SYN=1之后，就知道客户端此时想要建立连接了。此时，服务端将自己的SYN与ACK都设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后随机生成一个服务端的初始序列号（Sequence Number），将SYN、ACK、Acknowledgement Number、Sequence Number一并发送给客户端，然后服务端进入<em>SYN_RECV</em>状态。</p>
-<p><strong>第三次握手：</strong>客户端收到服务端发回的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，验证通过后，客户端将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），该值等于服务端传过来的初始序列号的值加一，然后将ACK与Acknowledgement Number发送给服务端，此时客户端进入<em>Establish</em>状态。服务端收到客户端传过来的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，若验证通过，则服务端也进入<em>Establish</em>状态。</p>
-<p>自此，连接建立完成，“三次握手”结束。</p>
-<h1 id="五、为什么TCP连接是三次握手，而不是两次或者四次？"><a href="#五、为什么TCP连接是三次握手，而不是两次或者四次？" class="headerlink" title="五、为什么TCP连接是三次握手，而不是两次或者四次？"></a>五、为什么TCP连接是三次握手，而不是两次或者四次？</h1><p><strong>结论：TCP连接允许“四次握手”，不允许“两次握手”。</strong></p>
-<p>“三次握手”的目的是建立可靠的通信信道，要确认自己与对方的发送与接收都是正常的。</p>
-<ol>
-<li><strong>第一次握手：</strong>Client什么都没有确认。Server确认了自己的接收和Client的发送正常。</li>
-<li><strong>第二次握手：</strong>Client确认了自己的发送和接收、Server的发送和接收正常。Server确认了自己的发送正常。</li>
-<li><strong>第三次握手：</strong>Server确认了Client的接收正常。</li>
-</ol>
-<p><strong>而两次握手会导致的问题主要有以下两个：</strong></p>
-<ul>
-<li><p>如果是两次握手，那么当服务端发送SYN、ACK、Acknowledge Number、Sequence Number之后，连接就建立完成。但由于客户端没有给服务端返回ACK和Acknowledge Number，服务端就不知道客户端是否收到了发送过去的东西，即服务端无法确认自己的发送和对方的接收是正常的。</p>
-</li>
-<li><p>客户端发出的第一个连接请求没有丢失，只是在某个网络节点长时间滞留了，而客户端没有收到任何反馈，则再次发起连接请求，此时，连接正常建立。当此次连接断开时，之前滞留的请求发送到了服务端，那么服务端会给客户端发送SYN、ACK、Acknowledge Number、Sequence Number。</p>
-<p>如果采用的是“两次握手”，到此连接就已经建立完成，但此时客户端并没有想要建立连接，所以客户端就不会理会服务端，但服务端却一直在等待客户端发送数据，因此服务端的资源就被白白浪费了。</p>
-<p>如果采用的是“三次握手”，当服务端给客户端发送SYN、ACK、Acknowledge Number、Sequence Number后，客户端依旧不会给服务端任何回应，此时服务端会重发上述信息，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态，避免了服务端资源的浪费。</p>
-</li>
-</ul>
-<p><strong>四次握手：</strong>将第二次握手分成两步。</p>
-<ul>
-<li><p><strong>第一步：</strong>服务端发送ACK和Acknowledge Number到客户端。</p>
-</li>
-<li><p><strong>第二步：</strong>服务端发送SYN和Sequence Number到客户端。</p>
-<p>出于优化的目的，提高效率，将这两步合并。</p>
-</li>
-</ul>
-<h1 id="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"><a href="#六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。" class="headerlink" title="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"></a>六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。</h1><p><strong>服务端：</strong></p>
-<ul>
-<li>如果客户端发出的ACK未及时送达服务端，那么服务端会重发SYN、ACK、Acknowledge Number、Sequence Number，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态。</li>
-</ul>
-<blockquote>
-<p>重传次数：由内核参数<code>top_syn_retries</code>配置，默认值为5，可以手动修改。</p>
-<p>重传周期：按照“指数退避”算法计算重传周期，即第一次是1秒后进行超时重传，第二次是2秒后进行超时重传，第三次是4秒后进行超时重传，第四次是8秒后进行超时重传，第五次是16秒后进行超时重传，以类类推，直到达到最大重传次数。</p>
-</blockquote>
-<p><strong>客户端：</strong></p>
-<ul>
-<li><p>服务端还未进入CLOSED状态：</p>
-<p>在服务端超时重发的过程中，客户端及时向服务端发送ACK并且该ACK抵达服务端，那么服务端收到之后进行ACK和Acknowledge Number的验证，验证通过则进入ESTABLISH状态，连接建立。</p>
-</li>
-<li><p>服务端已进入CLOSED状态：</p>
-<p>客户端依旧向服务端发送数据，但由于服务端已经进入CLOSED状态，此时服务端会给客户端回应一个RST包。</p>
-</li>
-</ul>
-<h1 id="七、如果连接已经建立，但客户端出现了故障怎么办？"><a href="#七、如果连接已经建立，但客户端出现了故障怎么办？" class="headerlink" title="七、如果连接已经建立，但客户端出现了故障怎么办？"></a>七、如果连接已经建立，但客户端出现了故障怎么办？</h1><p>服务端每收到一个客户端的发来的请求，会对该请求建立一个计时器，这个计时器通常设置为2小时。如果2小时后，仍未收到客户端的任何数据，此时服务端会发送一个探测报文段到客户端，一共会发送10次，每隔75秒发送一次，如果发送10次都没有反应的话，服务端会认为客户端出现了故障，连接就会关闭。</p>
-<h1 id="八、TCP三次握手中，哪一次握手最容易受到攻击？"><a href="#八、TCP三次握手中，哪一次握手最容易受到攻击？" class="headerlink" title="八、TCP三次握手中，哪一次握手最容易受到攻击？"></a>八、TCP三次握手中，哪一次握手最容易受到攻击？</h1><p>在TCP三次握手中，<strong>第二次握手</strong>最容易受到攻击，即SYN洪水攻击。具体原因如下：</p>
-<p>如果客户端伪造出大量第一次的SYN同步报文，服务端就会依次消耗掉很多资源来保存客户端的信息，并进行确认，实际上确认是会失败的，但失败需要一定的时间，因为服务端会连续多次进行第二次握手确认后才认定失败。那么短时间有大量的SYN同步报文涌向服务端，服务端资源可能被耗尽，就可能导致正常的客户端得不到响应而失败。</p>
-<p>解决措施：</p>
-<ul>
-<li><p><strong>缩短SYN超时时间，限制同时打开的SYN半连接数目。</strong></p>
-<p>SYN Flood攻击效果取决于服务端保持的SYN半连接数目，该值等于SYN攻击的频度乘上SYN超时时间。设置SYN超时时间在20秒以下可以成倍降低服务器的负荷。</p>
-</li>
-<li><p><strong>设置SYN Cookie</strong></p>
-<p>当服务端接收到SYN包并返回SYN + ACK包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值，并将这个cookie值作为将要返回的SYN + ACK包的初始序列号。当客户端返回一个ACK包时，根据包头信息计算cookie，与返回的确认序列号(初始序列号 + 1)进行对比，如果相同，则认为是一个正常连接，之后分配资源并建立连接；如果短时间内连续受到某个IP的重复SYN报文，就认定是受到了攻击，以后从这个IP地址来的包都会被丢弃。</p>
-</li>
-<li><p><strong>防火墙</strong></p>
-</li>
-</ul>
-<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1><p><img src="/img/article_content_img/TCP四次挥手.png" alt="TCP四次挥手"></p>
-<p><strong>第一次挥手：</strong>客户端将自己的FIN设置为1，并随机生成一个客户端的初始序列号（Sequence Number），发送给服务端，请求断开客户端到服务端之间的通信。此时，客户端进入<em>FIN_WAIT_1</em>状态。</p>
-<p><strong>第二次挥手：</strong>服务端收到客户端的FIN后，将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后将ACK与确认应答号发送到客户端，服务端进入<em>CLOSE_WAIT</em>状态。客户端收到并验证ACK与确认应答号，验证通过后，进入<em>FIN_WAIT_2</em>状态。</p>
-<p><strong>第三次挥手：</strong>服务端将自己的FIN设置为1，并随机生成一个服务端的初始序列号（Sequence Number），发送给客户端，请求断开服务端到客户端之间的通信。此时，服务端进入<em>LAST_ACK</em>状态。</p>
-<p><strong>第四次挥手：</strong>客户端收到服务端的FIN后，将自己的ACK设置为1，并生成一个确认应答号，该值为服务端传过来的初始序列号的值加一。之后将ACK与确认应答号发送到服务端，客户端进入<em>TIME_WAIT</em>状态。服务端收到并验证ACK与确认应答号，验证通过，进入<em>CLOSED</em>状态。客户端在等待2MSL的时间后，也进入<em>CLOSED</em>状态。</p>
-<p>自此，连接断开完成，“四次挥手”结束。</p>
-<p>==注意：只要四次挥手没有结束，客户端和服务端就可以继续传输数据！==</p>
-<blockquote>
-<p><strong>MSL（Maximum Segment Lifetime）</strong>：一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所需的最大时间。如果直到2MSL，客户端都没有再次收到FIN，那么客户端推断ACK已经被成功接收，则结束TCP连接。</p>
-</blockquote>
-<h1 id="十、为什么要四次挥手？"><a href="#十、为什么要四次挥手？" class="headerlink" title="十、为什么要四次挥手？"></a>十、为什么要四次挥手？</h1><p>TCP是全双工通信，可以双向传输数据。任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放的通知，对方确认后再完全断开TCP连接。</p>
-<h1 id="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）"><a href="#十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）" class="headerlink" title="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）"></a>十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）</h1><p>因为服务端收到客户端断开连接的请求时，可能还有一些数据没有发送完，因此先给客户端传回 ACK，表示已经接收到了断开连接的请求。等到数据发完之后再向客户端发送 FIN，申请断开服务端到客户端的数据传送。</p>
-<h1 id="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"><a href="#十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？" class="headerlink" title="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"></a>十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？</h1><p>第四次挥手时，客户端发送到服务端的ACK和确认应答号有可能丢失，如果服务端因为某些原因而没有收到ACK和确认应答号的话，服务端会重发FIN和初始序列号。</p>
-<p>如果客户端在2MSL的时间内收到了FIN和初始序列号，就会重新发送ACK和确认应答号，并再次等待2MSL。</p>
-<p>如果客户端没有等待2MSL的时间，而是直接进入CLOSED状态，那么客户端将永远无法收到服务端重发的FIN，而服务端因为一直未收到客户端的ACK和确认应答号，会不停的重发FIN，连接始终无法断开。</p>
-<h1 id="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"><a href="#十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？" class="headerlink" title="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"></a>十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？</h1><p>如果第二次挥手时，服务端ACK和确认应答号没有送达客户端，那么客户端会认为可能是第一次挥手时发送的FIN未送达服务端，因此客户端会重新发送FIN和初始序列号。</p>
-<h1 id="十四、TIME-WAIT状态的意义"><a href="#十四、TIME-WAIT状态的意义" class="headerlink" title="十四、TIME_WAIT状态的意义"></a>十四、TIME_WAIT状态的意义</h1><p>首先，==TIME_WAIT并不属于客户端或服务端专属的状态，而是属于主动发起断开连接请求的一端的状态==，在发送最后一次ACK和确认应答号后会进入TIME_WAIT状态。</p>
-<p>这里假设是客户端发起的断开连接的请求，客户端在第四次挥手发送ACK和确认应答号之后，可能由于网络比较阻塞，该数据帧在传输过程中丢失了，服务端由于没有收到ACK则会重发FIN，但此时如果客户端没有TIME_WAIT状态，而是直接进入CLOSED状态，则客户端不会理会服务端，服务端就会一直重发FIN。</p>
-<p>因此，采用TIME_WAIT状态用来保障当网络比较阻塞时，TCP连接依旧可以正常关闭。</p>
-<h1 id="十五、TIME-WAIT状态过多会产生什么后果？怎么处理？"><a href="#十五、TIME-WAIT状态过多会产生什么后果？怎么处理？" class="headerlink" title="十五、TIME_WAIT状态过多会产生什么后果？怎么处理？"></a>十五、TIME_WAIT状态过多会产生什么后果？怎么处理？</h1><p>从服务端来讲，短时间内主动关闭了大量的客户端连接，就会造成服务端上出现大量的TIME_WAIT状态，严重消耗服务端的资源，此时部分客户端就会显示连接不上。</p>
-<p>从客户端来讲，客户端TIME_WAIT过多会导致端口资源被占用，而端口就65535个，一旦被占满就无法创建新的连接。</p>
-<p><strong>解决方法：</strong></p>
-<ul>
-<li><p>服务端可以设置<code>SO_REUSEADDR</code>套接字选项来避免TIME_WAIT状态，此套接字选项告诉内核：即时此端口正忙（处于TIME_WAIT），也请继续并重用它。</p>
-</li>
-<li><p>调整系统内核参数，修改<code>/etc/sysctl.conf</code>文件中<code>net.ipv4.tcp_tw_reuse</code>和<code>tcp_timestamps</code>参数。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = 1 # 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭； </span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 # 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="十六、TCP如何保证可靠传输？"><a href="#十六、TCP如何保证可靠传输？" class="headerlink" title="十六、TCP如何保证可靠传输？"></a>十六、TCP如何保证可靠传输？</h1><ol>
-<li><strong>基于数据块传输：</strong>应用数据被分割成TCP认为最适合发送的数据块，再传输给网络层。数据块被称为报文段或段。</li>
-<li><strong>对失序数据包重新排序以及去重：</strong>TCP为了保证不发生丢包，发送端会对数据包进行编号，接收端会对收到的包进行排序，并对编号重复的包进行去重。</li>
-<li><strong>校验和：</strong>TCP将保持它首部和数据的校验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果检验和有差错，那么TCP将丢弃这个报文段并且不会对此报文段进行确认。</li>
-<li><strong>超时重传：</strong>当发送方发送数据后，它启动一个定时器，等待接收端确认收到这个报文段。若在规定时间内仍为收到确认，则重传该报文段。</li>
-<li><strong>流量控制：</strong>TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据时，能提示发送方降低发送速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
-<li><strong>拥塞控制：</strong>当网络出现拥塞时，减少数据的发送。（慢启动、拥塞避免、快重传、快恢复）</li>
-<li><strong>ARQ协议（自动重传请求）</strong>：连续ARQ协议与停止等待ARQ协议。</li>
-</ol>
-<h1 id="十七、TCP流量控制是如何实现的？"><a href="#十七、TCP流量控制是如何实现的？" class="headerlink" title="十七、TCP流量控制是如何实现的？"></a>十七、TCP流量控制是如何实现的？</h1><p><strong>首先考虑一个问题，为什么要引入流量控制？</strong></p>
-<p>双方在通信的时候，发送方的速率跟接收方的速率不一定相等，那如果发送方的发送速率过快，接收方速率慢导致来不及接收，这个时候接收方就会把来不及接收的数据包放到缓存区中。那如果接收方缓存区满了，此时发送方还在不停的发送数据，就会导致丢包的情况。大量丢包会浪费服务器资源。因此，需要控制发送方的发送速率，让发送方跟接收方形成动态平衡的状态。</p>
-<p><img src="/img/article_content_img/流量控制（一）.png" alt="流量控制（一）"></p>
-<p><strong>怎么去进行流量控制？</strong></p>
-<p>使用滑动窗口协议来进行流量控制。</p>
-<p><img src="/img/article_content_img/流量控制（二）.png" alt="流量控制（二）"></p>
-<p>从图中可以看出，窗口大小目前设定为7，灰色的部分是已经发送并且收到了返回的ACK的数据包。黄色的部分是已经发送但还没有收到ACK的数据包。绿色的部分是准备发送的数据包。后面11-16是还没有被读进内存的数据，所以他们也不在滑动窗口内。</p>
-<p><strong>接下来分两种情况来讨论：</strong></p>
-<ul>
-<li><strong>正常情况：</strong></li>
-</ul>
-<p><img src="/img/article_content_img/流量控制（三）.png" alt="流量控制（三）"></p>
-<p>从图中我们可以看出，4号数据包已经发送并收到返回的ACK，此时窗口可以右移，但是一定要保证窗口大小还是7。因此，现在11号数据包被读进了窗口中（缓存区），成为了待发送的状态。8号和9号数据包变成黄色，说明已经发送出去了，但是还没有收到返回的ACK。重复上述操作，直到所有的数据都发送成功。</p>
-<ul>
-<li><strong>丢包情况：</strong></li>
-</ul>
-<p><img src="/img/article_content_img/流量控制（四）.png" alt="流量控制（四）"></p>
-<p>如果数据已经发送出去了，但是接收方返回的ACK没有及时送达，可能丢失了，又或者数据看似发出去了，但是接收方根本没收到，那此时发送方会一直等待接收ACK，而接收方也一直在等待发送方继续发送数据，但是因为发送方在没收到返回的ACK之前是不能将窗口右移的，所以就会陷入一种僵局，即死锁状态。</p>
-<p><strong>那应该怎么去解决这种问题呢？</strong></p>
-<p>采用<strong>超时重传机制</strong>。因为接收方在返回的ACK中是包含着接收窗口的大小的。如果发送方在发送出数据之后始终收不到返回的ACK，会启用一个持续计时器，当计时器到时后，会主动的向接收方去发送1个字节的探测数据包，查看接收窗口的状态。如果这时候检测到接收窗口的大小是大于0的，那发送方会重发刚才的数据包，如果接收窗口大小等于0，那就刷新这个计时器，重复上述操作，这样就不会产生僵局的情况了。</p>
-<p><img src="/img/article_content_img/流量控制（五）.png" alt="流量控制（五）"></p>
-<h1 id="十八、接收窗口大小是固定的吗？接收窗口是否越大越好？"><a href="#十八、接收窗口大小是固定的吗？接收窗口是否越大越好？" class="headerlink" title="十八、接收窗口大小是固定的吗？接收窗口是否越大越好？"></a>十八、接收窗口大小是固定的吗？接收窗口是否越大越好？</h1><p><strong>TCP发送窗口可以划分为四个部分：</strong></p>
-<ol>
-<li><p>已经发送并且确认的TCP段（已经发送并确认）</p>
-</li>
-<li><p>已经发送但还没有确认的TCP段（已经发送未确认）</p>
-</li>
-<li><p>未发送但接收方准备接收的TCP段（可以发送）</p>
-</li>
-<li><p>未发送并且接收方也不准备接收的TCP段（不可发送）</p>
-</li>
-</ol>
-<p><strong>TCP发送窗口结构示意图：</strong></p>
-<p><img src="/img/article_content_img/滑动窗口（一）.jpg" alt="滑动窗口（一）"></p>
-<ul>
-<li>SND.WND：发送窗口</li>
-<li>SND.UNA：Send Unacknowledged指针，指向发送窗口的第一个字节。</li>
-<li>SND.NXT：Send Next指针，指向可用窗口的第一个字节。</li>
-</ul>
-<p><strong>可用窗口大小：</strong><code>SND.UNA + SND.WND - SND.NXT</code></p>
-<p><strong>TCP接收窗口可以划分成三个部分：</strong></p>
-<ol>
-<li>已经接收并且确认的TCP段（已经接收并确认）</li>
-<li>等待接收并且允许发送方发送的TCP段（可以接收未确认）</li>
-<li>不可接收并且不允许发送方发送的TCP段（不可接收）</li>
-</ol>
-<p><strong>TCP接收窗口结构示意图：</strong></p>
-<p><img src="/img/article_content_img/滑动窗口（二）.jpg" alt="滑动窗口（二）"></p>
-<p>接收窗口的大小是根据网络环境以及发送方的拥塞窗口大小动态调整的。</p>
-<p>接收窗口如果太小，会严重浪费链路利用率，增加丢包率。如果接收窗口太大，不仅不会减少丢包率，反而会增加内存消耗。</p>
-<h1 id="十九、零窗口"><a href="#十九、零窗口" class="headerlink" title="十九、零窗口"></a>十九、零窗口</h1><p>接收方没有能力接收数据的时候，会把接收窗口大小设置为0，此时发送方需要暂停发送数据，但是会启动一个持续计时器，计时器到时后，发送方会发送一个字节的探测数据包，查看接收窗口的状态。如果接收方能够接收数据，就会在返回的报文中更新接收窗口大小，恢复数据的发送。</p>
-<h1 id="二十、拥塞控制"><a href="#二十、拥塞控制" class="headerlink" title="二十、拥塞控制"></a>二十、拥塞控制</h1><p>关于拥塞控制的详细介绍，可以点击下面的链接进行查看。</p>
-<p><a href="http://love2peace.top/2023/06/24/TCP的拥塞控制是如何实现的？/">TCP的拥塞控制是如何实现的？</a></p>
-<h1 id="二十一、ARQ协议是什么？"><a href="#二十一、ARQ协议是什么？" class="headerlink" title="二十一、ARQ协议是什么？"></a>二十一、ARQ协议是什么？</h1><p><strong>自动重传请求（Automic Repeat-reQuest， ARQ）</strong>：是OSI模型中数据链路层和传输层的错误纠正协议之一。它通过使用确认和超时两个机制，在不可靠服务的基础上实现可靠的信息传输。如果发送方在发送后一段时间内没有收到确认信息，即ACK，它通常会重新发送，直到收到确认或者达到重试次数。</p>
-<p>ARQ协议包括<strong>停止等待ARQ协议</strong>和<strong>连续ARQ协议</strong>。</p>
-<h2 id="停止等待ARQ协议"><a href="#停止等待ARQ协议" class="headerlink" title="停止等待ARQ协议"></a>停止等待ARQ协议</h2><p>停止等待ARQ协议是为了实现可靠传输的，它的基本原理就是每发送完一个分组后就停止发送，等待对方确认（回复ACK）。如果达到设置的超时时间后，还是没有收到ACK，说明没有发送成功，需要重新发送，直到收到确认后再发送下一个分组。</p>
-<p>在停止等待协议中，若接收方收到重复分组，就丢弃该分组，但仍需要对发送方返回确认ACK。</p>
-<ol>
-<li><p><strong>无差错情况：</strong></p>
-<p>发送方发送分组，接收方在规定时间内收到，并回复ACK，发送方再次发送。</p>
-</li>
-<li><p><strong>有差错情况：（超时重传）</strong></p>
-<p>停止等待协议中超时重传是指：只要超过一段时间仍然没有收到确认，就重传前面发送过的分组（认为刚才发送过的分组丢失了）。因此，每发送完一个分组需要设置一个超时计时器，其重传时间应比数据在分组传输的平均往返时间更长一些。这种自动重传方式常称为 <strong>自动重传请求 ARQ</strong> 。此外，在停止等待协议中，若收到重复分组，就丢弃该分组，但同时还要发送确认ACK。</p>
-</li>
-<li><p><strong>确认丢失和确认迟到：</strong></p>
-<ul>
-<li><strong>确认丢失：</strong>确认消息在传输过程丢失。当A发送M1消息，B收到后，B向A发送了一个M1的确认消息，但却在传输过程中丢失。而A并不知道，在超时计时器超时后，A重传M1消息，B再次收到该消息后采取以下两点措施：<ul>
-<li>丢弃这个重复的M1消息，不向上层交付。 </li>
-<li>向A发送确认消息。（不会认为已经发送过了，就不再发送。A能重传，就证明B的确认消息丢失）。</li>
-</ul>
-</li>
-<li><strong>确认迟到：</strong>确认消息在传输过程中迟到。当A发送M1消息，B收到并发送确认。在超时时间内A没有收到确认消息，因此A重传M1消息，B仍然收到并继续发送确认消息（B收到了2份M1）。此时A收到了B第二次发送的确认消息，A接着发送其他数据了。过了一会，A收到了B第一次发送的对M1的确认消息（A也收到了2份确认消息）。处理如下：<ul>
-<li>A收到重复的确认后，直接丢弃。</li>
-<li>B收到重复的M1后，也直接丢。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p><strong>优点：</strong>简单。</p>
-<p><strong>缺点：</strong>信道利用率低、等待时间长。</p>
-<h2 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h2><p>连续ARQ协议可以提高信道利用率。发送方维持一个发送窗口，凡位于发送窗口内的分组可以连续发送出去，而不需要等待对方确认。接收方一般采用累计确认，对按序到达的最后一个分组发送确认，表明到这个分组为止的所有分组都已经正确收到了。</p>
-<p><strong>优点：</strong> 信道利用率高，容易实现，即使确认丢失，也不必重传。</p>
-<p><strong>缺点：</strong> 不能向发送方反映出接收方已经正确收到的所有分组的信息。 比如：发送方发送了5条消息，中间第三条丢失（3号），这时接收方只能对前两个发送确认。发送方无法知道后三个分组的下落，而只好把后三个全部重传一次。这也叫Go-Back-N（回退N），表示需要退回来重传已经发送过的 N 个消息。</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计算机网络面试题汇总（三）</title>
     <url>/posts/22577.html</url>
     <content><![CDATA[<h1 id="一、介绍一下RIP协议"><a href="#一、介绍一下RIP协议" class="headerlink" title="一、介绍一下RIP协议"></a>一、介绍一下RIP协议</h1><p><strong>RIP（Routing Information Protocol，路由信息协议）：</strong>每一个路由器维护一张表，记录该路由器到其他网络节点的跳数。路由器与其直接相连的网络节点的跳数为1，每经过一个网络节点跳数加一。跳数最大为15，超过15则认为不可达。</p>
@@ -1213,6 +1213,285 @@
       </categories>
       <tags>
         <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL面试题汇总（一）</title>
+    <url>/posts/13551.html</url>
+    <content><![CDATA[<h1 id="介绍一下MySQL的特点"><a href="#介绍一下MySQL的特点" class="headerlink" title="介绍一下MySQL的特点"></a>介绍一下MySQL的特点</h1><ol>
+<li>MySQL功能完善、性能卓越、服务稳定，很少出现异常宕机。</li>
+<li>MySQL开源免费且没有版权制约，自主性及使用成本低。</li>
+<li>MySQL历史悠久，用户活跃度高，遇到问题可以去社区寻求帮助。</li>
+<li>MySQL体积小，安装方便，易于维护。</li>
+<li>MySQL支持多种操作系统，提供多种API接口，支持多种开发语言。</li>
+<li>MySQL事务支持优秀，支持分库分表、读写分离和高可用。</li>
+</ol>
+<h1 id="什么是关系型数据库？"><a href="#什么是关系型数据库？" class="headerlink" title="什么是关系型数据库？"></a>什么是关系型数据库？</h1><p>关系型数据库（RDBMS，Relational Database Management System）就是一种建立在关系模型基础上的数据库。关系模型表明了数据库中所存储的数据之间的联系，包括：一对一、一对多、多对多。</p>
+<p>关系型数据库中，数据都被存放在了各种表中，表中的每一行就存放着一条数据。</p>
+<p><img src="/img/article_content_img/关系型数据库.jpg" alt="关系型数据库"></p>
+<p><strong>常见的关系型数据库：</strong>MySQL、Oracle、SQL Server、SQLite、PostgreSQL…</p>
+<h1 id="MySQL存储引擎有哪些？架构了解吗？"><a href="#MySQL存储引擎有哪些？架构了解吗？" class="headerlink" title="MySQL存储引擎有哪些？架构了解吗？"></a>MySQL存储引擎有哪些？架构了解吗？</h1><p>MySQL支持多种存储引擎，我们可以通过<code>SHOW ENGINES;</code>命令来查看，具体如下图：</p>
+<p><img src="/img/article_content_img/MySQL的存储引擎.jpg" alt=""></p>
+<p>从上图可以看出，MySQL支持9种存储引擎，默认使用InnoDB存储引擎，也只有InnoDB存储引擎支持事务。</p>
+<blockquote>
+<p>MySQL5.5 之前的版本，默认存储疫情是MyISAM，从MySQL5.5之后才默认采用InnoDB存储引擎。</p>
+<p>你可以通过<code>SELECT VERSION();</code>命令查看MySQL的版本。</p>
+</blockquote>
+<p>MySQL存储引擎采用的是<strong>插件式架构</strong>，支持多种存储引擎，甚至可以针对不同的业务场景，给每张表设置不同的存储引擎。<strong>存储引擎是基于表的，而不是基于数据库的！</strong></p>
+<h1 id="MyISAM存储引擎和InnoDB存储引擎有哪些区别？"><a href="#MyISAM存储引擎和InnoDB存储引擎有哪些区别？" class="headerlink" title="MyISAM存储引擎和InnoDB存储引擎有哪些区别？"></a>MyISAM存储引擎和InnoDB存储引擎有哪些区别？</h1><ol>
+<li>InnoDB是事务性存储引擎，因此支持事务操作，而MyISAM不支持事务。</li>
+<li>InnoDB支持外键，而MyISAM不支持。</li>
+<li>InnoDB既支持行级锁，也支持表级锁，默认采用行级锁。而MyISAM仅支持表级锁。</li>
+<li>基于InnoDB的表必须有主键，如果未主动设置主键列，则InnoDB会检索表中是否具有唯一索引，如果有唯一索引，那么会把加了唯一索引的列指定为主键列，否则，InnoDB会自动生成一个6Byte的自增主键。而MyISAM允许没有主键。</li>
+<li>MySQL5.7版本之前，InnoDB是不支持全文索引的，5.7版本之后才支持。而MyISAM引擎一直支持全文索引。</li>
+<li>InnoDB支持MVCC（多版本并发控制），而MyISAM不支持。</li>
+<li>InnoDB不保存表的具体行数，因此在执行 <code>select count(*) from table</code> 时需要进行全表扫描，相当于扫描整个磁盘。而MyISAM使用一个变量保存了整个表的行数，执行上述命令时，直接读出该变量的值即可，速度相对较快。</li>
+<li>MyISAM和InnoDB底层数据结构都是B+树，但是具体实现方式有所不同。基于InnoDB引擎的表只有一个.ibd文件，这个.ibd文件既存放索引，也存放数据，即每一个非叶子节点存放索引，叶子节点存放索引以及索引对应的数据。而基于MyISAM引擎的表具有.myi和.myd两个文件，.myi文件存储表中索引以及索引对应数据的指针，即每一个非叶子节点存放索引，叶子节点存放索引以及索引对应数据的指针，该指针就指向.myd文件中存放的数据。</li>
+</ol>
+<h1 id="InnoDB为什么推荐使用自增ID作为主键"><a href="#InnoDB为什么推荐使用自增ID作为主键" class="headerlink" title="InnoDB为什么推荐使用自增ID作为主键"></a>InnoDB为什么推荐使用自增ID作为主键</h1><p>在InnoDB中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。InnoDB使用B+树索引模型，所以数据都是存放在B+树的叶子节点中的。</p>
+<p><strong>每一个索引在InnoDB里面都对应一颗B+树。</strong>因此，一张表其实就是由多个B+树构成的，即一个主键索引树和多个非主键索引树。</p>
+<p>现在假设我们有一个主键列为ID的表，表中有一个字段k，并且字段k上加了索引。建表SQL语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">primary</span> key, </span><br><span class="line">k <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>, </span><br><span class="line">name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">index (k)) engine<span class="operator">=</span>InnoDB;</span><br></pre></td></tr></table></figure>
+<p>表中R1-R5的（ID,k）值分别为（100,1）、（200,2）、（300,3）、（500,5）和（600,6），具体如下图所示：</p>
+<p><img src="/img/article_content_img/mysql1.jpg" alt="InnoDB索引组织结构"></p>
+<p>从图中可以看出，根据叶子节点的内容，索引类型分为主键索引和非主键索引。</p>
+<blockquote>
+<p>主键索引的叶子节点保存的整行数据，而非主键索引的叶子节点保存的是主键的值。例如：查询k=3的数据，则先在非主索引树中找到对应主键的值为300，再进行回表，去主键索引树中查找ID为300的数据。</p>
+</blockquote>
+<p><strong>索引维护：</strong></p>
+<p>B+树为了维护<strong>索引有序性</strong>，在插入新值的时候需要做必要的维护。以上图为例，如果插入新的行ID值为700，则只需要在R5的记录后面插入一个新记录。但如果新插入的ID值为400，则需要逻辑上挪动后面的数据，以腾出位置。</p>
+<p>而更糟的情况是，如果R5所在的数据页已经满了，根据B+树的算法，这时需要申请一个新的数据页，然后挪动部分数据过去，这个过程称之为页分裂，而页分裂会影响性能。此外，原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。</p>
+<p>当相邻两个页由于删除了数据，利用率很低之后，会将数据页做合并。合并的过程，可以认为是分裂过程的逆过程。</p>
+<p><strong>自增ID作为主键，功能上来说，我们在插入数据时无需指定ID值，系统会根据当前ID最大值加1作为下一条记录的ID值。因此，这种插入数据的模式，非常符合递增插入的场景，每次插入一条新记录都是追加操作，不会涉及挪动其他记录，也不会触发叶子节点的分裂。而有业务逻辑的字段做主键，则往往不能保证有序插入，这样就有可能导致频繁的页分裂和合并，写数据成本相对较高，影响性能。</strong></p>
+<p><strong>此外，从存储的角度来说，由于每个非主键索引的叶子节点上都是主键的值，那么如果主键长度太长，非主键索引的叶子节点就越大，占用的空间也就越大。</strong>例如：使用<code>VARCHAR</code>类型的唯一字段身份证号作为主键，则每个非主键索引的叶子节点占用约20个字节，如果使用整型（<code>INT</code>）数据做主键，则只需要4个字节，如果是长整型（<code>BIGINT</code>）则需要8个字节。</p>
+<blockquote>
+<p><code>VARCHAR</code>需要使用1个或2个额外字节记录字符串的长度：如果列的最大长度小于或等于255个字节，则只使用1个字节表示，否则使用2个字节。假设采用<code>latin-1</code>字符集，一个<code>VARCHAR(10)</code>的列需要11个字节的存储空间。<code>VARCHAR(1000)</code>的列则需要1002个字节。</p>
+</blockquote>
+<p>因此，综合考虑性能和存储两方面，自增ID作为主键都会是更合理的选择！</p>
+<h1 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h1><p>事务就是逻辑上的一组操作，要么全部执行成功，要么全部执行失败。事务以<code>BEGIN/START TRANSACTION</code>开始，以<code>ROLLBACK/COMMIT</code>结束。</p>
+<p>事务具有四大特性：A（原子性）、C（一致性）、I（隔离性）、D（持久性）。</p>
+<ul>
+<li><p><strong>原子性（Atomicity）：</strong>指事务是最小的执行单位，不允许分割。事务中的操作要么全部执行成功，要么全部执行失败。</p>
+</li>
+<li><p><strong>一致性（Consistency）：</strong>指事务执行前后，数据处于一种合法的状态，这种状态是语义上的而不是语法上的。合法的数据状态就是要满足预定的约束，这个约束可以自己来定义。满足这个约束，数据就是一致的，否则就是不一致的。</p>
+<p>例子：</p>
+<ul>
+<li>规定如下约束：账户余额必须大于等于0。A账户有200元，转账300元出去，那么A账户余额变为-100元。此时，数据就是不一致的，因为不满足账户余额必须大于等于0这一约束。</li>
+<li>规定如下约束：A账户与B账户余额之和必须相同。A账户有200元，B账户有100元，A+B=300元。A转账50元给B账户，A账户的钱已经扣了，但是B账户因为各种意外原因，余额并未增加，那么A+B=250元。此时，数据就是不一致的，因为不满足A账户与B账户余额之和必须相同的约束。</li>
+</ul>
+</li>
+<li><p><strong>隔离性（Isolation）：</strong>指事务与事务之间不能互相干扰，即并发访问数据库的时候，一个用户的事务不能被其他事务所干扰，各并发事务之间数据库是独立的。</p>
+</li>
+<li><p><strong>持久性（Durability）：</strong>指事务一旦提交，它对数据库的改变就是永久性的，即使数据库发生故障也不应该对其有任何影响。</p>
+</li>
+</ul>
+<p><strong>注：原子性、隔离性和持久性是数据库保证一致性的手段，一致性是最终要达到的目的！也就是说，只有保证了原子性、隔离性和持久性，才能保证一致性！</strong></p>
+<h1 id="数据库如何保证原子性？"><a href="#数据库如何保证原子性？" class="headerlink" title="数据库如何保证原子性？"></a>数据库如何保证原子性？</h1><p>利用<strong>回滚日志（undo log）</strong>来实现原子性。所有事务执行期间所做的操作的<strong>逆操作</strong>都会被记录到undo log中，如果事务执行过程中遇到异常，出现了回滚，则可以直接利用undo log进行数据恢复，恢复到事务执行之前的状态。此外，undo log会先于数据持久化到磁盘上，这样就保证了即使遇到数据库突然宕机等情况，当用户再次启动数据库的时候，数据库还能够通过查询undo log来回滚之前未完成的事务。</p>
+<blockquote>
+<p><strong>逆操作：</strong></p>
+<ul>
+<li>当插入（INSERT）一条数据的时候，undo log中会记录这条数据对应的删除（DELETE）记录。</li>
+<li>当删除（DELETE）一条数据的时候，undo log中会记录这条数据对应的插入（INSERT）记录。</li>
+<li>当更新（UPDATE）一条数据（新值）的时候，undo log中会记录这条数据（旧值）对应的（UPDATE）记录。</li>
+</ul>
+</blockquote>
+<h1 id="数据库如何保证持久性？"><a href="#数据库如何保证持久性？" class="headerlink" title="数据库如何保证持久性？"></a>数据库如何保证持久性？</h1><p>利用重做日志（redo log）来实现持久性。</p>
+<p>MySQL是先把磁盘上的数据加载到内存，在内存中对数据进行修改，再写回到磁盘上。如果此时出现宕机，内存中的数据就会丢失。而redo log解决了这个问题，当做数据修改的时候，不仅在内存中操作，还会在redo log中记录这次操作。当事务提交的时候，会将redo log日志进行刷盘（redo log一部分在内存中，一部分在磁盘上）。当数据库宕机重启的时候，会将redo log中的内容恢复到数据库中，再根据undo log和binlog内容决定是回滚数据还是提交数据。</p>
+<p>此外，采用redo log具有以下好处：</p>
+<ul>
+<li>redo log体积小，毕竟只记录了哪一页修改了什么，所以刷盘快。</li>
+<li>redo log是一直往末尾追加，属于顺序IO，效率显然比随机IO高。</li>
+</ul>
+<h1 id="数据库如何保证隔离性？"><a href="#数据库如何保证隔离性？" class="headerlink" title="数据库如何保证隔离性？"></a>数据库如何保证隔离性？</h1><p>我们首先需要知道，如果无法保证隔离性会出现哪些问题呢？</p>
+<p>在典型的应用程序中，多个事务并发运行，经常会操作相同的数据来完成各自的任务，所以可能会导致以下问题的出现：</p>
+<h2 id="脏读（Dirty-Read）"><a href="#脏读（Dirty-Read）" class="headerlink" title="脏读（Dirty Read）"></a>脏读（Dirty Read）</h2><p>简单来说，脏读是指一个事务读取了被另一个事务修改但未提交的数据。</p>
+<p>一个事务读取数据并对数据进行了修改，这个修改对其他事务来说是可见的，即使当前事务没有提交。这时，另外一个事务读取了这个还未提交的数据，但第一个事务由于一些原因进行了回滚，导致数据并没有提交到数据库，那么第二个事务读取到的就是脏数据，即产生了脏读。</p>
+<p>下面将举一个例子来更为直观地说明脏读。</p>
+<p>例：事务1读取某表中的数据A=20，之后事务1修改数据A=A-1=19，但还未提交。这时，事务2读取表中数据A=19，然后事务1进行回滚导致对数据A的修改并未提交到数据库，A的值还是20。所以事务2读取到的就是脏数据。</p>
+<p><img src="/img/article_content_img/脏读.png" alt="脏读"></p>
+<h2 id="丢失修改（Lost-to-modify）"><a href="#丢失修改（Lost-to-modify）" class="headerlink" title="丢失修改（Lost to modify）"></a>丢失修改（Lost to modify）</h2><p>简单来说，就是一个事务修改了的数据，被另外一个事务再次修改，导致第一个事务修改的数据被覆盖（丢失）了。</p>
+<p>一个事务读取一个数据时，另外一个事务也读取了该数据，那么在第一个事务中修改了这个数据后，第二个事务也修改了这个数据。此时，第一个事务内的修改结果就被丢失了，因此称为丢失修改。</p>
+<p>下面将举一个例子来更为直观地说明丢失修改。</p>
+<p>例：事务1读取某表中的数据A=20，事务2也读取了该表中的数据A=20，然后事务1先修改了数据A=A-1=19，然后提交到数据库，后来事务2也修改了这个数据A=A-1=19，并提交到数据库。最终A的值为19。但是A进行了两次减1操作，A的值应该是18才对。这就是丢失修改，即事务1修改的数据A的值被事务2修改的数据A的值覆盖（丢失）了。</p>
+<p><img src="/img/article_content_img/丢失修改.png" alt="丢失修改"></p>
+<h2 id="不可重复读（Unrepeatable-Read）"><a href="#不可重复读（Unrepeatable-Read）" class="headerlink" title="不可重复读（Unrepeatable Read）"></a>不可重复读（Unrepeatable Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同一个数据，得到的值不一致。</p>
+<p>一个事务读取一个数据时，另外一个事务也读取了该数据，并对该数据进行了修改。此时，第一个事务再次读取该数据时，发现与之前读取的值不一样了，这就是不可重复读。</p>
+<p>下面将举一个例子来更为直观地说明不可重复读。</p>
+<p>例：事务1读取某表中的数据A=20，事务2也读取了该表中的数据A=20并将A的值进行了修改A=A-1=19，此时事务1再次读取数据A的值=19，这与第一次读取A的值=20不同。</p>
+<p><img src="/img/article_content_img/不可重复读.png" alt="不可重复读"></p>
+<h2 id="幻读（Phantom-Read）"><a href="#幻读（Phantom-Read）" class="headerlink" title="幻读（Phantom Read）"></a>幻读（Phantom Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同样的几行数据，但相比于第一次读取，会新增一些数据，就像出现了幻觉一样。</p>
+<p>一个事务读取了几行数据，接着另外一个并发事务往表中插入了一些新数据，之后第一个事务再次读取这几行数据时，发现数据变多了（不该出现的数据），这就是幻读。</p>
+<p>下面将举一个例子来更为直观地说明不可重复读。</p>
+<p>事务1根据条件（where name like “%王”）查询了某表中的一批数据（假设有5条数据），接着并发事务2往表中插入了一行数据，该数据同样满足上述条件，此时事务1再次根据该条件查询数据时，发现有6条数据，相比于之前多了一条。</p>
+<p><img src="/img/article_content_img/幻读.png" alt="幻读"></p>
+<h2 id="不可重复读和幻读有什么区别？"><a href="#不可重复读和幻读有什么区别？" class="headerlink" title="不可重复读和幻读有什么区别？"></a>不可重复读和幻读有什么区别？</h2><ul>
+<li>不可重复读主要针对的是<strong>某一行</strong>数据，并且针对的是<strong>UPDATE</strong>操作。</li>
+<li>幻读主要针对的是一个<strong>数据整体/范围</strong>，并且针对的是<strong>INSERT</strong>操作。</li>
+</ul>
+<p>因此，我们只要防止上述问题出现，即可保证事务的隔离性。那么如何防止上述问题出现呢？这里就需要隔离级别的概念。</p>
+<h2 id="数据库的四种隔离级别"><a href="#数据库的四种隔离级别" class="headerlink" title="数据库的四种隔离级别"></a>数据库的四种隔离级别</h2><p>SQL标准定义了四个隔离级别，其级别从低到高依次是：读未提交、读已提交、不可重复读、串行化。</p>
+<ul>
+<li><strong>读未提交（READ UNCOMMITTED）：</strong>允许读取尚<strong>未提交</strong>的数据变更，即一个事务提交之前，其执行结果对其他事务是可见的。该隔离级别最低，会导致脏读、不可重复读和幻读。</li>
+<li><strong>读已提交（READ COMMITTED）：</strong>允许读取并发事务<strong>已经提交</strong>的数据，即一个事务只能读取已经提交了的事务对数据做出的变更。该隔离级别是<strong>Oracle的默认隔离级别</strong>，可以解决脏读，但无法解决不可重复读和幻读。</li>
+<li><strong>可重复读（REPEATABLE READ）：</strong>确保同一个事务在执行期间，多次读取相同数据时，得到的结果相同。该隔离级别是<strong>MySQL的默认隔离级别</strong>，可以解决脏读和不可重复读，但无法解决幻读。</li>
+<li><strong>串行化（SERIALIZABLE）：</strong>所有事务串行执行，保证事务之间完全不可能产生干扰。该隔离级别最高，可以解决脏读、不可重复读和幻读问题，但是性能非常低，可能会导致大量的超时和锁竞争现象。一般不会使用。</li>
+</ul>
+<h1 id="MySQL中的锁"><a href="#MySQL中的锁" class="headerlink" title="MySQL中的锁"></a>MySQL中的锁</h1><p>锁是一种常见的并发事务的控制方式。根据加锁的范围，MySQL中的锁大致可以分为：全局锁、表锁和行锁。</p>
+<h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><p>全局锁就是对整个数据库实例加锁，可以通过<code>FLUSH TABLES WITH READ LOCK</code>（FTWRL）命令实现。加锁后，整个库处于只读状态，之后其他线程的数据更新语句（增、删、改）、数据定义语句（建表、修改表结构等）和更新类事务的提交语句，均会被阻塞。</p>
+<p><strong>全局锁的典型使用场景：全库逻辑备份</strong></p>
+<p>但备份过程中，整个库完全处于<strong>只读</strong>状态，也会造成以下问题：</p>
+<ul>
+<li>如果在主库上备份，那么在备份期间，主库不能执行更新，业务基本停摆。</li>
+<li>如果在从库备份，那么备份期间从库无法执行主库同步过来的binlog，导致主从数据不一致。</li>
+</ul>
+<p>当然，官方自带的逻辑备份工具是<strong>mysqldump</strong>，当mysqldump使用参数<code>-single-transaction</code>的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于MVCC的支持，这个过程中数据是可以正常更新的。但此方法只适用于所有的表使用事物引擎的库。如果有的表使用了不支持事务的引擎，那么备份就只能通过全局锁这种方式来实现了。</p>
+<p><strong>那么既然要做全库只读，为什么不使用<code>set global readonly = true</code>的方式呢？</strong></p>
+<p>主要有以下两个原因：</p>
+<ul>
+<li>某些系统中，<code>readonly</code>的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改global变量的方式影响面更大，不建议使用。</li>
+<li>在异常处理机制上存在差异。如果执行FTWRL命令之后由于客户端发生异常断开，那么MySQL会自动释放这个全局锁，整个库可以回到正常更新的状态。而将整个库设置为readonly后，如果客户端发生异常，则数据库就会一直保持readonly状态，这样会导致整个库长时间处于不可写的状态，风险较高。</li>
+</ul>
+<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><p>表级锁是MySQL中锁定粒度仅次于全局锁的一种锁，是<strong>针对非索引字段</strong>加的锁，对当前操作的整张表加锁，<strong>实现简单，资源消耗少，加锁快，不会出现死锁，但触发锁冲突的概率最高，高并发下效率低</strong>。表级锁与存储引擎无关，MyISAM和InnoDB引擎都支持表级锁。</p>
+<p><strong>MySQL中表级锁有两种：表锁、元数据锁（MDL，Meta Data Lock ）</strong></p>
+<h3 id="表锁："><a href="#表锁：" class="headerlink" title="表锁："></a>表锁：</h3><p>表锁的加锁语法为<code>lock tables xxx read/write</code>，<code>xxx</code>为表名，<code>read/write</code>为读锁或写锁。解锁可以使用<code>unlock tables</code>命令主动释放锁，也可以在客户端断开的时候自动释放。</p>
+<p>在表级锁中，如果加的是读锁，则当前线程读、写操作和其他线程的读操作均可以进行，但其他线程的写操作会被阻塞。如果加的是写锁，则当前线程的读、写操作均可进行，但其他线程的读、写操作均被阻塞。</p>
+<h3 id="元数据锁（MDL，Meta-Data-Lock）"><a href="#元数据锁（MDL，Meta-Data-Lock）" class="headerlink" title="元数据锁（MDL，Meta Data Lock）"></a>元数据锁（MDL，Meta Data Lock）</h3><p>MDL在MySQL5.5之后引入，该锁不需要显式使用，当访问一个表的时候会被自动加上。<strong>MDL的作用是保证读写的正确性，即用于隔离DML和DDL操作之间的干扰。</strong>例如：如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，删了一列，那么查询线程拿到的结果跟表结构就对不上了，肯定是有问题的。</p>
+<p>当对一个表做增、删、改、查操作时，需要加MDL读锁，当对一个表做结构变更时，需要加MDL写锁。</p>
+<ul>
+<li>读锁之间不互斥，允许多个线程对同一张表进行增、删、改、查操作。</li>
+<li>读锁与写锁之间，写锁与写锁之间互斥，所以如果有两个线程同时给一个表加字段，其中一个要等另一个执行完才能开始执行。</li>
+</ul>
+<p><strong>使用MDL锁中遇到的问题：</strong>给小表加字段导致数据库挂掉。（事务中的MDL锁，在语句执行开始时申请，但是语句结束后并不会马上释放，而会等到整个事务提交之后再释放）</p>
+<p><img src="/img/article_content_img/MDL锁问题.jpg" alt="MDL锁问题"></p>
+<p>从上图可以看出，sessionA先启动，这时候对表<code>t</code>加一个MDL读锁。由于sessionB需要的也是MDL读锁，因此可以正常执行。之后由于sessionA的MDL读锁还没有释放，而sessionC需要MDL写锁，因此sessionC会被阻塞。之后所有要在表<code>t</code>上新申请MDL读锁的请求也会被sessionC阻塞。因此，现在这个表<code>t</code>变成了一个完全不可读写的表。而如果这张表上查询语句频繁，且客户端有重试机制的话，那么每超时一个请求，就会再发起一个session去请求，整个数据库的线程很快就会爆满。</p>
+<p><strong>如何解决上述问题？</strong></p>
+<p>在<code>ALTER TABLE</code>语句里面设定等待时间，如果在指定的等待时间内没有拿到MDL写锁，也不要阻塞后面的业务语句，而是先放弃，之后开发人员或者DBA再通过重试命令重复这个过程。</p>
+<p>MariaDB已经合并了AliSQL的这个功能，所以这两个开元分支目前都支持DDL的<code>NOWAIT/WAIT N</code>语法。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name NOWAIT <span class="keyword">ADD</span> column...</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name WAIT N <span class="keyword">ADD</span> column...</span><br></pre></td></tr></table></figure>
+<h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2><p>MySQL的<strong>行锁是在引擎层由引擎自己实现的</strong>，行锁是针对数据表中行记录的锁。行锁也是MySQL中<strong>锁定粒度最小</strong>的一种锁，是<strong>针对索引字段加的锁</strong>。<strong>行级锁能大大减少数据库操作的冲突，并发度最高，但加锁开销也最大，加锁慢，可能会出现死锁</strong>。</p>
+<p>例如：事务A在执行期间对需要更改的那一行加行锁并进行更新操作，事务A还并未提交。此时事务B开启，也想要更改该行数据，但由于行锁还未释放，则事务B获得行锁失败，陷入阻塞等待，只有当事务A提交或回滚，事务A的行锁释放后，事务B才能对该行数据加行锁，执行更新操作。</p>
+<h3 id="两阶段协议"><a href="#两阶段协议" class="headerlink" title="两阶段协议"></a>两阶段协议</h3><p>两阶段协议指锁的添加和释放分别在两个阶段进行。也就是说，<strong>在InnoDB事务中，行锁是在需要的时候添加，不需要的时候不会立刻释放，而是要等到事务结束之后才释放</strong>。</p>
+<p><strong>如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量放在后面。</strong></p>
+<h3 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><p><img src="/img/article_content_img/MySQL死锁.jpg" alt="MySQL死锁"></p>
+<p>从上图可以看出，事务A在等待事务B释放id=2的行锁，事务B在等待事务A释放id=1的行锁，此时事务A和事务B就是在互相等待对方释放资源，陷入了死锁状态。</p>
+<p>对于死锁，有两种解决方案：</p>
+<ol>
+<li>直接进入等待，直到超时。超时时间通过参数<code>innodb_lock_wait_timeout</code>进行设置，默认为50s。</li>
+<li>发起死锁检测，发现死锁后，主动回滚死锁链中的某一个事务，让其他事务得以继续执行。可以将<code>innodb_deadlock_detect</code>参数设置为<code>on</code>来开启死锁检测，默认就是<code>on</code>。</li>
+</ol>
+<p>对于第一种方案，默认的超时时间为50s，即第一个被锁住的线程要等待50s才会超时退出，其他线程才能继续执行，这对于在线服务来说，是无法接受的。而如果将超时时间设置的很短，虽然可以很快解开死锁，但如果不是死锁，而是简单的锁等待的话，就会出现“误伤”。</p>
+<p>对于第二种方案，<code>innodb_deadlock_detect</code>默认值是<code>on</code>，主动进行死锁检测会在发生死锁的时候快速发现并进行处理，但也存在额外负担。<strong>死锁检测的时间复杂度是O(n^2^)</strong>。假设有1000个并发线程同时更新同一行，那么死锁检测操作就是100万（1000<em>1000）的量级，这期间需要<strong>消耗大量的CPU资源</strong>。因此，就可能会出现<em>*CPU利用率很高，但每秒执行的事务量却很少</em></em>的情况。</p>
+<p><strong>那么如何解决由热点数据行更新导致的性能问题？</strong></p>
+<ul>
+<li><p>如果可以确保这个业务一定不会出现死锁，可以临时把死锁检测关掉。</p>
+</li>
+<li><p>控制并发度。</p>
+<ol>
+<li><p>MySQL中间件做并发限制。</p>
+</li>
+<li><p>修改数据库源码：对于相同行的更新，在进入引擎之前排队。这样在InnoDB内部就不会有大量的死锁检测工作。</p>
+</li>
+<li><p>将一行改成逻辑上的多行来减少锁冲突。例如：将影院账户总额这一条记录拆成逻辑上的10条记录，影院郑虎总额等于这10条记录的值的总和。这样每次要给影院账户加金额的时候，随机选其中一条记录来增加。这样每次冲突的概率就变成原来的1/10，可以减少锁等待的个数，也就减少了死锁检测的CPU消耗。</p>
+<p>但这种方案要根据实际业务逻辑做详细设计。假如是退票逻辑，那么账户余额可能会减少，因此就需要考虑一部分行记录变成0的情况，代码层面就需要对其做特殊处理。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="InnoDB中有哪几类行锁？"><a href="#InnoDB中有哪几类行锁？" class="headerlink" title="InnoDB中有哪几类行锁？"></a>InnoDB中有哪几类行锁？</h3><p>InnoDB行锁是通过对索引数据页上的记录加锁实现的，MySQL InnoDB支持三种数据行锁定方式：</p>
+<ul>
+<li><p><strong>记录锁（Record Lock）：</strong>也被称为记录锁，属于单个行记录上的锁。</p>
+</li>
+<li><p><strong>间隙锁（Gap Lock）：</strong>锁定一个范围，即锁的就是两个值之间的空隙，不包括记录本身。间隙锁只有在可重复读隔离级别下才有效。（左开右开）</p>
+<p><img src="/img/article_content_img/间隙锁.jpg" alt="MySQL死锁"></p>
+</li>
+<li><p><strong>临键锁（Next-Key Lock）：</strong>记录锁与间隙锁的结合，既锁定一个范围，也锁定记录行本身。主要为了解决幻读问题。（左开右闭）</p>
+</li>
+</ul>
+<p>在可重复读隔离级别下，行锁默认使用Next-Key Lock，但是如果操作的索引是唯一索引或者主键索引，InnoDB会对Next-Key Lock进行优化，将其降级为Record Lock。</p>
+<h3 id="共享锁和排它锁"><a href="#共享锁和排它锁" class="headerlink" title="共享锁和排它锁"></a>共享锁和排它锁</h3><p>不论是表级锁还是行级锁，都存在共享锁（Share Lock，S锁）和排它锁（Exclusive Lock，X锁）</p>
+<ul>
+<li><p>共享锁（S锁）：又称为读锁，事务在读取记录的时候获取共享锁，允许多个事务同时获取。（锁兼容）</p>
+<p>若事务R对数据对象A加上S锁，则事务R可以读A但不能修改A，其他事务只能再对A加S锁，直到事务R释放S锁后，才不能加X锁。</p>
+</li>
+<li><p>排它锁（X锁）：又称为写锁/独占锁，事务在修改记录的时候获取排它锁，不允许多个事务同时获取。（锁不兼容）</p>
+<p>若事务R对数据对象A加上X锁，则事务R可以读、写A，其他事务在事务R没有释放X锁之前，无法对A加任何锁。</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">S锁</th>
+<th style="text-align:center">X锁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">S锁</td>
+<td style="text-align:center">不冲突</td>
+<td style="text-align:center">冲突</td>
+</tr>
+<tr>
+<td style="text-align:center">X锁</td>
+<td style="text-align:center">冲突</td>
+<td style="text-align:center">冲突</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>意向锁：</strong>用来快速判断是否可以对某表使用表锁。意向锁属于表级锁，主要有以下两种：</p>
+<ul>
+<li><strong>意向共享锁（Intention Shared Lock，IS锁）：</strong>事务有意向对表中某些记录加S锁，则在加这个S锁之前，需要先对该表加IS锁。</li>
+<li><strong>意向排它锁（Intention Exclusive Lock，IX锁）：</strong>事务有意向对表中某些记录加X锁，则在加这个X锁之前，需要先对该表加IX锁。</li>
+</ul>
+<p>意向锁之间都是相互兼容的，不存在任何冲突。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">IS锁</th>
+<th style="text-align:center">IX锁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IS锁</td>
+<td style="text-align:center">兼容</td>
+<td style="text-align:center">兼容</td>
+</tr>
+<tr>
+<td style="text-align:center">IX锁</td>
+<td style="text-align:center">兼容</td>
+<td style="text-align:center">兼容</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>意向锁是由数据引擎自己维护的，用户无法手动操作意向锁，在为数据行加S/X锁之前，InnoDB会先获取该行数据所在表的对应的意向锁。</strong></p>
+<p><strong>MySQL加行锁的方式：</strong></p>
+<p><code>select ... for update</code>：对读取的记录加X锁</p>
+<p><code>select ... lock in share mode</code>：对读取的记录加S锁</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis面试题汇总（二）</title>
+    <url>/posts/60306.html</url>
+    <content><![CDATA[<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -1480,287 +1759,8 @@
         <category>面试</category>
       </categories>
       <tags>
+        <tag>数据库</tag>
         <tag>Redis</tag>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL面试题汇总（一）</title>
-    <url>/posts/13551.html</url>
-    <content><![CDATA[<h1 id="介绍一下MySQL的特点"><a href="#介绍一下MySQL的特点" class="headerlink" title="介绍一下MySQL的特点"></a>介绍一下MySQL的特点</h1><ol>
-<li>MySQL功能完善、性能卓越、服务稳定，很少出现异常宕机。</li>
-<li>MySQL开源免费且没有版权制约，自主性及使用成本低。</li>
-<li>MySQL历史悠久，用户活跃度高，遇到问题可以去社区寻求帮助。</li>
-<li>MySQL体积小，安装方便，易于维护。</li>
-<li>MySQL支持多种操作系统，提供多种API接口，支持多种开发语言。</li>
-<li>MySQL事务支持优秀，支持分库分表、读写分离和高可用。</li>
-</ol>
-<h1 id="什么是关系型数据库？"><a href="#什么是关系型数据库？" class="headerlink" title="什么是关系型数据库？"></a>什么是关系型数据库？</h1><p>关系型数据库（RDBMS，Relational Database Management System）就是一种建立在关系模型基础上的数据库。关系模型表明了数据库中所存储的数据之间的联系，包括：一对一、一对多、多对多。</p>
-<p>关系型数据库中，数据都被存放在了各种表中，表中的每一行就存放着一条数据。</p>
-<p><img src="/img/article_content_img/关系型数据库.jpg" alt="关系型数据库"></p>
-<p><strong>常见的关系型数据库：</strong>MySQL、Oracle、SQL Server、SQLite、PostgreSQL…</p>
-<h1 id="MySQL存储引擎有哪些？架构了解吗？"><a href="#MySQL存储引擎有哪些？架构了解吗？" class="headerlink" title="MySQL存储引擎有哪些？架构了解吗？"></a>MySQL存储引擎有哪些？架构了解吗？</h1><p>MySQL支持多种存储引擎，我们可以通过<code>SHOW ENGINES;</code>命令来查看，具体如下图：</p>
-<p><img src="/img/article_content_img/MySQL的存储引擎.jpg" alt=""></p>
-<p>从上图可以看出，MySQL支持9种存储引擎，默认使用InnoDB存储引擎，也只有InnoDB存储引擎支持事务。</p>
-<blockquote>
-<p>MySQL5.5 之前的版本，默认存储疫情是MyISAM，从MySQL5.5之后才默认采用InnoDB存储引擎。</p>
-<p>你可以通过<code>SELECT VERSION();</code>命令查看MySQL的版本。</p>
-</blockquote>
-<p>MySQL存储引擎采用的是<strong>插件式架构</strong>，支持多种存储引擎，甚至可以针对不同的业务场景，给每张表设置不同的存储引擎。<strong>存储引擎是基于表的，而不是基于数据库的！</strong></p>
-<h1 id="MyISAM存储引擎和InnoDB存储引擎有哪些区别？"><a href="#MyISAM存储引擎和InnoDB存储引擎有哪些区别？" class="headerlink" title="MyISAM存储引擎和InnoDB存储引擎有哪些区别？"></a>MyISAM存储引擎和InnoDB存储引擎有哪些区别？</h1><ol>
-<li>InnoDB是事务性存储引擎，因此支持事务操作，而MyISAM不支持事务。</li>
-<li>InnoDB支持外键，而MyISAM不支持。</li>
-<li>InnoDB既支持行级锁，也支持表级锁，默认采用行级锁。而MyISAM仅支持表级锁。</li>
-<li>基于InnoDB的表必须有主键，如果未主动设置主键列，则InnoDB会检索表中是否具有唯一索引，如果有唯一索引，那么会把加了唯一索引的列指定为主键列，否则，InnoDB会自动生成一个6Byte的自增主键。而MyISAM允许没有主键。</li>
-<li>MySQL5.7版本之前，InnoDB是不支持全文索引的，5.7版本之后才支持。而MyISAM引擎一直支持全文索引。</li>
-<li>InnoDB支持MVCC（多版本并发控制），而MyISAM不支持。</li>
-<li>InnoDB不保存表的具体行数，因此在执行 <code>select count(*) from table</code> 时需要进行全表扫描，相当于扫描整个磁盘。而MyISAM使用一个变量保存了整个表的行数，执行上述命令时，直接读出该变量的值即可，速度相对较快。</li>
-<li>MyISAM和InnoDB底层数据结构都是B+树，但是具体实现方式有所不同。基于InnoDB引擎的表只有一个.ibd文件，这个.ibd文件既存放索引，也存放数据，即每一个非叶子节点存放索引，叶子节点存放索引以及索引对应的数据。而基于MyISAM引擎的表具有.myi和.myd两个文件，.myi文件存储表中索引以及索引对应数据的指针，即每一个非叶子节点存放索引，叶子节点存放索引以及索引对应数据的指针，该指针就指向.myd文件中存放的数据。</li>
-</ol>
-<h1 id="InnoDB为什么推荐使用自增ID作为主键"><a href="#InnoDB为什么推荐使用自增ID作为主键" class="headerlink" title="InnoDB为什么推荐使用自增ID作为主键"></a>InnoDB为什么推荐使用自增ID作为主键</h1><p>在InnoDB中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。InnoDB使用B+树索引模型，所以数据都是存放在B+树的叶子节点中的。</p>
-<p><strong>每一个索引在InnoDB里面都对应一颗B+树。</strong>因此，一张表其实就是由多个B+树构成的，即一个主键索引树和多个非主键索引树。</p>
-<p>现在假设我们有一个主键列为ID的表，表中有一个字段k，并且字段k上加了索引。建表SQL语句如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T(</span><br><span class="line">id <span class="type">int</span> <span class="keyword">primary</span> key, </span><br><span class="line">k <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>, </span><br><span class="line">name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">index (k)) engine<span class="operator">=</span>InnoDB;</span><br></pre></td></tr></table></figure>
-<p>表中R1-R5的（ID,k）值分别为（100,1）、（200,2）、（300,3）、（500,5）和（600,6），具体如下图所示：</p>
-<p><img src="/img/article_content_img/mysql1.jpg" alt="InnoDB索引组织结构"></p>
-<p>从图中可以看出，根据叶子节点的内容，索引类型分为主键索引和非主键索引。</p>
-<blockquote>
-<p>主键索引的叶子节点保存的整行数据，而非主键索引的叶子节点保存的是主键的值。例如：查询k=3的数据，则先在非主索引树中找到对应主键的值为300，再进行回表，去主键索引树中查找ID为300的数据。</p>
-</blockquote>
-<p><strong>索引维护：</strong></p>
-<p>B+树为了维护<strong>索引有序性</strong>，在插入新值的时候需要做必要的维护。以上图为例，如果插入新的行ID值为700，则只需要在R5的记录后面插入一个新记录。但如果新插入的ID值为400，则需要逻辑上挪动后面的数据，以腾出位置。</p>
-<p>而更糟的情况是，如果R5所在的数据页已经满了，根据B+树的算法，这时需要申请一个新的数据页，然后挪动部分数据过去，这个过程称之为页分裂，而页分裂会影响性能。此外，原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。</p>
-<p>当相邻两个页由于删除了数据，利用率很低之后，会将数据页做合并。合并的过程，可以认为是分裂过程的逆过程。</p>
-<p><strong>自增ID作为主键，功能上来说，我们在插入数据时无需指定ID值，系统会根据当前ID最大值加1作为下一条记录的ID值。因此，这种插入数据的模式，非常符合递增插入的场景，每次插入一条新记录都是追加操作，不会涉及挪动其他记录，也不会触发叶子节点的分裂。而有业务逻辑的字段做主键，则往往不能保证有序插入，这样就有可能导致频繁的页分裂和合并，写数据成本相对较高，影响性能。</strong></p>
-<p><strong>此外，从存储的角度来说，由于每个非主键索引的叶子节点上都是主键的值，那么如果主键长度太长，非主键索引的叶子节点就越大，占用的空间也就越大。</strong>例如：使用<code>VARCHAR</code>类型的唯一字段身份证号作为主键，则每个非主键索引的叶子节点占用约20个字节，如果使用整型（<code>INT</code>）数据做主键，则只需要4个字节，如果是长整型（<code>BIGINT</code>）则需要8个字节。</p>
-<blockquote>
-<p><code>VARCHAR</code>需要使用1个或2个额外字节记录字符串的长度：如果列的最大长度小于或等于255个字节，则只使用1个字节表示，否则使用2个字节。假设采用<code>latin-1</code>字符集，一个<code>VARCHAR(10)</code>的列需要11个字节的存储空间。<code>VARCHAR(1000)</code>的列则需要1002个字节。</p>
-</blockquote>
-<p>因此，综合考虑性能和存储两方面，自增ID作为主键都会是更合理的选择！</p>
-<h1 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h1><p>事务就是逻辑上的一组操作，要么全部执行成功，要么全部执行失败。事务以<code>BEGIN/START TRANSACTION</code>开始，以<code>ROLLBACK/COMMIT</code>结束。</p>
-<p>事务具有四大特性：A（原子性）、C（一致性）、I（隔离性）、D（持久性）。</p>
-<ul>
-<li><p><strong>原子性（Atomicity）：</strong>指事务是最小的执行单位，不允许分割。事务中的操作要么全部执行成功，要么全部执行失败。</p>
-</li>
-<li><p><strong>一致性（Consistency）：</strong>指事务执行前后，数据处于一种合法的状态，这种状态是语义上的而不是语法上的。合法的数据状态就是要满足预定的约束，这个约束可以自己来定义。满足这个约束，数据就是一致的，否则就是不一致的。</p>
-<p>例子：</p>
-<ul>
-<li>规定如下约束：账户余额必须大于等于0。A账户有200元，转账300元出去，那么A账户余额变为-100元。此时，数据就是不一致的，因为不满足账户余额必须大于等于0这一约束。</li>
-<li>规定如下约束：A账户与B账户余额之和必须相同。A账户有200元，B账户有100元，A+B=300元。A转账50元给B账户，A账户的钱已经扣了，但是B账户因为各种意外原因，余额并未增加，那么A+B=250元。此时，数据就是不一致的，因为不满足A账户与B账户余额之和必须相同的约束。</li>
-</ul>
-</li>
-<li><p><strong>隔离性（Isolation）：</strong>指事务与事务之间不能互相干扰，即并发访问数据库的时候，一个用户的事务不能被其他事务所干扰，各并发事务之间数据库是独立的。</p>
-</li>
-<li><p><strong>持久性（Durability）：</strong>指事务一旦提交，它对数据库的改变就是永久性的，即使数据库发生故障也不应该对其有任何影响。</p>
-</li>
-</ul>
-<p><strong>注：原子性、隔离性和持久性是数据库保证一致性的手段，一致性是最终要达到的目的！也就是说，只有保证了原子性、隔离性和持久性，才能保证一致性！</strong></p>
-<h1 id="数据库如何保证原子性？"><a href="#数据库如何保证原子性？" class="headerlink" title="数据库如何保证原子性？"></a>数据库如何保证原子性？</h1><p>利用<strong>回滚日志（undo log）</strong>来实现原子性。所有事务执行期间所做的操作的<strong>逆操作</strong>都会被记录到undo log中，如果事务执行过程中遇到异常，出现了回滚，则可以直接利用undo log进行数据恢复，恢复到事务执行之前的状态。此外，undo log会先于数据持久化到磁盘上，这样就保证了即使遇到数据库突然宕机等情况，当用户再次启动数据库的时候，数据库还能够通过查询undo log来回滚之前未完成的事务。</p>
-<blockquote>
-<p><strong>逆操作：</strong></p>
-<ul>
-<li>当插入（INSERT）一条数据的时候，undo log中会记录这条数据对应的删除（DELETE）记录。</li>
-<li>当删除（DELETE）一条数据的时候，undo log中会记录这条数据对应的插入（INSERT）记录。</li>
-<li>当更新（UPDATE）一条数据（新值）的时候，undo log中会记录这条数据（旧值）对应的（UPDATE）记录。</li>
-</ul>
-</blockquote>
-<h1 id="数据库如何保证持久性？"><a href="#数据库如何保证持久性？" class="headerlink" title="数据库如何保证持久性？"></a>数据库如何保证持久性？</h1><p>利用重做日志（redo log）来实现持久性。</p>
-<p>MySQL是先把磁盘上的数据加载到内存，在内存中对数据进行修改，再写回到磁盘上。如果此时出现宕机，内存中的数据就会丢失。而redo log解决了这个问题，当做数据修改的时候，不仅在内存中操作，还会在redo log中记录这次操作。当事务提交的时候，会将redo log日志进行刷盘（redo log一部分在内存中，一部分在磁盘上）。当数据库宕机重启的时候，会将redo log中的内容恢复到数据库中，再根据undo log和binlog内容决定是回滚数据还是提交数据。</p>
-<p>此外，采用redo log具有以下好处：</p>
-<ul>
-<li>redo log体积小，毕竟只记录了哪一页修改了什么，所以刷盘快。</li>
-<li>redo log是一直往末尾追加，属于顺序IO，效率显然比随机IO高。</li>
-</ul>
-<h1 id="数据库如何保证隔离性？"><a href="#数据库如何保证隔离性？" class="headerlink" title="数据库如何保证隔离性？"></a>数据库如何保证隔离性？</h1><p>我们首先需要知道，如果无法保证隔离性会出现哪些问题呢？</p>
-<p>在典型的应用程序中，多个事务并发运行，经常会操作相同的数据来完成各自的任务，所以可能会导致以下问题的出现：</p>
-<h2 id="脏读（Dirty-Read）"><a href="#脏读（Dirty-Read）" class="headerlink" title="脏读（Dirty Read）"></a>脏读（Dirty Read）</h2><p>简单来说，脏读是指一个事务读取了被另一个事务修改但未提交的数据。</p>
-<p>一个事务读取数据并对数据进行了修改，这个修改对其他事务来说是可见的，即使当前事务没有提交。这时，另外一个事务读取了这个还未提交的数据，但第一个事务由于一些原因进行了回滚，导致数据并没有提交到数据库，那么第二个事务读取到的就是脏数据，即产生了脏读。</p>
-<p>下面将举一个例子来更为直观地说明脏读。</p>
-<p>例：事务1读取某表中的数据A=20，之后事务1修改数据A=A-1=19，但还未提交。这时，事务2读取表中数据A=19，然后事务1进行回滚导致对数据A的修改并未提交到数据库，A的值还是20。所以事务2读取到的就是脏数据。</p>
-<p><img src="/img/article_content_img/脏读.png" alt="脏读"></p>
-<h2 id="丢失修改（Lost-to-modify）"><a href="#丢失修改（Lost-to-modify）" class="headerlink" title="丢失修改（Lost to modify）"></a>丢失修改（Lost to modify）</h2><p>简单来说，就是一个事务修改了的数据，被另外一个事务再次修改，导致第一个事务修改的数据被覆盖（丢失）了。</p>
-<p>一个事务读取一个数据时，另外一个事务也读取了该数据，那么在第一个事务中修改了这个数据后，第二个事务也修改了这个数据。此时，第一个事务内的修改结果就被丢失了，因此称为丢失修改。</p>
-<p>下面将举一个例子来更为直观地说明丢失修改。</p>
-<p>例：事务1读取某表中的数据A=20，事务2也读取了该表中的数据A=20，然后事务1先修改了数据A=A-1=19，然后提交到数据库，后来事务2也修改了这个数据A=A-1=19，并提交到数据库。最终A的值为19。但是A进行了两次减1操作，A的值应该是18才对。这就是丢失修改，即事务1修改的数据A的值被事务2修改的数据A的值覆盖（丢失）了。</p>
-<p><img src="/img/article_content_img/丢失修改.png" alt="丢失修改"></p>
-<h2 id="不可重复读（Unrepeatable-Read）"><a href="#不可重复读（Unrepeatable-Read）" class="headerlink" title="不可重复读（Unrepeatable Read）"></a>不可重复读（Unrepeatable Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同一个数据，得到的值不一致。</p>
-<p>一个事务读取一个数据时，另外一个事务也读取了该数据，并对该数据进行了修改。此时，第一个事务再次读取该数据时，发现与之前读取的值不一样了，这就是不可重复读。</p>
-<p>下面将举一个例子来更为直观地说明不可重复读。</p>
-<p>例：事务1读取某表中的数据A=20，事务2也读取了该表中的数据A=20并将A的值进行了修改A=A-1=19，此时事务1再次读取数据A的值=19，这与第一次读取A的值=20不同。</p>
-<p><img src="/img/article_content_img/不可重复读.png" alt="不可重复读"></p>
-<h2 id="幻读（Phantom-Read）"><a href="#幻读（Phantom-Read）" class="headerlink" title="幻读（Phantom Read）"></a>幻读（Phantom Read）</h2><p>简单来说，就是一个事务在执行期间，多次读取同样的几行数据，但相比于第一次读取，会新增一些数据，就像出现了幻觉一样。</p>
-<p>一个事务读取了几行数据，接着另外一个并发事务往表中插入了一些新数据，之后第一个事务再次读取这几行数据时，发现数据变多了（不该出现的数据），这就是幻读。</p>
-<p>下面将举一个例子来更为直观地说明不可重复读。</p>
-<p>事务1根据条件（where name like “%王”）查询了某表中的一批数据（假设有5条数据），接着并发事务2往表中插入了一行数据，该数据同样满足上述条件，此时事务1再次根据该条件查询数据时，发现有6条数据，相比于之前多了一条。</p>
-<p><img src="/img/article_content_img/幻读.png" alt="幻读"></p>
-<h2 id="不可重复读和幻读有什么区别？"><a href="#不可重复读和幻读有什么区别？" class="headerlink" title="不可重复读和幻读有什么区别？"></a>不可重复读和幻读有什么区别？</h2><ul>
-<li>不可重复读主要针对的是<strong>某一行</strong>数据，并且针对的是<strong>UPDATE</strong>操作。</li>
-<li>幻读主要针对的是一个<strong>数据整体/范围</strong>，并且针对的是<strong>INSERT</strong>操作。</li>
-</ul>
-<p>因此，我们只要防止上述问题出现，即可保证事务的隔离性。那么如何防止上述问题出现呢？这里就需要隔离级别的概念。</p>
-<h2 id="数据库的四种隔离级别"><a href="#数据库的四种隔离级别" class="headerlink" title="数据库的四种隔离级别"></a>数据库的四种隔离级别</h2><p>SQL标准定义了四个隔离级别，其级别从低到高依次是：读未提交、读已提交、不可重复读、串行化。</p>
-<ul>
-<li><strong>读未提交（READ UNCOMMITTED）：</strong>允许读取尚<strong>未提交</strong>的数据变更，即一个事务提交之前，其执行结果对其他事务是可见的。该隔离级别最低，会导致脏读、不可重复读和幻读。</li>
-<li><strong>读已提交（READ COMMITTED）：</strong>允许读取并发事务<strong>已经提交</strong>的数据，即一个事务只能读取已经提交了的事务对数据做出的变更。该隔离级别是<strong>Oracle的默认隔离级别</strong>，可以解决脏读，但无法解决不可重复读和幻读。</li>
-<li><strong>可重复读（REPEATABLE READ）：</strong>确保同一个事务在执行期间，多次读取相同数据时，得到的结果相同。该隔离级别是<strong>MySQL的默认隔离级别</strong>，可以解决脏读和不可重复读，但无法解决幻读。</li>
-<li><strong>串行化（SERIALIZABLE）：</strong>所有事务串行执行，保证事务之间完全不可能产生干扰。该隔离级别最高，可以解决脏读、不可重复读和幻读问题，但是性能非常低，可能会导致大量的超时和锁竞争现象。一般不会使用。</li>
-</ul>
-<h1 id="MySQL中的锁"><a href="#MySQL中的锁" class="headerlink" title="MySQL中的锁"></a>MySQL中的锁</h1><p>锁是一种常见的并发事务的控制方式。根据加锁的范围，MySQL中的锁大致可以分为：全局锁、表锁和行锁。</p>
-<h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><p>全局锁就是对整个数据库实例加锁，可以通过<code>FLUSH TABLES WITH READ LOCK</code>（FTWRL）命令实现。加锁后，整个库处于只读状态，之后其他线程的数据更新语句（增、删、改）、数据定义语句（建表、修改表结构等）和更新类事务的提交语句，均会被阻塞。</p>
-<p><strong>全局锁的典型使用场景：全库逻辑备份</strong></p>
-<p>但备份过程中，整个库完全处于<strong>只读</strong>状态，也会造成以下问题：</p>
-<ul>
-<li>如果在主库上备份，那么在备份期间，主库不能执行更新，业务基本停摆。</li>
-<li>如果在从库备份，那么备份期间从库无法执行主库同步过来的binlog，导致主从数据不一致。</li>
-</ul>
-<p>当然，官方自带的逻辑备份工具是<strong>mysqldump</strong>，当mysqldump使用参数<code>-single-transaction</code>的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于MVCC的支持，这个过程中数据是可以正常更新的。但此方法只适用于所有的表使用事物引擎的库。如果有的表使用了不支持事务的引擎，那么备份就只能通过全局锁这种方式来实现了。</p>
-<p><strong>那么既然要做全库只读，为什么不使用<code>set global readonly = true</code>的方式呢？</strong></p>
-<p>主要有以下两个原因：</p>
-<ul>
-<li>某些系统中，<code>readonly</code>的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改global变量的方式影响面更大，不建议使用。</li>
-<li>在异常处理机制上存在差异。如果执行FTWRL命令之后由于客户端发生异常断开，那么MySQL会自动释放这个全局锁，整个库可以回到正常更新的状态。而将整个库设置为readonly后，如果客户端发生异常，则数据库就会一直保持readonly状态，这样会导致整个库长时间处于不可写的状态，风险较高。</li>
-</ul>
-<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><p>表级锁是MySQL中锁定粒度仅次于全局锁的一种锁，是<strong>针对非索引字段</strong>加的锁，对当前操作的整张表加锁，<strong>实现简单，资源消耗少，加锁快，不会出现死锁，但触发锁冲突的概率最高，高并发下效率低</strong>。表级锁与存储引擎无关，MyISAM和InnoDB引擎都支持表级锁。</p>
-<p><strong>MySQL中表级锁有两种：表锁、元数据锁（MDL，Meta Data Lock ）</strong></p>
-<h3 id="表锁："><a href="#表锁：" class="headerlink" title="表锁："></a>表锁：</h3><p>表锁的加锁语法为<code>lock tables xxx read/write</code>，<code>xxx</code>为表名，<code>read/write</code>为读锁或写锁。解锁可以使用<code>unlock tables</code>命令主动释放锁，也可以在客户端断开的时候自动释放。</p>
-<p>在表级锁中，如果加的是读锁，则当前线程读、写操作和其他线程的读操作均可以进行，但其他线程的写操作会被阻塞。如果加的是写锁，则当前线程的读、写操作均可进行，但其他线程的读、写操作均被阻塞。</p>
-<h3 id="元数据锁（MDL，Meta-Data-Lock）"><a href="#元数据锁（MDL，Meta-Data-Lock）" class="headerlink" title="元数据锁（MDL，Meta Data Lock）"></a>元数据锁（MDL，Meta Data Lock）</h3><p>MDL在MySQL5.5之后引入，该锁不需要显式使用，当访问一个表的时候会被自动加上。<strong>MDL的作用是保证读写的正确性，即用于隔离DML和DDL操作之间的干扰。</strong>例如：如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，删了一列，那么查询线程拿到的结果跟表结构就对不上了，肯定是有问题的。</p>
-<p>当对一个表做增、删、改、查操作时，需要加MDL读锁，当对一个表做结构变更时，需要加MDL写锁。</p>
-<ul>
-<li>读锁之间不互斥，允许多个线程对同一张表进行增、删、改、查操作。</li>
-<li>读锁与写锁之间，写锁与写锁之间互斥，所以如果有两个线程同时给一个表加字段，其中一个要等另一个执行完才能开始执行。</li>
-</ul>
-<p><strong>使用MDL锁中遇到的问题：</strong>给小表加字段导致数据库挂掉。（事务中的MDL锁，在语句执行开始时申请，但是语句结束后并不会马上释放，而会等到整个事务提交之后再释放）</p>
-<p><img src="/img/article_content_img/MDL锁问题.jpg" alt="MDL锁问题"></p>
-<p>从上图可以看出，sessionA先启动，这时候对表<code>t</code>加一个MDL读锁。由于sessionB需要的也是MDL读锁，因此可以正常执行。之后由于sessionA的MDL读锁还没有释放，而sessionC需要MDL写锁，因此sessionC会被阻塞。之后所有要在表<code>t</code>上新申请MDL读锁的请求也会被sessionC阻塞。因此，现在这个表<code>t</code>变成了一个完全不可读写的表。而如果这张表上查询语句频繁，且客户端有重试机制的话，那么每超时一个请求，就会再发起一个session去请求，整个数据库的线程很快就会爆满。</p>
-<p><strong>如何解决上述问题？</strong></p>
-<p>在<code>ALTER TABLE</code>语句里面设定等待时间，如果在指定的等待时间内没有拿到MDL写锁，也不要阻塞后面的业务语句，而是先放弃，之后开发人员或者DBA再通过重试命令重复这个过程。</p>
-<p>MariaDB已经合并了AliSQL的这个功能，所以这两个开元分支目前都支持DDL的<code>NOWAIT/WAIT N</code>语法。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name NOWAIT <span class="keyword">ADD</span> column...</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tbl_name WAIT N <span class="keyword">ADD</span> column...</span><br></pre></td></tr></table></figure>
-<h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2><p>MySQL的<strong>行锁是在引擎层由引擎自己实现的</strong>，行锁是针对数据表中行记录的锁。行锁也是MySQL中<strong>锁定粒度最小</strong>的一种锁，是<strong>针对索引字段加的锁</strong>。<strong>行级锁能大大减少数据库操作的冲突，并发度最高，但加锁开销也最大，加锁慢，可能会出现死锁</strong>。</p>
-<p>例如：事务A在执行期间对需要更改的那一行加行锁并进行更新操作，事务A还并未提交。此时事务B开启，也想要更改该行数据，但由于行锁还未释放，则事务B获得行锁失败，陷入阻塞等待，只有当事务A提交或回滚，事务A的行锁释放后，事务B才能对该行数据加行锁，执行更新操作。</p>
-<h3 id="两阶段协议"><a href="#两阶段协议" class="headerlink" title="两阶段协议"></a>两阶段协议</h3><p>两阶段协议指锁的添加和释放分别在两个阶段进行。也就是说，<strong>在InnoDB事务中，行锁是在需要的时候添加，不需要的时候不会立刻释放，而是要等到事务结束之后才释放</strong>。</p>
-<p><strong>如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量放在后面。</strong></p>
-<h3 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><p><img src="/img/article_content_img/MySQL死锁.jpg" alt="MySQL死锁"></p>
-<p>从上图可以看出，事务A在等待事务B释放id=2的行锁，事务B在等待事务A释放id=1的行锁，此时事务A和事务B就是在互相等待对方释放资源，陷入了死锁状态。</p>
-<p>对于死锁，有两种解决方案：</p>
-<ol>
-<li>直接进入等待，直到超时。超时时间通过参数<code>innodb_lock_wait_timeout</code>进行设置，默认为50s。</li>
-<li>发起死锁检测，发现死锁后，主动回滚死锁链中的某一个事务，让其他事务得以继续执行。可以将<code>innodb_deadlock_detect</code>参数设置为<code>on</code>来开启死锁检测，默认就是<code>on</code>。</li>
-</ol>
-<p>对于第一种方案，默认的超时时间为50s，即第一个被锁住的线程要等待50s才会超时退出，其他线程才能继续执行，这对于在线服务来说，是无法接受的。而如果将超时时间设置的很短，虽然可以很快解开死锁，但如果不是死锁，而是简单的锁等待的话，就会出现“误伤”。</p>
-<p>对于第二种方案，<code>innodb_deadlock_detect</code>默认值是<code>on</code>，主动进行死锁检测会在发生死锁的时候快速发现并进行处理，但也存在额外负担。<strong>死锁检测的时间复杂度是O(n^2^)</strong>。假设有1000个并发线程同时更新同一行，那么死锁检测操作就是100万（1000<em>1000）的量级，这期间需要<strong>消耗大量的CPU资源</strong>。因此，就可能会出现<em>*CPU利用率很高，但每秒执行的事务量却很少</em></em>的情况。</p>
-<p><strong>那么如何解决由热点数据行更新导致的性能问题？</strong></p>
-<ul>
-<li><p>如果可以确保这个业务一定不会出现死锁，可以临时把死锁检测关掉。</p>
-</li>
-<li><p>控制并发度。</p>
-<ol>
-<li><p>MySQL中间件做并发限制。</p>
-</li>
-<li><p>修改数据库源码：对于相同行的更新，在进入引擎之前排队。这样在InnoDB内部就不会有大量的死锁检测工作。</p>
-</li>
-<li><p>将一行改成逻辑上的多行来减少锁冲突。例如：将影院账户总额这一条记录拆成逻辑上的10条记录，影院郑虎总额等于这10条记录的值的总和。这样每次要给影院账户加金额的时候，随机选其中一条记录来增加。这样每次冲突的概率就变成原来的1/10，可以减少锁等待的个数，也就减少了死锁检测的CPU消耗。</p>
-<p>但这种方案要根据实际业务逻辑做详细设计。假如是退票逻辑，那么账户余额可能会减少，因此就需要考虑一部分行记录变成0的情况，代码层面就需要对其做特殊处理。</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="InnoDB中有哪几类行锁？"><a href="#InnoDB中有哪几类行锁？" class="headerlink" title="InnoDB中有哪几类行锁？"></a>InnoDB中有哪几类行锁？</h3><p>InnoDB行锁是通过对索引数据页上的记录加锁实现的，MySQL InnoDB支持三种数据行锁定方式：</p>
-<ul>
-<li><p><strong>记录锁（Record Lock）：</strong>也被称为记录锁，属于单个行记录上的锁。</p>
-</li>
-<li><p><strong>间隙锁（Gap Lock）：</strong>锁定一个范围，即锁的就是两个值之间的空隙，不包括记录本身。间隙锁只有在可重复读隔离级别下才有效。（左开右开）</p>
-<p><img src="/img/article_content_img/间隙锁.jpg" alt="MySQL死锁"></p>
-</li>
-<li><p><strong>临键锁（Next-Key Lock）：</strong>记录锁与间隙锁的结合，既锁定一个范围，也锁定记录行本身。主要为了解决幻读问题。（左开右闭）</p>
-</li>
-</ul>
-<p>在可重复读隔离级别下，行锁默认使用Next-Key Lock，但是如果操作的索引是唯一索引或者主键索引，InnoDB会对Next-Key Lock进行优化，将其降级为Record Lock。</p>
-<h3 id="共享锁和排它锁"><a href="#共享锁和排它锁" class="headerlink" title="共享锁和排它锁"></a>共享锁和排它锁</h3><p>不论是表级锁还是行级锁，都存在共享锁（Share Lock，S锁）和排它锁（Exclusive Lock，X锁）</p>
-<ul>
-<li><p>共享锁（S锁）：又称为读锁，事务在读取记录的时候获取共享锁，允许多个事务同时获取。（锁兼容）</p>
-<p>若事务R对数据对象A加上S锁，则事务R可以读A但不能修改A，其他事务只能再对A加S锁，直到事务R释放S锁后，才不能加X锁。</p>
-</li>
-<li><p>排它锁（X锁）：又称为写锁/独占锁，事务在修改记录的时候获取排它锁，不允许多个事务同时获取。（锁不兼容）</p>
-<p>若事务R对数据对象A加上X锁，则事务R可以读、写A，其他事务在事务R没有释放X锁之前，无法对A加任何锁。</p>
-</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">S锁</th>
-<th style="text-align:center">X锁</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">S锁</td>
-<td style="text-align:center">不冲突</td>
-<td style="text-align:center">冲突</td>
-</tr>
-<tr>
-<td style="text-align:center">X锁</td>
-<td style="text-align:center">冲突</td>
-<td style="text-align:center">冲突</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>意向锁：</strong>用来快速判断是否可以对某表使用表锁。意向锁属于表级锁，主要有以下两种：</p>
-<ul>
-<li><strong>意向共享锁（Intention Shared Lock，IS锁）：</strong>事务有意向对表中某些记录加S锁，则在加这个S锁之前，需要先对该表加IS锁。</li>
-<li><strong>意向排它锁（Intention Exclusive Lock，IX锁）：</strong>事务有意向对表中某些记录加X锁，则在加这个X锁之前，需要先对该表加IX锁。</li>
-</ul>
-<p>意向锁之间都是相互兼容的，不存在任何冲突。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">IS锁</th>
-<th style="text-align:center">IX锁</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">IS锁</td>
-<td style="text-align:center">兼容</td>
-<td style="text-align:center">兼容</td>
-</tr>
-<tr>
-<td style="text-align:center">IX锁</td>
-<td style="text-align:center">兼容</td>
-<td style="text-align:center">兼容</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>意向锁是由数据引擎自己维护的，用户无法手动操作意向锁，在为数据行加S/X锁之前，InnoDB会先获取该行数据所在表的对应的意向锁。</strong></p>
-<p><strong>MySQL加行锁的方式：</strong></p>
-<p><code>select ... for update</code>：对读取的记录加X锁</p>
-<p><code>select ... lock in share mode</code>：对读取的记录加S锁</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis面试题汇总（二）</title>
-    <url>/posts/60306.html</url>
-    <content><![CDATA[<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1>]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-        <tag>数据库</tag>
       </tags>
   </entry>
 </search>
