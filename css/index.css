@@ -1376,12 +1376,12 @@ canvas:not(#ribbon-canvas),
 :root {
   --global-font-size: 15px;
   --global-bg: #fff;
-  --font-color: #000000;
+  --font-color: #000;
   --hr-border: #d2ebfd;
   --hr-before-color: #bfe4fb;
   --search-bg: #f6f8fa;
-  --search-input-color: #000000;
-  --search-a-color: #000000;
+  --search-input-color: #000;
+  --search-a-color: #000;
   --preloader-bg: #37474f;
   --preloader-color: #fff;
   --tab-border-color: #f0f0f0;
@@ -1843,6 +1843,48 @@ figure.highlight pre .javascript .function {
 #article-container .gist table td {
   border: none;
 }
+#article-container figure.highlight {
+  margin: 0 0 24px;
+  border-radius: 7px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.4);
+  -webkit-transform: translateZ(0);
+}
+#article-container figure.highlight .highlight-tools:after {
+  position: absolute;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fc625d;
+  -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  content: ' ';
+}
+#article-container figure.highlight .highlight-tools .expand {
+  right: 0;
+}
+#article-container figure.highlight .highlight-tools .expand.closed {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transform: rotate(90deg) !important;
+  -moz-transform: rotate(90deg) !important;
+  -o-transform: rotate(90deg) !important;
+  -ms-transform: rotate(90deg) !important;
+  transform: rotate(90deg) !important;
+}
+#article-container figure.highlight .highlight-tools .expand ~ .copy-notice {
+  right: 3.45em;
+}
+#article-container figure.highlight .highlight-tools .expand ~ .copy-button {
+  right: 2.1em;
+}
+#article-container figure.highlight .highlight-tools .code-lang {
+  left: 75px;
+}
 #article-container .code-expand-btn {
   position: absolute;
   bottom: 0;
@@ -2012,7 +2054,7 @@ figure.highlight pre .javascript .function {
   height: 100%;
   vertical-align: top;
   text-align: center;
-  font-family: Titillium Web, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft JhengHei', 'Microsoft YaHei', sans-serif;
+  font-family: sans-serif;
 }
 @media screen and (max-width: 768px) {
   .error404 #error-wrap .error-content .error-info {
@@ -2561,9 +2603,6 @@ figure.highlight pre .javascript .function {
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap .article-meta-link {
   margin: 0 4px;
-}
-#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap time {
-  display: none;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a {
   color: #858585;
@@ -3645,9 +3684,6 @@ h1.page-title + .tag-cloud-list {
 #post-info #post-meta a:hover {
   color: #49b1f5;
   text-decoration: underline;
-}
-#post-info #post-meta time {
-  display: none;
 }
 #nav {
   position: absolute;
@@ -5004,7 +5040,7 @@ mjx-assistive-mml {
   bottom: 0;
 }
 .aplayer {
-  color: #000000;
+  color: #000;
 }
 #article-container .aplayer {
   margin: 0 0 20px;
@@ -5528,13 +5564,13 @@ blockquote.pullquote.right {
 .note.modern {
   border: 1px solid transparent !important;
   background-color: #f5f5f5;
-  color: #000000;
+  color: #000;
 }
 .note.flat {
   border: initial;
   border-left: 5px solid #eee;
   background-color: #f9f9f9;
-  color: #000000;
+  color: #000;
 }
 .note h2,
 .note h3,
@@ -6132,10 +6168,10 @@ blockquote.pullquote.right {
   }
 }
 .read-mode {
-  --font-color: #000000;
+  --font-color: #000;
   --readmode-light-color: #fff;
-  --white: #000000;
-  --light-grey: #000000;
+  --white: #000;
+  --light-grey: #000;
   --gray: #d6dbdf;
   --hr-border: #d6dbdf;
   --hr-before-color: #b9c2c9;
