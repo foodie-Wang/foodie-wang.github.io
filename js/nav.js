@@ -28,4 +28,4 @@ function scrollToTop(){
     document.getElementById("name-container").setAttribute("style","display:none");
     btf.scrollToDest(0, 500);
 }
-document.getElementById("page-name").innerText = document.title.split(" | 王赟栋の小站")[0];
+document.getElementById("page-name").innerText = document.title.split(" |")[0];
