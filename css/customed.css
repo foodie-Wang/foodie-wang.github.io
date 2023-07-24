@@ -1,8 +1,8 @@
 :root {
-    --trans-light: rgba(255, 255, 255, 0.70);
-    --trans-dark: rgba(25, 25, 25, 0.75);
-    --border-style: 1.2px solid rbg(169, 169, 169);
-    --backdrop-filter: blur(15px) saturate(150%);
+    --trans-light: rgba(255, 255, 255, 0.88);
+    --trans-dark: rgba(25, 25, 25, 0.88);
+    --border-style: 1px solid rbg(169, 169, 169);
+    --backdrop-filter: blur(5px) saturate(150%);
 }
 
 /* 一图流设置 */
@@ -39,21 +39,6 @@
     margin: auto;
 }
 
-/* 鼠标样式 */
-body {
-    cursor: url(https://bu.dusays.com/2022/05/17/6283c365d20dd.png), auto;
-}
-
-.hide-block>.hide-button.open,
-.hide-inline>.hide-button.open {
-    display: block
-}
-
-a,
-button,
-img {
-    cursor: url(https://bu.dusays.com/2022/05/17/6283c376afcfc.png), auto
-}
 
 /* 滚动条 */
 ::-webkit-scrollbar {
@@ -88,76 +73,73 @@ img {
 
 /* 首页文章卡片 */
 #recent-posts > .recent-post-item {
-    background: var(--trans-light);
-    backdrop-filter: var(--backdrop-filter);
-    border-radius: 30px;
-    border: var(--border-style);
-}
+	background: var(--trans-light);
+	border-radius: 25px;
+	border: var(--border-style);
+  }
+  
+  /* 首页侧栏卡片 */
+  #aside-content .card-widget {
+	background: var(--trans-light);
+	border-radius: 18px;
+	border: var(--border-style);
+  }
+  
+  /* 文章页、归档页、普通页面 */
+  div#post,
+  div#page,
+  div#archive {
+	background: var(--trans-light);
+	border: var(--border-style);
+	border-radius: 20px;
+	--border-style: 2px solid rgb(82, 224, 132);
+  }
 
-/* 首页侧栏卡片 */
-#aside-content .card-widget {
-    background: var(--trans-light);
-    backdrop-filter: var(--backdrop-filter);
-    border: var(--border-style);
-    border-radius: 30px;
-}
-
-/* 文章页、归档页、普通页面*/
-div#post,
-div#page,
-div#archive {
-    background: var(--trans-light);
-    backdrop-filter: var(--backdrop-filter);
-    border: var(--border-style);
-    border-radius: 30px;
-}
-
-/* 导航栏 */
-#page-header.nav-fixed #nav {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: var(--backdrop-filter);
-    
-}
-
-[data-theme="dark"] #page-header.nav-fixed #nav {
-    background: rbga(0, 0, 0, 0.7) !important;
-}
-
-/* 夜间模式遮罩 */
-[data-theme="dark"] #recent-posts > .recent-post-item,
-[data-theme="dark"] #aside-content .card-widget,
-[data-theme="dark"] div#post,
-[data-theme="dark"] div#archive,
-[data-theme="dark"] div#page {
-    background: var(--trans-dark);
-}
-
-/*夜间模式页脚页头遮罩透明*/
-[data-theme="dark"] #footer::before {
-    background: transparent !important;
-}
-[data-theme="dark"] #page-header::before {
-    background: transparent !important;
-}
-
-
-/* 阅读模式 */
-.read-mode #aside-content .card-widget {
-    background: rgba(158, 204, 171, 0.5) !important;
-}
-.read-mode div#post {
-    background: rgba(158, 204, 171, 0.5) !important;
-}
-
-/* 夜间模式下的阅读模式 */
-[data-theme="dark"] .read-mode #aside-content .card-widget {
-    background: rgba(25, 25, 25, 0.9) !important;
-    color: #ffffff;
-}
-[data-theme="dark"] .read-mode div#post {
-    background: rgba(25, 25, 25, 0.9) !important;
-    color: #ffffff;
-}
+  
+  /* 导航栏 */
+  #page-header.nav-fixed #nav {
+	background: rgba(255, 255, 255, 0.88);
+  }
+  
+  [data-theme="dark"] #page-header.nav-fixed #nav {
+	background: rgba(0, 0, 0, 0.7) !important;
+  }
+  
+  /* 夜间模式遮罩 */
+  [data-theme="dark"] #recent-posts > .recent-post-item,
+  [data-theme="dark"] #aside-content .card-widget,
+  [data-theme="dark"] div#post,
+  [data-theme="dark"] div#archive,
+  [data-theme="dark"] div#page {
+	background: var(--trans-dark);
+  }
+  
+  
+  /* 夜间模式页脚页头遮罩透明 */
+  [data-theme="dark"] #footer::before {
+	background: transparent !important;
+  }
+  [data-theme="dark"] #page-header::before {
+	background: transparent !important;
+  }
+  
+  /* 阅读模式 */
+  .read-mode #aside-content .card-widget {
+	background: rgba(118, 238, 152, 0.5) !important;
+  }
+  .read-mode div#post {
+	background: rgba(114, 227, 146, 0.5) !important;
+  }
+  
+  /* 夜间模式下的阅读模式 */
+  [data-theme="dark"] .read-mode #aside-content .card-widget {
+	background: rgba(25, 25, 25, 0.9) !important;
+	color: #ffffff;
+  }
+  [data-theme="dark"] .read-mode div#post {
+	background: rgba(25, 25, 25, 0.9) !important;
+	color: #ffffff;
+  }
 
 
 
@@ -311,17 +293,17 @@ figure.highlight pre .addition {
 
 /* 个人信息卡片背景设置 */
 /*白天主题下的配置*/
-/* #aside-content>.card-widget.card-info {
-    background-image: url('../img/light_personInfo_background.png');
+#aside-content>.card-widget.card-info {
+    background-image: url('../img/card_light_bg.png');
     background-repeat: no-repeat;
     background-attachment: inherit;
     background-size: 100%
-} */
+}
 
 /*黑暗主题下的配置*/
 [data-theme=dark] #aside-content>.card-widget.card-info {
     /*换成自己图片的地址*/
-    background-image: url('../img/black.png') !important
+    background-image: url('../img/card_night_bg.png') !important
 }
 
 
@@ -403,5 +385,5 @@ figure.highlight pre .addition {
 }
 
 #article-container ul > li {
-    list-style-type: disclosure-closed;
+    list-style-type: disc;
 }
