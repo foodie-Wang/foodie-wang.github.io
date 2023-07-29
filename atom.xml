@@ -6,7 +6,7 @@
   <link href="https://foodie-wang.github.io/atom.xml" rel="self"/>
   
   <link href="https://foodie-wang.github.io/"/>
-  <updated>2023-07-08T12:42:22.163Z</updated>
+  <updated>2023-07-29T03:55:44.276Z</updated>
   <id>https://foodie-wang.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring学习（一）</title>
+    <link href="https://foodie-wang.github.io/posts/54388.html"/>
+    <id>https://foodie-wang.github.io/posts/54388.html</id>
+    <published>2023-07-28T16:59:27.000Z</published>
+    <updated>2023-07-29T03:55:44.276Z</updated>
+    
+    
+    <summary type="html">初识Spring，了解Spring中的工厂模式</summary>
+    
+    
+    
+    <category term="后端" scheme="https://foodie-wang.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+    <category term="Java" scheme="https://foodie-wang.github.io/tags/Java/"/>
+    
+    <category term="Spring" scheme="https://foodie-wang.github.io/tags/Spring/"/>
+    
+    <category term="框架" scheme="https://foodie-wang.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis面试题汇总（二）</title>
