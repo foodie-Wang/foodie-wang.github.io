@@ -1915,7 +1915,7 @@
 
 </li>
 </ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="inline-p-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">在一段话中插入各种颜色的标签，包括：&#123;% p red, 红色 %&#125;、&#123;% p yellow, 黄色 %&#125;、&#123;% p green, 绿色 %&#125;、&#123;% p cyan, 青色 %&#125;、&#123;% p blue, 蓝色 %&#125;、&#123;% p gray, 灰色 %&#125;</span><br><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">文档「开始」页面中的标题部分就是超大号文字。</span><br><span class="line">&#123;% p center logo large, 王赟栋的小站 %&#125;</span><br><span class="line">&#123;% p center small, A Wonderful Theme for Hexo %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-<h2 id="引用note"><a href="#引用note" class="headerlink" title="引用note"></a>引用note</h2><div class="tabs" id="note-tag"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#note-tag-1">通用配置</button></li><li class="tab"><button type="button" data-href="#note-tag-2">标签语法</button></li><li class="tab"><button type="button" data-href="#note-tag-3">配置参数</button></li><li class="tab"><button type="button" data-href="#note-tag-4">样式预览</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="note-tag-1"><p>修改主题配置文件：</p>
+<h2 id="引用note"><a href="#引用note" class="headerlink" title="引用note"></a>引用note</h2><div class="tabs" id="note-tag"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#note-tag-1">通用配置</button></li><li class="tab"><button type="button" data-href="#note-tag-2">标签语法</button></li><li class="tab"><button type="button" data-href="#note-tag-3">配置参数</button></li><li class="tab"><button type="button" data-href="#note-tag-4">样式预览</button></li><li class="tab"><button type="button" data-href="#note-tag-5">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="note-tag-1"><p>修改主题配置文件：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">note:</span></span><br><span class="line">  <span class="comment"># Note tag style values:</span></span><br><span class="line">  <span class="comment">#  - simple    bs-callout old alert style. Default.</span></span><br><span class="line">  <span class="comment">#  - modern    bs-callout new (v2-v3) alert style.</span></span><br><span class="line">  <span class="comment">#  - flat      flat callout style with background, like on Mozilla or StackOverflow.</span></span><br><span class="line">  <span class="comment">#  - disabled  disable all CSS styles import of note tag.</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">simple</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">border_radius:</span> <span class="number">3</span></span><br><span class="line">  <span class="comment"># Offset lighter of background in % for modern and flat styles (modern: -12 | 12; flat: -18 | 6).</span></span><br><span class="line">  <span class="comment"># Offset also applied to label tag variables. This option can work with disabled note tag.</span></span><br><span class="line">  <span class="attr">light_bg_offset:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
 <p><code>icons</code>和<code>light_bg_offset</code>属性只对方法一生效。</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="note-tag-2"><details class="folding-tag" open><summary> 方法一 </summary>
               <div class='content'>
@@ -1947,10 +1947,7 @@
               <div class='content'>
               <ol><li><p>simple样式</p><div class="note icon-padding simple"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note blue icon-padding simple"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p></div><div class="note pink icon-padding simple"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p></div><div class="note red icon-padding simple"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p></div><div class="note orange icon-padding simple"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note purple icon-padding simple"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p></div><div class="note green icon-padding simple"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p></div></li><li><p>modern样式</p><div class="note icon-padding modern"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note blue icon-padding modern"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p></div><div class="note pink icon-padding modern"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p></div><div class="note red icon-padding modern"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p></div><div class="note orange icon-padding modern"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note purple icon-padding modern"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p></div><div class="note green icon-padding modern"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p></div></li><li><p>flat样式</p><div class="note icon-padding flat"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note blue icon-padding flat"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p></div><div class="note pink icon-padding flat"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p></div><div class="note red icon-padding flat"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p></div><div class="note orange icon-padding flat"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note purple icon-padding flat"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p></div><div class="note green icon-padding flat"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p></div></li><li><p>disabled样式</p><div class="note icon-padding disabled"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note blue icon-padding disabled"><i class="note-icon fas fa-bullhorn"></i><p>2021年快到了….</p></div><div class="note pink icon-padding disabled"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p></div><div class="note red icon-padding disabled"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p></div><div class="note orange icon-padding disabled"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p></div><div class="note purple icon-padding disabled"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p></div><div class="note green icon-padding disabled"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p></div></li><li><p>no-icon样式</p><div class="note no-icon flat"><p>你是刷 Visa 还是 UnionPay</p></div><div class="note blue no-icon flat"><p>2021年快到了….</p></div><div class="note pink no-icon flat"><p>小心开车 安全至上</p></div><div class="note red no-icon flat"><p>这是三片呢？还是四片？</p></div><div class="note orange no-icon flat"><p>你是刷 Visa 还是 UnionPay</p></div><div class="note purple no-icon flat"><p>剪刀石头布</p></div><div class="note green no-icon flat"><p>前端最讨厌的浏览器</p></div></li></ol>
               </div>
-            </details>
-
-<!-- tab 示例源码 -->
-<details class="folding-tag" open><summary> 方法一 </summary>
+            </details><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="note-tag-5"><details class="folding-tag" open><summary> 方法一 </summary>
               <div class='content'>
               <ol><li><p>simple样式</p><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note simple %&#125;默认 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default simple %&#125;default 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary simple %&#125;primary 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success simple %&#125;success 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info simple %&#125;info 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning simple %&#125;warning 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger simple %&#125;danger 提示块标签&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure></li><li><p>modern样式</p><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note modern %&#125;默认 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default modern %&#125;default 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary modern %&#125;primary 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success modern %&#125;success 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info modern %&#125;info 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning modern %&#125;warning 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger modern %&#125;danger 提示块标签&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure></li><li><p>flat样式</p><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note flat %&#125;默认 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default flat %&#125;default 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary flat %&#125;primary 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success flat %&#125;success 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info flat %&#125;info 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning flat %&#125;warning 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger flat %&#125;danger 提示块标签&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure></li><li><p>disabled样式</p><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note disabled %&#125;默认 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default disabled %&#125;default 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary disabled %&#125;primary 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success disabled %&#125;success 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info disabled %&#125;info 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning disabled %&#125;warning 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger disabled %&#125;danger 提示块标签&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure></li><li><p>no-icon样式</p><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note no-icon %&#125;默认 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note default no-icon %&#125;default 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note primary no-icon %&#125;primary 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note success no-icon %&#125;success 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note info no-icon %&#125;info 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note warning no-icon %&#125;warning 提示块标签&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% note danger no-icon %&#125;danger 提示块标签&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure></li></ol>
               </div>
@@ -2091,7 +2088,7 @@
 </div></div></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="timeline-tab-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% timeline 时间轴样式,blue %&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- timeline 2020-05-15 [<span class="string">2.6.3 -&gt; 2.6.6</span>](<span class="link">https://github.com/volantis-x/hexo-theme-volantis/releases/tag/2.6.6</span>) --&gt;</span><br><span class="line"></span><br><span class="line">不需要额外处理。</span><br><span class="line"></span><br><span class="line">&lt;!-- endtimeline --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- timeline 2020-04-20 [<span class="string">2.6.2 -&gt; 2.6.3</span>](<span class="link">https://github.com/volantis-x/hexo-theme-volantis/releases/tag/2.6.3</span>) --&gt;</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 全局搜索 <span class="code">`seotitle`</span> 并替换为 <span class="code">`seo_title`</span>。</span><br><span class="line"><span class="bullet">2.</span> group 组件的索引规则有变，使用 group 组件的文章内，<span class="code">`group: group_name`</span> 对应的组件名必须是 <span class="code">`group_name`</span>。</span><br><span class="line"><span class="bullet">2.</span> group 组件的列表名优先显示文章的 <span class="code">`short_title`</span> 其次是 <span class="code">`title`</span>。</span><br><span class="line"></span><br><span class="line">&lt;!-- endtimeline --&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endtimeline %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 <h2 id="链接卡片link"><a href="#链接卡片link" class="headerlink" title="链接卡片link"></a>链接卡片link</h2><div class="tabs" id="link-tab"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#link-tab-1">标签语法</button></li><li class="tab"><button type="button" data-href="#link-tab-2">样式预览</button></li><li class="tab"><button type="button" data-href="#link-tab-3">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="link-tab-1"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 链接, 图片链接（可选） %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="link-tab-2"><div class="tag link"><a class="link-card" title="糖果屋教程贴" href="https://akilar.top/posts/615e2dec/"><div class="left"><img src="/img/siteicon/favicon.ico"/></div><div class="right"><p class="text">糖果屋教程贴</p><p class="url">https://akilar.top/posts/615e2dec/</p></div></a></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="link-tab-3"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 糖果屋教程贴, https://akilar.top/posts/615e2dec/, /img/siteicon/favicon.ico %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 <h2 id="按钮btns"><a href="#按钮btns" class="headerlink" title="按钮btns"></a>按钮btns</h2><div class="tabs" id="btns-tab"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#btns-tab-1">标签语法</button></li><li class="tab"><button type="button" data-href="#btns-tab-2">配置参数</button></li><li class="tab"><button type="button" data-href="#btns-tab-3">样式预览</button></li><li class="tab"><button type="button" data-href="#btns-tab-4">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="btns-tab-1"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% btns 样式参数 %&#125;</span><br><span class="line">&#123;% cell 标题, 链接, 图片或者图标 %&#125;</span><br><span class="line">&#123;% cell 标题, 链接, 图片或者图标 %&#125;</span><br><span class="line">&#123;% endbtns %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="btns-tab-2"><ol>
-<li>圆角样式：rounded、</li>
+<li>圆角样式：rounded、circle</li>
 <li>增加文字样式：可以在容器内增加<code>&lt;b&gt;标题&lt;/b&gt;</code>和<code>&lt;p&gt;描述文字&lt;/p&gt;</code></li>
 <li>布局方式：默认为自动宽度，适合视野内只有一两个的情况</li>
 </ol>
@@ -2138,39 +2135,54 @@
 </tr>
 </tbody>
 </table>
-</div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="btns-tab-3"><ol>
-<li><p>类似「团队成员」之类的一组含有头像的链接：</p>
+</div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="btns-tab-3"><ul>
+<li>类似「团队成员」之类的一组含有头像的链接：</li>
+</ul>
 <div class="btns circle grid5">
 
-</li>
-</ol>
-<p><a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a></p>
-<p><a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a></p>
-<p><a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a></p>
-<p><a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a></p>
-<p><a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a></p>
-<pre><code>      &lt;/div&gt;
-</code></pre><ol>
-<li><p>含有图标的按钮</p>
+<a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a>
+
+<a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a>
+
+<a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a>
+
+<a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a>
+
+<a class="button" href='https://xaoxuu.com' title='xaoxuu'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png'>xaoxuu</a>
+
+          </div>
+
+<ul>
+<li>含有图标的按钮</li>
+</ul>
 <div class="btns rounded grid5">
 
-</li>
-</ol>
-<p><a class="button" href='/' title='下载源码'><i class='fas fa-download'></i>下载源码</a></p>
-<p><a class="button" href='/' title='查看文档'><i class='fas fa-book-open'></i>查看文档</a></p>
-<pre><code>      &lt;/div&gt;
-</code></pre><ol>
-<li><p>原形图标+标题+描述+图片+网格5列+居中</p>
+<a class="button" href='/' title='下载源码'><i class='fas fa-download'></i>下载源码</a>
+
+<a class="button" href='/' title='查看文档'><i class='fas fa-book-open'></i>查看文档</a>
+
+          </div>
+
+<ul>
+<li>原形图标+标题+描述+图片+网格5列+居中</li>
+</ul>
 <div class="btns circle center grid5">
 
-</li>
-</ol>
-<p><a href='https://apps.apple.com/cn/app/heart-mate-pro-hrm-utility/id1463348922?ls=1'><br>  <i class='fab fa-apple'></i><br>  <b>心率管家</b><br>  <p class='p red'>专业版</p><br>  <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/heartmate_pro.png'>
-</a></p>
-<p><a href='https://apps.apple.com/cn/app/heart-mate-lite-hrm-utility/id1475747930?ls=1'><br>  <i class='fab fa-apple'></i><br>  <b>心率管家</b><br>  <p class='p green'>免费版</p><br>  <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/heartmate_lite.png'>
-</a></p>
-<pre><code>      &lt;/div&gt;
-</code></pre><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="btns-tab-4"><ol>
+<a href='https://apps.apple.com/cn/app/heart-mate-pro-hrm-utility/id1463348922?ls=1'>
+  <i class='fab fa-apple'></i>
+  <b>心率管家</b>
+  <p class='p red'>专业版</p>
+  <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/heartmate_pro.png'>
+</a>
+
+<a href='https://apps.apple.com/cn/app/heart-mate-lite-hrm-utility/id1475747930?ls=1'>
+  <i class='fab fa-apple'></i>
+  <b>心率管家</b>
+  <p class='p green'>免费版</p>
+  <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/heartmate_lite.png'>
+</a>
+
+          </div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="btns-tab-4"><ol>
 <li><p>类似「团队成员」之类的一组含有头像的链接：</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% btns circle grid5 %&#125;</span><br><span class="line">&#123;% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %&#125;</span><br><span class="line">&#123;% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %&#125;</span><br><span class="line">&#123;% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %&#125;</span><br><span class="line">&#123;% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %&#125;</span><br><span class="line">&#123;% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %&#125;</span><br><span class="line">&#123;% endbtns %&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -2218,57 +2230,6 @@
 </li>
 </ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 <h2 id="音频audio"><a href="#音频audio" class="headerlink" title="音频audio"></a>音频audio</h2><div class="tabs" id="audio-tab"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#audio-tab-1">标签语法</button></li><li class="tab"><button type="button" data-href="#audio-tab-2">样式预览</button></li><li class="tab"><button type="button" data-href="#audio-tab-3">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="audio-tab-1"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% audio 音频链接 %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="audio-tab-2"><div class="audio"><audio controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/Lumia1020.mp3' type='audio/mp3'>Your browser does not support the audio tag.</audio></div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="audio-tab-3"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% audio https://github.com/volantis-x/volantis-docs/releases/download/assets/Lumia1020.mp3 %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-<h2 id="视频video"><a href="#视频video" class="headerlink" title="视频video"></a>视频video</h2><div class="tabs" id="video-tab"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#video-tab-1">标签语法</button></li><li class="tab"><button type="button" data-href="#video-tab-2">配置参数</button></li><li class="tab"><button type="button" data-href="#video-tab-3">样式预览</button></li><li class="tab"><button type="button" data-href="#video-tab-4">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="video-tab-1"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% video 视频链接 %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="video-tab-2"><ol>
-<li>对其方向：left、center、right</li>
-<li>列数：逗号后面直接写列数，支持1~4列。</li>
-</ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="video-tab-3"><ol>
-<li><p>100%宽度</p>
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-</li>
-<li><p>50%宽度</p>
-<div class="videos" col='2'>
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-</li>
-</ol>
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-</div>
-
-<ol>
-<li><p>25%宽度</p>
-<div class="videos" col='4'>
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-</li>
-</ol>
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-
-<div class="video"><video controls preload><source src='https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_0341.mov' type='video/mp4'>Your browser does not support the video tag.</video></div>
-</div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="video-tab-4"><ol>
-<li><p>100%宽度</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG<span class="emphasis">_0341.mov %&#125;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>50%宽度</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% videos, 2 %&#125;</span><br><span class="line">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG<span class="emphasis">_0341.mov %&#125;</span></span><br><span class="line"><span class="emphasis">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_</span>0341.mov %&#125;</span><br><span class="line">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG<span class="emphasis">_0341.mov %&#125;</span></span><br><span class="line"><span class="emphasis">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_</span>0341.mov %&#125;</span><br><span class="line">&#123;% endvideos %&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>25%宽度</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% videos, 4 %&#125;</span><br><span class="line">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG<span class="emphasis">_0341.mov %&#125;</span></span><br><span class="line"><span class="emphasis">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_</span>0341.mov %&#125;</span><br><span class="line">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG<span class="emphasis">_0341.mov %&#125;</span></span><br><span class="line"><span class="emphasis">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_</span>0341.mov %&#125;</span><br><span class="line">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG<span class="emphasis">_0341.mov %&#125;</span></span><br><span class="line"><span class="emphasis">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_</span>0341.mov %&#125;</span><br><span class="line">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG<span class="emphasis">_0341.mov %&#125;</span></span><br><span class="line"><span class="emphasis">&#123;% video https://github.com/volantis-x/volantis-docs/releases/download/assets/IMG_</span>0341.mov %&#125;</span><br><span class="line">&#123;% endvideos %&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 <h2 id="相册gallery"><a href="#相册gallery" class="headerlink" title="相册gallery"></a>相册gallery</h2><div class="tabs" id="gallery-tab"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#gallery-tab-1">标签语法</button></li><li class="tab"><button type="button" data-href="#gallery-tab-2">配置参数</button></li><li class="tab"><button type="button" data-href="#gallery-tab-3">样式预览</button></li><li class="tab"><button type="button" data-href="#gallery-tab-4">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="gallery-tab-1"><ol>
 <li><p>gallerygroup相册图库</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;gallery-group-main&quot;</span>&gt;</span></span></span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line">&#123;% galleryGroup name description link img-url %&#125;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
@@ -2312,21 +2273,20 @@
 <p>区别于旧版的Gallery相册,新的Gallery相册会自动根据图片长度进行排版，书写也更加方便，与markdown格式一样。可根据需要插入到相应的md。无需再自己配置长宽。<strong>建议在粘贴时故意使用长短、大小、横竖不一的图片</strong>，会有更好的效果。（尺寸完全相同的图片只会平铺输出，效果很糟糕）</p>
 </li>
 </ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="gallery-tab-3"><ul>
-<li><p>gallerygroup相册图库</p>
+<li>gallerygroup相册图库</li>
+</ul>
 <div class="gallery-group-main">
 
-<figure class="gallery-group">
-<img class="gallery-group-img no-lightbox" src='/img/wallpaper.jpg' alt="Group Image Gallery">
-<figcaption>
-<div class="gallery-group-name">电脑壁紙</div>
-<p>4K精美壁纸</p>
-<a href='/picLib/wallpaper'></a>
-</figcaption>
-</figure>
+  <figure class="gallery-group">
+  <img class="gallery-group-img no-lightbox" src='/img/wallpaper.jpg' alt="Group Image Gallery">
+  <figcaption>
+  <div class="gallery-group-name">电脑壁紙</div>
+  <p>4K精美壁纸</p>
+  <a href='/picLib/wallpaper'></a>
+  </figcaption>
+  </figure>
 
 
-</li>
-</ul>
   <figure class="gallery-group">
   <img class="gallery-group-img no-lightbox" src='/img/dailylife.jpg' alt="Group Image Gallery">
   <figcaption>
@@ -2346,18 +2306,17 @@
   </figcaption>
   </figure>
 
-<p>  &lt;/div&gt;</p>
-<ul>
-<li><p>gallery相册</p>
-<div class="gallery">
-  <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
-  <span class="gallery-data">[{"url":"http://love2peace.top/img/bizhi/1.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/2.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/3.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/4.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/5.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/6.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/7.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/8.jpg","alt":""}]</span>
-  </div>
-  <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
-  </div>
+</div>
 
-</li>
-</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="gallery-tab-4"><ul>
+<ul>
+<li>gallery相册</li>
+</ul>
+<div class="gallery">
+    <div class="fj-gallery  data" data-rowHeight="220" data-limit="10">
+    <span class="gallery-data">[{"url":"https://love2peace.top/img/1.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/2.jpg","alt":""},{"url":"https://love2peace.top/img/3.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/4.jpg","alt":""},{"url":"http://love2peace.top/img/bizhi/5.jpg","alt":""},{"url":"https://love2peace.top/img/6.jpg","alt":""},{"url":"https://love2peace.top/img/7.jpg","alt":""},{"url":"https://love2peace.top/img/8.jpg","alt":""}]</span>
+    </div>
+    <button class="gallery-load-more"><span>加载更多</span><i class="fa-solid fa-arrow-down"></i></button>
+    </div><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="gallery-tab-4"><ul>
 <li><p>gallerygroup相册图库</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;gallery-group-main&quot;</span>&gt;</span></span></span><br><span class="line">&#123;% galleryGroup &#x27;电脑壁紙&#x27; &#x27;4K精美壁纸&#x27; &#x27;/picLib/wallpaper&#x27; /img/wallpaper.jpg %&#125;</span><br><span class="line">&#123;% galleryGroup &#x27;日常生活&#x27; &#x27;生活琐碎&#x27; &#x27;/picLib/dailyLife&#x27; /img/dailylife.jpg %&#125;</span><br><span class="line">&#123;% galleryGroup &#x27;游戏&#x27; &#x27;游戏时刻&#x27; &#x27;/picLib/game&#x27; /img/game.jpg %&#125;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 </li>
@@ -2453,11 +2412,11 @@
 <svg class="icon" style="width:3em; height:3em" aria-hidden="true"><use xlink:href="#icon-dog_xu"></use></svg><svg class="icon" style="width:4em; height:4em" aria-hidden="true"><use xlink:href="#icon-dog"></use></svg>
 
 <svg class="icon" style="width:5em; height:5em" aria-hidden="true"><use xlink:href="#icon-boar_hai"></use></svg><svg class="icon" style="width:6em; height:6em" aria-hidden="true"><use xlink:href="#icon-boar"></use></svg><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="icon-tab-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% icon icon-rat<span class="emphasis">_zi %&#125;&#123;% icon icon-rat,2 %&#125;</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">&#123;% icon icon-ox_</span>chou,3 %&#125;&#123;% icon icon-ox,4 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% icon icon-tiger<span class="emphasis">_yin,5 %&#125;&#123;% icon icon-tiger,6 %&#125;</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">&#123;% icon icon-rabbit_</span>mao,1 %&#125;&#123;% icon icon-rabbit,2 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% icon icon-dragon<span class="emphasis">_chen,3 %&#125;&#123;% icon icon-dragon,4 %&#125;</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">&#123;% icon icon-snake_</span>si,5 %&#125;&#123;% icon icon-snake,6 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% icon icon-horse<span class="emphasis">_wu %&#125;&#123;% icon icon-horse,2 %&#125;</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">&#123;% icon icon-goat_</span>wei,3 %&#125;&#123;% icon icon-goat,4 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% icon icon-monkey<span class="emphasis">_shen,5 %&#125;&#123;% icon icon-monkey,6 %&#125;</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">&#123;% icon icon-rooster_</span>you %&#125;&#123;% icon icon-rooster,2 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% icon icon-dog<span class="emphasis">_xu,3 %&#125;&#123;% icon icon-dog,4 %&#125;</span></span><br><span class="line"><span class="emphasis"></span></span><br><span class="line"><span class="emphasis">&#123;% icon icon-boar_</span>hai,5 %&#125;&#123;% icon icon-boar,6 %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-<h2 id="气泡注释bubble"><a href="#气泡注释bubble" class="headerlink" title="气泡注释bubble"></a>气泡注释bubble</h2><div class="tabs" id="bubble-tab"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#bubble-tab-1">标签语法</button></li><li class="tab"><button type="button" data-href="#bubble-tab-2">配置参数</button></li><li class="tab"><button type="button" data-href="#bubble-tab-3">样式预览</button></li><li class="tab"><button type="button" data-href="#bubble-tab-4">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="bubble-tab-1"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% bubble [content] , [notation] ,[background-color] %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="bubble-tab-2"><ol>
+<h2 id="气泡注释bubble"><a href="#气泡注释bubble" class="headerlink" title="气泡注释bubble"></a>气泡注释bubble</h2><div class="tabs" id="bubble-tab"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#bubble-tab-1">标签语法</button></li><li class="tab"><button type="button" data-href="#bubble-tab-2">配置参数</button></li><li class="tab"><button type="button" data-href="#bubble-tab-3">样式预览</button></li><li class="tab"><button type="button" data-href="#bubble-tab-4">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="bubble-tab-1"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% bubble [content], [notation], [background-color] %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="bubble-tab-2"><ol>
 <li><code>content</code>：注释词汇</li>
-<li>notation：悬停显示的注解内容</li>
-<li>background-color：【可选】，气泡背景色，默认为<code>#71a4e3</code></li>
-</ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="bubble-tab-3"><p>最近我学到了不少新玩意儿（虽然对很多大佬来说这些已经是旧技术了），比如CSS的<span class="bubble-content">兄弟相邻选择器</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#71a4e3;">例如 h1 + p {margin-top:50px;}</span>&lt;/span&gt;，<span class="bubble-content">flex布局</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#ec5830;">Flex 是 Flexible Box 的缩写，意为弹性布局”，用来为盒状模型提供最大的灵活性”</span>&lt;/span&gt;，<span class="bubble-content">transform变换</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#1db675;">transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。</span>&lt;/span&gt;，animation的<span class="bubble-content">贝塞尔速度曲线</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#de4489;">贝塞尔曲线(Bézier curve)，又称贝兹曲线或贝济埃曲线，是应用于二维图形应用程序的数学曲线。一般的矢量图形软件通过它来精确画出曲线，贝兹曲线由线段与节点组成，节点是可拖动的支点，线段像可伸缩的皮筋</span>&lt;/span&gt;写法，还有今天刚看到的<span class="bubble-content">clip-path</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#868fd7;">clip-path属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。</span>&lt;/span&gt;属性。这些对我来说很新颖的概念狠狠的冲击着我以前积累起来的设计思路。</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="bubble-tab-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">最近我学到了不少新玩意儿（虽然对很多大佬来说这些已经是旧技术了），比如CSS的&#123;% bubble 兄弟相邻选择器,&quot;例如 h1 + p &#123;margin-top:50px;&#125;&quot; %&#125;，&#123;% bubble flex布局,&quot;Flex 是 Flexible Box 的缩写，意为&quot;弹性布局&quot;，用来为盒状模型提供最大的灵活性&quot;,&quot;#ec5830&quot; %&#125;，&#123;% bubble transform变换,&quot;transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。&quot;,&quot;#1db675&quot; %&#125;，animation的&#123;% bubble 贝塞尔速度曲线,&quot;贝塞尔曲线(Bézier curve)，又称贝兹曲线或贝济埃曲线，是应用于二维图形应用程序的数学曲线。一般的矢量图形软件通过它来精确画出曲线，贝兹曲线由线段与节点组成，节点是可拖动的支点，线段像可伸缩的皮筋&quot;,&quot;#de4489&quot; %&#125;写法，还有今天刚看到的&#123;% bubble clip-path,&quot;clip-path属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。&quot;,&quot;#868fd7&quot; %&#125;属性。这些对我来说很新颖的概念狠狠的冲击着我以前积累起来的设计思路。</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+<li><code>notation</code>：悬停显示的注解内容</li>
+<li><code>background-color</code>：【可选】，气泡背景色，默认为<code>#71a4e3</code></li>
+</ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="bubble-tab-3"><p>最近我学到了不少新玩意儿（虽然对很多大佬来说这些已经是旧技术了），比如CSS的<span class="bubble-content">兄弟相邻选择器</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#71a4e3;"> 例如 h1 + p {margin-top:50px;}</span>&lt;/span&gt;，<span class="bubble-content">flex布局</span><span class="bubble-notation"><span class="bubble-item" style="background-color: #ec5830;"> Flex是Flexible Box的缩写，意为弹性布局”，用来为盒状模型提供最大的灵活性”</span>&lt;/span&gt;，<span class="bubble-content">transform变换</span><span class="bubble-notation"><span class="bubble-item" style="background-color: #1db675;"> transform属性向元素应用 2D或3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。</span>&lt;/span&gt;，animation的<span class="bubble-content">贝塞尔速度曲线</span><span class="bubble-notation"><span class="bubble-item" style="background-color: #de4489;"> 贝塞尔曲线(Bézier curve)，又称贝兹曲线或贝济埃曲线，是应用于二维图形应用程序的数学曲线。一般的矢量图形软件通过它来精确画出曲线，贝兹曲线由线段与节点组成，节点是可拖动的支点，线段像可伸缩的皮筋</span>&lt;/span&gt;写法，还有今天刚看到的<span class="bubble-content">clip-path</span><span class="bubble-notation"><span class="bubble-item" style="background-color: #868fd7;"> clip-path属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。</span>&lt;/span&gt;属性。这些对我来说很新颖的概念狠狠的冲击着我以前积累起来的设计思路。 </p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="bubble-tab-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">最近我学到了不少新玩意儿（虽然对很多大佬来说这些已经是旧技术了），比如CSS的&#123;% bubble 兄弟相邻选择器,&quot;例如 h1 + p &#123;margin-top:50px;&#125;&quot; %&#125;，&#123;% bubble flex布局,&quot;Flex 是 Flexible Box 的缩写，意为&quot;弹性布局&quot;，用来为盒状模型提供最大的灵活性&quot;,&quot;#ec5830&quot; %&#125;，&#123;% bubble transform变换,&quot;transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。&quot;,&quot;#1db675&quot; %&#125;，animation的&#123;% bubble 贝塞尔速度曲线,&quot;贝塞尔曲线(Bézier curve)，又称贝兹曲线或贝济埃曲线，是应用于二维图形应用程序的数学曲线。一般的矢量图形软件通过它来精确画出曲线，贝兹曲线由线段与节点组成，节点是可拖动的支点，线段像可伸缩的皮筋&quot;,&quot;#de4489&quot; %&#125;写法，还有今天刚看到的&#123;% bubble clip-path,&quot;clip-path属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。&quot;,&quot;#868fd7&quot; %&#125;属性。这些对我来说很新颖的概念狠狠的冲击着我以前积累起来的设计思路。</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 ]]></content>
       <tags>
         <tag>工具</tag>
