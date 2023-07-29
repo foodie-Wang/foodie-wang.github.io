@@ -6,7 +6,7 @@
   <link href="https://foodie-wang.github.io/atom.xml" rel="self"/>
   
   <link href="https://foodie-wang.github.io/"/>
-  <updated>2023-07-29T03:55:44.276Z</updated>
+  <updated>2023-07-29T14:45:13.940Z</updated>
   <id>https://foodie-wang.github.io/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Tag PluginsPlus的使用</title>
+    <link href="https://foodie-wang.github.io/posts/12800.html"/>
+    <id>https://foodie-wang.github.io/posts/12800.html</id>
+    <published>2023-07-29T06:55:49.000Z</published>
+    <updated>2023-07-29T14:45:13.940Z</updated>
+    
+    
+    <summary type="html">Hexo外挂标签使用</summary>
+    
+    
+    
+    
+    <category term="工具" scheme="https://foodie-wang.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Spring学习（一）</title>
     <link href="https://foodie-wang.github.io/posts/54388.html"/>
     <id>https://foodie-wang.github.io/posts/54388.html</id>
     <published>2023-07-28T16:59:27.000Z</published>
-    <updated>2023-07-29T03:55:44.276Z</updated>
+    <updated>2023-07-29T09:07:52.847Z</updated>
     
     
     <summary type="html">初识Spring，了解Spring中的工厂模式</summary>
