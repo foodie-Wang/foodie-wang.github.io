@@ -6,7 +6,7 @@
   <link href="https://foodie-wang.github.io/atom.xml" rel="self"/>
   
   <link href="https://foodie-wang.github.io/"/>
-  <updated>2023-07-31T09:43:15.321Z</updated>
+  <updated>2023-08-27T15:53:10.343Z</updated>
   <id>https://foodie-wang.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Maven遇到的问题汇总</title>
+    <link href="https://foodie-wang.github.io/posts/43486.html"/>
+    <id>https://foodie-wang.github.io/posts/43486.html</id>
+    <published>2023-08-27T15:22:51.000Z</published>
+    <updated>2023-08-27T15:53:10.343Z</updated>
+    
+    
+    <summary type="html">日常开发过程中，使用Maven遇到的一些问题</summary>
+    
+    
+    
+    <category term="踩坑" scheme="https://foodie-wang.github.io/categories/%E8%B8%A9%E5%9D%91/"/>
+    
+    
+    <category term="Maven" scheme="https://foodie-wang.github.io/tags/Maven/"/>
+    
+  </entry>
   
   <entry>
     <title>Tag PluginsPlus的使用</title>
@@ -40,7 +59,7 @@
     <link href="https://foodie-wang.github.io/posts/54388.html"/>
     <id>https://foodie-wang.github.io/posts/54388.html</id>
     <published>2023-07-28T16:59:27.000Z</published>
-    <updated>2023-07-29T17:38:49.465Z</updated>
+    <updated>2023-08-08T08:32:14.471Z</updated>
     
     
     <summary type="html">初识Spring，了解Spring中的工厂模式</summary>
