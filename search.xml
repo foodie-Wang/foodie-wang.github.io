@@ -728,46 +728,46 @@
   <entry>
     <title>计算机网络面试题汇总（一）</title>
     <url>/posts/50226.html</url>
-    <content><![CDATA[<h1 id="一、OSI七层模型、TCP-IP四层模型与五层模型介绍"><a href="#一、OSI七层模型、TCP-IP四层模型与五层模型介绍" class="headerlink" title="一、OSI七层模型、TCP/IP四层模型与五层模型介绍"></a>一、OSI七层模型、TCP/IP四层模型与五层模型介绍</h1><p>OSI七层模型（从顶到下）分别是：应用层、表示层、会话层、传输层、网络层、数据链路层和物理层。</p>
+    <content><![CDATA[<h1 id="OSI七层模型、TCP-IP四层模型与五层模型"><a href="#OSI七层模型、TCP-IP四层模型与五层模型" class="headerlink" title="OSI七层模型、TCP/IP四层模型与五层模型"></a>OSI七层模型、TCP/IP四层模型与五层模型</h1><p>OSI七层模型（从顶到下）分别是：应用层、表示层、会话层、传输层、网络层、数据链路层和物理层。</p>
 <p>TCP/IP四层模型（从顶到下）分别是：应用层、传输层、网际层、网络接口层。</p>
 <p>五层模型（从顶到下）分别是：应用层、传输层、网络层、数据链路层、物理层。</p>
 <p>OSI七层模型中每一层的功能与常见协议如下：</p>
 <ul>
-<li><p><strong>应用层：</strong>通过应用进程间的交互来完成特定的网络应用。</p>
+<li><p><span class='p red'>应用层：</span>通过应用进程间的交互来完成特定的网络应用。</p>
 <p>常见协议：SMTP（简单邮件传输协议）、FTP（文件传输协议）、DNS（域名系统）、HTTP（超文本传输协议）、POP3（邮局协议）、Telnet（远程登录协议）…</p>
 </li>
-<li><p><strong>表示层：</strong>主要用于处理两个通信系统间信息交换的表示方式，包括：数据的加密和解密、数据的压缩和解压缩、数据的编码和解码等。</p>
+<li><p><span class='p red'>表示层：</span>主要用于处理两个通信系统间信息交换的表示方式，包括：数据的加密和解密、数据的压缩和解压缩、数据的编码和解码等。</p>
 </li>
-<li><p><strong>会话层：</strong>建立、维护和重连应用程序之间的会话。</p>
+<li><p><span class='p red'>会话层：</span>建立、维护和重连应用程序之间的会话。</p>
 </li>
-<li><p><strong>传输层：</strong>为两台主机进程之间的通信提供通用的数据传输服务。</p>
+<li><p><span class='p red'>传输层：</span>为两台主机进程之间的通信提供通用的数据传输服务。</p>
 <p>常见协议：TCP（传输控制协议）、UDP（用户数据报协议）。</p>
 </li>
-<li><p><strong>网络层：</strong>把传输层产生的报文段或用户数据报封装成分组和包进行传送。此外，还会寻找合适的网间路由和交换节点，保证数据的及时传输。</p>
+<li><p><span class='p red'>网络层：</span>把传输层产生的报文段或用户数据报封装成分组和包进行传送。此外，还会寻找合适的网间路由和交换节点，保证数据的及时传输。</p>
 <p>常见协议：IP（网际互联协议）、IPv6（网际互联协议第6版），ICMP（互联网控制信息协议）、IGMP（互联网组管理协议）、OSPF（开放最短路径优先协议）…</p>
 </li>
-<li><p><strong>数据链路层：</strong>将网络层传下来的IP数据报组装成帧，在两个相邻节点之间的链路上进行帧的传输。每一帧包括必要的控制信息（同步信息、差错控制、地址信息等）。</p>
+<li><p><span class='p red'>数据链路层：</span>将网络层传下来的IP数据报组装成帧，在两个相邻节点之间的链路上进行帧的传输。每一帧包括必要的控制信息（同步信息、差错控制、地址信息等）。</p>
 </li>
-<li><p><strong>物理层：</strong>利用物理传输介质为数据链路层提供物理连接，实现相邻计算机之间比特流的透明传输。</p>
+<li><p><span class='p red'>物理层：</span>利用物理传输介质为数据链路层提供物理连接，实现相邻计算机之间比特流的透明传输。</p>
 </li>
 </ul>
 <p><img src="https://love2peace.top/img/osi-model.png" alt="osi-model"></p>
-<h1 id="二、常见协议简介"><a href="#二、常见协议简介" class="headerlink" title="二、常见协议简介"></a>二、常见协议简介</h1><ul>
-<li><strong>HTTP（Hypertext Transfer Protocol，超文本传输协议）：</strong> 基于TCP协议，使用“客户端/服务器”工作模式，是一种用于传输超文本和多媒体内容的协议，主要是为Web浏览器与Web服务器之间的通信而设计的。当我们使用浏览器浏览网页时，网页就是通过HTTP请求进行加载的。HTTP是一种<strong>无状态</strong>协议，即无法记录客户端用户的状态。因此，一般采用会采用Session来记录客户端用户的状态。</li>
-<li><strong>SMTP（Simple Mail Transfer Protocol，简单邮件传输协议）：</strong>基于TCP协议，是一种用于发送电子邮件的协议。（注：SMTP只负责发送邮件，不负责接收邮件）</li>
-<li><strong>FTP（File Transfer Protocol，文件传输协议）：</strong>基于TCP协议，是一种用于在计算机之间传输文件的协议，可以屏蔽操作系统和文件存储方式。但FTP是一种不安全的协议，因为它在传输过程中不会对数据进行加密。因此，若要传输敏感数据，建议使用SFTP（<strong>SSH File Transfer Protocol，安全文件传输协议</strong>）。</li>
-<li><strong>Telnet（远程登录协议）：</strong>基于TCP协议，用于通过一个终端登录到其他服务器。但Telnet也是一种不安全的协议，因为所有数据都会以明文的形式传送。</li>
-<li><strong>DNS（Domain Name System，域名系统）：</strong>基于UDP协议，用于IP地址与域名映射。</li>
-<li><strong>POP3（Post Office Protocol - Version 3，邮局协议版本3）：</strong>基于TCP协议，负责邮件的接收。</li>
-<li><strong>IMAP（Internet Mail Access Protocol，邮件访问协议）：</strong>基于TCP协议，负责邮件的接收。相比于POP3协议，IMAP协议支持邮件搜索、标记、分类、归档等功能，并且支持在多个设备之间同步邮件状态。</li>
-<li><strong>TCP（Transmission Control Protocol，传输控制协议）：</strong>提供面向连接的、可靠的、有状态的数据传输服务。</li>
-<li><strong>UDP（User Datagram Protocol，用户数据报协议）：</strong>提供无连接的，不可靠的，无状态的数据传输服务。</li>
-<li><strong>IP（Internet Protocol，网际互联协议）：</strong>主要用来定义数据包格式、对数据包进行路由和寻址，以便它们可以跨网络传播并到达正确的目的地。目前IP协议主要有两种，分别为IPv4和IPv6。</li>
-<li><strong>ICMP（Internet Control Message Protocol，互联网控制信息协议）：</strong>一种用于传输网络状态和错误信息的协议，常用于网络诊断和故障排除。例如：<code>ping</code>命令就是使用ICMP协议来测试网络连通性。</li>
-<li><strong>ARP（Address Resolution Protocol，地址解析协议）：</strong>用于解决IP地址与物理地址（MAC地址）相互转化的问题。</li>
-<li><strong>RIP（Routing Information Protocol，路由信息协议）：</strong>一种内部网关协议，也是一种动态路由协议。该协议基于距离向量算法，使用固定的跳数作为度量标准，选择跳数最少的路径作为最佳路径。</li>
+<h1 id="常见协议简介"><a href="#常见协议简介" class="headerlink" title="常见协议简介"></a>常见协议简介</h1><ul>
+<li><span class='p red'>HTTP（Hypertext Transfer Protocol，超文本传输协议）：</span> 基于TCP协议，使用“客户端/服务器”工作模式，是一种用于传输超文本和多媒体内容的协议，主要是为Web浏览器与Web服务器之间的通信而设计的。当我们使用浏览器浏览网页时，网页就是通过HTTP请求进行加载的。HTTP是一种<span class='p green'>无状态</span>协议，即无法记录客户端用户的状态。因此，一般采用会采用Session来记录客户端用户的状态。</li>
+<li><span class='p red'>SMTP（Simple Mail Transfer Protocol，简单邮件传输协议）：</span>基于TCP协议，是一种用于发送电子邮件的协议。（注：SMTP只负责发送邮件，不负责接收邮件）</li>
+<li><span class='p red'>FTP（File Transfer Protocol，文件传输协议）：</span>基于TCP协议，是一种用于在计算机之间传输文件的协议，可以屏蔽操作系统和文件存储方式。但FTP是一种不安全的协议，因为它在传输过程中不会对数据进行加密。因此，若要传输敏感数据，建议使用SFTP（SSH File Transfer Protocol，安全文件传输协议）。</li>
+<li><span class='p red'>Telnet（远程登录协议）：</span>基于TCP协议，用于通过一个终端登录到其他服务器。但Telnet也是一种不安全的协议，因为所有数据都会以明文的形式传送。</li>
+<li><span class='p red'>DNS（Domain Name System，域名系统）：</span>基于UDP协议，用于IP地址与域名映射。</li>
+<li><span class='p red'>POP3（Post Office Protocol - Version 3，邮局协议版本3）：</span>基于TCP协议，负责邮件的接收。</li>
+<li><span class='p red'>IMAP（Internet Mail Access Protocol，邮件访问协议）：</span>基于TCP协议，负责邮件的接收。相比于POP3协议，IMAP协议支持邮件搜索、标记、分类、归档等功能，并且支持在多个设备之间同步邮件状态。</li>
+<li><span class='p red'>TCP（Transmission Control Protocol，传输控制协议）：</span>提供面向连接的、可靠的、有状态的数据传输服务。</li>
+<li><span class='p red'>UDP（User Datagram Protocol，用户数据报协议）：</span>提供无连接的，不可靠的，无状态的数据传输服务。</li>
+<li><span class='p red'>IP（Internet Protocol，网际互联协议）：</span>主要用来定义数据包格式、对数据包进行路由和寻址，以便它们可以跨网络传播并到达正确的目的地。目前IP协议主要有两种，分别为IPv4和IPv6。</li>
+<li><span class='p red'>ICMP（Internet Control Message Protocol，互联网控制信息协议）：</span>一种用于传输网络状态和错误信息的协议，常用于网络诊断和故障排除。例如：<code>ping</code>命令就是使用ICMP协议来测试网络连通性。</li>
+<li><span class='p red'>ARP（Address Resolution Protocol，地址解析协议）：</span>用于解决IP地址与物理地址（MAC地址）相互转化的问题。</li>
+<li><span class='p red'>RIP（Routing Information Protocol，路由信息协议）：</span>一种内部网关协议，也是一种动态路由协议。该协议基于距离向量算法，使用固定的跳数作为度量标准，选择跳数最少的路径作为最佳路径。</li>
 </ul>
-<h1 id="三、常见协议端口号"><a href="#三、常见协议端口号" class="headerlink" title="三、常见协议端口号"></a>三、常见协议端口号</h1><ul>
+<h1 id="常见协议端口号"><a href="#常见协议端口号" class="headerlink" title="常见协议端口号"></a>常见协议端口号</h1><ul>
 <li>Telnet（远程登录协议）：23</li>
 <li>FTP（文件传输协议）：20、21</li>
 <li>SMTP（简单邮件传输协议）：25</li>
@@ -777,15 +777,15 @@
 <li>HTTP（超文本传输协议）：80</li>
 <li>HTTPS（安全的超文本传输协议）：443</li>
 </ul>
-<h1 id="四、从输入URL到页面展示的全过程"><a href="#四、从输入URL到页面展示的全过程" class="headerlink" title="四、从输入URL到页面展示的全过程"></a>四、从输入URL到页面展示的全过程</h1><ol>
-<li><strong>DNS解析：</strong>浏览器查找所输入域名的IP地址。</li>
-<li><strong>TCP连接：</strong>浏览器与目标服务器通过“三次握手”建立TCP连接。</li>
-<li><strong>发送请求：</strong>浏览器通过HTTP协议发送请求。</li>
-<li><strong>返回报文：</strong>服务器处理请求并将处理结果及相应的视图返回给浏览器。</li>
-<li><strong>解析、渲染页面：</strong>浏览器解析并渲染页面。若遇到对js、css、图片等静态资源的引用，则重复上述步骤，向服务器请求这些资源。</li>
-<li><strong>TCP断开连接：</strong>浏览器与目标服务器通过“四次挥手”断开连接。</li>
+<h1 id="从输入URL到页面展示的全过程"><a href="#从输入URL到页面展示的全过程" class="headerlink" title="从输入URL到页面展示的全过程"></a>从输入URL到页面展示的全过程</h1><ol>
+<li><span class='p red'>DNS解析：</span>浏览器查找所输入域名的IP地址。</li>
+<li><span class='p red'>TCP连接：</span>浏览器与目标服务器通过“三次握手”建立TCP连接。</li>
+<li><span class='p red'>发送请求：</span>浏览器通过HTTP协议发送请求。</li>
+<li><span class='p red'>返回报文：</span>服务器处理请求并将处理结果及相应的视图返回给浏览器。</li>
+<li><span class='p red'>解析、渲染页面：</span>浏览器解析并渲染页面。若遇到对js、css、图片等静态资源的引用，则重复上述步骤，向服务器请求这些资源。</li>
+<li><span class='p red'>TCP断开连接：</span>浏览器与目标服务器通过“四次挥手”断开连接。</li>
 </ol>
-<h1 id="五、HTTP状态码"><a href="#五、HTTP状态码" class="headerlink" title="五、HTTP状态码"></a>五、HTTP状态码</h1><div class="table-container">
+<h1 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h1><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -857,41 +857,42 @@
 </tbody>
 </table>
 </div>
-<h1 id="六、HTTP和HTTPS的区别"><a href="#六、HTTP和HTTPS的区别" class="headerlink" title="六、HTTP和HTTPS的区别"></a>六、HTTP和HTTPS的区别</h1><ul>
-<li><strong>端口号不同：</strong>HTTP端口号为80，HTTPS端口号为443。</li>
-<li><strong>URL前缀不同：</strong>HTTP的URL前缀是<code>http://</code>，HTTPS的URL前缀是<code>https://</code>。</li>
-<li><strong>安全性不同：</strong>HTTP是明文传输，客户端和服务器都无法验证对方的身份，所以安全性很低。而HTTPS是运行在SSL/TLS之上的，所有内容都经过加密，加密采用对称加密，而对称加密的秘钥又是采用服务端证书进行了非对称加密，所以安全性很高。不过HTTPS比HTTP更耗费服务器资源。</li>
+<h1 id="HTTP和HTTPS的区别"><a href="#HTTP和HTTPS的区别" class="headerlink" title="HTTP和HTTPS的区别"></a>HTTP和HTTPS的区别</h1><ul>
+<li><span class='p red'>端口号不同：</span>HTTP端口号为80，HTTPS端口号为443。</li>
+<li><span class='p red'>URL前缀不同：</span>HTTP的URL前缀是<code>http://</code>，HTTPS的URL前缀是<code>https://</code>。</li>
+<li><span class='p red'>安全性不同：</span>HTTP是明文传输，客户端和服务器都无法验证对方的身份，所以安全性很低。而HTTPS是运行在SSL/TLS之上的，所有内容都经过加密，加密采用对称加密，而对称加密的秘钥又是采用服务端证书进行了非对称加密，所以安全性很高。不过HTTPS比HTTP更耗费服务器资源。</li>
 </ul>
-<h1 id="七、HTTP-1-0和HTTP-1-1的区别"><a href="#七、HTTP-1-0和HTTP-1-1的区别" class="headerlink" title="七、HTTP/1.0和HTTP/1.1的区别"></a>七、HTTP/1.0和HTTP/1.1的区别</h1><ul>
-<li><p><strong>连接方式：</strong>HTTP1.0默认使用短连接，但可以通过设置请求头的<code>Connection</code>属性为<code>Keep-Alive</code>来实现长连接。HTTP/1.1默认使用长连接。实现长连接需要客户端和服务端均支持长连接。</p>
+<h1 id="HTTP-1-0和HTTP-1-1的区别"><a href="#HTTP-1-0和HTTP-1-1的区别" class="headerlink" title="HTTP/1.0和HTTP/1.1的区别"></a>HTTP/1.0和HTTP/1.1的区别</h1><ul>
+<li><p><span class='p red'>连接方式：</span>HTTP1.0默认使用短连接，但可以通过设置请求头的<code>Connection</code>属性为<code>Keep-Alive</code>来实现长连接。HTTP/1.1默认使用长连接。实现长连接需要客户端和服务端均支持长连接。</p>
 </li>
-<li><p><strong>状态码：</strong>HTTP/1.0仅定义了16种状态码。而HTTP/1.1新加入了大量的状态码。例如：409（Conflict）、410（Gone）、100（Continue）、206（Partial Content）等。</p>
+<li><p><span class='p red'>状态码：</span>HTTP/1.0仅定义了16种状态码。而HTTP/1.1新加入了大量的状态码。例如：409（Conflict）、410（Gone）、100（Continue）、206（Partial Content）等。</p>
 </li>
-<li><p><strong>缓存策略：</strong>HTTP/1.0中主要使用Header里的<code>If-Modified-Since</code>和<code>Expires</code>作为缓存判断的标准，而HTTP/1.1引入了更多的缓存控制策略，例如：<code>Entity tag</code>、<code>If-Unmodified-Since</code>、<code>If-Match</code>、<code>If-None-Match</code>等。</p>
+<li><p><span class='p red'>缓存策略：</span>HTTP/1.0中主要使用Header里的<code>If-Modified-Since</code>和<code>Expires</code>作为缓存判断的标准，而HTTP/1.1引入了更多的缓存控制策略，例如：<code>Entity tag</code>、<code>If-Unmodified-Since</code>、<code>If-Match</code>、<code>If-None-Match</code>等。</p>
 </li>
-<li><p><strong>带宽：</strong>HTTP/1.0中存在一些浪费带宽的情况，例如：客户端只需要某个对象的一部分，而服务器却将整个对象都传送过来了，并且不支持断点续传功能。而HTTP/1.1引入了范围请求机制，当客户端想请求一个文件的一部分，或者需要继续下载一个已经下载了部分但被终止的文件，可以在请求中加入<code>range</code>头部，以请求数据的一部分，对应的状态码为206（Partial Content）。此外，HTTP/1.1在针对大文件请求时也做了优化，引入了100（Continue）状态码，当服务器不愿意响应这种大文件请求时，100状态码可以作为指示请求是否会被正常响应的标志。过程如下图：</p>
+<li><p><span class='p red'>带宽：</span>HTTP/1.0中存在一些浪费带宽的情况，例如：客户端只需要某个对象的一部分，而服务器却将整个对象都传送过来了，并且不支持断点续传功能。而HTTP/1.1引入了范围请求机制，当客户端想请求一个文件的一部分，或者需要继续下载一个已经下载了部分但被终止的文件，可以在请求中加入<code>range</code>头部，以请求数据的一部分，对应的状态码为206（Partial Content）。此外，HTTP/1.1在针对大文件请求时也做了优化，引入了100（Continue）状态码，当服务器不愿意响应这种大文件请求时，100状态码可以作为指示请求是否会被正常响应的标志。过程如下图：</p>
 <p><img src="/img/article_content_img/http1.1_continue1.png" alt="http1.1_continue1"></p>
 <p><img src="/img/article_content_img/http1.1_continue2.png" alt="http1.1_continue1"></p>
 </li>
-<li><p><strong>Host域：</strong>域名系统（DNS）允许多个主机名绑定到同一个IP地址上，但是HTTP/1.0不支持。例如：有一个资源的URL是<code>http://test1.org/index.html</code>，对于HTTP/1.0来说，请求的是<code>GET /index.html</code>，即没有加入主机名。这样的报文送到服务端，服务器无法理解客户端想要请求的真正网址。而对于HTTP/1.1来说，请求的是：</p>
+<li><span class='p red'>Host域：</span>域名系统（DNS）允许多个主机名绑定到同一个IP地址上，但是HTTP/1.0不支持。例如：有一个资源的URL是`http://test1.org/index.html`，对于HTTP/1.0来说，请求的是`GET /index.html`，即没有加入主机名。这样的报文送到服务端，服务器无法理解客户端想要请求的真正网址。而对于HTTP/1.1来说，请求的是：
+
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">GET /index.html HTTP/1.1</span><br><span class="line">Host: test1.org</span><br></pre></td></tr></table></figure>
 <p>这样，服务器就知道客户端想请求的真正网址了。</p>
 </li>
 </ul>
-<h1 id="八、HTTP-1-1和HTTP-2-0的区别"><a href="#八、HTTP-1-1和HTTP-2-0的区别" class="headerlink" title="八、HTTP/1.1和HTTP/2.0的区别"></a>八、HTTP/1.1和HTTP/2.0的区别</h1><ul>
-<li><strong>IO多路复用：</strong>HTTP/1.1使用的是串行方式，每个请求和响应都需要独立的连接。HTTP/2.0引入IO多路复用技术，支持在同一个连接上并发处理多个请求，并且并发请求的数量比HTTP/1.1大了好几个量级。因此，在处理多个请求时HTTP/2.0更加高效，减少了网络延迟，提高了性能。</li>
-<li><strong>二进制帧：</strong>HTTP/1.1使用文本格式的报文进行数据传输，而HTTP/2.0使用二进制帧进行数据传输，二进制帧更加紧凑和高效，减少了传输的数据量和宽带消耗。</li>
-<li><strong>头部压缩：</strong>HTTP/1.1中，请求和响应都是由自由状态行、请求/响应头部、消息主体三部分组成。一般而言，消息主体都会经过gzip压缩，或者本身传输的就是压缩后的二进制文件，但状态行和头部没有经过任何压缩，直接以纯文本的形式传输。随着Web功能越来越复杂，每个页面产生的请求越来越多，导致消耗在头部的流量越来越多，尤其每次都要传输UserAgent、Cookie这类不会频繁变动的内容，完全是一种浪费。所以在HTTP/2.0中采用HPACK算法对头部数据进行压缩，体积小了，传输速度就更快了。</li>
-<li><strong>服务器推送：</strong>对于HTTP/1.1来说，想要获取任何资源，客户端都必须自己向服务端发送请求，这样就会导致客户端请求次数过多。而HTTP/2.0引入了服务器推送技术（Sever Push），它允许服务器推送资源给浏览器，即当客户端请求一个资源时，服务器会将其他相关的资源一并推送给客户端，从而减少了客户端的请求次数和延迟。</li>
+<h1 id="HTTP-1-1和HTTP-2-0的区别"><a href="#HTTP-1-1和HTTP-2-0的区别" class="headerlink" title="HTTP/1.1和HTTP/2.0的区别"></a>HTTP/1.1和HTTP/2.0的区别</h1><ul>
+<li><span class='p red'>IO多路复用：</span>HTTP/1.1使用的是串行方式，每个请求和响应都需要独立的连接。HTTP/2.0引入IO多路复用技术，支持在同一个连接上并发处理多个请求，并且并发请求的数量比HTTP/1.1大了好几个量级。因此，在处理多个请求时HTTP/2.0更加高效，减少了网络延迟，提高了性能。</li>
+<li><span class='p red'>二进制帧：</span>HTTP/1.1使用文本格式的报文进行数据传输，而HTTP/2.0使用二进制帧进行数据传输，二进制帧更加紧凑和高效，减少了传输的数据量和宽带消耗。</li>
+<li><span class='p red'>头部压缩：</span>HTTP/1.1中，请求和响应都是由自由状态行、请求/响应头部、消息主体三部分组成。一般而言，消息主体都会经过gzip压缩，或者本身传输的就是压缩后的二进制文件，但状态行和头部没有经过任何压缩，直接以纯文本的形式传输。随着Web功能越来越复杂，每个页面产生的请求越来越多，导致消耗在头部的流量越来越多，尤其每次都要传输UserAgent、Cookie这类不会频繁变动的内容，完全是一种浪费。所以在HTTP/2.0中采用HPACK算法对头部数据进行压缩，体积小了，传输速度就更快了。</li>
+<li><span class='p red'>服务器推送：</span>对于HTTP/1.1来说，想要获取任何资源，客户端都必须自己向服务端发送请求，这样就会导致客户端请求次数过多。而HTTP/2.0引入了服务器推送技术（Sever Push），它允许服务器推送资源给浏览器，即当客户端请求一个资源时，服务器会将其他相关的资源一并推送给客户端，从而减少了客户端的请求次数和延迟。</li>
 </ul>
-<h1 id="九、HTTP-2-0和HTTP-3-0的区别"><a href="#九、HTTP-2-0和HTTP-3-0的区别" class="headerlink" title="九、HTTP/2.0和HTTP/3.0的区别"></a>九、HTTP/2.0和HTTP/3.0的区别</h1><ul>
-<li><strong>传输协议：</strong>HTTP/2.0是基于TCP的协议，HTTP/3.0新增了QUIC（Quic UDP Internet Connections）协议来实现可靠的传输，提供与SSL/TLS相当的安全性，具有较低的连接和传输延迟。</li>
-<li><strong>连接建立：</strong>由于HTTP/2.0是基于TCP的协议，因此建立连接需要进行“三次握手”过程（一般是3个RTT）。而HTTP/3.0是基于UDP的协议，因此避免了“三次握手”过程，它允许在第一次连接时发送数据（0个RTT）。</li>
-<li><strong>队头阻塞：</strong>HTTP/2.0采用了IO多路复用，即多个请求复用一个TCP连接，因此一旦发生丢包，就会阻塞所有HTTP请求。而HTTP/3.0基于QUIC协议的特性，在一定程度上解决了队头阻塞问题。一个连接建立多个不同的数据流，这些数据流之间互不影响，当某个数据流发生了丢包，其他数据流不会受到影响（本质上是多路复用+轮询）。</li>
-<li><strong>错误恢复：</strong>HTTP/3.0相比于HTTP/2.0来说，具有更好的错误恢复机制，当出现丢包、延迟等网络问题时，可以更快地进行恢复和重传。而HTTP/2.0需要依赖于TCP的错误恢复机制。</li>
-<li><strong>安全性：</strong>HTTP/2.0使用TLS协议进行加密，而HTTP/3.0基于QUIC协议，包含了内置的加密和身份验证机制，可以提供更强的安全性。</li>
+<h1 id="HTTP-2-0和HTTP-3-0的区别"><a href="#HTTP-2-0和HTTP-3-0的区别" class="headerlink" title="HTTP/2.0和HTTP/3.0的区别"></a>HTTP/2.0和HTTP/3.0的区别</h1><ul>
+<li><span class='p red'>传输协议：</span>HTTP/2.0是基于TCP的协议，HTTP/3.0新增了QUIC（Quic UDP Internet Connections）协议来实现可靠的传输，提供与SSL/TLS相当的安全性，具有较低的连接和传输延迟。</li>
+<li><span class='p red'>连接建立：</span>由于HTTP/2.0是基于TCP的协议，因此建立连接需要进行“三次握手”过程（一般是3个RTT）。而HTTP/3.0是基于UDP的协议，因此避免了“三次握手”过程，它允许在第一次连接时发送数据（0个RTT）。</li>
+<li><span class='p red'>队头阻塞：</span>HTTP/2.0采用了IO多路复用，即多个请求复用一个TCP连接，因此一旦发生丢包，就会阻塞所有HTTP请求。而HTTP/3.0基于QUIC协议的特性，在一定程度上解决了队头阻塞问题。一个连接建立多个不同的数据流，这些数据流之间互不影响，当某个数据流发生了丢包，其他数据流不会受到影响（本质上是多路复用+轮询）。</li>
+<li><span class='p red'>错误恢复：</span>HTTP/3.0相比于HTTP/2.0来说，具有更好的错误恢复机制，当出现丢包、延迟等网络问题时，可以更快地进行恢复和重传。而HTTP/2.0需要依赖于TCP的错误恢复机制。</li>
+<li><span class='p red'>安全性：</span>HTTP/2.0使用TLS协议进行加密，而HTTP/3.0基于QUIC协议，包含了内置的加密和身份验证机制，可以提供更强的安全性。</li>
 </ul>
-<h1 id="十、HTTPS（SSL-TLS）的连接过程是怎么样的"><a href="#十、HTTPS（SSL-TLS）的连接过程是怎么样的" class="headerlink" title="十、HTTPS（SSL/TLS）的连接过程是怎么样的"></a>十、HTTPS（SSL/TLS）的连接过程是怎么样的</h1><ol>
+<h1 id="HTTPS（SSL-TLS）的连接过程是怎么样的"><a href="#HTTPS（SSL-TLS）的连接过程是怎么样的" class="headerlink" title="HTTPS（SSL/TLS）的连接过程是怎么样的"></a>HTTPS（SSL/TLS）的连接过程是怎么样的</h1><ol>
 <li><p>TLS层是在TCP层之上的，因此在建立TLS之前，需要先建立TCP连接。</p>
 </li>
 <li><p>客户端向服务器发送建立TLS请求，请求内容包括：客户端支持的SSL/TLS协议版本号、客户端产生的随机数client-random、客户端支持的加密规则等。</p>
@@ -903,12 +904,11 @@
 <li><p>如果校验通过，客户端会从数字证书中取出服务器的公钥，然后使用这个公钥去加密要传输的报文，之后向服务器发送以下信息：</p>
 <ul>
 <li>Client Key Exchange：基于前面提到的两个随机数，再生成第三个随机数pre-master，然后通过CA证书中的公钥对pre-master加密，得到pre-master key，发送给服务器。</li>
-<li>Change Cipher Spec：加密通信算法改变通知，表示客户端随后的信息都将用<strong>会话秘钥</strong>加密通信。</li>
+<li>Change Cipher Spec：加密通信算法改变通知，表示客户端随后的信息都将用<span class='p green'>会话秘钥</span>加密通信。</li>
 <li>Encrypted handshake message：这一步对应的是客户端的Finish消息，客户端将前面握手的消息生成摘要，再用协商好的会话秘钥进行加密，这是客户端发出的第一条加密消息，服务端收到后，会用会话秘钥解密，如果能解出来说明前面协商的秘钥是一致的，至此，客户端的握手完成。</li>
 </ul>
-<blockquote>
-<p>会话秘钥是用双方协商的加密算法和三个随机数生成的</p>
-</blockquote>
+<div class="note info flat"><p>会话秘钥是用双方协商的加密算法和三个随机数生成的</p>
+</div>
 </li>
 <li><p>服务器使用自己的CA证书的私钥对pre-master key解密，得到pre-master，再计算出会话秘钥，随后向客户端发送以下信息：</p>
 <ul>
@@ -919,20 +919,20 @@
 <li><p>至此，整个SSL/TLS的握手阶段全部结束，TCP四次挥手断开连接。</p>
 </li>
 </ol>
-<h1 id="十一、HTTP协议如何保持状态"><a href="#十一、HTTP协议如何保持状态" class="headerlink" title="十一、HTTP协议如何保持状态"></a>十一、HTTP协议如何保持状态</h1><p>HTTP是一种无状态协议，即不会对请求和响应之间的通信状态进行保存。因此，当我们需要保存用户状态时，需要采用Session机制。Session的主要作用就是通过服务端记录用户的状态，典型场景是购物车，当添加商品到购物车时，系统本来是不知道是哪个用户操作的（HTTP无状态），但由于服务端会给每个用户创建特定的Session，以此来标识并跟踪用户，这样系统便知道是哪个用户进行添加购物车的操作了。</p>
+<h1 id="HTTP协议如何保持状态"><a href="#HTTP协议如何保持状态" class="headerlink" title="HTTP协议如何保持状态"></a>HTTP协议如何保持状态</h1><p>HTTP是一种无状态协议，即不会对请求和响应之间的通信状态进行保存。因此，当我们需要保存用户状态时，需要采用Session机制。Session的主要作用就是通过服务端记录用户的状态，典型场景是购物车，当添加商品到购物车时，系统本来是不知道是哪个用户操作的（HTTP无状态），但由于服务端会给每个用户创建特定的Session，以此来标识并跟踪用户，这样系统便知道是哪个用户进行添加购物车的操作了。</p>
 <p>Session在服务端一般会保存在数据库和内存（例如：Redis）。然后通过在Cookie中附加SessionID的方式来实现Session跟踪。如果Cookie被禁用了，则可以利用URL重写，把SessionID直接附加到URL路径的后面。</p>
-<h1 id="十二、Cookie和Session是如何配合的"><a href="#十二、Cookie和Session是如何配合的" class="headerlink" title="十二、Cookie和Session是如何配合的"></a>十二、Cookie和Session是如何配合的</h1><p>用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的Session，请求返回时将此Session的唯一标识信息SessionID返回给浏览器，浏览器收到服务器返回的SessionID后，会将此信息存入到Cookie中，同时Cookie记录此SessionID属于哪个域名。</p>
+<h1 id="Cookie和Session是如何配合的"><a href="#Cookie和Session是如何配合的" class="headerlink" title="Cookie和Session是如何配合的"></a>Cookie和Session是如何配合的</h1><p>用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的Session，请求返回时将此Session的唯一标识信息SessionID返回给浏览器，浏览器收到服务器返回的SessionID后，会将此信息存入到Cookie中，同时Cookie记录此SessionID属于哪个域名。</p>
 <p>用户第二次访问服务器的时候，请求会自动判断此域名下是否存在Cookie信息，如果存在，则自动将Cookie信息也发送给服务器，服务器会从Cookie中获取SessionID，再根据SessionID查找对应的Session信息，如果没有找到，说明用户没有登录或者登录失效，如果找到了，说明用户已经登录，可执行后续操作。</p>
-<h1 id="十三、Cookie和Session的区别"><a href="#十三、Cookie和Session的区别" class="headerlink" title="十三、Cookie和Session的区别"></a>十三、Cookie和Session的区别</h1><ul>
-<li><strong>存储位置：</strong>Cookie的数据信息保存在客户端浏览器中。Session的数据信息保存在服务器上。</li>
-<li><strong>存储容量：</strong>单个Cookie保存的数据小于等于4KB，一个站点最多保存20个Cookie。对于Session来说，没有上限，但是出于对服务器的性能考虑，Session内不要存放过多的东西，并且设置Session删除机制。</li>
-<li><strong>存储方式：</strong>Cookie中只能保存ASCII字符串，如果要存储非ASCII字符串还要对其编码。Session中能够存储任何类型的数据。</li>
-<li><strong>隐私策略：</strong>Cookie存储在浏览器中，对客户端是可见的。Session存储在服务器上，对客户端是透明的（不可见）。</li>
-<li><strong>跨域支持：</strong>Cookie支持跨域名访问，Session不支持跨域名访问。</li>
-<li><strong>生命周期：</strong>Cookie保存在硬盘中，通过设置<code>maxAge</code>属性来设置生命周期，如果是比较大的正整数，那么关闭浏览器，Cookie还是存在的。Session保存在服务器中，设置<code>maxInactiveInterval</code>属性值来确定Session的有效期，并且Session虽然没有从服务器中消亡，但也失效了。</li>
-<li><strong>浏览器支持：</strong>如果浏览器禁用了Cookie，那么Cookie是无用的。而Session可以通过url重写来进行会话跟踪。</li>
+<h1 id="Cookie和Session的区别"><a href="#Cookie和Session的区别" class="headerlink" title="Cookie和Session的区别"></a>Cookie和Session的区别</h1><ul>
+<li><span class='p red'>存储位置：</span>Cookie的数据信息保存在客户端浏览器中。Session的数据信息保存在服务器上。</li>
+<li><span class='p red'>存储容量：</span>单个Cookie保存的数据小于等于4KB，一个站点最多保存20个Cookie。对于Session来说，没有上限，但是出于对服务器的性能考虑，Session内不要存放过多的东西，并且设置Session删除机制。</li>
+<li><span class='p red'>存储方式：</span>Cookie中只能保存ASCII字符串，如果要存储非ASCII字符串还要对其编码。Session中能够存储任何类型的数据。</li>
+<li><span class='p red'>隐私策略：</span>Cookie存储在浏览器中，对客户端是可见的。Session存储在服务器上，对客户端是透明的（不可见）。</li>
+<li><span class='p red'>跨域支持：</span>Cookie支持跨域名访问，Session不支持跨域名访问。</li>
+<li><span class='p red'>生命周期：</span>Cookie保存在硬盘中，通过设置<code>maxAge</code>属性来设置生命周期，如果是比较大的正整数，那么关闭浏览器，Cookie还是存在的。Session保存在服务器中，设置<code>maxInactiveInterval</code>属性值来确定Session的有效期，并且Session虽然没有从服务器中消亡，但也失效了。</li>
+<li><span class='p red'>浏览器支持：</span>如果浏览器禁用了Cookie，那么Cookie是无用的。而Session可以通过url重写来进行会话跟踪。</li>
 </ul>
-<h1 id="十四、HTTP的GET和POST请求方式的区别"><a href="#十四、HTTP的GET和POST请求方式的区别" class="headerlink" title="十四、HTTP的GET和POST请求方式的区别"></a>十四、HTTP的GET和POST请求方式的区别</h1><ul>
+<h1 id="HTTP的GET和POST请求方式的区别"><a href="#HTTP的GET和POST请求方式的区别" class="headerlink" title="HTTP的GET和POST请求方式的区别"></a>HTTP的GET和POST请求方式的区别</h1><ul>
 <li>GET是获取数据，POST是提交数据。</li>
 <li>我们平时在浏览器上输入网址直接访问的方式就是GET方式。而form表单提交，method里面设置的post，则是POST方式。</li>
 <li>GET的访问时候的参数是在URL里面的，比如<code>?username=111&amp;password=123</code>，POST提交的参数是在请求体里面的。而且在请求体里面的会进行urlencode编码，所以这两者相比较来说，POST更安全。但其实从数据传输角度来说这两种都不安全，如果想要安全的，需要使用HTTPS协议。</li>
@@ -945,7 +945,7 @@
 <li>HTTP协议并没有对GET和POST的长度做限制，其实是浏览器限制了他们传输大小。URL地址是有长度限制的，浏览器不同，长度限制的具体数值也是不一样的。比如IE浏览器是2083字节。需要注意的是这些仅仅是URL地址栏的长度限制。理论上来说POST的长度是没有限制的，但是受服务器的配置限制或者内存大小的限制，造成了实际开发中POST也是有数据长度的限制的。</li>
 <li>因为GET是获取数据，所以GET请求是安全且幂等的，是无害的。这个安全指得是对数据不会造成影响。幂等就是无论获取多少次数据得到的资源都是一样的。POST是向服务器传输数据，数据会被重新提交，所以就会有对原有的数据造成伤害。</li>
 </ul>
-<h1 id="十五、URL和URI的区别"><a href="#十五、URL和URI的区别" class="headerlink" title="十五、URL和URI的区别"></a>十五、URL和URI的区别</h1><p>URI是统一资源标识符，可以唯一标识一个资源。</p>
+<h1 id="URL和URI的区别"><a href="#URL和URI的区别" class="headerlink" title="URL和URI的区别"></a>URL和URI的区别</h1><p>URI是统一资源标识符，可以唯一标识一个资源。</p>
 <p>URL是统一资源定位符，它是具体的URI，即它既可以唯一标识一个资源，还提供了定位该资源的信息。</p>
 ]]></content>
       <categories>
@@ -958,74 +958,75 @@
   <entry>
     <title>计算机网络面试题汇总（二）</title>
     <url>/posts/21576.html</url>
-    <content><![CDATA[<h1 id="一、TCP与UDP的区别"><a href="#一、TCP与UDP的区别" class="headerlink" title="一、TCP与UDP的区别"></a>一、TCP与UDP的区别</h1><ul>
-<li><strong>是否面向连接：</strong>TCP是面向连接的，即传输数据之前，需要先与服务端通过“三次握手”建立连接，数据传输完成后，通过“四次挥手”释放连接。而UDP则是无连接的，可以直接进行数据的传输。</li>
-<li><strong>传输是否可靠：</strong>TCP由于具有“三次握手”、“四次挥手”、流量控制、拥塞控制、超时重传、确认等机制，保证了TCP的传输是可靠的，即无差错、不丢失、不重复、按序到达。而UDP不具有上述机制，因此传输是不可靠的。</li>
-<li><strong>是否具有状态：</strong>TCP传输是有状态的，即TCP会去记录自己发送消息的状态。比如：消息是否发送了、消息是否被接收了等。因此，TCP会维持一个复杂的连接状态表。而UDP传输是无状态的。</li>
-<li><strong>首部开销：</strong>TCP的首部开销为20个字节，UDP的首部开销8个字节。</li>
-<li><strong>传输形式：</strong>TCP是基于字节流进行传输，而UDP是基于报文进行传输。</li>
-<li><strong>传输效率：</strong>由于TCP具有各种各样的机制来保证其传输的可靠性，因此传输效率比UDP低很多。</li>
-<li><strong>是否支持广播或多播服务：</strong>TCP只支持一对一（点对点）通信，而UDP既支持一对一通信，也支持一对多、多对一、多对多通信。</li>
-<li><strong>应用场景：</strong>TCP主要用于严格保证数据可靠传输的场景，例如：文件、邮件传输。而UDP主要用于追求实时性，即便丢失一些数据也无关紧要的场景，例如：直播、语音、视频、游戏等。</li>
+    <content><![CDATA[<h1 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h1><ul>
+<li><span class='p red'>是否面向连接：</span>TCP是面向连接的，即传输数据之前，需要先与服务端通过“三次握手”建立连接，数据传输完成后，通过“四次挥手”释放连接。而UDP则是无连接的，可以直接进行数据的传输。</li>
+<li><span class='p red'>传输是否可靠：</span>TCP由于具有“三次握手”、“四次挥手”、流量控制、拥塞控制、超时重传、确认等机制，保证了TCP的传输是可靠的，即无差错、不丢失、不重复、按序到达。而UDP不具有上述机制，因此传输是不可靠的。</li>
+<li><span class='p red'>是否具有状态：</span>TCP传输是有状态的，即TCP会去记录自己发送消息的状态。比如：消息是否发送了、消息是否被接收了等。因此，TCP会维持一个复杂的连接状态表。而UDP传输是无状态的。</li>
+<li><span class='p red'>首部开销：</span>TCP的首部开销为20个字节，UDP的首部开销8个字节。</li>
+<li><span class='p red'>传输形式：</span>TCP是基于字节流进行传输，而UDP是基于报文进行传输。</li>
+<li><span class='p red'>传输效率：</span>由于TCP具有各种各样的机制来保证其传输的可靠性，因此传输效率比UDP低很多。</li>
+<li><span class='p red'>是否支持广播或多播服务：</span>TCP只支持一对一（点对点）通信，而UDP既支持一对一通信，也支持一对多、多对一、多对多通信。</li>
+<li><span class='p red'>应用场景：</span>TCP主要用于严格保证数据可靠传输的场景，例如：文件、邮件传输。而UDP主要用于追求实时性，即便丢失一些数据也无关紧要的场景，例如：直播、语音、视频、游戏等。</li>
 </ul>
-<h1 id="二、TCP和UDP首部的格式"><a href="#二、TCP和UDP首部的格式" class="headerlink" title="二、TCP和UDP首部的格式"></a>二、TCP和UDP首部的格式</h1><p>UDP首部由源端口号、目标端口号、包长度、校验和组成。</p>
+<h1 id="TCP和UDP首部的格式"><a href="#TCP和UDP首部的格式" class="headerlink" title="TCP和UDP首部的格式"></a>TCP和UDP首部的格式</h1><p>UDP首部由源端口号、目标端口号、包长度、校验和组成。</p>
 <ul>
-<li><strong>源端口号（Source Port）：</strong>表示发送端端口号，字段长16位（2字节）。该字段是可选项，有时可能不会设置源端口号。没有源端口号的时候，该字段的值设置为0。</li>
-<li><strong>目标端口号（Destination Port）：</strong>表示接收端端口号，字段长16位（2字节）。</li>
-<li><strong>包长度（Length）：</strong>该字段保存了UDP首部的长度与数据的长度之和，单位为字节。</li>
-<li><strong>校验和（Checksum）：</strong>校验和是为了提供可靠的UDP首部和数据而设计的。包括校验和字段在内的所有数据之和结果为“16位全部为1”时，才会被认为所收到的数据是正确的。</li>
+<li><span class='p red'>源端口号（Source Port）：</span>表示发送端端口号，字段长16位（2字节）。该字段是可选项，有时可能不会设置源端口号。没有源端口号的时候，该字段的值设置为0。</li>
+<li><span class='p red'>目标端口号（Destination Port）：</span>表示接收端端口号，字段长16位（2字节）。</li>
+<li><span class='p red'>包长度（Length）：</span>该字段保存了UDP首部的长度与数据的长度之和，单位为字节。</li>
+<li><span class='p red'>校验和（Checksum）：</span>校验和是为了提供可靠的UDP首部和数据而设计的。包括校验和字段在内的所有数据之和结果为“16位全部为1”时，才会被认为所收到的数据是正确的。</li>
 </ul>
-<blockquote>
-<p>关于UDP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》220页。</p>
-</blockquote>
+<div class="note info flat"><p>关于UDP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》220页。</p>
+</div>
 <p>TCP首部由源端口号、目标端口号、序列号、确认应答号、数据偏移、保留、控制位、窗口大小、校验和、紧急指针、选项、填充构成。</p>
 <ul>
-<li><p><strong>源端口号（Source Port）：</strong>表示发送端端口号，字段长16位（2字节）。</p>
+<li><p><span class='p red'>源端口号（Source Port）：</span>表示发送端端口号，字段长16位（2字节）。</p>
 </li>
-<li><p><strong>目标端口号（Destination Port）：</strong>表示接收端端口号，字段长度16位（2字节）。</p>
+<li><p><span class='p red'>目标端口号（Destination Port）：</span>表示接收端端口号，字段长度16位（2字节）。</p>
 </li>
-<li><p><strong>序列号（Sequence Number）：</strong>指发送数据的位置，序列号不会从0或1开始，而是在建立连接时由计算机生成的随机数作为其初始值，通过SYN包传给接收端主机。每发送一次数据，就累加一次该数据字节数的大小。字段长32位（4字节）。</p>
+<li><p><span class='p red'>序列号（Sequence Number）：</span>指发送数据的位置，序列号不会从0或1开始，而是在建立连接时由计算机生成的随机数作为其初始值，通过SYN包传给接收端主机。每发送一次数据，就累加一次该数据字节数的大小。字段长32位（4字节）。</p>
 </li>
-<li><p><strong>确认应答号（Acknowledgement Number）：</strong>指下一次应该收到的数据的序列号，字段长度32位（4字节）。实际上，可以将其理解为发送端收到这个确认应答以后，可以认为在这个序号以前的数据都已经被正确接收。</p>
+<li><p><span class='p red'>确认应答号（Acknowledgement Number）：</span>指下一次应该收到的数据的序列号，字段长度32位（4字节）。实际上，可以将其理解为发送端收到这个确认应答以后，可以认为在这个序号以前的数据都已经被正确接收。</p>
 </li>
-<li><p><strong>数据偏移（Data Offset）：</strong>该字段表示TCP所传输的数据部分应该从TCP包的哪个位开始计算，当然也可以把它看作TCP首部的长度。字段长4位，单位为4字节。</p>
+<li><p><span class='p red'>数据偏移（Data Offset）：</span>该字段表示TCP所传输的数据部分应该从TCP包的哪个位开始计算，当然也可以把它看作TCP首部的长度。字段长4位，单位为4字节。</p>
 </li>
-<li><p><strong>保留（Reserved）：</strong>该字段主要是为了以后扩展时使用，其长度为4位。一般设置为0，但即时收到的包中该字段不为0，此包也不会被丢弃。</p>
+<li><p><span class='p red'>保留（Reserved）：</span>该字段主要是为了以后扩展时使用，其长度为4位。一般设置为0，但即时收到的包中该字段不为0，此包也不会被丢弃。</p>
 </li>
-<li><p><strong>控制位（Control Flag）：</strong>字段长为8位，每一位从左至右分别为CWR、ECE、URG、ACK、PSH、RST、SYN、FIN。这些控制标志也叫作控制位。当他们对应位上的值为1时，具有不同的含义。例如：CWR标志和ECE标志都用于IP首部的ECN字段，ECE标志为1时，则通知对方已将拥塞窗口缩小。</p>
-<blockquote>
-<p>关于控制位值为1时具体的含义，可以参考《图解TCP/IP（第5版）》223页。</p>
-</blockquote>
+<li><span class='p red'>控制位（Control Flag）：</span>字段长为8位，每一位从左至右分别为CWR、ECE、URG、ACK、PSH、RST、SYN、FIN。这些控制标志也叫作控制位。当他们对应位上的值为1时，具有不同的含义。例如：CWR标志和ECE标志都用于IP首部的ECN字段，ECE标志为1时，则通知对方已将拥塞窗口缩小。
+
+<div class="note info flat"><p>关于控制位值为1时具体的含义，可以参考《图解TCP/IP（第5版）》223页。</p>
+</div>
 </li>
-<li><p><strong>窗口大小（Window Size）：</strong>用于通知从相同TCP首部的确认应答号所指位置开始能够接收的数据大小，该字段长16位（2字节）。TCP不允许发送超过此处所示大小的数据。不过，如果窗口为0，则表示可以发送窗口探测，以了解最新的窗口大小，但这个探测数据必须是1字节。</p>
+<li><p><span class='p red'>窗口大小（Window Size）：</span>用于通知从相同TCP首部的确认应答号所指位置开始能够接收的数据大小，该字段长16位（2字节）。TCP不允许发送超过此处所示大小的数据。不过，如果窗口为0，则表示可以发送窗口探测，以了解最新的窗口大小，但这个探测数据必须是1字节。</p>
 </li>
-<li><p><strong>校验和（Checksum）：</strong>与UDP类似，区别在于TCP的校验和无法关闭。</p>
-<blockquote>
-<p>关于TCP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》224页。</p>
-</blockquote>
+<li><span class='p red'>校验和（Checksum）：</span>与UDP类似，区别在于TCP的校验和无法关闭。
+
+<div class="note info flat"><p>关于TCP首部校验和具体的计算逻辑，可以参考《图解TCP/IP（第5版）》224页。</p>
+</div>
 </li>
-<li><p><strong>紧急指针（Urgent Pointer）：</strong>该字段长16位（2字节）。只有在URG控制位为1时有效。该字段表示本报文段中紧急数据的指针，即从数据部分的首位到紧急指针所指示的位置为紧急数据。</p>
+<li><p><span class='p red'>紧急指针（Urgent Pointer）：</span>该字段长16位（2字节）。只有在URG控制位为1时有效。该字段表示本报文段中紧急数据的指针，即从数据部分的首位到紧急指针所指示的位置为紧急数据。</p>
 </li>
-<li><p><strong>选项（Options）：</strong>该字段用于提高TCP的传输性能。长度最大为40字节。</p>
-<blockquote>
-<p>关于每个选项字段具体的含义，可以参考《图解TCP/IP（第5版）》225页。</p>
-</blockquote>
+<li><span class='p red'>选项（Options）：</span>该字段用于提高TCP的传输性能。长度最大为40字节。
+
+<div class="note info flat"><p>关于每个选项字段具体的含义，可以参考《图解TCP/IP（第5版）》225页。</p>
+</div>
 </li>
 </ul>
-<h1 id="三、HTTP是基于TCP还是UDP的？"><a href="#三、HTTP是基于TCP还是UDP的？" class="headerlink" title="三、HTTP是基于TCP还是UDP的？"></a>三、HTTP是基于TCP还是UDP的？</h1><p>HTTP/3.0之前是基于TCP协议的，而HTTP/3.0弃用TCP，改用基于UDP的QUIC协议。主要目的是解决HTTP/2.0中存在的队头阻塞问题。由于HTTP/2.0在单个TCP连接上使用了多路复用技术，受到TCP拥塞控制的影响，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。此外，HTTP/2.0需要经过“三次握手”的过程建立连接，一般是3个RTT（往返时延），而借助QUIC协议的特性，HTTP/3.0可以避免TCP的“三次握手”的延迟，允许在第一次连接时发送数据（0个RTT）。</p>
-<h1 id="四、TCP的三次握手"><a href="#四、TCP的三次握手" class="headerlink" title="四、TCP的三次握手"></a>四、TCP的三次握手</h1><p><img src="/img/article_content_img/TCP三次握手.png" alt="TCP三次握手"></p>
-<p><strong>第一次握手：</strong>客户端将自己的SYN设置为1，并随机生成一个客户端的初始序列号（Sequence Number）发送给服务端，然后客户端进入<em>SYN_SENT</em>状态。</p>
-<p><strong>第二次握手：</strong>服务端收到客户端发来的SYN=1之后，就知道客户端此时想要建立连接了。此时，服务端将自己的SYN与ACK都设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后随机生成一个服务端的初始序列号（Sequence Number），将SYN、ACK、Acknowledgement Number、Sequence Number一并发送给客户端，然后服务端进入<em>SYN_RECV</em>状态。</p>
-<p><strong>第三次握手：</strong>客户端收到服务端发回的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，验证通过后，客户端将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），该值等于服务端传过来的初始序列号的值加一，然后将ACK与Acknowledgement Number发送给服务端，此时客户端进入<em>Establish</em>状态。服务端收到客户端传过来的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，若验证通过，则服务端也进入<em>Establish</em>状态。</p>
-<p>自此，连接建立完成，“三次握手”结束。</p>
-<h1 id="五、为什么TCP连接是三次握手，而不是两次或者四次？"><a href="#五、为什么TCP连接是三次握手，而不是两次或者四次？" class="headerlink" title="五、为什么TCP连接是三次握手，而不是两次或者四次？"></a>五、为什么TCP连接是三次握手，而不是两次或者四次？</h1><p><strong>结论：TCP连接允许“四次握手”，不允许“两次握手”。</strong></p>
+<h1 id="HTTP是基于TCP还是UDP的？"><a href="#HTTP是基于TCP还是UDP的？" class="headerlink" title="HTTP是基于TCP还是UDP的？"></a>HTTP是基于TCP还是UDP的？</h1><p>HTTP/3.0之前是基于TCP协议的，而HTTP/3.0弃用TCP，改用基于UDP的QUIC协议。主要目的是解决HTTP/2.0中存在的队头阻塞问题。由于HTTP/2.0在单个TCP连接上使用了多路复用技术，受到TCP拥塞控制的影响，少量的丢包就可能导致整个TCP连接上的所有流被阻塞。此外，HTTP/2.0需要经过“三次握手”的过程建立连接，一般是3个RTT（往返时延），而借助QUIC协议的特性，HTTP/3.0可以避免TCP的“三次握手”的延迟，允许在第一次连接时发送数据（0个RTT）。</p>
+<h1 id="TCP的三次握手"><a href="#TCP的三次握手" class="headerlink" title="TCP的三次握手"></a>TCP的三次握手</h1><p><img src="/img/article_content_img/TCP三次握手.png" alt="TCP三次握手"></p>
+<ul>
+<li><span class='p red'>第一次握手：</span>客户端将自己的SYN设置为1，并随机生成一个客户端的初始序列号（Sequence Number）发送给服务端，然后客户端进入<em>SYN_SENT</em>状态。</li>
+<li><span class='p red'>第二次握手：</span>服务端收到客户端发来的SYN=1之后，就知道客户端此时想要建立连接了。此时，服务端将自己的SYN与ACK都设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后随机生成一个服务端的初始序列号（Sequence Number），将SYN、ACK、Acknowledgement Number、Sequence Number一并发送给客户端，然后服务端进入<em>SYN_RECV</em>状态。</li>
+<li><span class='p red'>第三次握手：</span>客户端收到服务端发回的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，验证通过后，客户端将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），该值等于服务端传过来的初始序列号的值加一，然后将ACK与Acknowledgement Number发送给服务端，此时客户端进入<em>Establish</em>状态。服务端收到客户端传过来的信息后，验证Acknowledgement Number是否为自己的初始序列号的值加一，若验证通过，则服务端也进入<em>Establish</em>状态。</li>
+</ul>
+<h1 id="为什么TCP连接是三次握手，而不是两次或四次？"><a href="#为什么TCP连接是三次握手，而不是两次或四次？" class="headerlink" title="为什么TCP连接是三次握手，而不是两次或四次？"></a>为什么TCP连接是三次握手，而不是两次或四次？</h1><div class="note success flat"><p>结论：TCP连接允许“四次握手”，不允许“两次握手”。</p>
+</div>
 <p>“三次握手”的目的是建立可靠的通信信道，要确认自己与对方的发送与接收都是正常的。</p>
 <ol>
-<li><strong>第一次握手：</strong>Client什么都没有确认。Server确认了自己的接收和Client的发送正常。</li>
-<li><strong>第二次握手：</strong>Client确认了自己的发送和接收、Server的发送和接收正常。Server确认了自己的发送正常。</li>
-<li><strong>第三次握手：</strong>Server确认了Client的接收正常。</li>
+<li><span class='p red'>第一次握手：</span>Client什么都没有确认。Server确认了自己的接收和Client的发送正常。</li>
+<li><span class='p red'>第二次握手：</span>Client确认了自己的发送和接收、Server的发送和接收正常。Server确认了自己的发送正常。</li>
+<li><span class='p red'>第三次握手：</span>Server确认了Client的接收正常。</li>
 </ol>
-<p><strong>而两次握手会导致的问题主要有以下两个：</strong></p>
+<span class='p red'>而两次握手会导致的问题主要有以下两个：</span>
 <ul>
 <li><p>如果是两次握手，那么当服务端发送SYN、ACK、Acknowledge Number、Sequence Number之后，连接就建立完成。但由于客户端没有给服务端返回ACK和Acknowledge Number，服务端就不知道客户端是否收到了发送过去的东西，即服务端无法确认自己的发送和对方的接收是正常的。</p>
 </li>
@@ -1034,15 +1035,15 @@
 <p>如果采用的是“三次握手”，当服务端给客户端发送SYN、ACK、Acknowledge Number、Sequence Number后，客户端依旧不会给服务端任何回应，此时服务端会重发上述信息，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态，避免了服务端资源的浪费。</p>
 </li>
 </ul>
-<p><strong>四次握手：</strong>将第二次握手分成两步。</p>
+<p>四次握手：将第二次握手分成两步。</p>
 <ul>
-<li><p><strong>第一步：</strong>服务端发送ACK和Acknowledge Number到客户端。</p>
+<li><p><span class='p red'>第一步：</span>服务端发送ACK和Acknowledge Number到客户端。</p>
 </li>
-<li><p><strong>第二步：</strong>服务端发送SYN和Sequence Number到客户端。</p>
+<li><p><span class='p red'>第二步：</span>服务端发送SYN和Sequence Number到客户端。</p>
 <p>出于优化的目的，提高效率，将这两步合并。</p>
 </li>
 </ul>
-<h1 id="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"><a href="#六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。" class="headerlink" title="六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"></a>六、第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。</h1><p><strong>服务端：</strong></p>
+<h1 id="第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"><a href="#第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。" class="headerlink" title="第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。"></a>第三次握手中，如果客户端的ACK未送达服务端，客户端与服务端分别会做出什么处理。</h1><span class='p red'>服务端：</span>
 <ul>
 <li>如果客户端发出的ACK未及时送达服务端，那么服务端会重发SYN、ACK、Acknowledge Number、Sequence Number，默认发送5次，如果发送5次之后仍没有收到客户端的任何回应，则服务端会进入CLOSED状态。</li>
 </ul>
@@ -1050,51 +1051,52 @@
 <p>重传次数：由内核参数<code>top_syn_retries</code>配置，默认值为5，可以手动修改。</p>
 <p>重传周期：按照“指数退避”算法计算重传周期，即第一次是1秒后进行超时重传，第二次是2秒后进行超时重传，第三次是4秒后进行超时重传，第四次是8秒后进行超时重传，第五次是16秒后进行超时重传，以类类推，直到达到最大重传次数。</p>
 </blockquote>
-<p><strong>客户端：</strong></p>
+<span class='p red'>客户端：</span>
 <ul>
-<li><p>服务端还未进入CLOSED状态：</p>
+<li><span class='p red'>服务端还未进入CLOSED状态：</span>
 <p>在服务端超时重发的过程中，客户端及时向服务端发送ACK并且该ACK抵达服务端，那么服务端收到之后进行ACK和Acknowledge Number的验证，验证通过则进入ESTABLISH状态，连接建立。</p>
 </li>
-<li><p>服务端已进入CLOSED状态：</p>
+<li><span class='p red'>服务端已进入CLOSED状态：</span>
 <p>客户端依旧向服务端发送数据，但由于服务端已经进入CLOSED状态，此时服务端会给客户端回应一个RST包。</p>
 </li>
 </ul>
-<h1 id="七、如果连接已经建立，但客户端出现了故障怎么办？"><a href="#七、如果连接已经建立，但客户端出现了故障怎么办？" class="headerlink" title="七、如果连接已经建立，但客户端出现了故障怎么办？"></a>七、如果连接已经建立，但客户端出现了故障怎么办？</h1><p>服务端每收到一个客户端的发来的请求，会对该请求建立一个计时器，这个计时器通常设置为2小时。如果2小时后，仍未收到客户端的任何数据，此时服务端会发送一个探测报文段到客户端，一共会发送10次，每隔75秒发送一次，如果发送10次都没有反应的话，服务端会认为客户端出现了故障，连接就会关闭。</p>
-<h1 id="八、TCP三次握手中，哪一次握手最容易受到攻击？"><a href="#八、TCP三次握手中，哪一次握手最容易受到攻击？" class="headerlink" title="八、TCP三次握手中，哪一次握手最容易受到攻击？"></a>八、TCP三次握手中，哪一次握手最容易受到攻击？</h1><p>在TCP三次握手中，<strong>第二次握手</strong>最容易受到攻击，即SYN洪水攻击。具体原因如下：</p>
+<h1 id="如果连接已经建立，但客户端出现了故障怎么办？"><a href="#如果连接已经建立，但客户端出现了故障怎么办？" class="headerlink" title="如果连接已经建立，但客户端出现了故障怎么办？"></a>如果连接已经建立，但客户端出现了故障怎么办？</h1><p>服务端每收到一个客户端的发来的请求，会对该请求建立一个计时器，这个计时器通常设置为2小时。如果2小时后，仍未收到客户端的任何数据，此时服务端会发送一个探测报文段到客户端，一共会发送10次，每隔75秒发送一次，如果发送10次都没有反应的话，服务端会认为客户端出现了故障，连接就会关闭。</p>
+<h1 id="TCP三次握手中，哪一次握手最容易受到攻击？"><a href="#TCP三次握手中，哪一次握手最容易受到攻击？" class="headerlink" title="TCP三次握手中，哪一次握手最容易受到攻击？"></a>TCP三次握手中，哪一次握手最容易受到攻击？</h1><p>在TCP三次握手中，<span class='p green'>第二次握手</span>最容易受到攻击，即SYN洪水攻击。具体原因如下：</p>
 <p>如果客户端伪造出大量第一次的SYN同步报文，服务端就会依次消耗掉很多资源来保存客户端的信息，并进行确认，实际上确认是会失败的，但失败需要一定的时间，因为服务端会连续多次进行第二次握手确认后才认定失败。那么短时间有大量的SYN同步报文涌向服务端，服务端资源可能被耗尽，就可能导致正常的客户端得不到响应而失败。</p>
 <p>解决措施：</p>
 <ul>
-<li><p><strong>缩短SYN超时时间，限制同时打开的SYN半连接数目。</strong></p>
+<li><span class='p red'>缩短SYN超时时间，限制同时打开的SYN半连接数目。</span>
 <p>SYN Flood攻击效果取决于服务端保持的SYN半连接数目，该值等于SYN攻击的频度乘上SYN超时时间。设置SYN超时时间在20秒以下可以成倍降低服务器的负荷。</p>
 </li>
-<li><p><strong>设置SYN Cookie</strong></p>
+<li><span class='p red'>设置SYN Cookie</span>
 <p>当服务端接收到SYN包并返回SYN + ACK包时，不分配一个专门的数据区，而是根据这个SYN包计算出一个cookie值，并将这个cookie值作为将要返回的SYN + ACK包的初始序列号。当客户端返回一个ACK包时，根据包头信息计算cookie，与返回的确认序列号(初始序列号 + 1)进行对比，如果相同，则认为是一个正常连接，之后分配资源并建立连接；如果短时间内连续受到某个IP的重复SYN报文，就认定是受到了攻击，以后从这个IP地址来的包都会被丢弃。</p>
 </li>
-<li><p><strong>防火墙</strong></p>
+<li><span class='p red'>防火墙</span>
 </li>
 </ul>
-<h1 id="九、TCP的四次挥手"><a href="#九、TCP的四次挥手" class="headerlink" title="九、TCP的四次挥手"></a>九、TCP的四次挥手</h1><p><img src="/img/article_content_img/TCP四次挥手.png" alt="TCP四次挥手"></p>
-<p><strong>第一次挥手：</strong>客户端将自己的FIN设置为1，并随机生成一个客户端的初始序列号（Sequence Number），发送给服务端，请求断开客户端到服务端之间的通信。此时，客户端进入<em>FIN_WAIT_1</em>状态。</p>
-<p><strong>第二次挥手：</strong>服务端收到客户端的FIN后，将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后将ACK与确认应答号发送到客户端，服务端进入<em>CLOSE_WAIT</em>状态。客户端收到并验证ACK与确认应答号，验证通过后，进入<em>FIN_WAIT_2</em>状态。</p>
-<p><strong>第三次挥手：</strong>服务端将自己的FIN设置为1，并随机生成一个服务端的初始序列号（Sequence Number），发送给客户端，请求断开服务端到客户端之间的通信。此时，服务端进入<em>LAST_ACK</em>状态。</p>
-<p><strong>第四次挥手：</strong>客户端收到服务端的FIN后，将自己的ACK设置为1，并生成一个确认应答号，该值为服务端传过来的初始序列号的值加一。之后将ACK与确认应答号发送到服务端，客户端进入<em>TIME_WAIT</em>状态。服务端收到并验证ACK与确认应答号，验证通过，进入<em>CLOSED</em>状态。客户端在等待2MSL的时间后，也进入<em>CLOSED</em>状态。</p>
-<p>自此，连接断开完成，“四次挥手”结束。</p>
-<p>==注意：只要四次挥手没有结束，客户端和服务端就可以继续传输数据！==</p>
-<blockquote>
-<p><strong>MSL（Maximum Segment Lifetime）</strong>：一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所需的最大时间。如果直到2MSL，客户端都没有再次收到FIN，那么客户端推断ACK已经被成功接收，则结束TCP连接。</p>
-</blockquote>
-<h1 id="十、为什么要四次挥手？"><a href="#十、为什么要四次挥手？" class="headerlink" title="十、为什么要四次挥手？"></a>十、为什么要四次挥手？</h1><p>TCP是全双工通信，可以双向传输数据。任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放的通知，对方确认后再完全断开TCP连接。</p>
-<h1 id="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）"><a href="#十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）" class="headerlink" title="十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）"></a>十一、为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）</h1><p>因为服务端收到客户端断开连接的请求时，可能还有一些数据没有发送完，因此先给客户端传回 ACK，表示已经接收到了断开连接的请求。等到数据发完之后再向客户端发送 FIN，申请断开服务端到客户端的数据传送。</p>
-<h1 id="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"><a href="#十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？" class="headerlink" title="十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"></a>十二、为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？</h1><p>第四次挥手时，客户端发送到服务端的ACK和确认应答号有可能丢失，如果服务端因为某些原因而没有收到ACK和确认应答号的话，服务端会重发FIN和初始序列号。</p>
+<h1 id="TCP的四次挥手"><a href="#TCP的四次挥手" class="headerlink" title="TCP的四次挥手"></a>TCP的四次挥手</h1><p><img src="/img/article_content_img/TCP四次挥手.png" alt="TCP四次挥手"></p>
+<ul>
+<li><span class='p red'>第一次挥手：</span>客户端将自己的FIN设置为1，并随机生成一个客户端的初始序列号（Sequence Number），发送给服务端，请求断开客户端到服务端之间的通信。此时，客户端进入<em>FIN_WAIT_1</em>状态。</li>
+<li><span class='p red'>第二次挥手：</span>服务端收到客户端的FIN后，将自己的ACK设置为1，并生成一个确认应答号（Acknowledgement Number），确认应答号的值为客户端传过来的初始序列号的值加一，即Acknowledgement Number = Sequence Number + 1。之后将ACK与确认应答号发送到客户端，服务端进入<em>CLOSE_WAIT</em>状态。客户端收到并验证ACK与确认应答号，验证通过后，进入<em>FIN_WAIT_2</em>状态。</li>
+<li><span class='p red'>第三次挥手：</span>服务端将自己的FIN设置为1，并随机生成一个服务端的初始序列号（Sequence Number），发送给客户端，请求断开服务端到客户端之间的通信。此时，服务端进入<em>LAST_ACK</em>状态。</li>
+<li><span class='p red'>第四次挥手：</span>客户端收到服务端的FIN后，将自己的ACK设置为1，并生成一个确认应答号，该值为服务端传过来的初始序列号的值加一。之后将ACK与确认应答号发送到服务端，客户端进入<em>TIME_WAIT</em>状态。服务端收到并验证ACK与确认应答号，验证通过，进入<em>CLOSED</em>状态。客户端在等待2MSL的时间后，也进入<em>CLOSED</em>状态。</li>
+</ul>
+<div class="note danger flat"><p>注意：只要四次挥手没有结束，客户端和服务端就可以继续传输数据！</p>
+</div>
+<div class="note info flat"><p><span class='p red'>MSL（Maximum Segment Lifetime）：</span>一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所需的最大时间。如果直到2MSL，客户端都没有再次收到FIN，那么客户端推断ACK已经被成功接收，则结束TCP连接。</p>
+</div>
+<h1 id="为什么要四次挥手？"><a href="#为什么要四次挥手？" class="headerlink" title="为什么要四次挥手？"></a>为什么要四次挥手？</h1><p>TCP是全双工通信，可以双向传输数据。任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放的通知，对方确认后再完全断开TCP连接。</p>
+<h1 id="为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）"><a href="#为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE-WAIT状态的意义）" class="headerlink" title="为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）"></a>为什么不能把服务器发送的ACK和FIN合并起来，变成三次挥手？（CLOSE_WAIT状态的意义）</h1><p>因为服务端收到客户端断开连接的请求时，可能还有一些数据没有发送完，因此先给客户端传回 ACK，表示已经接收到了断开连接的请求。等到数据发完之后再向客户端发送 FIN，申请断开服务端到客户端的数据传送。</p>
+<h1 id="为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"><a href="#为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？" class="headerlink" title="为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？"></a>为什么第四次挥手时，客户端需要等待2MSL后才进入CLOSED状态？</h1><p>第四次挥手时，客户端发送到服务端的ACK和确认应答号有可能丢失，如果服务端因为某些原因而没有收到ACK和确认应答号的话，服务端会重发FIN和初始序列号。</p>
 <p>如果客户端在2MSL的时间内收到了FIN和初始序列号，就会重新发送ACK和确认应答号，并再次等待2MSL。</p>
 <p>如果客户端没有等待2MSL的时间，而是直接进入CLOSED状态，那么客户端将永远无法收到服务端重发的FIN，而服务端因为一直未收到客户端的ACK和确认应答号，会不停的重发FIN，连接始终无法断开。</p>
-<h1 id="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"><a href="#十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？" class="headerlink" title="十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"></a>十三、第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？</h1><p>如果第二次挥手时，服务端ACK和确认应答号没有送达客户端，那么客户端会认为可能是第一次挥手时发送的FIN未送达服务端，因此客户端会重新发送FIN和初始序列号。</p>
-<h1 id="十四、TIME-WAIT状态的意义"><a href="#十四、TIME-WAIT状态的意义" class="headerlink" title="十四、TIME_WAIT状态的意义"></a>十四、TIME_WAIT状态的意义</h1><p>首先，==TIME_WAIT并不属于客户端或服务端专属的状态，而是属于主动发起断开连接请求的一端的状态==，在发送最后一次ACK和确认应答号后会进入TIME_WAIT状态。</p>
+<h1 id="第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"><a href="#第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？" class="headerlink" title="第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？"></a>第二次挥手时，如果服务端的ACK没有送达客户端，会怎么样？</h1><p>如果第二次挥手时，服务端ACK和确认应答号没有送达客户端，那么客户端会认为可能是第一次挥手时发送的FIN未送达服务端，因此客户端会重新发送FIN和初始序列号。</p>
+<h1 id="TIME-WAIT状态的意义"><a href="#TIME-WAIT状态的意义" class="headerlink" title="TIME_WAIT状态的意义"></a>TIME_WAIT状态的意义</h1><p>首先，<span class='p green'>TIME_WAIT并不属于客户端或服务端专属的状态，而是属于主动发起断开连接请求的一端的状态</span>，在发送最后一次ACK和确认应答号后会进入TIME_WAIT状态。</p>
 <p>这里假设是客户端发起的断开连接的请求，客户端在第四次挥手发送ACK和确认应答号之后，可能由于网络比较阻塞，该数据帧在传输过程中丢失了，服务端由于没有收到ACK则会重发FIN，但此时如果客户端没有TIME_WAIT状态，而是直接进入CLOSED状态，则客户端不会理会服务端，服务端就会一直重发FIN。</p>
 <p>因此，采用TIME_WAIT状态用来保障当网络比较阻塞时，TCP连接依旧可以正常关闭。</p>
-<h1 id="十五、TIME-WAIT状态过多会产生什么后果？怎么处理？"><a href="#十五、TIME-WAIT状态过多会产生什么后果？怎么处理？" class="headerlink" title="十五、TIME_WAIT状态过多会产生什么后果？怎么处理？"></a>十五、TIME_WAIT状态过多会产生什么后果？怎么处理？</h1><p>从服务端来讲，短时间内主动关闭了大量的客户端连接，就会造成服务端上出现大量的TIME_WAIT状态，严重消耗服务端的资源，此时部分客户端就会显示连接不上。</p>
+<h1 id="TIME-WAIT状态过多会产生什么后果？怎么处理？"><a href="#TIME-WAIT状态过多会产生什么后果？怎么处理？" class="headerlink" title="TIME_WAIT状态过多会产生什么后果？怎么处理？"></a>TIME_WAIT状态过多会产生什么后果？怎么处理？</h1><p>从服务端来讲，短时间内主动关闭了大量的客户端连接，就会造成服务端上出现大量的TIME_WAIT状态，严重消耗服务端的资源，此时部分客户端就会显示连接不上。</p>
 <p>从客户端来讲，客户端TIME_WAIT过多会导致端口资源被占用，而端口就65535个，一旦被占满就无法创建新的连接。</p>
-<p><strong>解决方法：</strong></p>
+<span class='p red'>解决方法：</span>
 <ul>
 <li><p>服务端可以设置<code>SO_REUSEADDR</code>套接字选项来避免TIME_WAIT状态，此套接字选项告诉内核：即时此端口正忙（处于TIME_WAIT），也请继续并重用它。</p>
 </li>
@@ -1102,37 +1104,39 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">net.ipv4.tcp_tw_reuse = 1 # 表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭； </span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 # 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="十六、TCP如何保证可靠传输？"><a href="#十六、TCP如何保证可靠传输？" class="headerlink" title="十六、TCP如何保证可靠传输？"></a>十六、TCP如何保证可靠传输？</h1><ol>
-<li><strong>基于数据块传输：</strong>应用数据被分割成TCP认为最适合发送的数据块，再传输给网络层。数据块被称为报文段或段。</li>
-<li><strong>对失序数据包重新排序以及去重：</strong>TCP为了保证不发生丢包，发送端会对数据包进行编号，接收端会对收到的包进行排序，并对编号重复的包进行去重。</li>
-<li><strong>校验和：</strong>TCP将保持它首部和数据的校验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果检验和有差错，那么TCP将丢弃这个报文段并且不会对此报文段进行确认。</li>
-<li><strong>超时重传：</strong>当发送方发送数据后，它启动一个定时器，等待接收端确认收到这个报文段。若在规定时间内仍为收到确认，则重传该报文段。</li>
-<li><strong>流量控制：</strong>TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据时，能提示发送方降低发送速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
-<li><strong>拥塞控制：</strong>当网络出现拥塞时，减少数据的发送。（慢启动、拥塞避免、快重传、快恢复）</li>
-<li><strong>ARQ协议（自动重传请求）</strong>：连续ARQ协议与停止等待ARQ协议。</li>
+<h1 id="TCP如何保证可靠传输？"><a href="#TCP如何保证可靠传输？" class="headerlink" title="TCP如何保证可靠传输？"></a>TCP如何保证可靠传输？</h1><ol>
+<li><span class='p red'>基于数据块传输：</span>应用数据被分割成TCP认为最适合发送的数据块，再传输给网络层。数据块被称为报文段或段。</li>
+<li><span class='p red'>对失序数据包重新排序以及去重：</span>TCP为了保证不发生丢包，发送端会对数据包进行编号，接收端会对收到的包进行排序，并对编号重复的包进行去重。</li>
+<li><span class='p red'>校验和：</span>TCP将保持它首部和数据的校验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果检验和有差错，那么TCP将丢弃这个报文段并且不会对此报文段进行确认。</li>
+<li><span class='p red'>超时重传：</span>当发送方发送数据后，它启动一个定时器，等待接收端确认收到这个报文段。若在规定时间内仍为收到确认，则重传该报文段。</li>
+<li><span class='p red'>流量控制：</span>TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据时，能提示发送方降低发送速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
+<li><span class='p red'>拥塞控制：</span>当网络出现拥塞时，减少数据的发送。（慢启动、拥塞避免、快重传、快恢复）</li>
+<li><span class='p red'>ARQ协议（自动重传请求）：</span>连续ARQ协议与停止等待ARQ协议。</li>
 </ol>
-<h1 id="十七、TCP流量控制是如何实现的？"><a href="#十七、TCP流量控制是如何实现的？" class="headerlink" title="十七、TCP流量控制是如何实现的？"></a>十七、TCP流量控制是如何实现的？</h1><p><strong>首先考虑一个问题，为什么要引入流量控制？</strong></p>
+<h1 id="TCP流量控制是如何实现的？"><a href="#TCP流量控制是如何实现的？" class="headerlink" title="TCP流量控制是如何实现的？"></a>TCP流量控制是如何实现的？</h1><span class='p red'>首先考虑一个问题，为什么要引入流量控制？</span>
 <p>双方在通信的时候，发送方的速率跟接收方的速率不一定相等，那如果发送方的发送速率过快，接收方速率慢导致来不及接收，这个时候接收方就会把来不及接收的数据包放到缓存区中。那如果接收方缓存区满了，此时发送方还在不停的发送数据，就会导致丢包的情况。大量丢包会浪费服务器资源。因此，需要控制发送方的发送速率，让发送方跟接收方形成动态平衡的状态。</p>
 <p><img src="/img/article_content_img/流量控制（一）.png" alt="流量控制（一）"></p>
-<p><strong>怎么去进行流量控制？</strong></p>
+<span class='p red'>怎么去进行流量控制？</span>
 <p>使用滑动窗口协议来进行流量控制。</p>
 <p><img src="/img/article_content_img/流量控制（二）.png" alt="流量控制（二）"></p>
 <p>从图中可以看出，窗口大小目前设定为7，灰色的部分是已经发送并且收到了返回的ACK的数据包。黄色的部分是已经发送但还没有收到ACK的数据包。绿色的部分是准备发送的数据包。后面11-16是还没有被读进内存的数据，所以他们也不在滑动窗口内。</p>
-<p><strong>接下来分两种情况来讨论：</strong></p>
+<span class='p red'>接下来分两种情况来讨论：</span>
 <ul>
-<li><strong>正常情况：</strong></li>
+<li><span class='p red'>正常情况：</span>
+</li>
 </ul>
 <p><img src="/img/article_content_img/流量控制（三）.png" alt="流量控制（三）"></p>
 <p>从图中我们可以看出，4号数据包已经发送并收到返回的ACK，此时窗口可以右移，但是一定要保证窗口大小还是7。因此，现在11号数据包被读进了窗口中（缓存区），成为了待发送的状态。8号和9号数据包变成黄色，说明已经发送出去了，但是还没有收到返回的ACK。重复上述操作，直到所有的数据都发送成功。</p>
 <ul>
-<li><strong>丢包情况：</strong></li>
+<li><span class='p red'>丢包情况：</span>
+</li>
 </ul>
 <p><img src="/img/article_content_img/流量控制（四）.png" alt="流量控制（四）"></p>
 <p>如果数据已经发送出去了，但是接收方返回的ACK没有及时送达，可能丢失了，又或者数据看似发出去了，但是接收方根本没收到，那此时发送方会一直等待接收ACK，而接收方也一直在等待发送方继续发送数据，但是因为发送方在没收到返回的ACK之前是不能将窗口右移的，所以就会陷入一种僵局，即死锁状态。</p>
-<p><strong>那应该怎么去解决这种问题呢？</strong></p>
-<p>采用<strong>超时重传机制</strong>。因为接收方在返回的ACK中是包含着接收窗口的大小的。如果发送方在发送出数据之后始终收不到返回的ACK，会启用一个持续计时器，当计时器到时后，会主动的向接收方去发送1个字节的探测数据包，查看接收窗口的状态。如果这时候检测到接收窗口的大小是大于0的，那发送方会重发刚才的数据包，如果接收窗口大小等于0，那就刷新这个计时器，重复上述操作，这样就不会产生僵局的情况了。</p>
+<span class='p red'>那应该怎么去解决这种问题呢？</span>
+<p>采用<span class='p green'>超时重传机制</span>。因为接收方在返回的ACK中是包含着接收窗口的大小的。如果发送方在发送出数据之后始终收不到返回的ACK，会启用一个持续计时器，当计时器到时后，会主动的向接收方去发送1个字节的探测数据包，查看接收窗口的状态。如果这时候检测到接收窗口的大小是大于0的，那发送方会重发刚才的数据包，如果接收窗口大小等于0，那就刷新这个计时器，重复上述操作，这样就不会产生僵局的情况了。</p>
 <p><img src="/img/article_content_img/流量控制（五）.png" alt="流量控制（五）"></p>
-<h1 id="十八、接收窗口大小是固定的吗？接收窗口是否越大越好？"><a href="#十八、接收窗口大小是固定的吗？接收窗口是否越大越好？" class="headerlink" title="十八、接收窗口大小是固定的吗？接收窗口是否越大越好？"></a>十八、接收窗口大小是固定的吗？接收窗口是否越大越好？</h1><p><strong>TCP发送窗口可以划分为四个部分：</strong></p>
+<h1 id="接收窗口大小是固定的吗？接收窗口是否越大越好？"><a href="#接收窗口大小是固定的吗？接收窗口是否越大越好？" class="headerlink" title="接收窗口大小是固定的吗？接收窗口是否越大越好？"></a>接收窗口大小是固定的吗？接收窗口是否越大越好？</h1><span class='p red'>TCP发送窗口可以划分为四个部分：</span>
 <ol>
 <li><p>已经发送并且确认的TCP段（已经发送并确认）</p>
 </li>
@@ -1143,46 +1147,52 @@
 <li><p>未发送并且接收方也不准备接收的TCP段（不可发送）</p>
 </li>
 </ol>
-<p><strong>TCP发送窗口结构示意图：</strong></p>
+<span class='p red'>TCP发送窗口结构示意图：</span>
 <p><img src="/img/article_content_img/滑动窗口（一）.jpg" alt="滑动窗口（一）"></p>
 <ul>
 <li>SND.WND：发送窗口</li>
 <li>SND.UNA：Send Unacknowledged指针，指向发送窗口的第一个字节。</li>
 <li>SND.NXT：Send Next指针，指向可用窗口的第一个字节。</li>
 </ul>
-<p><strong>可用窗口大小：</strong><code>SND.UNA + SND.WND - SND.NXT</code></p>
-<p><strong>TCP接收窗口可以划分成三个部分：</strong></p>
+<span class='p red'>可用窗口大小：</span>`SND.UNA + SND.WND - SND.NXT`
+
+<span class='p red'>TCP接收窗口可以划分成三个部分：</span>
 <ol>
 <li>已经接收并且确认的TCP段（已经接收并确认）</li>
 <li>等待接收并且允许发送方发送的TCP段（可以接收未确认）</li>
 <li>不可接收并且不允许发送方发送的TCP段（不可接收）</li>
 </ol>
-<p><strong>TCP接收窗口结构示意图：</strong></p>
+<span class='p red'>TCP接收窗口结构示意图：</span>
 <p><img src="/img/article_content_img/滑动窗口（二）.jpg" alt="滑动窗口（二）"></p>
 <p>接收窗口的大小是根据网络环境以及发送方的拥塞窗口大小动态调整的。</p>
 <p>接收窗口如果太小，会严重浪费链路利用率，增加丢包率。如果接收窗口太大，不仅不会减少丢包率，反而会增加内存消耗。</p>
-<h1 id="十九、零窗口"><a href="#十九、零窗口" class="headerlink" title="十九、零窗口"></a>十九、零窗口</h1><p>接收方没有能力接收数据的时候，会把接收窗口大小设置为0，此时发送方需要暂停发送数据，但是会启动一个持续计时器，计时器到时后，发送方会发送一个字节的探测数据包，查看接收窗口的状态。如果接收方能够接收数据，就会在返回的报文中更新接收窗口大小，恢复数据的发送。</p>
-<h1 id="二十、拥塞控制"><a href="#二十、拥塞控制" class="headerlink" title="二十、拥塞控制"></a>二十、拥塞控制</h1><p>关于拥塞控制的详细介绍，可以点击下面的链接进行查看。</p>
+<h1 id="零窗口"><a href="#零窗口" class="headerlink" title="零窗口"></a>零窗口</h1><p>接收方没有能力接收数据的时候，会把接收窗口大小设置为0，此时发送方需要暂停发送数据，但是会启动一个持续计时器，计时器到时后，发送方会发送一个字节的探测数据包，查看接收窗口的状态。如果接收方能够接收数据，就会在返回的报文中更新接收窗口大小，恢复数据的发送。</p>
+<h1 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h1><p>关于拥塞控制的详细介绍，可以点击下面的链接进行查看。</p>
 <p><a href="http://love2peace.top/2023/06/24/TCP的拥塞控制是如何实现的？/">TCP的拥塞控制是如何实现的？</a></p>
-<h1 id="二十一、ARQ协议是什么？"><a href="#二十一、ARQ协议是什么？" class="headerlink" title="二十一、ARQ协议是什么？"></a>二十一、ARQ协议是什么？</h1><p><strong>自动重传请求（Automic Repeat-reQuest， ARQ）</strong>：是OSI模型中数据链路层和传输层的错误纠正协议之一。它通过使用确认和超时两个机制，在不可靠服务的基础上实现可靠的信息传输。如果发送方在发送后一段时间内没有收到确认信息，即ACK，它通常会重新发送，直到收到确认或者达到重试次数。</p>
-<p>ARQ协议包括<strong>停止等待ARQ协议</strong>和<strong>连续ARQ协议</strong>。</p>
-<h2 id="停止等待ARQ协议"><a href="#停止等待ARQ协议" class="headerlink" title="停止等待ARQ协议"></a>停止等待ARQ协议</h2><p>停止等待ARQ协议是为了实现可靠传输的，它的基本原理就是每发送完一个分组后就停止发送，等待对方确认（回复ACK）。如果达到设置的超时时间后，还是没有收到ACK，说明没有发送成功，需要重新发送，直到收到确认后再发送下一个分组。</p>
-<p>在停止等待协议中，若接收方收到重复分组，就丢弃该分组，但仍需要对发送方返回确认ACK。</p>
+<h1 id="ARQ协议是什么？"><a href="#ARQ协议是什么？" class="headerlink" title="ARQ协议是什么？"></a>ARQ协议是什么？</h1><span class='p red'>自动重传请求（Automic Repeat-reQuest， ARQ）</span>：是OSI模型中数据链路层和传输层的错误纠正协议之一。它通过使用确认和超时两个机制，在不可靠服务的基础上实现可靠的信息传输。如果发送方在发送后一段时间内没有收到确认信息，即ACK，它通常会重新发送，直到收到确认或者达到重试次数。
+
+ARQ协议包括<span class='p green'>停止等待ARQ协议</span>和<span class='p green'>连续ARQ协议</span>。
+
+## 停止等待ARQ协议
+
+停止等待ARQ协议是为了实现可靠传输的，它的基本原理就是每发送完一个分组后就停止发送，等待对方确认（回复ACK）。如果达到设置的超时时间后，还是没有收到ACK，说明没有发送成功，需要重新发送，直到收到确认后再发送下一个分组。
+
+在停止等待协议中，若接收方收到重复分组，就丢弃该分组，但仍需要对发送方返回确认ACK。
+
+1. <span class='p red'>无差错情况：</span>
+<p>   发送方发送分组，接收方在规定时间内收到，并回复ACK，发送方再次发送。</p>
 <ol>
-<li><p><strong>无差错情况：</strong></p>
-<p>发送方发送分组，接收方在规定时间内收到，并回复ACK，发送方再次发送。</p>
+<li><span class='p red'>有差错情况：（超时重传）</span>
+<p>停止等待协议中超时重传是指：只要超过一段时间仍然没有收到确认，就重传前面发送过的分组（认为刚才发送过的分组丢失了）。因此，每发送完一个分组需要设置一个超时计时器，其重传时间应比数据在分组传输的平均往返时间更长一些。这种自动重传方式常称为<span class='p green'>自动重传请求 ARQ</span> 。此外，在停止等待协议中，若收到重复分组，就丢弃该分组，但同时还要发送确认ACK。</p>
 </li>
-<li><p><strong>有差错情况：（超时重传）</strong></p>
-<p>停止等待协议中超时重传是指：只要超过一段时间仍然没有收到确认，就重传前面发送过的分组（认为刚才发送过的分组丢失了）。因此，每发送完一个分组需要设置一个超时计时器，其重传时间应比数据在分组传输的平均往返时间更长一些。这种自动重传方式常称为 <strong>自动重传请求 ARQ</strong> 。此外，在停止等待协议中，若收到重复分组，就丢弃该分组，但同时还要发送确认ACK。</p>
-</li>
-<li><p><strong>确认丢失和确认迟到：</strong></p>
+<li><span class='p red'>确认丢失和确认迟到：</span>
 <ul>
-<li><strong>确认丢失：</strong>确认消息在传输过程丢失。当A发送M1消息，B收到后，B向A发送了一个M1的确认消息，但却在传输过程中丢失。而A并不知道，在超时计时器超时后，A重传M1消息，B再次收到该消息后采取以下两点措施：<ul>
+<li><span class='p red'>确认丢失：</span>确认消息在传输过程丢失。当A发送M1消息，B收到后，B向A发送了一个M1的确认消息，但却在传输过程中丢失。而A并不知道，在超时计时器超时后，A重传M1消息，B再次收到该消息后采取以下两点措施：<ul>
 <li>丢弃这个重复的M1消息，不向上层交付。 </li>
 <li>向A发送确认消息。（不会认为已经发送过了，就不再发送。A能重传，就证明B的确认消息丢失）。</li>
 </ul>
 </li>
-<li><strong>确认迟到：</strong>确认消息在传输过程中迟到。当A发送M1消息，B收到并发送确认。在超时时间内A没有收到确认消息，因此A重传M1消息，B仍然收到并继续发送确认消息（B收到了2份M1）。此时A收到了B第二次发送的确认消息，A接着发送其他数据了。过了一会，A收到了B第一次发送的对M1的确认消息（A也收到了2份确认消息）。处理如下：<ul>
+<li><span class='p red'>确认迟到：</span>确认消息在传输过程中迟到。当A发送M1消息，B收到并发送确认。在超时时间内A没有收到确认消息，因此A重传M1消息，B仍然收到并继续发送确认消息（B收到了2份M1）。此时A收到了B第二次发送的确认消息，A接着发送其他数据了。过了一会，A收到了B第一次发送的对M1的确认消息（A也收到了2份确认消息）。处理如下：<ul>
 <li>A收到重复的确认后，直接丢弃。</li>
 <li>B收到重复的M1后，也直接丢。</li>
 </ul>
@@ -1190,11 +1200,11 @@
 </ul>
 </li>
 </ol>
-<p><strong>优点：</strong>简单。</p>
-<p><strong>缺点：</strong>信道利用率低、等待时间长。</p>
+<p><span class='p red'>优点：</span>简单。</p>
+<p><span class='p red'>缺点：</span>信道利用率低、等待时间长。</p>
 <h2 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h2><p>连续ARQ协议可以提高信道利用率。发送方维持一个发送窗口，凡位于发送窗口内的分组可以连续发送出去，而不需要等待对方确认。接收方一般采用累计确认，对按序到达的最后一个分组发送确认，表明到这个分组为止的所有分组都已经正确收到了。</p>
-<p><strong>优点：</strong> 信道利用率高，容易实现，即使确认丢失，也不必重传。</p>
-<p><strong>缺点：</strong> 不能向发送方反映出接收方已经正确收到的所有分组的信息。 比如：发送方发送了5条消息，中间第三条丢失（3号），这时接收方只能对前两个发送确认。发送方无法知道后三个分组的下落，而只好把后三个全部重传一次。这也叫Go-Back-N（回退N），表示需要退回来重传已经发送过的 N 个消息。</p>
+<p><span class='p red'>优点：</span> 信道利用率高，容易实现，即使确认丢失，也不必重传。</p>
+<p><span class='p red'>缺点：</span>不能向发送方反映出接收方已经正确收到的所有分组的信息。 比如：发送方发送了5条消息，中间第三条丢失（3号），这时接收方只能对前两个发送确认。发送方无法知道后三个分组的下落，而只好把后三个全部重传一次。这也叫Go-Back-N（回退N），表示需要退回来重传已经发送过的 N 个消息。</p>
 ]]></content>
       <categories>
         <category>面试</category>
@@ -1768,40 +1778,39 @@
 </table>
 </div>
 <p>Spring 是一种基于 Bean 的编程技术，其使用最简单、最基本的 Java Bean 来完成以前只有 EJB（Enterprise Java Bean）才能完成的工作，但又解决了 EJB 运行环境苛刻和代码移植性差的问题，因此使得很多复杂的代码变得优雅和简洁。</p>
-<h2 id="Spring-Framework-的特点"><a href="#Spring-Framework-的特点" class="headerlink" title="Spring Framework 的特点"></a>Spring Framework 的特点</h2><p>//TODO</p>
 <h1 id="Spring的体系结构"><a href="#Spring的体系结构" class="headerlink" title="Spring的体系结构"></a>Spring的体系结构</h1><p><img src="https://love2peace.top/img/163550G63-0.png" alt="img"></p>
 <p>上面这张图就是 Spring 的架构图，从图中可以看出，整个 Spring Framework 被分成了八大模块，分别为：Data Access/Integration 模块、Web 模块、AOP 模块、Aspects 模块、Instrumentation 模块、Messaging 模块、Core Container 模块以及 Test 模块。下面我们就对这些模块进行一个简单的介绍，了解即可。</p>
 <h2 id="Data-Access-Integration-（数据访问-集成）"><a href="#Data-Access-Integration-（数据访问-集成）" class="headerlink" title="Data Access / Integration （数据访问 / 集成）"></a>Data Access / Integration （数据访问 / 集成）</h2><p>数据访问 / 集成模块主要包括：JDBC、ORM、OXM、JMS 以及 Transactions 子模块。具体介绍如下：</p>
 <ul>
-<li><strong>JDBC 模块：</strong>提供了一个 JDBC 的样例模板，使用这些模板能消除传统冗长的 JDBC 编码还有必须的事务控制，而且能享受到 Spring 管理事务的好处。</li>
-<li><strong>ORM 模块：</strong>提供与现有流行的“对象——关系”映射框架无缝集成的 API，包括 JPA、JDO、Hibernate 和 MyBatis 等。而且还可以使用 Spring 进行事务管理，无需额外控制事务。</li>
-<li><strong>OXM 模块：</strong>提供了一个支持 Object / XML 映射的抽象层实现，如 JAXB、Castor、XMLBeans、JiBX 和 XStream。将 Java 对象映射成 XML 数据，或者将 XML 数据映射成 Java 对象。</li>
-<li><strong>JMS 模块：</strong>指 Java 消息服务，提供一套“消息生产者、消息消费者”模板用于更加简单地使用 JMS，JMS 用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。</li>
-<li><strong>Transactions 模块：</strong>支持编程和声明式事务管理。</li>
+<li><span class='p red'>JDBC 模块：</span>提供了一个 JDBC 的样例模板，使用这些模板能消除传统冗长的 JDBC 编码还有必须的事务控制，而且能享受到 Spring 管理事务的好处。</li>
+<li><span class='p red'>ORM 模块：</span>提供与现有流行的“对象——关系”映射框架无缝集成的 API，包括 JPA、JDO、Hibernate 和 MyBatis 等。而且还可以使用 Spring 进行事务管理，无需额外控制事务。</li>
+<li><span class='p red'>OXM 模块：</span>提供了一个支持 Object / XML 映射的抽象层实现，如 JAXB、Castor、XMLBeans、JiBX 和 XStream。将 Java 对象映射成 XML 数据，或者将 XML 数据映射成 Java 对象。</li>
+<li><span class='p red'>JMS 模块：</span>指 Java 消息服务，提供一套“消息生产者、消息消费者”模板用于更加简单地使用 JMS，JMS 用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。</li>
+<li><span class='p red'>Transactions 模块：</span>支持编程和声明式事务管理。</li>
 </ul>
 <h2 id="Web-模块"><a href="#Web-模块" class="headerlink" title="Web 模块"></a>Web 模块</h2><p>Web 模块主要包括：WebSocket、Servlet、Web 和 Portlet 子模块。具体介绍如下：</p>
 <ul>
-<li><strong>WebSocket 模块：</strong>提供了一个简单的接口，用户只要实现响应的接口就可以快速地搭建 WebSocket Server，从而实现双向通讯。</li>
-<li><strong>Servlet 模块：</strong>提供了一个 Spring MVC Web 框架实现。Spring MVC 框架提供了基于注解的请求资源注入、更简单的数据绑定、数据验证等以及一套非常易用的 JSP 标签，完全与 Spring 其他技术无缝对接。</li>
-<li><strong>Web 模块：</strong>提供了基本的 Web 开发集成特性。</li>
-<li><strong>Portlet 模块：</strong>提供了在 Portlet 环境中使用 MVC 的实现，类似于 Web - Servlet 模块的功能。</li>
+<li><span class='p red'>WebSocket 模块：</span>提供了一个简单的接口，用户只要实现响应的接口就可以快速地搭建 WebSocket Server，从而实现双向通讯。</li>
+<li><span class='p red'>Servlet 模块：</span>提供了一个 Spring MVC Web 框架实现。Spring MVC 框架提供了基于注解的请求资源注入、更简单的数据绑定、数据验证等以及一套非常易用的 JSP 标签，完全与 Spring 其他技术无缝对接。</li>
+<li><span class='p red'>Web 模块：</span>提供了基本的 Web 开发集成特性。</li>
+<li><span class='p red'>Portlet 模块：</span>提供了在 Portlet 环境中使用 MVC 的实现，类似于 Web - Servlet 模块的功能。</li>
 </ul>
 <h2 id="AOP、Aspects、Instrumentations-和-Messaging模块"><a href="#AOP、Aspects、Instrumentations-和-Messaging模块" class="headerlink" title="AOP、Aspects、Instrumentations 和 Messaging模块"></a>AOP、Aspects、Instrumentations 和 Messaging模块</h2><ul>
-<li><strong>AOP 模块：</strong>提供了面向切面编程的实现，也就是将日志记录、权限控制、性能统计等通用功能与业务逻辑分离的技术。它能够在不修改源代码的前提下动态地把这些功能添加到需要的代码中，以降低业务逻辑和通用功能之间存在的耦合。</li>
-<li><strong>Aspects 模块：</strong>提供了与 AspectJ 的集成，是一个功能强大且成熟的面向切面编程（AOP）框架。</li>
-<li><strong>Instrumentation 模块：</strong>提供了类工具的支持和类加载器的实现，可以在特定的应用服务器中使用。</li>
-<li><strong>Messaging 模块：</strong>在Spring 4.0 以后新增了 Messaging 模块，该模块提供了对消息传递体系结构和协议的支持。</li>
+<li><span class='p red'>AOP 模块：</span>提供了面向切面编程的实现，也就是将日志记录、权限控制、性能统计等通用功能与业务逻辑分离的技术。它能够在不修改源代码的前提下动态地把这些功能添加到需要的代码中，以降低业务逻辑和通用功能之间存在的耦合。</li>
+<li><span class='p red'>Aspects 模块：</span>提供了与 AspectJ 的集成，是一个功能强大且成熟的面向切面编程（AOP）框架。</li>
+<li><span class='p red'>Instrumentation 模块：</span>提供了类工具的支持和类加载器的实现，可以在特定的应用服务器中使用。</li>
+<li><span class='p red'>Messaging 模块：</span>在Spring 4.0 以后新增了 Messaging 模块，该模块提供了对消息传递体系结构和协议的支持。</li>
 </ul>
 <h2 id="Core-Container（核心容器）"><a href="#Core-Container（核心容器）" class="headerlink" title="Core Container（核心容器）"></a>Core Container（核心容器）</h2><p>Core Container 模块主要包括：Beans、Core、Context 和 SpEL 子模块，它是 Spring 的核心容器，也是其他模块建立的基础。如果没有 Core Container，也不可能有 AOP、Web 等上层的功能。具体介绍如下：</p>
 <ul>
-<li><strong>Beans 模块：</strong>提供了框架的基础部分，包括控制反转和依赖注入。</li>
-<li><strong>Core 模块：</strong>封装了 Spring 框架的底层部分，包括资源访问、类型转换以及一些常用的工具类。</li>
-<li><strong>Context 模块：</strong>建立在 Core 和 Beans 模块的基础之上，集成 Beans 模块的功能并添加资源绑定、数据验证、国际化、Java EE 支持、容器生命周期、事件传播等功能。</li>
-<li><strong>SpEL 模块：</strong>提供了强大的表达式语言支持，例如：支持访问和修改属性值、方法调用；支持访问及修改数组、容器和索引器；支持访问命名变量；支持算数和逻辑运算；支持从 Spring 容器获取 Bean；支持列表投影、选择和一般的列表聚合等。</li>
+<li><span class='p red'>Beans 模块：</span>提供了框架的基础部分，包括控制反转和依赖注入。</li>
+<li><span class='p red'>Core 模块：</span>封装了 Spring 框架的底层部分，包括资源访问、类型转换以及一些常用的工具类。</li>
+<li><span class='p red'>Context 模块：</span>建立在 Core 和 Beans 模块的基础之上，集成 Beans 模块的功能并添加资源绑定、数据验证、国际化、Java EE 支持、容器生命周期、事件传播等功能。</li>
+<li><span class='p red'>SpEL 模块：</span>提供了强大的表达式语言支持，例如：支持访问和修改属性值、方法调用；支持访问及修改数组、容器和索引器；支持访问命名变量；支持算数和逻辑运算；支持从 Spring 容器获取 Bean；支持列表投影、选择和一般的列表聚合等。</li>
 </ul>
 <h2 id="Test-模块"><a href="#Test-模块" class="headerlink" title="Test 模块"></a>Test 模块</h2><p>Spring 支持 Junit 和 TestNG 测试框架，而且还额外提供了一些基于 Spring 的测试功能。</p>
 <h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>设计模式是软件设计中常见问题的典型解决方案，它们就像能根据需求进行调整的预制蓝图，可用于解决代码中反复出现的设计问题。</p>
-<p>目前设计模式一共有23种，而<strong>工厂模式</strong>也是这23种设计模式中最重要，也是最被广泛应用的一种。在 Spring 中更是如此，因为整个 Spring 完全可以被看作是一个生产 Bean 对象的工厂。</p>
+<p>目前设计模式一共有23种，而<span class='p green'>工厂模式</span>也是这23种设计模式中最重要，也是最被广泛应用的一种。在 Spring 中更是如此，因为整个 Spring 完全可以被看作是一个生产 Bean 对象的工厂。</p>
 <p>自然而然地，我们就会产生一个疑惑，那就是为什么 Spring 要使用工厂模式去创建对象呢？使用传统的<code>new</code>关键字去创建对象不可以吗？会有什么问题呢？</p>
 <h2 id="不使用工厂模式带来的问题"><a href="#不使用工厂模式带来的问题" class="headerlink" title="不使用工厂模式带来的问题"></a>不使用工厂模式带来的问题</h2><p>OK！先来看一个例子：</p>
 <p>我们定义一个<code>UserDao</code>接口，里面有两个接口方法，分别是：</p>
@@ -1974,7 +1983,7 @@
 <p><span class='p center logo large'>王赟栋的小站</span></p>
 <p><span class='p center small'>A Wonderful Theme for Hexo</span></p>
 </li>
-</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="inline-span-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">在一段话中插入各种颜色的标签，包括：&#123;% span red, 红色 %&#125;、&#123;% span yellow, 黄色 %&#125;、&#123;% span green, 绿色 %&#125;、&#123;% span cyan, 青色 %&#125;、&#123;% span blue, 蓝色 %&#125;、&#123;% span gray, 灰色 %&#125;</span><br><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">文档「开始」页面中的标题部分就是超大号文字。</span><br><span class="line">&#123;% span center logo large, 王赟栋的小站 %&#125;</span><br><span class="line">&#123;% span center small, A Wonderful Theme for Hexo %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="inline-span-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">在一段话中插入各种颜色的标签，包括：&#123;% span red, 红色 %&#125;、&#123;% span yellow, 黄色 %&#125;、&#123;% span green, 绿色 %&#125;、&#123;% span cyan, 青色 %&#125;、&#123;% span blue, 蓝色 %&#125;、&#123;% span gray, 灰色 %&#125;</span><br><span class="line"><span class="bullet">+</span> 超大号文字</span><br><span class="line">文档「开始」页面中的标题部分就是超大号文字。</span><br><span class="line">&#123;% span center logo large, 王赟栋的小站 %&#125;</span><br><span class="line">&#123;% span center small, A Wonderful Theme for Hexo %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 <h2 id="段落文本p"><a href="#段落文本p" class="headerlink" title="段落文本p"></a>段落文本p</h2><div class="tabs" id="inline-p"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#inline-p-1">标签语法</button></li><li class="tab"><button type="button" data-href="#inline-p-2">配置参数</button></li><li class="tab"><button type="button" data-href="#inline-p-3">样式预览</button></li><li class="tab"><button type="button" data-href="#inline-p-4">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="inline-p-1"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% p 样式参数(参数以空格划分), 文本内容 %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="inline-p-2"><ol>
 <li>字体：logo，code</li>
 <li>颜色：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span>、<span class='p cyan'>青色</span>、<span class='p blue'>蓝色</span>、<span class='p gray'>灰色</span>。</li>
@@ -1991,7 +2000,7 @@
 <p class='p center small'>A Wonderful Theme for Hexo</p>
 
 </li>
-</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="inline-p-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">在一段话中插入各种颜色的标签，包括：&#123;% p red, 红色 %&#125;、&#123;% p yellow, 黄色 %&#125;、&#123;% p green, 绿色 %&#125;、&#123;% p cyan, 青色 %&#125;、&#123;% p blue, 蓝色 %&#125;、&#123;% p gray, 灰色 %&#125;</span><br><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">文档「开始」页面中的标题部分就是超大号文字。</span><br><span class="line">&#123;% p center logo large, 王赟栋的小站 %&#125;</span><br><span class="line">&#123;% p center small, A Wonderful Theme for Hexo %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="inline-p-4"><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">+</span> 彩色文字</span><br><span class="line">在一段话中插入各种颜色的标签，包括：&#123;% p red, 红色 %&#125;、&#123;% p yellow, 黄色 %&#125;、&#123;% p green, 绿色 %&#125;、&#123;% p cyan, 青色 %&#125;、&#123;% p blue, 蓝色 %&#125;、&#123;% p gray, 灰色 %&#125;</span><br><span class="line"><span class="bullet">+</span> 超大号文字</span><br><span class="line">文档「开始」页面中的标题部分就是超大号文字。</span><br><span class="line">&#123;% p center logo large, 王赟栋的小站 %&#125;</span><br><span class="line">&#123;% p center small, A Wonderful Theme for Hexo %&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
 <h2 id="引用note"><a href="#引用note" class="headerlink" title="引用note"></a>引用note</h2><div class="tabs" id="note-tag"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#note-tag-1">通用配置</button></li><li class="tab"><button type="button" data-href="#note-tag-2">标签语法</button></li><li class="tab"><button type="button" data-href="#note-tag-3">配置参数</button></li><li class="tab"><button type="button" data-href="#note-tag-4">样式预览</button></li><li class="tab"><button type="button" data-href="#note-tag-5">示例源码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="note-tag-1"><p>修改主题配置文件：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">note:</span></span><br><span class="line">  <span class="comment"># Note tag style values:</span></span><br><span class="line">  <span class="comment">#  - simple    bs-callout old alert style. Default.</span></span><br><span class="line">  <span class="comment">#  - modern    bs-callout new (v2-v3) alert style.</span></span><br><span class="line">  <span class="comment">#  - flat      flat callout style with background, like on Mozilla or StackOverflow.</span></span><br><span class="line">  <span class="comment">#  - disabled  disable all CSS styles import of note tag.</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">simple</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">border_radius:</span> <span class="number">3</span></span><br><span class="line">  <span class="comment"># Offset lighter of background in % for modern and flat styles (modern: -12 | 12; flat: -18 | 6).</span></span><br><span class="line">  <span class="comment"># Offset also applied to label tag variables. This option can work with disabled note tag.</span></span><br><span class="line">  <span class="attr">light_bg_offset:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
 <p><code>icons</code>和<code>light_bg_offset</code>属性只对方法一生效。</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="note-tag-2"><details class="folding-tag" open><summary> 方法一 </summary>
